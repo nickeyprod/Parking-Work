@@ -15,9 +15,9 @@ class ParkingWorkGame: SKScene {
     // Player state
     var playerStateMachine: GKStateMachine!
     var playerLocationDestination: CGPoint?
-    var playerInitialPosition: CGPoint?
+    
+    // Time
     var previousTimeInterval: TimeInterval = 0
-    var playerPrevDirection: String?
     
     // Movement target
     var currentSpriteTarget: SKSpriteNode?
@@ -33,32 +33,101 @@ class ParkingWorkGame: SKScene {
     // Constants
     let PLAYER_SPEED = 1.0
     
+    // Physic body categories
+    let playerCategory: UInt32 = 1 << 1
+    let lockCategory: UInt32 = 1 << 2
+    let carCategory: UInt32 = 1 << 3
+
+    enum Cars {
+        enum vaz2107 {
+            static var node = SKNode()
+            enum locks {
+                static var driverLock = SKNode()
+                static var passengerLock = SKNode()
+            }
+        }
+    }
+    
+    // car lock complexity list
+    let carLockComplexities: [String: Float] = [
+        // vaz 2107
+        CarLockList.vaz_2107_driver_lock: 0.10,
+        CarLockList.vaz_2107_passenger_lock: 0.07
+    ]
+    
+    func setupPlayer() {
+        // player
+        player = self.childNode(withName: "playerNode")
+        player?.physicsBody?.categoryBitMask = playerCategory
+        player?.zPosition = 10
+        
+    }
+    
+    func setupCars() {
+        // cars
+        Cars.vaz2107.node = self.childNode(withName: "vaz_2107")!
+        Cars.vaz2107.node.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "vaz_2107"), size: SKTexture(imageNamed: "vaz_2107").size())
+        
+        Cars.vaz2107.node.physicsBody?.categoryBitMask = carCategory
+        Cars.vaz2107.node.physicsBody?.affectedByGravity = false
+        Cars.vaz2107.node.physicsBody?.isDynamic = false
+    }
+    
+    func setupCarLocks() {
+        // car locks
+        let vaz2107DriverLock = self.childNode(withName: CarLockList.vaz_2107_driver_lock)!
+        let vaz2107PassengerLock = self.childNode(withName: CarLockList.vaz_2107_passenger_lock)!
+        
+        vaz2107PassengerLock.physicsBody = SKPhysicsBody(rectangleOf: vaz2107PassengerLock.frame.size)
+        vaz2107PassengerLock.physicsBody?.categoryBitMask = lockCategory
+        
+        // can contact with
+        vaz2107PassengerLock.physicsBody?.contactTestBitMask = playerCategory
+        
+        vaz2107PassengerLock.physicsBody?.affectedByGravity = false
+        vaz2107PassengerLock.physicsBody?.pinned = true
+        
+        Cars.vaz2107.locks.driverLock = vaz2107DriverLock
+        Cars.vaz2107.locks.passengerLock = vaz2107PassengerLock
+
+    }
+    
+    func setupPhysicBodies() {
+        // player
+        setupPlayer()
+        
+        // cars
+        setupCars()
+        
+        // car locks
+        setupCarLocks()
+               
+    }
+    
     override func didMove(to view: SKView) {
         
+        // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
-    
-        player = self.childNode(withName: "playerNode")
-        player?.zPosition = 10
-        cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
         
-        playerLocationDestination = player?.position
+        // setup physic bodies
+        setupPhysicBodies()
+        
+        // setup camera
+        cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
         cameraNode?.position = player!.position
         
+        // setup initial values
+        playerLocationDestination = player?.position
+        
         playerStateMachine = GKStateMachine(states: [
-//            JumpingState(playerNode: player!),
             WalkingState(player: player!),
-            IdleState(player: player!),
-//            LandingState(playerNode: player!),
-//            StunnedState(playerNode: player!)
+            IdleState(player: player!)
         ])
         
+        // enter to initial player state
         playerStateMachine.enter(IdleState.self)
 
     }
-}
-
-extension ParkingWorkGame: SKPhysicsContactDelegate {
-    
 }
 
 // MARK: Touches
@@ -97,7 +166,6 @@ extension ParkingWorkGame {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         startTouchPosition = nil
-        playerInitialPosition = player?.position
         
         for touch in touches {
             let location = touch.location(in: self)
@@ -115,6 +183,8 @@ extension ParkingWorkGame {
     }
     
     func setTarget(at location: CGPoint) {
+        
+        // setting 'target' sprite on ground
         currentSpriteTarget = SKSpriteNode(imageNamed: "target")
         currentSpriteTarget!.position = location
         currentSpriteTarget!.xScale = 0.2
@@ -138,6 +208,7 @@ extension ParkingWorkGame {
             target.run(rotatingAction)
         }
     }
+
 }
 
 
@@ -237,3 +308,41 @@ extension ParkingWorkGame {
     }
        
 }
+
+// MARK: Collisions
+extension ParkingWorkGame: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        print("collision")
+        
+        let bodyA = contact.bodyA
+        let bodyB = contact.bodyB
+        
+        print("didBeginContact entered for \(String(describing: bodyA.node!.name)) and \(String(describing: bodyB.node!.name))")
+        
+        let contactMask = (bodyA.categoryBitMask | bodyB.categoryBitMask)
+ 
+        switch contactMask {
+        case (playerCategory | lockCategory):
+            if bodyA.node!.name == CarLockList.vaz_2107_passenger_lock {
+                tryOpenCarLock(of: CarLockList.vaz_2107_passenger_lock)
+            } else if bodyB.node!.name == CarLockList.vaz_2107_passenger_lock {
+                tryOpenCarLock(of: CarLockList.vaz_2107_passenger_lock)
+            }
+        default:
+            print("Some other contact occurred")
+        }
+    }
+        
+}
+
+
+// MARK: Player possibilities
+extension ParkingWorkGame {
+    func tryOpenCarLock(of type: String) {
+        let lockComplexity: Float = carLockComplexities[type]!
+        print("Player is now trying to open \(type), with \(lockComplexity) complexity")
+    }
+}
+

@@ -16,6 +16,7 @@
 		D1198F032979B76E00701A24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1198F022979B76E00701A24 /* Assets.xcassets */; };
 		D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1198F042979B76E00701A24 /* LaunchScreen.storyboard */; };
 		D1198F0D2979B7A900701A24 /* Asphalt.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198F0C2979B7A900701A24 /* Asphalt.sks */; };
+		D13F2E16298972EB008976EA /* CarLockList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F2E15298972EB008976EA /* CarLockList.swift */; };
 		D1DAC79E29819DD900B60AED /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerStateMachine.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		D1198F022979B76E00701A24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1198F052979B76E00701A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D1198F0C2979B7A900701A24 /* Asphalt.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Asphalt.sks; sourceTree = "<group>"; };
+		D13F2E15298972EB008976EA /* CarLockList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLockList.swift; sourceTree = "<group>"; };
 		D1DAC79D29819DD900B60AED /* PlayerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				D1198F042979B76E00701A24 /* LaunchScreen.storyboard */,
 				D1198EF92979B76D00701A24 /* Actions.sks */,
 				D1198EF52979B76D00701A24 /* AppDelegate.swift */,
+				D13F2E15298972EB008976EA /* CarLockList.swift */,
 			);
 			path = "Parking Work";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */,
+				D13F2E16298972EB008976EA /* CarLockList.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
 				D1DAC79E29819DD900B60AED /* PlayerStateMachine.swift in Sources */,
 				D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */,
