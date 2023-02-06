@@ -37,6 +37,7 @@ class ParkingWorkGame: SKScene {
     let playerCategory: UInt32 = 1 << 1
     let lockCategory: UInt32 = 1 << 2
     let carCategory: UInt32 = 1 << 3
+    let boundaryCategory: UInt32 = 1 << 4
 
     enum Cars {
         enum vaz2107 {
@@ -59,6 +60,7 @@ class ParkingWorkGame: SKScene {
         // player
         player = self.childNode(withName: "playerNode")
         player?.physicsBody?.categoryBitMask = playerCategory
+        player?.physicsBody?.collisionBitMask = boundaryCategory | carCategory
         player?.zPosition = 10
         
     }
@@ -92,7 +94,26 @@ class ParkingWorkGame: SKScene {
 
     }
     
+    func setupWorldBoundaries() {
+        // player collides with this `end of the world` boundaries
+        for i in 0...6 {
+            let worldBoundary = self.childNode(withName: "boundary\(i)")
+            worldBoundary?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: (worldBoundary?.frame.width)!, height: (worldBoundary?.frame.height)!))
+            worldBoundary?.physicsBody?.categoryBitMask = boundaryCategory
+            worldBoundary?.physicsBody?.affectedByGravity = false
+            worldBoundary?.physicsBody?.isDynamic = false
+            worldBoundary?.alpha = 0
+        }
+    
+    }
+    
+ 
+    
     func setupPhysicBodies() {
+        
+        // world bounds to collide
+        setupWorldBoundaries()
+        
         // player
         setupPlayer()
         

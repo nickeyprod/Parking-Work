@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EF52979B76D00701A24 /* AppDelegate.swift */; };
 		D1198EF82979B76D00701A24 /* ParkingWorkGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198EF72979B76D00701A24 /* ParkingWorkGameScene.sks */; };
-		D1198EFA2979B76D00701A24 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198EF92979B76D00701A24 /* Actions.sks */; };
 		D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */; };
 		D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EFD2979B76D00701A24 /* GameViewController.swift */; };
 		D1198F012979B76D00701A24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1198EFF2979B76D00701A24 /* Main.storyboard */; };
@@ -24,7 +23,6 @@
 		D1198EF22979B76D00701A24 /* Parking Work.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parking Work.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1198EF52979B76D00701A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1198EF72979B76D00701A24 /* ParkingWorkGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParkingWorkGameScene.sks; sourceTree = "<group>"; };
-		D1198EF92979B76D00701A24 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingWorkGame.swift; sourceTree = "<group>"; };
 		D1198EFD2979B76D00701A24 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D1198F002979B76D00701A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 				D1198F022979B76E00701A24 /* Assets.xcassets */,
 				D1198F0C2979B7A900701A24 /* Asphalt.sks */,
 				D1198F042979B76E00701A24 /* LaunchScreen.storyboard */,
-				D1198EF92979B76D00701A24 /* Actions.sks */,
 				D1198EF52979B76D00701A24 /* AppDelegate.swift */,
 				D13F2E15298972EB008976EA /* CarLockList.swift */,
 			);
@@ -142,7 +139,6 @@
 				D1198EF82979B76D00701A24 /* ParkingWorkGameScene.sks in Resources */,
 				D1198F032979B76E00701A24 /* Assets.xcassets in Resources */,
 				D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */,
-				D1198EFA2979B76D00701A24 /* Actions.sks in Resources */,
 				D1198F0D2979B7A900701A24 /* Asphalt.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
