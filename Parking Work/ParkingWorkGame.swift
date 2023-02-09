@@ -38,23 +38,28 @@ class ParkingWorkGame: SKScene {
     let lockCategory: UInt32 = 1 << 2
     let carCategory: UInt32 = 1 << 3
     let boundaryCategory: UInt32 = 1 << 4
+    
+    // Cars
+    var oldCopper: SKNode?
 
-    enum Cars {
-        enum vaz2107 {
+    enum Cars: String {
+        case OldCopper = "OldCopper"
+        
+        enum Chowerler {
             static var node = SKNode()
+            static var name = "Chowerler"
             enum locks {
-                static var driverLock = SKNode()
-                static var passengerLock = SKNode()
+//                static var driverLock = SKNode()
+//                static var passengerLock = SKNode()
+                case driverLock, passengerLock
+            }
+            enum locksComplexity {
+                static var driverLock = 0.90
+                static var passengerLock = 0.87
             }
         }
     }
     
-    // car lock complexity list
-    let carLockComplexities: [String: Float] = [
-        // vaz 2107
-        CarLockList.vaz_2107_driver_lock: 0.10,
-        CarLockList.vaz_2107_passenger_lock: 0.07
-    ]
     
     func setupPlayer() {
         // player
@@ -67,30 +72,44 @@ class ParkingWorkGame: SKScene {
     
     func setupCars() {
         // cars
-        Cars.vaz2107.node = self.childNode(withName: "vaz_2107")!
-        Cars.vaz2107.node.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "vaz_2107"), size: SKTexture(imageNamed: "vaz_2107").size())
         
-        Cars.vaz2107.node.physicsBody?.categoryBitMask = carCategory
-        Cars.vaz2107.node.physicsBody?.affectedByGravity = false
-        Cars.vaz2107.node.physicsBody?.isDynamic = false
+        // Old Copper
+        oldCopper = self.childNode(withName: Cars.OldCopper.rawValue)
+
+//        oldCopper.node =
+//        oldCopper.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: Cars.OldCopper.rawValue), size: CGSize(width: 460, height: 200))
+//
+//        oldCopper.physicsBody?.categoryBitMask = carCategory
+//        oldCopper.physicsBody?.affectedByGravity = false
+//        oldCopper.physicsBody?.isDynamic = false
+        
+        // Chowerler
+//        Cars.Chowerler.node = self.childNode(withName: Cars.Chowerler.name)!
+//        Cars.Chowerler.node.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: Cars.Chowerler.name), size: CGSize(width: 258.363, height: 506.244))
+//
+//        Cars.Chowerler.node.physicsBody?.categoryBitMask = carCategory
+//        Cars.Chowerler.node.physicsBody?.affectedByGravity = false
+//        Cars.Chowerler.node.physicsBody?.isDynamic = false
     }
     
     func setupCarLocks() {
         // car locks
-        let vaz2107DriverLock = self.childNode(withName: CarLockList.vaz_2107_driver_lock)!
-        let vaz2107PassengerLock = self.childNode(withName: CarLockList.vaz_2107_passenger_lock)!
+        let oldCopperDriver = oldCopper!.childNode(withName: "driver_lock")
+        let oldCopperPassengerLock = oldCopper!.childNode(withName: "passenger_lock")
         
-        vaz2107PassengerLock.physicsBody = SKPhysicsBody(rectangleOf: vaz2107PassengerLock.frame.size)
-        vaz2107PassengerLock.physicsBody?.categoryBitMask = lockCategory
+        // OldCopper driver lock
+        oldCopperDriver?.physicsBody = SKPhysicsBody(rectangleOf: (oldCopperDriver?.frame.size)!)
+        oldCopperDriver?.physicsBody?.categoryBitMask = lockCategory
+        oldCopperDriver?.physicsBody?.contactTestBitMask = playerCategory
+        oldCopperDriver?.physicsBody?.affectedByGravity = false
+        oldCopperDriver?.physicsBody?.isDynamic = false
         
-        // can contact with
-        vaz2107PassengerLock.physicsBody?.contactTestBitMask = playerCategory
-        
-        vaz2107PassengerLock.physicsBody?.affectedByGravity = false
-        vaz2107PassengerLock.physicsBody?.pinned = true
-        
-        Cars.vaz2107.locks.driverLock = vaz2107DriverLock
-        Cars.vaz2107.locks.passengerLock = vaz2107PassengerLock
+        // OldCopper passenger lock
+        oldCopperPassengerLock?.physicsBody = SKPhysicsBody(rectangleOf: (oldCopperPassengerLock?.frame.size)!)
+        oldCopperPassengerLock?.physicsBody?.categoryBitMask = lockCategory
+        oldCopperPassengerLock?.physicsBody?.contactTestBitMask = playerCategory
+        oldCopperPassengerLock?.physicsBody?.affectedByGravity = false
+        oldCopperPassengerLock?.physicsBody?.isDynamic = false
 
     }
     
@@ -106,8 +125,6 @@ class ParkingWorkGame: SKScene {
         }
     
     }
-    
- 
     
     func setupPhysicBodies() {
         
@@ -346,10 +363,11 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
  
         switch contactMask {
         case (playerCategory | lockCategory):
-            if bodyA.node!.name == CarLockList.vaz_2107_passenger_lock {
-                tryOpenCarLock(of: CarLockList.vaz_2107_passenger_lock)
-            } else if bodyB.node!.name == CarLockList.vaz_2107_passenger_lock {
-                tryOpenCarLock(of: CarLockList.vaz_2107_passenger_lock)
+            if bodyA.node!.name != "playerNode" {
+                tryOpenCarLock(of: (bodyA.node?.parent!.name)!, lockType: (bodyA.node?.name)!)
+            }
+            else if bodyB.node!.name != "playerNode" {
+                tryOpenCarLock(of: (bodyB.node?.parent!.name)!, lockType: (bodyB.node?.name)!)
             }
         default:
             print("Some other contact occurred")
@@ -361,9 +379,22 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
 
 // MARK: Player possibilities
 extension ParkingWorkGame {
-    func tryOpenCarLock(of type: String) {
-        let lockComplexity: Float = carLockComplexities[type]!
-        print("Player is now trying to open \(type), with \(lockComplexity) complexity")
+
+    func tryOpenCarLock(of carName: String, lockType: String) {
+        let lockComplexity = LOCK_COMPLEXITY[carName]?[lockType]
+        
+        let targetCar = TargetCar(carName: carName, lockType: lockType, lockComplexity: lockComplexity!)
+        
+        // show message suggesting to open the target car
+        self.showOpenCarMessage(of: targetCar)
+        
+    }
+}
+
+// MARK: Game functions
+extension ParkingWorkGame {
+    func showOpenCarMessage(of targetCar: TargetCar) {
+        print(targetCar)
     }
 }
 
