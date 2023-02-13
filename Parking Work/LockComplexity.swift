@@ -6,9 +6,14 @@
 //
 
 
-let LOCK_COMPLEXITY: [String : [String: Float] ] = [
+let CARS: [String : [String: Float] ] = [
     "OldCopper": [
         "driver_lock": 0.10,
-        "passenger_lock": 0.08
+        "passenger_lock": 0.08,
     ]
 ]
+
+let CAR_NAMES: [String: String] = [
+    "OldCopper": "Old Copper"
+]
+

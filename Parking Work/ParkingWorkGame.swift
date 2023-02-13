@@ -16,6 +16,12 @@ class ParkingWorkGame: SKScene {
     var playerStateMachine: GKStateMachine!
     var playerLocationDestination: CGPoint?
     
+    // Message windows
+    var openCarWindow: SKNode?
+    var openCarWindowNameLabel: SKLabelNode?
+    var openCarWindowLockTypeLabel: SKLabelNode?
+    var openCarWindowComplexityNum: SKLabelNode?
+    
     // Time
     var previousTimeInterval: TimeInterval = 0
     
@@ -23,8 +29,8 @@ class ParkingWorkGame: SKScene {
     var currentSpriteTarget: SKSpriteNode?
     var targetMovementTimer: Timer?
     
-    var targetX: CGFloat?
-    var targetY: CGFloat?
+    // Lock target
+    var currLockTarget: SKNode?
     
     // Camera position
     var startTouchPosition: CGPoint? = nil
@@ -76,12 +82,10 @@ class ParkingWorkGame: SKScene {
         // Old Copper
         oldCopper = self.childNode(withName: Cars.OldCopper.rawValue)
 
-//        oldCopper.node =
-//        oldCopper.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: Cars.OldCopper.rawValue), size: CGSize(width: 460, height: 200))
-//
-//        oldCopper.physicsBody?.categoryBitMask = carCategory
-//        oldCopper.physicsBody?.affectedByGravity = false
-//        oldCopper.physicsBody?.isDynamic = false
+        oldCopper?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: Cars.OldCopper.rawValue), size: CGSize(width: 460, height: 200))
+        oldCopper?.physicsBody?.categoryBitMask = carCategory
+        oldCopper?.physicsBody?.affectedByGravity = false
+        oldCopper?.physicsBody?.isDynamic = false
         
         // Chowerler
 //        Cars.Chowerler.node = self.childNode(withName: Cars.Chowerler.name)!
@@ -126,6 +130,56 @@ class ParkingWorkGame: SKScene {
     
     }
     
+    func initOpenCarWindowMessage() {
+        // get open car window itself
+        openCarWindow = self.childNode(withName: "openCarMessageWindow")
+        openCarWindow?.alpha = 0
+        openCarWindow?.zPosition = 11 // player=10 + 1
+        
+        // open car window labels
+        //  - car name label
+        openCarWindowNameLabel = openCarWindow?.childNode(withName: "carNameLabel") as? SKLabelNode
+        openCarWindowNameLabel?.fontSize = 58
+        openCarWindowNameLabel?.position = CGPoint(x: (openCarWindow?.frame.width)! / 2, y: (openCarWindow?.frame.height)! - 38)
+
+        // - message label set to 'Попробовать вскрыть?' initially
+        let openCarWindowMsgLabel = openCarWindow?.childNode(withName: "carMessage") as? SKLabelNode
+        openCarWindowMsgLabel?.text = "Попробовать вскрыть?"
+        openCarWindowMsgLabel?.position = CGPoint(x: (openCarWindow?.frame.width)! / 2, y: (openCarWindow?.frame.height)! - 80)
+        
+        // - lock type label
+        openCarWindowLockTypeLabel = openCarWindow?.childNode(withName: "lockTypeLabel") as? SKLabelNode
+        openCarWindowLockTypeLabel?.position = CGPoint(x: (openCarWindow?.frame.width)! / 2, y: (openCarWindow?.frame.height)! - 90)
+        
+        // complexity level label
+        let openCarWindowComplexityLabel = openCarWindow?.childNode(withName: "complexityLabel") as? SKLabelNode
+        openCarWindowComplexityLabel?.fontSize = 18
+        openCarWindowComplexityLabel?.position = CGPoint(x: (openCarWindow?.frame.width)! / 2 - 35, y: (openCarWindow?.frame.height)! - 112)
+        
+        // complexity level number
+        openCarWindowComplexityNum = openCarWindowComplexityLabel?.childNode(withName: "complexityNumLevel") as? SKLabelNode
+        openCarWindowComplexityNum?.fontSize = 18
+        openCarWindowComplexityNum?.position = CGPoint(x: (openCarWindowComplexityLabel?.frame.width)! - 8, y: 0)
+        
+        // yes/no open car buttons
+        let yesBtn = openCarWindow?.childNode(withName: "yesOpenLockBtn")
+        let noBtn = openCarWindow?.childNode(withName: "noOpenLockBtn")
+        
+        // yes/no button labels
+        let yesLabel = yesBtn?.childNode(withName: "yesBtnLabel")
+        let noLabel = noBtn?.childNode(withName: "noBtnLabel")
+        
+        // position text at the center of button
+        yesLabel?.position = CGPoint(x: 0, y: 0)
+        noLabel?.position = CGPoint(x: 0, y: 0)
+    }
+    
+    func setupWindowMessages() {
+        // open car window message
+        self.initOpenCarWindowMessage()
+    }
+    
+    
     func setupPhysicBodies() {
         
         // world bounds to collide
@@ -139,7 +193,10 @@ class ParkingWorkGame: SKScene {
         
         // car locks
         setupCarLocks()
-               
+        
+        // Window messages
+        setupWindowMessages()
+        
     }
     
     override func didMove(to view: SKView) {
@@ -177,6 +234,14 @@ extension ParkingWorkGame {
             if startTouchPosition == nil {
                 startTouchPosition = location
             }
+            
+            // buttons pressed check
+            let touchedNode = atPoint(location)
+            if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
+                print("open car button pressed")
+            } else if touchedNode.name == "noOpenLockBtn" || touchedNode.parent?.name == "noOpenLockBtn" {
+                print("no open car button pressed")
+            }
         }
     }
     
@@ -207,8 +272,9 @@ extension ParkingWorkGame {
         
         for touch in touches {
             let location = touch.location(in: self)
-            
-            if cameraMovingByFinger == false {
+            let touchedNode = atPoint(location)
+
+            if cameraMovingByFinger == false && touchedNode.name == "tilemapLevel1"{
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()
                 setTarget(at: location)
@@ -373,6 +439,22 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             print("Some other contact occurred")
         }
     }
+    
+//    func didEnd(_ contact: SKPhysicsContact) {
+//        let bodyA = contact.bodyA
+//        let bodyB = contact.bodyB
+//
+//        print("didEndContact entered for \(String(describing: bodyA.node!.name)) and \(String(describing: bodyB.node!.name))")
+//
+//        let contactMask = (bodyA.categoryBitMask | bodyB.categoryBitMask)
+//
+//        switch contactMask {
+//        case (playerCategory | lockCategory):
+//            openCarWindow?.alpha = 0
+//        default:
+//            print("Some other contact occurred")
+//        }
+//    }
         
 }
 
@@ -381,7 +463,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
 extension ParkingWorkGame {
 
     func tryOpenCarLock(of carName: String, lockType: String) {
-        let lockComplexity = LOCK_COMPLEXITY[carName]?[lockType]
+        let lockComplexity = CARS[carName]?[lockType]!
         
         let targetCar = TargetCar(carName: carName, lockType: lockType, lockComplexity: lockComplexity!)
         
@@ -395,6 +477,20 @@ extension ParkingWorkGame {
 extension ParkingWorkGame {
     func showOpenCarMessage(of targetCar: TargetCar) {
         print(targetCar)
+        
+        
+        let carNode = self.childNode(withName: targetCar.carName)
+        let targetLock = carNode?.childNode(withName: targetCar.lockType)
+        
+        openCarWindow?.position = player!.position
+        openCarWindowNameLabel?.text = "\(CAR_NAMES[targetCar.carName]!)"
+        if openCarWindow?.alpha == 0 {
+            print("open")
+//            playerLocationDestination?.x = (player?.position.x)!
+//            playerLocationDestination?.y = (player?.position.y)!
+            openCarWindow?.alpha = 1
+        }
+
     }
 }
 
