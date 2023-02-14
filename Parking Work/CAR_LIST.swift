@@ -6,14 +6,14 @@
 //
 
 
-let CARS: [String : [String: Float] ] = [
+let CAR_LIST: [String : [String: Float] ] = [
     "OldCopper": [
         "driver_lock": 0.10,
         "passenger_lock": 0.08,
+    ],
+    "Chowerler": [
+        "driver_lock": 0.90,
+        "passenger_lock": 0.87
     ]
-]
-
-let CAR_NAMES: [String: String] = [
-    "OldCopper": "Old Copper"
 ]
 

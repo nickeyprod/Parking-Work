@@ -14,10 +14,22 @@
 		D1198F012979B76D00701A24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1198EFF2979B76D00701A24 /* Main.storyboard */; };
 		D1198F032979B76E00701A24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1198F022979B76E00701A24 /* Assets.xcassets */; };
 		D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1198F042979B76E00701A24 /* LaunchScreen.storyboard */; };
-		D1198F0D2979B7A900701A24 /* Asphalt.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198F0C2979B7A900701A24 /* Asphalt.sks */; };
-		D13F2E16298972EB008976EA /* LockComplexity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F2E15298972EB008976EA /* LockComplexity.swift */; };
+		D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */; };
+		D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F2E15298972EB008976EA /* CAR_LIST.swift */; };
 		D18653C02994FBE100DEE90D /* TargetCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653BF2994FBE100DEE90D /* TargetCar.swift */; };
-		D1DAC79E29819DD900B60AED /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerStateMachine.swift */; };
+		D18653C2299A30B900DEE90D /* Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C1299A30B900DEE90D /* Touches.swift */; };
+		D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C4299A31D400DEE90D /* GameLoop.swift */; };
+		D18653C7299A326900DEE90D /* Collisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C6299A326900DEE90D /* Collisions.swift */; };
+		D18653C9299A38AE00DEE90D /* GameStartSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C8299A38AE00DEE90D /* GameStartSetup.swift */; };
+		D18653CB299A3A3600DEE90D /* GameFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653CA299A3A3600DEE90D /* GameFunctions.swift */; };
+		D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653CD299A3AE200DEE90D /* PlayerFunctions.swift */; };
+		D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D1299A3C6F00DEE90D /* PlayerSetup.swift */; };
+		D18653D4299A3D9F00DEE90D /* WorldSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D3299A3D9F00DEE90D /* WorldSetup.swift */; };
+		D18653D6299A3EAF00DEE90D /* CarsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D5299A3EAF00DEE90D /* CarsSetup.swift */; };
+		D18653D8299A3FE200DEE90D /* CarLocksSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */; };
+		D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */; };
+		D18653DC299B7DE300DEE90D /* CameraSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653DB299B7DE300DEE90D /* CameraSetup.swift */; };
+		D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,10 +41,22 @@
 		D1198F002979B76D00701A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D1198F022979B76E00701A24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1198F052979B76E00701A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D1198F0C2979B7A900701A24 /* Asphalt.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Asphalt.sks; sourceTree = "<group>"; };
-		D13F2E15298972EB008976EA /* LockComplexity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockComplexity.swift; sourceTree = "<group>"; };
+		D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParkingWorkTileSets.sks; sourceTree = "<group>"; };
+		D13F2E15298972EB008976EA /* CAR_LIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_LIST.swift; sourceTree = "<group>"; };
 		D18653BF2994FBE100DEE90D /* TargetCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCar.swift; sourceTree = "<group>"; };
-		D1DAC79D29819DD900B60AED /* PlayerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
+		D18653C1299A30B900DEE90D /* Touches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Touches.swift; sourceTree = "<group>"; };
+		D18653C4299A31D400DEE90D /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
+		D18653C6299A326900DEE90D /* Collisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collisions.swift; sourceTree = "<group>"; };
+		D18653C8299A38AE00DEE90D /* GameStartSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartSetup.swift; sourceTree = "<group>"; };
+		D18653CA299A3A3600DEE90D /* GameFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFunctions.swift; sourceTree = "<group>"; };
+		D18653CD299A3AE200DEE90D /* PlayerFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerFunctions.swift; sourceTree = "<group>"; };
+		D18653D1299A3C6F00DEE90D /* PlayerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSetup.swift; sourceTree = "<group>"; };
+		D18653D3299A3D9F00DEE90D /* WorldSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSetup.swift; sourceTree = "<group>"; };
+		D18653D5299A3EAF00DEE90D /* CarsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsSetup.swift; sourceTree = "<group>"; };
+		D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLocksSetup.swift; sourceTree = "<group>"; };
+		D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindowsSetup.swift; sourceTree = "<group>"; };
+		D18653DB299B7DE300DEE90D /* CameraSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetup.swift; sourceTree = "<group>"; };
+		D1DAC79D29819DD900B60AED /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,19 +89,71 @@
 		D1198EF42979B76D00701A24 /* Parking Work */ = {
 			isa = PBXGroup;
 			children = (
-				D1198EF72979B76D00701A24 /* ParkingWorkGameScene.sks */,
-				D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */,
+				D18653DE299B899800DEE90D /* Game */,
+				D18653CF299A3B6300DEE90D /* GameSetup */,
+				D18653D0299A3B8400DEE90D /* GameProcessing */,
+				D18653C3299A318500DEE90D /* GameFunctions */,
+				D18653DD299B841400DEE90D /* GameModels */,
 				D1198EFD2979B76D00701A24 /* GameViewController.swift */,
-				D1DAC79D29819DD900B60AED /* PlayerStateMachine.swift */,
 				D1198EFF2979B76D00701A24 /* Main.storyboard */,
 				D1198F022979B76E00701A24 /* Assets.xcassets */,
-				D1198F0C2979B7A900701A24 /* Asphalt.sks */,
+				D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */,
 				D1198F042979B76E00701A24 /* LaunchScreen.storyboard */,
 				D1198EF52979B76D00701A24 /* AppDelegate.swift */,
-				D13F2E15298972EB008976EA /* LockComplexity.swift */,
-				D18653BF2994FBE100DEE90D /* TargetCar.swift */,
+				D13F2E15298972EB008976EA /* CAR_LIST.swift */,
 			);
 			path = "Parking Work";
+			sourceTree = "<group>";
+		};
+		D18653C3299A318500DEE90D /* GameFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				D18653CA299A3A3600DEE90D /* GameFunctions.swift */,
+				D18653CD299A3AE200DEE90D /* PlayerFunctions.swift */,
+			);
+			path = GameFunctions;
+			sourceTree = "<group>";
+		};
+		D18653CF299A3B6300DEE90D /* GameSetup */ = {
+			isa = PBXGroup;
+			children = (
+				D18653C8299A38AE00DEE90D /* GameStartSetup.swift */,
+				D18653D1299A3C6F00DEE90D /* PlayerSetup.swift */,
+				D18653D3299A3D9F00DEE90D /* WorldSetup.swift */,
+				D18653D5299A3EAF00DEE90D /* CarsSetup.swift */,
+				D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */,
+				D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */,
+				D18653DB299B7DE300DEE90D /* CameraSetup.swift */,
+			);
+			path = GameSetup;
+			sourceTree = "<group>";
+		};
+		D18653D0299A3B8400DEE90D /* GameProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				D18653C1299A30B900DEE90D /* Touches.swift */,
+				D18653C4299A31D400DEE90D /* GameLoop.swift */,
+				D18653C6299A326900DEE90D /* Collisions.swift */,
+				D1DAC79D29819DD900B60AED /* PlayerState.swift */,
+			);
+			path = GameProcessing;
+			sourceTree = "<group>";
+		};
+		D18653DD299B841400DEE90D /* GameModels */ = {
+			isa = PBXGroup;
+			children = (
+				D18653BF2994FBE100DEE90D /* TargetCar.swift */,
+			);
+			path = GameModels;
+			sourceTree = "<group>";
+		};
+		D18653DE299B899800DEE90D /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				D1198EF72979B76D00701A24 /* ParkingWorkGameScene.sks */,
+				D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +218,7 @@
 				D1198EF82979B76D00701A24 /* ParkingWorkGameScene.sks in Resources */,
 				D1198F032979B76E00701A24 /* Assets.xcassets in Resources */,
 				D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */,
-				D1198F0D2979B7A900701A24 /* Asphalt.sks in Resources */,
+				D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,11 +229,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18653D4299A3D9F00DEE90D /* WorldSetup.swift in Sources */,
+				D18653D8299A3FE200DEE90D /* CarLocksSetup.swift in Sources */,
 				D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */,
+				D18653D6299A3EAF00DEE90D /* CarsSetup.swift in Sources */,
 				D18653C02994FBE100DEE90D /* TargetCar.swift in Sources */,
-				D13F2E16298972EB008976EA /* LockComplexity.swift in Sources */,
+				D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */,
+				D18653DC299B7DE300DEE90D /* CameraSetup.swift in Sources */,
+				D18653C7299A326900DEE90D /* Collisions.swift in Sources */,
+				D18653C2299A30B900DEE90D /* Touches.swift in Sources */,
+				D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */,
+				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
-				D1DAC79E29819DD900B60AED /* PlayerStateMachine.swift in Sources */,
+				D18653C9299A38AE00DEE90D /* GameStartSetup.swift in Sources */,
+				D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */,
+				D18653CB299A3A3600DEE90D /* GameFunctions.swift in Sources */,
+				D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */,
+				D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */,
 				D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

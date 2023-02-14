@@ -5,7 +5,6 @@
 //  Created by Николай Ногин on 25.01.2023.
 //
 
-import Foundation
 import GameplayKit
 
 fileprivate let animationKey = "Sprite Animation"
