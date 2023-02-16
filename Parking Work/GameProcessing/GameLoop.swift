@@ -91,7 +91,7 @@ extension ParkingWorkGame {
             player?.run(action)
         }
         
-        // sprite state
+        // player state
         if playerMoving {
             playerStateMachine.enter(WalkingState.self)
         } else {
@@ -100,6 +100,10 @@ extension ParkingWorkGame {
             currentSpriteTarget?.removeFromParent()
         }
         
+        // check if need to hide open car window pop-up
+        if currLockTarget != nil {
+            checkDistanceBetweenPlayerAndTargetLock()
+        }
     }
        
 }

@@ -55,9 +55,8 @@ extension ParkingWorkGame {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
-            
-            // && (touchedNode.name == "tilemapLevel1")
-            if cameraMovingByFinger == false  {
+
+            if cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) {
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()
                 setTarget(at: location)
@@ -94,6 +93,30 @@ extension ParkingWorkGame {
             target.removeAllActions()
             target.run(rotatingAction)
         }
+    }
+    
+    func isTouchingOpenCarWindow(touchedNode: SKNode) -> Bool {
+        let openCarWindowNodesNames = [
+            "openCarMessageWindow",
+            "carNameLabel",
+            "carMessageLabel",
+            "lockTypeLabel",
+            "yesOpenLockBtn",
+            "noOpenLockBtn",
+            "yesBtnLabel",
+            "noBtnLabel",
+            "complexityLabel",
+            "complexityNumLevel"
+        ]
+        
+        var isTouchingOpenCarWindow = false
+        
+        for nodeName in openCarWindowNodesNames {
+            if touchedNode.name == nodeName {
+                isTouchingOpenCarWindow = true
+            }
+        }
+        return isTouchingOpenCarWindow
     }
 
 }

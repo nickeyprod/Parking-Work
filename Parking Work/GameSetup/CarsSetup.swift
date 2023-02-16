@@ -19,6 +19,7 @@ extension ParkingWorkGame {
         oldCopper?.physicsBody?.categoryBitMask = carCategory
         oldCopper?.physicsBody?.affectedByGravity = false
         oldCopper?.physicsBody?.isDynamic = false
+        oldCopper?.zPosition = 1
         
         // Chowerler
         chowerler = self.childNode(withName: Cars.Chowerler.rawValue)
@@ -27,5 +28,6 @@ extension ParkingWorkGame {
         chowerler?.physicsBody?.categoryBitMask = carCategory
         chowerler?.physicsBody?.affectedByGravity = false
         chowerler?.physicsBody?.isDynamic = false
+        chowerler?.zPosition = 1
     }
 }
