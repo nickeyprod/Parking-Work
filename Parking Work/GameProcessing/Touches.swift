@@ -20,9 +20,11 @@ extension ParkingWorkGame {
             // buttons pressed check
             let touchedNode = atPoint(location)
             if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
-                print("open car button pressed")
+                // try to open target door of the car
+                tryOpenCarLock(of: currTargetCar!)
             } else if touchedNode.name == "noOpenLockBtn" || touchedNode.parent?.name == "noOpenLockBtn" {
-                print("no open car button pressed")
+                // does not open and hide pop-up message
+                hideOpenCarMessage()
             }
         }
     }

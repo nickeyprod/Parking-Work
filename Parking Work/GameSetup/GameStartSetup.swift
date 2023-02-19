@@ -27,6 +27,8 @@ extension ParkingWorkGame {
     func setupPopUpWindowMessages() {
         // open car window message
         self.setupOpenCarWindowMessage()
+        // open car window success message
+        self.setupOpenCarSuccessWindowMessage()
     }
     
     // MARK: - Physic Bodies Setup

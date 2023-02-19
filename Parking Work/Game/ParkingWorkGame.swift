@@ -17,10 +17,17 @@ class ParkingWorkGame: SKScene {
     var playerLocationDestination: CGPoint?
     
     // Message windows
+    // Open Car Window
     var openCarWindow: SKNode?
     var openCarWindowNameLabel: SKLabelNode?
     var openCarWindowLockTypeLabel: SKLabelNode?
     var openCarWindowComplexityNum: SKLabelNode?
+    // Open Car Success Wibdow
+    var openCarSuccessWindow: SKNode?
+    var openCarSuccessWindowSuccessLabel: SKLabelNode?
+    var openCarSuccessWindowGarageLabel: SKLabelNode?
+    var openCarSuccessWindowGoodBtn: SKNode?
+    var openCarSuccessWindowGoodBtnLabel: SKLabelNode?
     
     // Time
     var previousTimeInterval: TimeInterval = 0
@@ -29,7 +36,8 @@ class ParkingWorkGame: SKScene {
     var currentSpriteTarget: SKSpriteNode?
     var targetMovementTimer: Timer?
     
-    // Lock target
+    // Target
+    var currTargetCar: TargetCar?
     var currLockTarget: SKNode?
     
     // Camera position
@@ -50,9 +58,11 @@ class ParkingWorkGame: SKScene {
     var chowerler: SKNode?
 
     enum Cars: String {
-        case OldCopper = "OldCopper"
-        case Chowerler = "Chowerler"
+        case OldCopper
+        case Chowerler
     }
+    
+    var ownedCars: [OwnedCar?] = []
     
     // analog to 'ViewDidLoad' - runs when game scene appears
     override func didMove(to view: SKView) {

@@ -21,14 +21,24 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
  
         switch contactMask {
         case (playerCategory | lockCategory):
+            
             if bodyA.node!.name != "playerNode" {
                 currLockTarget = bodyA.node
-                tryOpenCarLock(of: (bodyA.node?.parent!.name)!, lockType: (bodyA.node?.name)!)
             }
             else if bodyB.node!.name != "playerNode" {
                 currLockTarget = bodyB.node
-                tryOpenCarLock(of: (bodyB.node?.parent!.name)!, lockType: (bodyB.node?.name)!)
             }
+            
+            // get car name, lock type and lock complexity
+            let carName = currLockTarget?.parent!.name
+            let lockType = currLockTarget?.name
+            let lockComplexity = CAR_LIST[carName!]?[lockType!]
+            
+            // initialize targetCar object
+            currTargetCar = TargetCar(carName: carName!, lockType: lockType!, lockComplexity: lockComplexity!)
+            
+            // show message suggesting to open the target car
+            self.showOpenCarMessage(of: currTargetCar!)
         default:
             currLockTarget = nil
             print("Some other contact occurred")

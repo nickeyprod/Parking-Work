@@ -10,6 +10,19 @@ import SpriteKit
 // Pop-up Windows Setup
 extension ParkingWorkGame {
     
+    func setupOpenCarSuccessWindowMessage() {
+        // get open car succeess window itself
+        openCarSuccessWindow = self.childNode(withName: "carInfoWindow")
+        openCarSuccessWindow?.alpha = 0
+        openCarSuccessWindow?.zPosition = 12
+        
+        // open car success window labels
+        openCarSuccessWindowSuccessLabel = openCarSuccessWindow?.childNode(withName: "successLabel") as? SKLabelNode
+        openCarSuccessWindowGarageLabel = openCarSuccessWindow?.childNode(withName: "garageLabel") as? SKLabelNode
+        openCarSuccessWindowGoodBtn = openCarSuccessWindow?.childNode(withName: "goodButton")
+        openCarSuccessWindowGoodBtnLabel = openCarSuccessWindow?.childNode(withName: "goodLabel") as? SKLabelNode
+    }
+    
     func setupOpenCarWindowMessage() {
         // get open car window itself
         openCarWindow = self.childNode(withName: "openCarMessageWindow")

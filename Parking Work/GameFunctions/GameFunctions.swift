@@ -13,17 +13,12 @@ extension ParkingWorkGame {
     /// Shows pop-up window, offering to try to open the lock when player comes сlose to it.
     func showOpenCarMessage(of targetCar: TargetCar) {
         
-        let translateLockType = [
-            "passenger_lock": "Пассажирский замок",
-            "driver_lock": "Водительский замок"
-        ]
-        
         // add one zero at the end if complexity 0.1 to display -> 0.10
         let complexity = "\(targetCar.lockComplexity)".count == 3 ? "\(targetCar.lockComplexity)0" : "\(targetCar.lockComplexity)"
 
         openCarWindow?.position = player!.position
         openCarWindowNameLabel?.text = "\(targetCar.carName)"
-        openCarWindowLockTypeLabel?.text = "\(translateLockType[targetCar.lockType] ?? "тип неизвестен")"
+        openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[targetCar.lockType] ?? "тип неизвестен")"
         openCarWindowComplexityNum?.text = "\(complexity)/1.00"
         
         openCarWindow?.alpha = 1
@@ -47,5 +42,7 @@ extension ParkingWorkGame {
             currLockTarget = nil
         }
     }
+    
+    
 }
 
