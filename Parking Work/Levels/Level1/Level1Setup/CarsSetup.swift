@@ -7,9 +7,8 @@
 
 import SpriteKit
 
-// Cars Setup
-extension ParkingWorkGame {
-    
+// Level 1 Cars Setup
+extension Level1 {
     func setupCars() {
         
         // Old Copper
@@ -30,4 +29,5 @@ extension ParkingWorkGame {
         chowerler?.physicsBody?.isDynamic = false
         chowerler?.zPosition = 1
     }
+
 }

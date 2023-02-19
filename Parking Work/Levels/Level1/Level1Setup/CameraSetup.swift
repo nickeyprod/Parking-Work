@@ -7,11 +7,12 @@
 
 import SpriteKit
 
-// Camera Setup
-extension ParkingWorkGame {
+// Level 1 Camera Setup
+extension Level1 {
     /// Get camera node from game scene and set its position to the same place as player position.
     func setupCamera() {
         cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
         cameraNode?.position = player!.position
     }
+    
 }

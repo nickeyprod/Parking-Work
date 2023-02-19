@@ -9,8 +9,9 @@
 
 import SpriteKit
 
-// Car Locks Setup
-extension ParkingWorkGame {
+// Level 1 Car Locks Setup
+extension Level1 {
+    
     func setupCarLocks() {
         // car locks
         let oldCopperDriver = oldCopper!.childNode(withName: "driver_lock")

@@ -7,8 +7,8 @@
 
 import SpriteKit
 
-// World Bounds Setup
-extension ParkingWorkGame {
+// Level 1 World Bounds Setup
+extension Level1 {
     
     func setupWorldBoundaries() {
         // player collides with this `end of the world` boundaries
@@ -20,7 +20,6 @@ extension ParkingWorkGame {
             worldBoundary?.physicsBody?.isDynamic = false
             worldBoundary?.alpha = 0
         }
-    
     }
     
 }

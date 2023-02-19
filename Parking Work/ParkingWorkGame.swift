@@ -53,15 +53,6 @@ class ParkingWorkGame: SKScene {
     let carCategory: UInt32 = 1 << 3
     let boundaryCategory: UInt32 = 1 << 4
     
-    // Cars
-    var oldCopper: SKNode?
-    var chowerler: SKNode?
-
-    enum Cars: String {
-        case OldCopper
-        case Chowerler
-    }
-    
     var ownedCars: [OwnedCar?] = []
     
     // analog to 'ViewDidLoad' - runs when game scene appears
@@ -70,20 +61,17 @@ class ParkingWorkGame: SKScene {
         // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
         
-        // setup physic bodies
-        setupPhysicBodies()
-        
-        // setup camera
-        setupCamera()
-        
-        // setup pop-up windows
-        setupPopUpWindowMessages()
-        
-        // setup initial values needed for start the game
-        setupInitialGameValues()
-        
-        // enter to initial player state
-        playerStateMachine.enter(IdleState.self)
-
     }
+    
+    // MARK: - Initial Game Values Setup
+    /// Setup all initial values (or variables) needed for start the game
+    func setupInitialGameValues() {
+        playerLocationDestination = player?.position
+        
+        playerStateMachine = GKStateMachine(states: [
+            WalkingState(player: player!),
+            IdleState(player: player!)
+        ])
+    }
+    
 }
