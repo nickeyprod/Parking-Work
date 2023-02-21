@@ -43,12 +43,45 @@ extension ParkingWorkGame {
                 
                 let diffX = startTouchPosition!.x - currTouchPosition!.x
                 let diffY = startTouchPosition!.y - currTouchPosition!.y
-                cameraNode?.position.x = (cameraNode?.position.x)! + diffX
-                cameraNode?.position.y = (cameraNode?.position.y)! + diffY
+                
+                // restrict camera movement by X to top and right world bounds
+                if (rightTopCameraEnd!.x <= rightTopEnd!.x) && (leftBottomCameraEnd!.x >= leftBottomEnd!.x) {
+                    cameraNode?.position.x = (cameraNode?.position.x)! + diffX
+                } else {
+                    let newPosX = (cameraNode?.position.x)! + diffX
+                    if (newPosX <= rightTopEnd!.x) && (newPosX >= leftBottomEnd!.x) {
+                        cameraNode?.position.x = newPosX
+                    } else {
+                        if (cameraNode?.position.x)! < 0 {
+                            cameraNode?.position.x = leftBottomEnd!.x
+                        } else {
+                            cameraNode?.position.x = rightTopEnd!.x
+                        }
+                        
+                    }
+                }
+                
+                // restrict camera movement by Y to bottom and left world bounds
+                if (rightTopCameraEnd!.y <= rightTopEnd!.y) && (leftBottomCameraEnd!.y >= leftBottomEnd!.y) {
+                    cameraNode?.position.y = (cameraNode?.position.y)! + diffY
+                } else {
+
+                    let newPosY = (cameraNode?.position.y)! + diffY
+
+                    if newPosY <= rightTopEnd!.y && newPosY >= leftBottomEnd!.y {
+                        cameraNode?.position.y = newPosY
+                    } else {
+                        if (cameraNode?.position.y)! < 0 {
+                            cameraNode?.position.y = leftBottomEnd!.y
+                        } else {
+                            cameraNode?.position.y = rightTopEnd!.y
+                        }
+                        
+                    }
+                }
+
             }
-            
         }
-        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

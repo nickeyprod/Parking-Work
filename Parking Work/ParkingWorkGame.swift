@@ -4,6 +4,11 @@ import GameplayKit
 
 class ParkingWorkGame: SKScene {
     
+    // Display Size
+    let displaySize = UIScreen.main.bounds
+    var displayWidth: CGFloat?
+    var displayHeight: CGFloat?
+    
     // Nodes
     var player: SKNode?
     var cameraNode: SKCameraNode?
@@ -44,6 +49,14 @@ class ParkingWorkGame: SKScene {
     var startTouchPosition: CGPoint? = nil
     var currTouchPosition: CGPoint? = nil
     
+    // Camera Ends
+    var rightTopCameraEnd: CGPoint? = nil
+    var leftBottomCameraEnd: CGPoint? = nil
+    
+    // End of the World
+    var rightTopEnd: CGPoint?
+    var leftBottomEnd: CGPoint?
+    
     // Constants
     let PLAYER_SPEED = 1.0
     
@@ -57,21 +70,50 @@ class ParkingWorkGame: SKScene {
     
     // analog to 'ViewDidLoad' - runs when game scene appears
     override func didMove(to view: SKView) {
-        
         // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
-        
+    
     }
     
     // MARK: - Initial Game Values Setup
     /// Setup all initial values (or variables) needed for start the game
     func setupInitialGameValues() {
+        
+        // initial player location destionation the same as player position
         playerLocationDestination = player?.position
         
+        // get display width and height
+        displayWidth = displaySize.width
+        displayHeight = displaySize.height
+        
+        // set right and left boundaries of the tilemap
+        let tileNode = self.childNode(withName: "tilemapLevel1")
+        
+        let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 3)
+        let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 3)
+        let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 3)
+        let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 3)
+        
+        rightTopEnd = CGPoint(x: rightX, y: rightY)
+        leftBottomEnd = CGPoint(x: leftX, y: leftY)
+        
+        // intialize possible player states
         playerStateMachine = GKStateMachine(states: [
             WalkingState(player: player!),
             IdleState(player: player!)
         ])
+    }
+    
+    func updateCameraEdges() {
+        
+        let rightX = (cameraNode?.position.x)! + (displayWidth! / 2)
+        let rightY = (cameraNode?.position.y)! + (displayHeight! / 2)
+        
+        let leftX = (cameraNode?.position.x)! - (displayWidth! / 2)
+        let leftY = (cameraNode?.position.y)! - (displayHeight! / 2)
+        
+        rightTopCameraEnd = CGPoint(x: rightX, y: rightY)
+        leftBottomCameraEnd = CGPoint(x: leftX, y: leftY)
     }
     
 }

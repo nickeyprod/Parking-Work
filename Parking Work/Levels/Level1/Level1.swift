@@ -18,7 +18,6 @@ class Level1: ParkingWorkGame {
         case OldCopper
         case Chowerler
     }
-    
 
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -37,7 +36,6 @@ class Level1: ParkingWorkGame {
         
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)
-        
     }
     
     // MARK: - Physic Bodies Setup

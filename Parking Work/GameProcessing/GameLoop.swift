@@ -104,6 +104,8 @@ extension ParkingWorkGame {
         if currLockTarget != nil {
             checkDistanceBetweenPlayerAndTargetLock()
         }
+        
+        updateCameraEdges()
     }
        
 }
