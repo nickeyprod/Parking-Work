@@ -90,9 +90,9 @@ class ParkingWorkGame: SKScene {
         let tileNode = self.childNode(withName: "tilemapLevel1")
         
         let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 3)
-        let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 3)
+        let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 2.5)
         let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 3)
-        let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 3)
+        let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 2.5)
         
         rightTopEnd = CGPoint(x: rightX, y: rightY)
         leftBottomEnd = CGPoint(x: leftX, y: leftY)

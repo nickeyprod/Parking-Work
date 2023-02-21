@@ -34,6 +34,11 @@ class Level1: ParkingWorkGame {
         // setup pop-up windows
         setupPopUpWindowMessages()
         
+        // play traffic street background sound
+//        run(SKAction.sequence([
+            run(SKAction.repeatForever(CitySound.traffic1.action))
+//            SKAction.changeVolume(to: 0.00, duration: 0)
+//        ]))
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)
     }
