@@ -36,7 +36,7 @@ class Level1: ParkingWorkGame {
         
         // play traffic street background sound
 //        run(SKAction.sequence([
-            run(SKAction.repeatForever(CitySound.traffic1.action))
+//            run(SKAction.repeatForever(CitySound.traffic1.action))
 //            SKAction.changeVolume(to: 0.00, duration: 0)
 //        ]))
         // enter to initial player state

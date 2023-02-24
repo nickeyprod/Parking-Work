@@ -22,6 +22,11 @@ extension ParkingWorkGame {
         openCarWindowComplexityNum?.text = "\(complexity)/1.00"
         
         openCarWindow?.alpha = 1
+        
+        // stop player movement
+        // enter to initial player state
+//        playerLocationDestination = player?.position
+//        playerStateMachine.enter(IdleState.self)
 
     }
     
