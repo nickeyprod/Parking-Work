@@ -72,6 +72,9 @@ class ParkingWorkGame: SKScene {
     override func didMove(to view: SKView) {
         // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
+        
+        // detect PINCH to increase zoom
+//        let pinch = UIPinchGestureRecognizer()
     
     }
     

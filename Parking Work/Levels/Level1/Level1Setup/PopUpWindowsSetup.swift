@@ -25,7 +25,7 @@ extension Level1 {
         // get open car succeess window itself
         openCarSuccessWindow = self.childNode(withName: "carInfoWindow")
         openCarSuccessWindow?.alpha = 0
-        openCarSuccessWindow?.zPosition = 12
+        openCarSuccessWindow?.zPosition = 12 // player=10, suggestpopUp=11 + 1
         
         // open car success window labels
         openCarSuccessWindowSuccessLabel = openCarSuccessWindow?.childNode(withName: "successLabel") as? SKLabelNode

@@ -10,6 +10,19 @@ import SpriteKit
 // General Game Functions
 extension ParkingWorkGame {
     
+    func showCarOpenedSuccessMessage(of targetCar: TargetCar) {
+        let carName = targetCar.carName
+        
+        openCarSuccessWindow?.position = CGPoint(x: (cameraNode?.frame.midX)!, y: (cameraNode?.frame.midY)!)
+        openCarSuccessWindowGarageLabel?.text = "\(carName) появится в вашем гараже"
+        openCarSuccessWindow?.alpha = 1
+        
+    }
+    
+    func hideCarOpenedSiccessMessage() {
+        openCarSuccessWindow?.alpha = 0
+    }
+    
     /// Shows pop-up window, offering to try to open the lock when player comes сlose to it.
     func showOpenCarMessage(of targetCar: TargetCar) {
         

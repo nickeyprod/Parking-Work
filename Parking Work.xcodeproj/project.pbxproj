@@ -38,6 +38,7 @@
 		D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B1299FA0B000084380 /* car_door_locked.wav */; };
 		D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B2299FA0B000084380 /* car_signalization.wav */; };
 		D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerState.swift */; };
+		D1FDF2A429A929280058040E /* button_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1FDF2A329A929280058040E /* button_click.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		D1A3F5B1299FA0B000084380 /* car_door_locked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_door_locked.wav; sourceTree = "<group>"; };
 		D1A3F5B2299FA0B000084380 /* car_signalization.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_signalization.wav; sourceTree = "<group>"; };
 		D1DAC79D29819DD900B60AED /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
+		D1FDF2A329A929280058040E /* button_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button_click.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				D16D775629A4E371004EC225 /* traffic1.wav */,
+				D1FDF2A329A929280058040E /* button_click.wav */,
 				D1A3F5AD299F9BB900084380 /* door_open.wav */,
 				D1A3F5AF299F9E0C00084380 /* success_bell.wav */,
 				D1A3F5B1299FA0B000084380 /* car_door_locked.wav */,
@@ -258,6 +261,7 @@
 				D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */,
 				D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */,
 				D1198F012979B76D00701A24 /* Main.storyboard in Resources */,
+				D1FDF2A429A929280058040E /* button_click.wav in Resources */,
 				D1198F032979B76E00701A24 /* Assets.xcassets in Resources */,
 				D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */,
 				D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */,

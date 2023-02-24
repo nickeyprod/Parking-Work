@@ -34,6 +34,8 @@ extension ParkingWorkGame {
             hideOpenCarMessage()
             // play success ring
             run(Sound.success_bell.action)
+            // show car successfuly opened message
+            showCarOpenedSuccessMessage(of: car)
             
         } else {
             print("The door open has failed")

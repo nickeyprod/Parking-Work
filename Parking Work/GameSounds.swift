@@ -15,6 +15,14 @@ enum Sound: String {
     }
 }
 
+enum MenuSounds: String {
+    case button_click
+    
+    var action: SKAction {
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
+    }
+}
+
 enum CitySound: String {
     case traffic1
     
