@@ -68,14 +68,44 @@ class ParkingWorkGame: SKScene {
     
     var ownedCars: [OwnedCar?] = []
     
+    var prevScale: CGFloat = 0.0
+    let minScale: CGFloat = 1.02
+    let maxScale: CGFloat = 2.02
+    
     // analog to 'ViewDidLoad' - runs when game scene appears
     override func didMove(to view: SKView) {
         // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
         
         // detect PINCH to increase zoom
-//        let pinch = UIPinchGestureRecognizer()
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler))
+        self.view?.isUserInteractionEnabled = true
+        self.view?.addGestureRecognizer(pinch)
     
+    }
+    
+    @objc func pinchHandler(_ sender: UIPinchGestureRecognizer) {
+        
+        // change zoom of the map
+        if sender.state == UIGestureRecognizer.State.changed {
+            if prevScale < sender.scale {
+                if cameraNode!.xScale >= minScale {
+                    // Zooming In
+                    cameraNode?.xScale -= 0.02
+                    cameraNode?.yScale -= 0.02
+                }
+            } else {
+                if cameraNode!.xScale <= maxScale {
+                    // Zooming Out
+                    cameraNode?.xScale += 0.02
+                    cameraNode?.yScale += 0.02
+                }
+            }
+            // set for the next run
+            prevScale = sender.scale
+
+        }
+        
     }
     
     // MARK: - Initial Game Values Setup
@@ -92,10 +122,10 @@ class ParkingWorkGame: SKScene {
         // set right and left boundaries of the tilemap
         let tileNode = self.childNode(withName: "tilemapLevel1")
         
-        let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 3)
-        let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 2.5)
-        let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 3)
-        let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 2.5)
+        let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 4)
+        let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 3)
+        let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 4)
+        let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 3)
         
         rightTopEnd = CGPoint(x: rightX, y: rightY)
         leftBottomEnd = CGPoint(x: leftX, y: leftY)
