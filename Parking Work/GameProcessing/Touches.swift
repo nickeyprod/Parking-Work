@@ -30,11 +30,6 @@ extension ParkingWorkGame {
                 hideCarOpenedSiccessMessage()
                 run(MenuSounds.button_click.action)
             }
-            else if touchedNode.name == "noOpenLockBtn" || touchedNode.parent?.name == "noOpenLockBtn" {
-                // does not open and hide pop-up message
-                hideOpenCarMessage()
-                run(MenuSounds.button_click.action)
-            }
         }
     }
     

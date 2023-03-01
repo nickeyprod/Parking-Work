@@ -61,6 +61,89 @@ extension ParkingWorkGame {
         }
     }
     
+    // this creates window text and buttons for open car message pop-up
+    func createOpenCarMessage() {
+        // window itself
+        let window = SKShapeNode(rectOf: CGSize(width: 260, height: 170), cornerRadius: 10.0)
+        
+        // hide it initially
+        window.alpha = 0
+        window.zPosition = 11 // player=10 + 1
+        
+        window.fillColor = UIColor(named: Colors.OpenCarWindowColor.rawValue)!
+        window.strokeColor = UIColor(named: Colors.OpenCarWindowColorStroke.rawValue)!
+        window.name = "openCarMessageWindow"
+        self.addChild(window)
+        
+        window.position = player!.position
+        
+        // car name label
+        let carNameLabel = SKLabelNode(text: "Old Copper")
+        carNameLabel.name = "carNameLabel"
+        carNameLabel.fontSize = 30
+        carNameLabel.fontName = "SignPainter-HouseScript"
+        carNameLabel.fontColor = UIColor(named: Colors.OpenCarWindowCarNameColor.rawValue)
+        carNameLabel.position = CGPoint(x: 0, y: 54)
+        
+        window.addChild(carNameLabel)
+        
+        // - message label set to 'Попробовать вскрыть?' initially
+        let messageLabel = SKLabelNode(text: "Попробовать вскрыть?")
+        messageLabel.name = "carMessage"
+        messageLabel.position = CGPoint(x: 0, y: 26)
+        messageLabel.fontName = "Copperplate"
+        messageLabel.fontSize = 21
+        messageLabel.fontColor = UIColor(named: Colors.OpenCarWindowCarMsgColor.rawValue)
+        
+        window.addChild(messageLabel)
+        
+        // - lock type label
+        let lockTypeLabel = SKLabelNode(text: "")
+        lockTypeLabel.name = "lockTypeLabel"
+        lockTypeLabel.text = "Пассажирский замок"
+        lockTypeLabel.fontName = "Hoefler Text"
+        lockTypeLabel.fontSize = 18
+        lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
+        lockTypeLabel.position = CGPoint(x: 0, y: 1)
+        
+        window.addChild(lockTypeLabel)
+        
+        // complexity level label
+        let complexityLabel = SKLabelNode(text: "Cложность")
+        complexityLabel.name = "complexityLabel"
+        complexityLabel.fontName = "Hoefler Text"
+        complexityLabel.fontSize = 18
+        complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
+        complexityLabel.position = CGPoint(x: -30, y: -24)
+        
+        window.addChild(complexityLabel)
+        
+        // complexity level number
+        let complexityNumLabel = SKLabelNode(text: "0.08/1.00")
+        complexityNumLabel.name = "complexityNumLevel"
+        complexityNumLabel.fontName = "Hoefler Text"
+        complexityNumLabel.fontSize = 18
+        complexityNumLabel.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+        complexityNumLabel.position = CGPoint(x: 90, y: 0)
+        
+        complexityLabel.addChild(complexityNumLabel)
+        
+        //  open car button
+        let yesBtn = SKShapeNode(rect: CGRect(x: -30, y: -70, width: 60, height: 30), cornerRadius: 6.0)
+        yesBtn.fillColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
+        yesBtn.strokeColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
+        yesBtn.name = "yesOpenLockBtn"
+        window.addChild(yesBtn)
+        
+        let yesBtnLabel = SKLabelNode(text: "Да")
+        yesBtnLabel.name = "yesBtnLabel"
+        yesBtnLabel.fontName = "Copperplate"
+        yesBtnLabel.fontSize = 20
+        yesBtnLabel.position = CGPoint(x: 0, y: -60)
+        
+        yesBtn.addChild(yesBtnLabel)
+    }
+    
     
 }
 

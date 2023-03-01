@@ -31,6 +31,9 @@ class Level1: ParkingWorkGame {
         // setup camera of the level
         setupCamera()
         
+        // create window messages sprites
+        createOpenCarMessage()
+        
         // setup pop-up windows
         setupPopUpWindowMessages()
         
