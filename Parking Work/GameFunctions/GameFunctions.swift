@@ -75,8 +75,6 @@ extension ParkingWorkGame {
         window.name = "openCarMessageWindow"
         self.addChild(window)
         
-        window.position = player!.position
-        
         // car name label
         let carNameLabel = SKLabelNode(text: "Old Copper")
         carNameLabel.name = "carNameLabel"
@@ -144,6 +142,60 @@ extension ParkingWorkGame {
         yesBtn.addChild(yesBtnLabel)
     }
     
+    // this creates window text and buttons for open car success message pop-up
+    func createOpenCarSuccessMessage() {
+        // window itself
+        let window = SKShapeNode(rectOf: CGSize(width: 500, height: 300), cornerRadius: 10.0)
+        window.alpha = 0
+        window.zPosition = 12 // player=10, suggestpopUp=11 + 1
+        
+        window.position = player!.position
+        
+        window.fillColor = UIColor(named: Colors.OpenCarSuccessWindowColor.rawValue)!
+        window.strokeColor = UIColor(named: Colors.OpenCarSuccessWindowColor.rawValue)!
+        window.name = "openCarSuccessWindow"
+        
+        self.addChild(window)
+        
+        // success label
+        let successLabel = SKLabelNode(text: "Вскрытие успешно!")
+        successLabel.name = "successLabel"
+        successLabel.fontSize = 32
+        successLabel.fontName = "American Typewriter Semibold"
+        successLabel.fontColor = UIColor(named: Colors.OpenCarSuccessWindowSuccessLabelColor.rawValue)
+        successLabel.position = CGPoint(x: 0, y: 80)
+        window.addChild(successLabel)
+        
+        // car will go to garage label
+        let toGarageLabel = SKLabelNode(text: "Old Copper появится в вашем гараже.")
+        toGarageLabel.fontName = "American Typewriter Semibold"
+        toGarageLabel.fontSize = 24
+        toGarageLabel.fontColor = UIColor(named: Colors.OpenCarSuccessWindowGarageLabelColor.rawValue)
+        toGarageLabel.position = CGPoint(x: 0, y: 0)
+        toGarageLabel.name = "garageLabel"
+        
+        window.addChild(toGarageLabel)
+        
+        // good button window
+        let goodBtn = SKShapeNode(rect: CGRect(x: -75, y: -100, width: 150, height: 40), cornerRadius: 6)
+        goodBtn.name = "goodButton"
+        goodBtn.fillColor = .gray
+        goodBtn.strokeColor = .gray
+        
+        window.addChild(goodBtn)
+        
+        // good button label
+        let goodBtnLabel = SKLabelNode(text: "Хорошо")
+        goodBtnLabel.position = CGPoint(x: 0, y: -88)
+        goodBtnLabel.fontColor = .black
+        goodBtnLabel.alpha = 0.75
+        
+        goodBtnLabel.fontName = "American Typewriter Bold"
+        goodBtnLabel.fontSize = 24
+        goodBtnLabel.name = "goodLabel"
+        
+        goodBtn.addChild(goodBtnLabel)
+    }
     
 }
 

@@ -33,8 +33,9 @@ class Level1: ParkingWorkGame {
         
         // create window messages sprites
         createOpenCarMessage()
+        createOpenCarSuccessMessage()
         
-        // setup pop-up windows
+        // setup pop-up windows (attach to global variables)
         setupPopUpWindowMessages()
         
         // play traffic street background sound

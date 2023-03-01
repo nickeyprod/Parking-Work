@@ -6,6 +6,7 @@
 //
 
 enum Colors: String {
+    // Open Car Suggest Window
     case OpenCarWindowColor
     case OpenCarWindowColorStroke
     case OpenCarWindowCarNameColor
@@ -13,6 +14,11 @@ enum Colors: String {
     case OpenCarWindowLockTypeColor
     case OpenCarWindowComplexityColor
     case OpenCarYesBtnColor
+    
+    // Open Car Success Window
+    case OpenCarSuccessWindowColor
+    case OpenCarSuccessWindowSuccessLabelColor
+    case OpenCarSuccessWindowGarageLabelColor
     
     // lock complexities
     case OpenCarLockComplexityLightColor
