@@ -11,13 +11,8 @@ import GameplayKit
 class Level1: ParkingWorkGame {
     
     // Cars
-    var oldCopper: SKNode?
-    var chowerler: SKNode?
-
-    enum Cars: String {
-        case OldCopper
-        case Chowerler
-    }
+    let oldCopper = Car(name: CarNameList.OldCopper.rawValue)
+    let chowerler = Car(name: CarNameList.Chowerler.rawValue)
 
     override func didMove(to view: SKView) {
         super.didMove(to: view)

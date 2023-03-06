@@ -22,5 +22,7 @@ enum Colors: String {
     
     // lock complexities
     case OpenCarLockComplexityLightColor
+    case OpenCarLockComplexityMiddleColor
+    case OpenCarLockComplexityHardColor
     
 }

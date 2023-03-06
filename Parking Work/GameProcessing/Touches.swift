@@ -22,12 +22,12 @@ extension ParkingWorkGame {
             let touchedNode = atPoint(location)
             if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
                 // try to open target door of the car
-                tryOpenCarLock(of: currTargetCar!)
+                tryOpenCarLock(of: currTargetCar!, lockType: (currLockTarget?.name)!)
                 run(MenuSounds.button_click.action)
             }
             else if touchedNode.name == "goodButton" || touchedNode.name == "goodLabel" {
                 // hide open success message and play button click sound
-                hideCarOpenedSiccessMessage()
+                hideCarOpenedSuccessMessage()
                 run(MenuSounds.button_click.action)
             }
         }

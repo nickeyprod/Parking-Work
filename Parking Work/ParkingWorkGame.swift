@@ -27,6 +27,7 @@ class ParkingWorkGame: SKScene {
     var openCarWindowNameLabel: SKLabelNode?
     var openCarWindowLockTypeLabel: SKLabelNode?
     var openCarWindowComplexityNum: SKLabelNode?
+    
     // Open Car Success Wibdow
     var openCarSuccessWindow: SKNode?
     var openCarSuccessWindowSuccessLabel: SKLabelNode?
@@ -42,7 +43,7 @@ class ParkingWorkGame: SKScene {
     var targetMovementTimer: Timer?
     
     // Target
-    var currTargetCar: TargetCar?
+    var currTargetCar: Car?
     var currLockTarget: SKNode?
     
     // Camera position
@@ -66,7 +67,8 @@ class ParkingWorkGame: SKScene {
     let carCategory: UInt32 = 1 << 3
     let boundaryCategory: UInt32 = 1 << 4
     
-    var ownedCars: [OwnedCar?] = []
+    var ownedCars: [Car?] = []
+    var signalignCarTimers: [Timer?] = []
     
     var prevScale: CGFloat = 0.0
     let minScale: CGFloat = 1.02

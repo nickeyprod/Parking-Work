@@ -12,22 +12,25 @@ extension Level1 {
     func setupCars() {
         
         // Old Copper
-        oldCopper = self.childNode(withName: Cars.OldCopper.rawValue)
+        oldCopper.node = self.childNode(withName: CAR_TEXTURE_NAMES.oldCopper)
+        oldCopper.node?.userData = NSMutableDictionary()
+        oldCopper.node?.userData?.setValue(oldCopper.self, forKeyPath: "self")
+        oldCopper.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.oldCopper), size: CGSize(width: 460, height: 200))
+        oldCopper.node?.physicsBody?.categoryBitMask = carCategory
+        oldCopper.node?.physicsBody?.affectedByGravity = false
+        oldCopper.node?.physicsBody?.isDynamic = false
+        oldCopper.node?.zPosition = 1
 
-        oldCopper?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: Cars.OldCopper.rawValue), size: CGSize(width: 460, height: 200))
-        oldCopper?.physicsBody?.categoryBitMask = carCategory
-        oldCopper?.physicsBody?.affectedByGravity = false
-        oldCopper?.physicsBody?.isDynamic = false
-        oldCopper?.zPosition = 1
-        
         // Chowerler
-        chowerler = self.childNode(withName: Cars.Chowerler.rawValue)
-        chowerler?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: Cars.Chowerler.rawValue), size: CGSize(width: 258.363, height: 506.244))
+        chowerler.node = self.childNode(withName: CAR_TEXTURE_NAMES.chowerler)
+        chowerler.node?.userData = NSMutableDictionary()
+        chowerler.node?.userData?.setValue(chowerler.self, forKeyPath: "self")
+        chowerler.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.chowerler), size: CGSize(width: 258.363, height: 506.244))
 
-        chowerler?.physicsBody?.categoryBitMask = carCategory
-        chowerler?.physicsBody?.affectedByGravity = false
-        chowerler?.physicsBody?.isDynamic = false
-        chowerler?.zPosition = 1
+        chowerler.node?.physicsBody?.categoryBitMask = carCategory
+        chowerler.node?.physicsBody?.affectedByGravity = false
+        chowerler.node?.physicsBody?.isDynamic = false
+        chowerler.node?.zPosition = 1
     }
 
 }

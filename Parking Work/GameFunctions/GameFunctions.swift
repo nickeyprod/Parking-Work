@@ -10,8 +10,8 @@ import SpriteKit
 // General Game Functions
 extension ParkingWorkGame {
     
-    func showCarOpenedSuccessMessage(of targetCar: TargetCar) {
-        let carName = targetCar.carName
+    func showCarOpenedSuccessMessage(of targetCar: Car) {
+        let carName = targetCar.name
         
         openCarSuccessWindow?.position = CGPoint(x: (cameraNode?.frame.midX)!, y: (cameraNode?.frame.midY)!)
         openCarSuccessWindowGarageLabel?.text = "\(carName) появится в вашем гараже"
@@ -19,20 +19,35 @@ extension ParkingWorkGame {
         
     }
     
-    func hideCarOpenedSiccessMessage() {
+    func hideCarOpenedSuccessMessage() {
+        if openCarSuccessWindow?.alpha == 0 { return }
         openCarSuccessWindow?.alpha = 0
     }
     
     /// Shows pop-up window, offering to try to open the lock when player comes сlose to it.
-    func showOpenCarMessage(of targetCar: TargetCar) {
+    func showOpenCarMessage(of targetCar: Car, lockType: String) {
+        
+        if openCarWindow?.alpha != 0 { return }
         
         // add one zero at the end if complexity 0.1 to display -> 0.10
-        let complexity = "\(targetCar.lockComplexity)".count == 3 ? "\(targetCar.lockComplexity)0" : "\(targetCar.lockComplexity)"
+        let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
 
         openCarWindow?.position = player!.position
-        openCarWindowNameLabel?.text = "\(targetCar.carName)"
-        openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[targetCar.lockType] ?? "тип неизвестен")"
+        openCarWindowNameLabel?.text = "\(targetCar.name)"
+        openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
         openCarWindowComplexityNum?.text = "\(complexity)/1.00"
+        
+        
+        // set complexity num color
+        let comp = targetCar.locks[lockType]!!
+   
+        if comp >= 0.0 && comp <= 0.34 {
+            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+        } else if (comp > 0.34 && comp <= 0.74 ) {
+            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
+        } else {
+            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
+        }
         
         openCarWindow?.alpha = 1
         
@@ -55,7 +70,7 @@ extension ParkingWorkGame {
 
         let diffX = abs(playerPosition!.x) - abs(targetLockPosition!.x)
         let diffY = abs(playerPosition!.y) - abs(targetLockPosition!.y)
-        if (abs(diffX) > 120 || abs(diffY) > 120) {
+        if (abs(diffX) > 150 || abs(diffY) > 150) {
             hideOpenCarMessage()
             currLockTarget = nil
         }
@@ -195,6 +210,31 @@ extension ParkingWorkGame {
         goodBtnLabel.name = "goodLabel"
         
         goodBtn.addChild(goodBtnLabel)
+    }
+    
+    func blinkLightSignals(of car: Car) {
+        
+        let lightSignals = car.node?.childNode(withName: "light_signals")
+        
+        let signalingCar = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(blinkLights), userInfo: lightSignals, repeats: true)
+        
+        // stop signal after 15 seconds
+        Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
+            signalingCar.invalidate()
+            self.removeAction(forKey: (car.node?.name)! + "_light_signal")
+            car.signaling = false
+        }
+       
+    }
+    
+    @objc func blinkLights(sender: Timer) {
+        let lightSignals = sender.userInfo as? SKNode
+        if lightSignals?.alpha == 0  {
+            lightSignals?.alpha = 1
+        } else {
+            lightSignals?.alpha = 0
+        }
+        
     }
     
 }

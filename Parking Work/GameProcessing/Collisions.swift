@@ -25,20 +25,27 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             if bodyA.node!.name != "playerNode" {
                 currLockTarget = bodyA.node
             }
-            else if bodyB.node!.name != "playerNode" {
+            if bodyB.node!.name != "playerNode" {
                 currLockTarget = bodyB.node
             }
             
-            // get car name, lock type and lock complexity
-            let carName = currLockTarget?.parent!.name
+            // get lock type
             let lockType = currLockTarget?.name
-            let lockComplexity = CAR_LIST[carName!]?[lockType!]
             
-            // initialize targetCar object
-            currTargetCar = TargetCar(carName: carName!, lockType: lockType!, lockComplexity: lockComplexity!)
-            
+            // initialize Car object
+            currTargetCar = currLockTarget?.parent?.userData?.value(forKey: "self") as? Car
+
             // show message suggesting to open the target car
-            self.showOpenCarMessage(of: currTargetCar!)
+            // if distance not more than 150
+            let playerPosition = player?.position
+            let targetLockPosition = currLockTarget?.parent?.position
+
+            let diffX = abs(playerPosition!.x) - abs(targetLockPosition!.x)
+            let diffY = abs(playerPosition!.y) - abs(targetLockPosition!.y)
+            if (abs(diffX) < 150 && abs(diffY) < 150 && !currTargetCar!.signaling) {
+                self.showOpenCarMessage(of: currTargetCar!, lockType: lockType!)
+            }
+            
         default:
             currLockTarget = nil
             print("Some other contact occurred")

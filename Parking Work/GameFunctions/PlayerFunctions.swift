@@ -12,22 +12,18 @@ extension ParkingWorkGame {
     
     // MARK: - Car Locks Opening Logic
     /// Player can try to open any lock of any car on the map
-    func tryOpenCarLock(of car: TargetCar) {
+    func tryOpenCarLock(of car: Car, lockType: String) {
+        print(car.name, car.locks[lockType])
         
         // 100% - 0.08% = 99,92%
-        let percentOfSuccess = 100.0 - car.lockComplexity
-        
-        let randomInt = Float.random(in: 0.0...100.0)
-        print(randomInt)
-        if (percentOfSuccess >= randomInt) && (randomInt <= 100.0) {
-            print("The \(LOCK_TRANSLATIONS[car.lockType]!) door of \(car.carName) has been opened!")
-            
-            // init owned car object
-            let ownedCar = OwnedCar(carName: car.carName, lockType: car.lockType, lockComplexity: car.lockComplexity, stolen: true)
+        let percentOfSuccess = 1.0 - car.locks[lockType]!! /// 1.0 - 0.08 = 0.92
+        let randomInt = Float.random(in: 0.0...1.0) // 0.82
+
+        if (randomInt <= percentOfSuccess)  {
             // add it to owned cars array
-            ownedCars.append(ownedCar)
+            ownedCars.append(car)
             // remove the car from tilemap
-            self.childNode(withName: car.carName)?.removeFromParent()
+            car.node?.removeFromParent()
             // play door open sound
             run(Sound.door_open.action)
             // hide open car window pop-up
@@ -41,10 +37,19 @@ extension ParkingWorkGame {
             print("The door open has failed")
             // play door closed sound & car signalization sound
             run(Sound.car_door_locked.action)
-            run(Sound.car_signalization.action)
+            run(Sound.car_signalization.action, withKey: car.name + "_light_signal")
+            
+            // hide open car message
+            hideOpenCarMessage()
+            
+            // block lock of the car
+//            cars[car.carName].
+            
+            // blick lights
+            blinkLightSignals(of: car)
+            car.signaling = true
         }
 
     }
     
 }
-
