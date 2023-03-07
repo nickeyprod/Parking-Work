@@ -86,7 +86,11 @@ class ParkingWorkGame: SKScene {
     
     }
     
+    // MARK: - Pinch handler (zooming In/Out)
+    /// Gesture handling function for zooming in and out map
     @objc func pinchHandler(_ sender: UIPinchGestureRecognizer) {
+        // this prevents camera `jumping` while moving just after zooming
+        currTouchPosition = nil; startTouchPosition = nil
         
         // change zoom of the map
         if sender.state == UIGestureRecognizer.State.changed {
