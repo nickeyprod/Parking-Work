@@ -45,7 +45,6 @@ extension ParkingWorkGame {
             
             // movig camera logic
             if currTouchPosition != nil && startTouchPosition != nil {
-                print(currTouchPosition, startTouchPosition)
                 
                 let diffX = startTouchPosition!.x - currTouchPosition!.x
                 let diffY = startTouchPosition!.y - currTouchPosition!.y

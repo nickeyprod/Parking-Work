@@ -21,6 +21,10 @@ class ParkingWorkGame: SKScene {
     var playerStateMachine: GKStateMachine!
     var playerLocationDestination: CGPoint?
     
+    // Anxiety Bar
+    var anxietyBar: SKSpriteNode?
+    var canReduceAnxiety: Bool = true
+    
     // Message windows
     // Open Car Window
     var openCarWindow: SKNode?
@@ -143,6 +147,7 @@ class ParkingWorkGame: SKScene {
         ])
     }
     
+    // detect where is now left bottom and right top angles of camera positions
     func updateCameraEdges() {
         
         let rightX = (cameraNode?.position.x)! + (displayWidth! / 2)

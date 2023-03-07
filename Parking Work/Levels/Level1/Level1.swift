@@ -30,6 +30,9 @@ class Level1: ParkingWorkGame {
         createOpenCarMessage()
         createOpenCarSuccessMessage()
         
+        // create anxiety bar
+        createAnxietyBar()
+        
         // setup pop-up windows (attach to global variables)
         setupPopUpWindowMessages()
         

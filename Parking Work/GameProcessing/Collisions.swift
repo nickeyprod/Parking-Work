@@ -44,6 +44,8 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             let diffY = abs(playerPosition!.y) - abs(targetLockPosition!.y)
             if (abs(diffX) < 150 && abs(diffY) < 150 && !currTargetCar!.signaling) {
                 self.showOpenCarMessage(of: currTargetCar!, lockType: lockType!)
+                // raise anxiety bar
+                raiseAnxiety(to: 10.0)
             }
             
         default:

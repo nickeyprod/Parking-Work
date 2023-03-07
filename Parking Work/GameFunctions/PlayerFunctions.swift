@@ -13,7 +13,6 @@ extension ParkingWorkGame {
     // MARK: - Car Locks Opening Logic
     /// Player can try to open any lock of any car on the map
     func tryOpenCarLock(of car: Car, lockType: String) {
-        print(car.name, car.locks[lockType])
         
         // 100% - 0.08% = 99,92%
         let percentOfSuccess = 1.0 - car.locks[lockType]!! /// 1.0 - 0.08 = 0.92
@@ -32,9 +31,13 @@ extension ParkingWorkGame {
             run(Sound.success_bell.action)
             // show car successfuly opened message
             showCarOpenedSuccessMessage(of: car)
+            // raise anxiety
+            raiseAnxiety(to: 20.0)
             
         } else {
             print("The door open has failed")
+            // raise anxiety!
+            raiseAnxiety(to: 80.0)
             // play door closed sound & car signalization sound
             run(Sound.car_door_locked.action)
             run(Sound.car_signalization.action, withKey: car.name + "_light_signal")
@@ -42,12 +45,11 @@ extension ParkingWorkGame {
             // hide open car message
             hideOpenCarMessage()
             
-            // block lock of the car
-//            cars[car.carName].
-            
             // blick lights
             blinkLightSignals(of: car)
             car.signaling = true
+            
+            
         }
 
     }

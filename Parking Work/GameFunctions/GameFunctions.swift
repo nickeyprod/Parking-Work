@@ -237,5 +237,57 @@ extension ParkingWorkGame {
         
     }
     
+    // create anxiety bar
+    func createAnxietyBar() {
+        let outerRect = CGRect(origin: CGPoint(x: -(displayWidth! / 2.25), y: -displayHeight! / 2.4), size: CGSize(width: 140, height: 17))
+        let outerShape = SKShapeNode(rect: outerRect, cornerRadius: 4)
+        
+        let innerSprite = SKSpriteNode(color: .blue, size: CGSize(width: 0, height: 17) )
+        innerSprite.anchorPoint = CGPoint(x: 0, y: 0.5)
+        innerSprite.position = CGPoint(x: -(displayWidth! / 2.25) + 1, y: -(displayHeight! / 2.4) + 8)
+        innerSprite.zPosition = 14
+    
+        outerShape.strokeColor = .white
+        outerShape.zPosition = 15
+        
+        self.cameraNode?.addChild(innerSprite)
+        self.cameraNode?.addChild(outerShape)
+        
+        // set for global access
+        self.anxietyBar = innerSprite
+        
+    }
+    
+    
+    // rising anxiety bar (140max)
+    func raiseAnxiety(to num: CGFloat) {
+        canReduceAnxiety = false
+        
+        let currWidth = anxietyBar!.frame.width
+        var futureWidth = currWidth + num
+        
+        if futureWidth > 140.0 {
+            futureWidth = 140.0
+        }
+        
+        anxietyBar!.run(SKAction.resize(toWidth: futureWidth, duration: 0.5)) {
+            self.canReduceAnxiety = true
+        }
+ 
+    }
+    
+    // slowly substracting anxiety
+    func substractAnxiety() {
+        if !canReduceAnxiety { return }
+        let currWidth = (self.anxietyBar?.size.width)!
+        
+        if currWidth > 0 {
+            
+            let futureWidth = currWidth - 1
+            self.anxietyBar?.run(SKAction.resize(toWidth: futureWidth, duration: 0.2))
+        }
+
+    }
+    
 }
 

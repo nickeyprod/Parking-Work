@@ -105,7 +105,12 @@ extension ParkingWorkGame {
             checkDistanceBetweenPlayerAndTargetLock()
         }
         
+        // update left bottom and right top angle positions of the camera
         updateCameraEdges()
+        
+        // slowly substracting anxiety
+        substractAnxiety()
+    
     }
        
 }
