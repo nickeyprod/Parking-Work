@@ -43,6 +43,13 @@ class Level1: ParkingWorkGame {
 //        ]))
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)
+        
+        // showing level number at the start
+        showLevelNumLabel()
+        
+        // zoom out animation
+        zoomOutCamera(to: maxScale)
+        
     }
     
     // MARK: - Physic Bodies Setup

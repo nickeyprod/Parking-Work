@@ -4,6 +4,9 @@ import GameplayKit
 
 class ParkingWorkGame: SKScene {
     
+    // Current Level Number
+    var levelNum: Int = 1
+    
     // Display Size
     let displaySize = UIScreen.main.bounds
     var displayWidth: CGFloat?
@@ -120,8 +123,7 @@ class ParkingWorkGame: SKScene {
     
     // MARK: - Initial Game Values Setup
     /// Setup all initial values (or variables) needed for start the game
-    func setupInitialGameValues() {
-        
+    func setupInitialGameValues() {        
         // initial player location destionation the same as player position
         playerLocationDestination = player?.position
         

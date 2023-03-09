@@ -38,7 +38,11 @@
 		D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B2299FA0B000084380 /* car_signalization.wav */; };
 		D1BC8CDB29B5DA4900F9C597 /* LOCK_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */; };
 		D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */; };
+		D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */; };
+		D1BC8CE229B8752900F9C597 /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CE129B8752900F9C597 /* IntroScene.swift */; };
 		D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerState.swift */; };
+		D1EC016C29B8922200390C41 /* PTSansNarrow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1EC016A29B8922200390C41 /* PTSansNarrow-Regular.ttf */; };
+		D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */; };
 		D1F4CFC529B0C70E003CB541 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4CFC429B0C70E003CB541 /* Car.swift */; };
 		D1FDF2A429A929280058040E /* button_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1FDF2A329A929280058040E /* button_click.wav */; };
 /* End PBXBuildFile section */
@@ -76,7 +80,12 @@
 		D1A3F5B2299FA0B000084380 /* car_signalization.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_signalization.wav; sourceTree = "<group>"; };
 		D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_TYPES.swift; sourceTree = "<group>"; };
 		D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_TEXTURTE_NAMES.swift; sourceTree = "<group>"; };
+		D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
+		D1BC8CE129B8752900F9C597 /* IntroScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScene.swift; sourceTree = "<group>"; };
 		D1DAC79D29819DD900B60AED /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
+		D1EC016929B8911F00390C41 /* Parking-Work-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Parking-Work-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D1EC016A29B8922200390C41 /* PTSansNarrow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTSansNarrow-Regular.ttf"; sourceTree = "<group>"; };
+		D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTSansNarrow-Bold.ttf"; sourceTree = "<group>"; };
 		D1F4CFC429B0C70E003CB541 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		D1FDF2A329A929280058040E /* button_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button_click.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +104,7 @@
 		D1198EE92979B76D00701A24 = {
 			isa = PBXGroup;
 			children = (
+				D1EC016629B88FB200390C41 /* Fonts */,
 				D1628B3029AE050700DF817E /* Colors.swift */,
 				D1198EF42979B76D00701A24 /* Parking Work */,
 				D1198EF32979B76D00701A24 /* Products */,
@@ -129,6 +139,7 @@
 				D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */,
 				D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */,
 				D1A3F5AA299F9B8B00084380 /* GameSounds.swift */,
+				D1EC016929B8911F00390C41 /* Parking-Work-Info.plist */,
 			);
 			path = "Parking Work";
 			sourceTree = "<group>";
@@ -136,6 +147,7 @@
 		D16FD69729A270A70097BC3E /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				D1BC8CE029B8751100F9C597 /* IntroScene */,
 				D16FD69829A270A70097BC3E /* Level1 */,
 			);
 			path = Levels;
@@ -205,6 +217,24 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		D1BC8CE029B8751100F9C597 /* IntroScene */ = {
+			isa = PBXGroup;
+			children = (
+				D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */,
+				D1BC8CE129B8752900F9C597 /* IntroScene.swift */,
+			);
+			path = IntroScene;
+			sourceTree = "<group>";
+		};
+		D1EC016629B88FB200390C41 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */,
+				D1EC016A29B8922200390C41 /* PTSansNarrow-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,12 +296,15 @@
 				D1A3F5B0299F9E0C00084380 /* success_bell.wav in Resources */,
 				D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */,
 				D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */,
+				D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */,
 				D1198F012979B76D00701A24 /* Main.storyboard in Resources */,
 				D1FDF2A429A929280058040E /* button_click.wav in Resources */,
 				D1198F032979B76E00701A24 /* Assets.xcassets in Resources */,
 				D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */,
 				D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */,
+				D1EC016C29B8922200390C41 /* PTSansNarrow-Regular.ttf in Resources */,
 				D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */,
+				D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */,
 				D16D775729A4E371004EC225 /* traffic1.wav in Resources */,
 				D16FD69C29A270A70097BC3E /* Level1Scene.sks in Resources */,
 			);
@@ -297,6 +330,7 @@
 				D18653C7299A326900DEE90D /* Collisions.swift in Sources */,
 				D18653C2299A30B900DEE90D /* Touches.swift in Sources */,
 				D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */,
+				D1BC8CE229B8752900F9C597 /* IntroScene.swift in Sources */,
 				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
 				D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */,
@@ -455,6 +489,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J723W5X5H;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Parking-Work-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -487,6 +522,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J723W5X5H;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Parking-Work-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

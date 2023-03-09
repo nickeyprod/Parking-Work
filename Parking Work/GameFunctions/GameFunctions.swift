@@ -289,5 +289,49 @@ extension ParkingWorkGame {
 
     }
     
+    // Zooming Out
+    func zoomOutCamera(to num: CGFloat) {
+        
+        let act = SKAction.scale(by: num, duration: 2.0)
+        let act2 = SKAction.sequence([act, SKAction.wait(forDuration: 1.5)])
+        cameraNode?.run(act2, completion: {
+            self.cameraNode?.run(SKAction.scale(to: self.minScale, duration: 0.7))
+        })
+
+        
+    }
+    
+    // showing level number message at the center of the screens
+    func showLevelNumLabel() {
+        let levelNumberNode = self.cameraNode?.childNode(withName: "LevelNumberNode")
+        let levelLabelNode = levelNumberNode?.childNode(withName: "LevelLabelNode") as? SKLabelNode
+        levelLabelNode?.run(SKAction.fadeIn(withDuration: 0.8))
+        
+        levelLabelNode?.text = "Уровень \(levelNum)"
+        let act = SKAction.resize(toWidth: displayWidth!, duration: 0.3)
+        levelNumberNode?.run(act)
+        
+        levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.4), completion: {
+            levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
+            // roll back and hide
+            Timer.scheduledTimer(withTimeInterval: 2.2, repeats: false) { _ in
+                let act = SKAction.resize(toWidth: 0, duration: 0.6)
+                levelNumberNode?.run(act)
+                levelLabelNode?.run(SKAction.fadeOut(withDuration: 0.5))
+
+                levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.2))
+                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                    levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15), completion: {
+//                        self.showLevelTaskDescription()
+                    })
+                    
+                }
+            }
+        })
+        
+         
+        
+    }
+    
 }
 
