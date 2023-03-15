@@ -262,15 +262,14 @@ extension ParkingWorkGame {
     // rising anxiety bar (140max)
     func raiseAnxiety(to num: CGFloat) {
         canReduceAnxiety = false
-        
-        let currWidth = anxietyBar!.frame.width
-        var futureWidth = currWidth + num
+        let futureWidth = anxietyLevel + num
         
         if futureWidth > 140.0 {
-            futureWidth = 140.0
+            anxietyLevel = 140
+        } else {
+            anxietyLevel = futureWidth
         }
-        
-        anxietyBar!.run(SKAction.resize(toWidth: futureWidth, duration: 0.5)) {
+        anxietyBar!.run(SKAction.resize(toWidth: anxietyLevel, duration: 0.2)) {
             self.canReduceAnxiety = true
         }
  
@@ -278,13 +277,14 @@ extension ParkingWorkGame {
     
     // slowly substracting anxiety
     func substractAnxiety() {
-        if !canReduceAnxiety { return }
-        let currWidth = (self.anxietyBar?.size.width)!
+        if !canReduceAnxiety { return } // false
+        let currWidth = anxietyLevel
         
         if currWidth > 0 {
             
             let futureWidth = currWidth - 1
-            self.anxietyBar?.run(SKAction.resize(toWidth: futureWidth, duration: 0.2))
+            anxietyLevel = futureWidth
+            self.anxietyBar?.run(SKAction.resize(toWidth: anxietyLevel, duration: 0.2))
         }
 
     }
@@ -328,9 +328,195 @@ extension ParkingWorkGame {
                 }
             }
         })
+    }
+    
+    func createMinimap() {
+            
+        let mapWidth: CGFloat = 120
+        let mapHeight: CGFloat = 100
         
-         
+        let mapPos = CGPoint(x: -displayWidth! / 2 + 90, y: displayHeight! / 2 - 60)
         
+        let cropNode = SKCropNode()
+        
+        cropNode.zPosition = 20
+        cropNode.position = mapPos
+        
+        let mask = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
+        
+        mask.fillColor = UIColor.white
+        mask.alpha = 0.8
+
+        cropNode.maskNode = mask
+        
+        // border around minimap
+        let strokeShape = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
+        strokeShape.position = mapPos
+        strokeShape.lineWidth = 6
+        strokeShape.strokeColor = UIColor.darkGray
+
+
+        // set mini map level sprite
+        miniMapSprite = SKSpriteNode(texture: SKTexture(image: UIImage(named: "minimap")!))
+        miniMapSprite?.size.width = mapWidth
+        miniMapSprite?.size.height = mapHeight
+        
+        miniMapWidth = miniMapSprite?.frame.width
+        miniMapHeight = miniMapSprite?.frame.height
+
+        cropNode.addChild(miniMapSprite!)
+        miniMapSprite?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        miniMapSprite?.zPosition = 0
+        
+        self.cameraNode?.addChild(cropNode)
+        self.cameraNode?.addChild(strokeShape)
+        
+        // plus minus buttons
+        let plusBtn = SKLabelNode(text: "+")
+        plusBtn.zPosition = 20
+        let minusBtn = SKLabelNode(text: "-")
+        minusBtn.zPosition = 20
+        
+        plusBtn.fontSize = 20
+        minusBtn.fontSize = 20
+        
+        plusBtn.position = CGPoint(x: -displayWidth! / 2 + 100 + 20, y: (displayHeight! / 2) - 80 - (miniMapHeight! / 2 + 25))
+        
+        minusBtn.position = CGPoint(x: (-displayWidth! / 2 ) + 100 - 20, y: (displayHeight! / 2) - 80 - (miniMapHeight! / 2 + 25))
+        self.cameraNode?.addChild(plusBtn)
+        self.cameraNode?.addChild(minusBtn)
+        
+        // add player dot to mini map
+        self.miniMapPlayerDot = SKShapeNode(circleOfRadius: 3)
+        miniMapPlayerDot!.fillColor = .orange
+        cropNode.addChild(miniMapPlayerDot!)
+        
+        self.miniMapSprite?.setScale(miniMapScaleFactor)
+        // set crop node globally for adding car dots on Level init class
+        self.miniMapCropNode = cropNode
+        self.miniMapCropNode?.zPosition = 2
+
+    }
+
+    
+    // this updates position of the player on minimap
+    func updateMiniMapPlayerPos() {
+    
+        let scaleWidthFactor = tileMapWidth! / miniMapWidth!
+        let scaleHeightFactor = tileMapHeight! / miniMapHeight!
+
+        let miniMapX = (player?.position.x)! / scaleWidthFactor * miniMapScaleFactor
+        let minimapY = (player?.position.y)! / scaleHeightFactor * miniMapScaleFactor
+
+        miniMapPlayerDot?.position = CGPoint(x: miniMapX, y: minimapY)
+    }
+    
+    // creates screen with task for a level message
+    func createLevelTaskScreen() {
+
+        // background
+        taskScreen = SKSpriteNode(color: .black, size: CGSize(width: displayWidth!, height: displayHeight!))
+        
+        cameraNode?.addChild(taskScreen!)
+        taskScreen?.position = CGPoint(x: 0, y: 0)
+        taskScreen?.zPosition = 45
+        taskScreen?.alpha = 0
+        
+        // close task screen button
+        let closeTaskScreenBtn = SKShapeNode(circleOfRadius: 14)
+        closeTaskScreenBtn.name = "ui-closeTaskBtn"
+        closeTaskScreenBtn.fillColor = UIColor.gray
+        closeTaskScreenBtn.alpha = 0.75
+        closeTaskScreenBtn.position = CGPoint(x: -displayWidth! / 2 + 180, y: displayHeight! / 2 - 26)
+        closeTaskScreenBtn.zPosition = 50
+        
+        // close task screen label
+        let closeTaskScreenLabel = SKLabelNode(text: "X")
+        closeTaskScreenLabel.name = "ui-closeTaskLabel"
+        closeTaskScreenLabel.fontSize = 20
+        closeTaskScreenLabel.fontName = "Baskerville-bold"
+        closeTaskScreenLabel.fontColor = .white
+        closeTaskScreenLabel.horizontalAlignmentMode = .center
+        closeTaskScreenLabel.verticalAlignmentMode = .center
+        
+        closeTaskScreenBtn.addChild(closeTaskScreenLabel)
+        
+        taskScreen?.addChild(closeTaskScreenBtn)
+        
+        // level number label
+        let levelNum = SKLabelNode(text: "Уровень \(levelNum)")
+        levelNum.fontSize = 30
+        levelNum.fontName = "Baskerville-bold"
+        levelNum.position = CGPoint(x: 70, y: displayHeight! / 2 - 40)
+        taskScreen?.addChild(levelNum)
+        
+        // level task message
+        let spriteRect = SKSpriteNode()
+        spriteRect.size = CGSize(width: displayWidth! - 260, height: 100)
+        spriteRect.color = UIColor(named: Colors.TaskMessageBackground.rawValue)!
+        spriteRect.alpha = 0.9
+        spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 120)
+        
+        let taskMessage = SKLabelNode(text: "Босс: \"Марка машины мне не важна, на твое усмотрение. Главное,  доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\"")
+        taskMessage.fontSize = 24
+        taskMessage.fontName = "Baskerville"
+        taskMessage.fontColor = UIColor.white
+        taskMessage.preferredMaxLayoutWidth = displayWidth! - 280
+        taskMessage.numberOfLines = 0
+        taskMessage.horizontalAlignmentMode = .center
+        taskMessage.verticalAlignmentMode = .center
+        spriteRect.addChild(taskMessage)
+        taskScreen?.addChild(spriteRect)
+        
+        let bossSiluette = SKSpriteNode(texture: SKTexture(imageNamed: "boss-siluette"))
+        bossSiluette.setScale(0.48)
+        bossSiluette.position = CGPoint(x: displayWidth! / 2 - 140, y: -displayHeight! / 2 + 100)
+        taskScreen?.addChild(bossSiluette)
+        
+    }
+    
+    func showTaskScreen() {
+        taskScreen?.run(SKAction.fadeAlpha(to: 0.9, duration: 0.2), completion: {
+            self.isPaused = true
+        })
+        miniMapCropNode?.zPosition = 45
+
+    }
+    
+    func hideTaskScreen() {
+        taskScreen?.alpha = 0
+        self.isPaused = false
+        self.miniMapCropNode?.zPosition = 2
+    }
+    
+    
+    // creates menu screen to pause game and settings
+    func createMenuScreen() {
+        
+    }
+    
+    // creates buttons
+    func createUIButtons() {
+ 
+        let taskBtn = SKShapeNode(circleOfRadius: 14)
+        taskBtn.name = "ui-taskBtn"
+        taskBtn.fillColor = UIColor.gray
+        taskBtn.alpha = 0.75
+        taskBtn.zPosition = 51
+        taskBtn.position = CGPoint(x: -displayWidth! / 2 + 180, y: displayHeight! / 2 - 26)
+        
+        // label
+        let taskBtnLabel = SKLabelNode(text: "?")
+        taskBtnLabel.name = "ui-taskLabel"
+        taskBtnLabel.fontSize = 20
+        taskBtnLabel.fontName = "Baskerville-bold"
+        taskBtnLabel.fontColor = .white
+        taskBtnLabel.horizontalAlignmentMode = .center
+        taskBtnLabel.verticalAlignmentMode = .center
+        
+        taskBtn.addChild(taskBtnLabel)
+        
+        self.cameraNode?.addChild(taskBtn)
     }
     
 }

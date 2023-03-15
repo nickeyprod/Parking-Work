@@ -6,6 +6,10 @@ class ParkingWorkGame: SKScene {
     
     // Current Level Number
     var levelNum: Int = 1
+    var anxietyLevel: CGFloat = 0.0
+    
+    // additional game screens
+    var taskScreen: SKSpriteNode?
     
     // Display Size
     let displaySize = UIScreen.main.bounds
@@ -15,6 +19,23 @@ class ParkingWorkGame: SKScene {
     // Nodes
     var player: SKNode?
     var cameraNode: SKCameraNode?
+    var tileNode: SKTileMapNode?
+    var miniMapSprite: SKSpriteNode?
+    var miniMapCropNode: SKCropNode?
+    
+    // minimap player dot
+    var miniMapPlayerDot: SKShapeNode?
+    
+    // tile Map dimensions
+    var tileMapWidth: CGFloat?
+    var tileMapHeight: CGFloat?
+    
+    // mini Map dimensions
+    var miniMapWidth: CGFloat?
+    var miniMapHeight: CGFloat?
+    
+    // mini map scale factor
+    var miniMapScaleFactor: CGFloat = 1.4
     
     // Bools
     var sinceTouchPassedTime: Timer?
@@ -44,6 +65,7 @@ class ParkingWorkGame: SKScene {
     
     // Time
     var previousTimeInterval: TimeInterval = 0
+    var substractAnxietyTimer: Timer?
     
     // Movement target
     var currentSpriteTarget: SKSpriteNode?
@@ -104,14 +126,14 @@ class ParkingWorkGame: SKScene {
             if prevScale < sender.scale {
                 if cameraNode!.xScale >= minScale {
                     // Zooming In
-                    cameraNode?.xScale -= 0.02
-                    cameraNode?.yScale -= 0.02
+                    cameraNode?.xScale -= 0.035
+                    cameraNode?.yScale -= 0.035
                 }
             } else {
                 if cameraNode!.xScale <= maxScale {
                     // Zooming Out
-                    cameraNode?.xScale += 0.02
-                    cameraNode?.yScale += 0.02
+                    cameraNode?.xScale += 0.035
+                    cameraNode?.yScale += 0.035
                 }
             }
             // set for the next run
@@ -123,7 +145,9 @@ class ParkingWorkGame: SKScene {
     
     // MARK: - Initial Game Values Setup
     /// Setup all initial values (or variables) needed for start the game
-    func setupInitialGameValues() {        
+    func setupInitialGameValues() {
+
+        
         // initial player location destionation the same as player position
         playerLocationDestination = player?.position
         
@@ -131,9 +155,18 @@ class ParkingWorkGame: SKScene {
         displayWidth = displaySize.width
         displayHeight = displaySize.height
         
-        // set right and left boundaries of the tilemap
-        let tileNode = self.childNode(withName: "tilemapLevel1")
+        // get tile map
+        tileNode = childNode(withName: "tilemapLevel1") as? SKTileMapNode
         
+        // set tile map dimensions
+        tileMapWidth = tileNode?.frame.width
+        tileMapHeight = tileNode?.frame.height
+        
+        // set mini map sprite dimensions
+        miniMapWidth = miniMapSprite?.frame.width
+        miniMapHeight = miniMapSprite?.frame.height
+        
+        // set right and left boundaries of the tilemap
         let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 4)
         let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 3)
         let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 4)
@@ -147,6 +180,11 @@ class ParkingWorkGame: SKScene {
             WalkingState(player: player!),
             IdleState(player: player!)
         ])
+        
+        // substracting anxiety
+        self.substractAnxietyTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in
+            self.substractAnxiety()
+        })
     }
     
     // detect where is now left bottom and right top angles of camera positions

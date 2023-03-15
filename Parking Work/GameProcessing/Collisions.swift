@@ -15,7 +15,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         let bodyA = contact.bodyA
         let bodyB = contact.bodyB
         
-        print("didBeginContact entered for \(String(describing: bodyA.node!.name)) and \(String(describing: bodyB.node!.name))")
+//        print("didBeginContact entered for \(String(describing: bodyA.node!.name)) and \(String(describing: bodyB.node!.name))")
         
         let contactMask = (bodyA.categoryBitMask | bodyB.categoryBitMask)
  
@@ -45,7 +45,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             if (abs(diffX) < 150 && abs(diffY) < 150 && !currTargetCar!.signaling) {
                 self.showOpenCarMessage(of: currTargetCar!, lockType: lockType!)
                 // raise anxiety bar
-                raiseAnxiety(to: 10.0)
+                raiseAnxiety(to: 0.5)
             }
             
         default:

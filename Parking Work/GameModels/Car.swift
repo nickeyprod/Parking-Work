@@ -29,4 +29,5 @@ class Car {
 
     // node
     var node: SKNode?
+    var miniMapDot: SKShapeNode?
 }

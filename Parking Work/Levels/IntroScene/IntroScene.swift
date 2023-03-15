@@ -131,8 +131,8 @@ class IntroScene: ParkingWorkGame {
     }
     
     func createSkipButton() {
-        
-        let r = CGRect(origin: CGPoint(x: displayWidth! / 3, y: displayHeight! / 3), size: CGSize(width: 110, height: 30))
+
+        let r = CGRect(origin: CGPoint(x: displayWidth! / 2.2, y: displayHeight! / 2), size: CGSize(width: 110, height: 30))
         let button = SKShapeNode(rect: r, cornerRadius: 5)
         button.name = "skip-btn"
         button.fillColor = UIColor.black
@@ -143,7 +143,7 @@ class IntroScene: ParkingWorkGame {
         
         let label = SKLabelNode(text: "Пропустить")
         button.name = "skip-label"
-        label.position = CGPoint(x: displayWidth! / 3 + 6, y: displayHeight! / 3 + 4)
+        label.position = CGPoint(x: displayWidth! / 2.2 + 6, y: displayHeight! / 2 + 4)
         label.horizontalAlignmentMode = .left
         label.verticalAlignmentMode = .bottom
         label.fontSize = 20

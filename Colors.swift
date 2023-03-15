@@ -25,4 +25,7 @@ enum Colors: String {
     case OpenCarLockComplexityMiddleColor
     case OpenCarLockComplexityHardColor
     
+    // task screen
+    case TaskMessageBackground
+    
 }

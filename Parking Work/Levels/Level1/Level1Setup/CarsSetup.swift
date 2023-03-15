@@ -12,7 +12,7 @@ extension Level1 {
     func setupCars() {
         
         // Old Copper
-        oldCopper.node = self.childNode(withName: CAR_TEXTURE_NAMES.oldCopper)
+        oldCopper.node = childNode(withName: CAR_TEXTURE_NAMES.oldCopper)
         oldCopper.node?.userData = NSMutableDictionary()
         oldCopper.node?.userData?.setValue(oldCopper.self, forKeyPath: "self")
         oldCopper.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.oldCopper), size: CGSize(width: 460, height: 200))
@@ -22,7 +22,7 @@ extension Level1 {
         oldCopper.node?.zPosition = 1
 
         // Chowerler
-        chowerler.node = self.childNode(withName: CAR_TEXTURE_NAMES.chowerler)
+        chowerler.node = childNode(withName: CAR_TEXTURE_NAMES.chowerler)
         chowerler.node?.userData = NSMutableDictionary()
         chowerler.node?.userData?.setValue(chowerler.self, forKeyPath: "self")
         chowerler.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.chowerler), size: CGSize(width: 258.363, height: 506.244))

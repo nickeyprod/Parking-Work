@@ -16,22 +16,25 @@ class GameViewController: UIViewController {
         
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
-        if let scene = GKScene(fileNamed: "IntroScene") {
+        if let scene = GKScene(fileNamed: "Level1Scene") {
+            scene.accessibilityFrame.size
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! ParkingWorkGame? {
+        
                 
                 // Copy gameplay related content over to the scene
 //                sceneNode.entities = scene.entities
 //                sceneNode.graphs = scene.graphs
                 
-//                let displaySize: CGRect = UIScreen.main.bounds
-//                let displayWidth = displaySize.width
-//                let displayHeight = displaySize.height
+                let displaySize: CGRect = UIScreen.main.bounds
+                print(displaySize)
+                let displayWidth = displaySize.width
+                let displayHeight = displaySize.height
                 
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
-//                sceneNode.size = displaySize.size
+                sceneNode.size = displaySize.size
 //                sceneNode.view?.widthAnchor = displayWidth
 //                sceneNode.view?.heightAnchor = displayHeight
                 
@@ -42,8 +45,8 @@ class GameViewController: UIViewController {
                     
                     view.ignoresSiblingOrder = false
                     
-                    view.showsFPS = true
-                    view.showsNodeCount = true
+                    view.showsFPS = false
+                    view.showsNodeCount = false
                 }
             }
         }

@@ -23,6 +23,8 @@ extension ParkingWorkGame {
             ownedCars.append(car)
             // remove the car from tilemap
             car.node?.removeFromParent()
+            // remove the car from minimap also
+            car.miniMapDot?.removeFromParent()
             // play door open sound
             run(Sound.door_open.action)
             // hide open car window pop-up

@@ -11,8 +11,11 @@ import SpriteKit
 extension ParkingWorkGame {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        if event?.allTouches?.count == 2 { return }
+        
+       
         for touch in touches {
+            
             let location = touch.location(in: self)
             if startTouchPosition == nil {
                 startTouchPosition = location
@@ -20,9 +23,21 @@ extension ParkingWorkGame {
             
             // buttons pressed check
             let touchedNode = atPoint(location)
-            if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
+            
+            if touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel" {
+                showTaskScreen()
+            }
+            else if touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel" {
+                hideTaskScreen()
+            }
+            else if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
                 // try to open target door of the car
                 tryOpenCarLock(of: currTargetCar!, lockType: (currLockTarget?.name)!)
+                run(MenuSounds.button_click.action)
+            }
+            else if touchedNode.name == "goodButton" || touchedNode.name == "goodLabel" {
+                // hide open success message and play button click sound
+                hideCarOpenedSuccessMessage()
                 run(MenuSounds.button_click.action)
             }
             else if touchedNode.name == "goodButton" || touchedNode.name == "goodLabel" {
@@ -34,7 +49,7 @@ extension ParkingWorkGame {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.count == 2 { return }
+        if event?.allTouches?.count == 2 { return }
             
         cameraMovingByFinger = true
         
@@ -90,20 +105,21 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if event?.allTouches?.count == 2 { return }
+        
         startTouchPosition = nil
         
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
 
-            if cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) {
+            if cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()
                 setTarget(at: location)
             }
             
             cameraMovingByFinger = false
-            
             
         }
     }
@@ -115,7 +131,7 @@ extension ParkingWorkGame {
         currentSpriteTarget!.position = location
         currentSpriteTarget!.xScale = 0.2
         currentSpriteTarget!.yScale = 0.2
-        currentSpriteTarget?.zPosition = 0
+        currentSpriteTarget?.zPosition = 1
         currentSpriteTarget?.colorBlendFactor = 0.4
         addChild(currentSpriteTarget!)
         
@@ -133,6 +149,14 @@ extension ParkingWorkGame {
             target.removeAllActions()
             target.run(rotatingAction)
         }
+    }
+    
+    func isTouchingUI(touchedNode: SKNode) -> Bool {
+        var isTouchingUI = false
+        if touchedNode.name?.split(separator: "-")[0] == "ui" {
+            isTouchingUI = true
+        }
+        return isTouchingUI
     }
     
     func isTouchingOpenCarWindow(touchedNode: SKNode) -> Bool {

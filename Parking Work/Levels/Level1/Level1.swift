@@ -17,14 +17,28 @@ class Level1: ParkingWorkGame {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        // set level number
+        self.levelNum = 1
+        
         // setup all physic bodies of the level
         setupPhysicBodies()
         
         // setup all needed initial variables (values)
         setupInitialGameValues()
+
+        
+        // create menu screen
+//        createMenuScreen()
+        
         
         // setup camera of the level
         setupCamera()
+        
+        // create level task screen
+        createLevelTaskScreen()
+        
+        // create UI Buttons - pause, task buttons
+        createUIButtons()
         
         // create window messages sprites
         createOpenCarMessage()
@@ -32,6 +46,12 @@ class Level1: ParkingWorkGame {
         
         // create anxiety bar
         createAnxietyBar()
+        
+        // create mini map
+        createMinimap()
+        
+        // add cars dots to map
+        setupCarsOnMap()
         
         // setup pop-up windows (attach to global variables)
         setupPopUpWindowMessages()
@@ -49,6 +69,7 @@ class Level1: ParkingWorkGame {
         
         // zoom out animation
         zoomOutCamera(to: maxScale)
+        
         
     }
     

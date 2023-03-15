@@ -58,7 +58,6 @@ extension ParkingWorkGame {
         if dy < 0 {
             movingDown = true
         }
-        
         // set sprite face direction when moving horizontal/vertical
         if movingUp && !movingLeft && !movingRight {
             let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
@@ -108,8 +107,8 @@ extension ParkingWorkGame {
         // update left bottom and right top angle positions of the camera
         updateCameraEdges()
         
-        // slowly substracting anxiety
-        substractAnxiety()
+        // update player position dot on mini map
+        updateMiniMapPlayerPos()
     
     }
        

@@ -45,6 +45,7 @@
 		D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */; };
 		D1F4CFC529B0C70E003CB541 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4CFC429B0C70E003CB541 /* Car.swift */; };
 		D1FDF2A429A929280058040E /* button_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1FDF2A329A929280058040E /* button_click.wav */; };
+		D1FF461529BE693E0061D819 /* MiniMapSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF461429BE693E0061D819 /* MiniMapSetup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTSansNarrow-Bold.ttf"; sourceTree = "<group>"; };
 		D1F4CFC429B0C70E003CB541 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		D1FDF2A329A929280058040E /* button_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button_click.wav; sourceTree = "<group>"; };
+		D1FF461429BE693E0061D819 /* MiniMapSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMapSetup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				D18653D5299A3EAF00DEE90D /* CarsSetup.swift */,
 				D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */,
 				D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */,
+				D1FF461429BE693E0061D819 /* MiniMapSetup.swift */,
 			);
 			path = Level1Setup;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
 				D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */,
 				D18653CB299A3A3600DEE90D /* GameFunctions.swift in Sources */,
+				D1FF461529BE693E0061D819 /* MiniMapSetup.swift in Sources */,
 				D1F4CFC529B0C70E003CB541 /* Car.swift in Sources */,
 				D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */,
 				D1A3F5AB299F9B8B00084380 /* GameSounds.swift in Sources */,
