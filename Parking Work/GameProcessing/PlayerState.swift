@@ -34,6 +34,7 @@ class WalkingState: PlayerState {
         SKTexture(imageNamed: "user_go_02"),
     ]
     
+
     lazy var walkAction = {
         SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.50))
     }()
@@ -41,6 +42,33 @@ class WalkingState: PlayerState {
     override func didEnter(from previousState: GKState?) {
         player.removeAction(forKey: animationKey)
         player.run(walkAction, withKey: animationKey)
+    }
+}
+
+
+class RunningState: PlayerState {
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        switch stateClass {
+        case is RunningState.Type:
+            return false
+        default:
+            return true
+        }
+    }
+
+    let textures: Array <SKTexture> = [
+        SKTexture(imageNamed: "user_run_01"),
+        SKTexture(imageNamed: "user_run_02"),
+    ]
+
+    lazy var runAction = {
+        return SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.30))
+    }()
+
+    override func didEnter(from previousState: GKState?) {
+        player.removeAction(forKey: animationKey)
+        player.run(runAction, withKey: animationKey)
     }
 }
 
@@ -69,3 +97,5 @@ class IdleState: PlayerState {
         player.run(action, withKey: animationKey)
     }
 }
+
+

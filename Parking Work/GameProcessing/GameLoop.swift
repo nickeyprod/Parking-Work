@@ -38,6 +38,20 @@ extension ParkingWorkGame {
             playerMoving = true
         }
         
+        if isRunButtonHolded {
+            if dx > 0 {
+                dx += 1.0
+            } else {
+                dx -= 1.0
+            }
+            
+            if dy > 0 {
+                dy += 1.0
+            } else {
+                dy -= 1.0
+            }
+        }
+        
         let displacement = CGVector(dx: dx, dy: dy)
         let move = SKAction.move(by: displacement, duration: 0)
         player?.run(move)
@@ -58,6 +72,7 @@ extension ParkingWorkGame {
         if dy < 0 {
             movingDown = true
         }
+        
         // set sprite face direction when moving horizontal/vertical
         if movingUp && !movingLeft && !movingRight {
             let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
@@ -91,9 +106,13 @@ extension ParkingWorkGame {
         }
         
         // player state
-        if playerMoving {
+        if playerMoving && !isRunButtonHolded {
             playerStateMachine.enter(WalkingState.self)
-        } else {
+        }
+        else if playerMoving && isRunButtonHolded {
+            playerStateMachine.enter(RunningState.self)
+        }
+        else {
             playerStateMachine.enter(IdleState.self)
             targetMovementTimer?.invalidate()
             currentSpriteTarget?.removeFromParent()

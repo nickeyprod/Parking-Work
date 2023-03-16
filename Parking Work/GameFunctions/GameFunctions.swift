@@ -70,10 +70,12 @@ extension ParkingWorkGame {
 
         let diffX = abs(playerPosition!.x) - abs(targetLockPosition!.x)
         let diffY = abs(playerPosition!.y) - abs(targetLockPosition!.y)
+
         if (abs(diffX) > 150 || abs(diffY) > 150) {
             hideOpenCarMessage()
             currLockTarget = nil
         }
+    
     }
     
     // this creates window text and buttons for open car message pop-up
@@ -667,6 +669,23 @@ extension ParkingWorkGame {
         menuBtn.addChild(menuBtnLabel)
         
         self.cameraNode?.addChild(menuBtn)
+        
+        // run button
+        let runBtn = SKShapeNode(circleOfRadius: 30)
+        runBtn.name = "ui-runBtn"
+        runBtn.fillColor = UIColor.brown
+        runBtn.alpha = 0.75
+        runBtn.zPosition = 51
+        runBtn.position = CGPoint(x: (displayWidth! / 2) - 90, y: -(displayHeight! / 2) + 90)
+        
+        let shoe = SKSpriteNode(texture: SKTexture(imageNamed: "shoe"))
+        shoe.name = "ui-runBtnImg"
+        shoe.size.width = 50
+        shoe.size.height = 50
+        
+        runBtn.addChild(shoe)
+        
+        self.cameraNode?.addChild(runBtn)
     }
     
 }

@@ -8,6 +8,8 @@ class ParkingWorkGame: SKScene {
     var levelNum: Int = 1
     var anxietyLevel: CGFloat = 0.0
     
+//    var safeAnxietyDistance: CGFloat = 100
+    
     // additional game screens
     var taskScreen: SKSpriteNode?
     var menuScreen: SKSpriteNode?
@@ -46,6 +48,7 @@ class ParkingWorkGame: SKScene {
     var cameraMovingByFinger = false
     var animatedAnxietyFirst: Bool = false
     var animatedAnxietySecond: Bool = false
+    var isRunButtonHolded: Bool = false
     
     // Player state
     var playerStateMachine: GKStateMachine!
@@ -185,6 +188,7 @@ class ParkingWorkGame: SKScene {
         // intialize possible player states
         playerStateMachine = GKStateMachine(states: [
             WalkingState(player: player!),
+            RunningState(player: player!),
             IdleState(player: player!)
         ])
         

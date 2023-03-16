@@ -23,9 +23,11 @@ extension ParkingWorkGame {
             
             // buttons pressed check
             let touchedNode = atPoint(location)
-
             if touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel" {
                 showTaskScreen()
+            }
+            else if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
+                isRunButtonHolded = true
             }
             else if touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel" {
                 hideTaskScreen()
@@ -121,6 +123,10 @@ extension ParkingWorkGame {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
+            
+            if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
+                isRunButtonHolded = false
+            }
 
             if cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
                 playerLocationDestination = location

@@ -14,11 +14,15 @@ extension ParkingWorkGame {
     /// Player can try to open any lock of any car on the map
     func tryOpenCarLock(of car: Car, lockType: String) {
         
+        let unlockSkill = 10
+        
         // 100% - 0.08% = 99,92%
         let percentOfSuccess = 1.0 - car.locks[lockType]!! /// 1.0 - 0.08 = 0.92
         let randomInt = Float.random(in: 0.0...1.0) // 0.82
+    
 
         if (randomInt <= percentOfSuccess)  {
+ 
             // add it to owned cars array
             ownedCars.append(car)
             // remove the car from tilemap
