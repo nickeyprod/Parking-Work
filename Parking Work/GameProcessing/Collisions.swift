@@ -50,7 +50,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             
         default:
             currLockTarget = nil
-            print("Some other contact occurred")
+//            print("Some other contact occurred")
         }
     }
     

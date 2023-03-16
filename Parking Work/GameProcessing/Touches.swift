@@ -11,7 +11,7 @@ import SpriteKit
 extension ParkingWorkGame {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if event?.allTouches?.count == 2 { return }
+        if event?.allTouches?.count == 2  { return }
         
        
         for touch in touches {
@@ -23,12 +23,21 @@ extension ParkingWorkGame {
             
             // buttons pressed check
             let touchedNode = atPoint(location)
-            
+
             if touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel" {
                 showTaskScreen()
             }
             else if touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel" {
                 hideTaskScreen()
+            }
+            else if touchedNode.name == "ui-menuBtn" || touchedNode.name == "ui-menuLabel" {
+                showMenuScreen()
+            }
+            else if touchedNode.name == "ui-resumeGameBtn" || touchedNode.name == "ui-resumeGameBtnLabel" {
+                hideMenuScreen()
+            }
+            else if touchedNode.name == "ui-gameSettingsBtn" || touchedNode.name == "ui-gameSettingsBtnLabel" {
+                showSettingsScreen()
             }
             else if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
                 // try to open target door of the car
@@ -49,7 +58,7 @@ extension ParkingWorkGame {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if event?.allTouches?.count == 2 { return }
+        if event?.allTouches?.count == 2 || self.isPaused { return }
             
         cameraMovingByFinger = true
         

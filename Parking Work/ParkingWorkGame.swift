@@ -10,6 +10,8 @@ class ParkingWorkGame: SKScene {
     
     // additional game screens
     var taskScreen: SKSpriteNode?
+    var menuScreen: SKSpriteNode?
+    var settingsScreen: SKSpriteNode?
     
     // Display Size
     let displaySize = UIScreen.main.bounds
@@ -22,6 +24,8 @@ class ParkingWorkGame: SKScene {
     var tileNode: SKTileMapNode?
     var miniMapSprite: SKSpriteNode?
     var miniMapCropNode: SKCropNode?
+    var anxietyOuterShape: SKShapeNode?
+    var anxietyInnerSprite: SKSpriteNode?
     
     // minimap player dot
     var miniMapPlayerDot: SKShapeNode?
@@ -40,6 +44,8 @@ class ParkingWorkGame: SKScene {
     // Bools
     var sinceTouchPassedTime: Timer?
     var cameraMovingByFinger = false
+    var animatedAnxietyFirst: Bool = false
+    var animatedAnxietySecond: Bool = false
     
     // Player state
     var playerStateMachine: GKStateMachine!
@@ -118,6 +124,7 @@ class ParkingWorkGame: SKScene {
     // MARK: - Pinch handler (zooming In/Out)
     /// Gesture handling function for zooming in and out map
     @objc func pinchHandler(_ sender: UIPinchGestureRecognizer) {
+        if self.isPaused { return }
         // this prevents camera `jumping` while moving just after zooming
         currTouchPosition = nil; startTouchPosition = nil
         
@@ -183,6 +190,7 @@ class ParkingWorkGame: SKScene {
         
         // substracting anxiety
         self.substractAnxietyTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in
+            if (self.isPaused)  { return }
             self.substractAnxiety()
         })
     }

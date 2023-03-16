@@ -26,13 +26,11 @@ class Level1: ParkingWorkGame {
         // setup all needed initial variables (values)
         setupInitialGameValues()
 
-        
-        // create menu screen
-//        createMenuScreen()
-        
-        
         // setup camera of the level
         setupCamera()
+        
+        // create menu screen
+        createMenuScreen()
         
         // create level task screen
         createLevelTaskScreen()

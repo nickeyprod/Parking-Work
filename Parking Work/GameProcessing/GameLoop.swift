@@ -109,7 +109,21 @@ extension ParkingWorkGame {
         
         // update player position dot on mini map
         updateMiniMapPlayerPos()
+        
+        // color anxiety bar
+        hightLightAnxietyBar()
+        
+        // if anxiety 140 or above, calling cops
+        if self.anxietyLevel >= 140.0 {
+            callCops()
+        }
+ 
     
+    }
+    
+    func callCops() {
+        print("calling COPS!")
+//        self.isPaused = true
     }
        
 }

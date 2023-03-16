@@ -239,18 +239,33 @@ extension ParkingWorkGame {
     
     // create anxiety bar
     func createAnxietyBar() {
-        let outerRect = CGRect(origin: CGPoint(x: -(displayWidth! / 2.25), y: -displayHeight! / 2.4), size: CGSize(width: 140, height: 17))
-        let outerShape = SKShapeNode(rect: outerRect, cornerRadius: 4)
         
-        let innerSprite = SKSpriteNode(color: .blue, size: CGSize(width: 0, height: 17) )
-        innerSprite.anchorPoint = CGPoint(x: 0, y: 0.5)
-        innerSprite.position = CGPoint(x: -(displayWidth! / 2.25) + 1, y: -(displayHeight! / 2.4) + 8)
-        innerSprite.zPosition = 14
-    
-        outerShape.strokeColor = .white
+        let cropShape = SKCropNode()
+        cropShape.zPosition = 15
+        cropShape.position = CGPoint(x: -(displayWidth! / 2) + 100, y: -(displayHeight! / 2) + 20)
+        
+        // shape for stroke
+        let outerShape = SKShapeNode(rectOf: CGSize(width: 140, height: 17), cornerRadius: 6)
         outerShape.zPosition = 15
+        outerShape.strokeColor = .white
+        outerShape.lineWidth = 2
         
-        self.cameraNode?.addChild(innerSprite)
+        outerShape.position = CGPoint(x: -(displayWidth! / 2) + 100, y: -(displayHeight! / 2) + 20)
+
+        let maskShape = SKShapeNode(rectOf: CGSize(width: 140, height: 17), cornerRadius: 8)
+        maskShape.fillColor = .black
+        cropShape.maskNode = maskShape
+        
+        let innerSprite = SKSpriteNode(color: .blue, size: CGSize(width: 0, height: 20) )
+        innerSprite.anchorPoint = CGPoint(x: 0, y: 0)
+        
+        innerSprite.position = CGPoint(x: -(maskShape.frame.width / 2), y: -(maskShape.frame.height / 2) )
+            
+        anxietyOuterShape = outerShape
+        anxietyInnerSprite = innerSprite
+        
+        cropShape.addChild(innerSprite)
+        self.cameraNode?.addChild(cropShape)
         self.cameraNode?.addChild(outerShape)
         
         // set for global access
@@ -273,6 +288,36 @@ extension ParkingWorkGame {
             self.canReduceAnxiety = true
         }
  
+    }
+    
+    func hightLightAnxietyBar() {
+        if self.anxietyLevel >= 110.0 {
+            self.anxietyOuterShape?.strokeColor = Colors.DangerStrokeRed
+            self.anxietyInnerSprite?.color = .black
+            
+            if !animatedAnxietyFirst {
+                animatedAnxietyFirst = true
+                self.anxietyOuterShape?.run(SKAction.scale(to: 1.2, duration: 0.2), completion: {
+                    self.anxietyOuterShape?.setScale(1.0)
+                })
+            }
+            
+        } else if self.anxietyLevel > 70.0 && self.anxietyLevel <= 110.0 {
+            if !animatedAnxietySecond {
+                self.animatedAnxietySecond = true
+                self.anxietyOuterShape?.run(SKAction.scale(to: 1.2, duration: 0.2), completion: {
+                    self.anxietyOuterShape?.setScale(1.0)
+                })
+            }
+
+            self.anxietyOuterShape?.strokeColor = .white
+            self.anxietyInnerSprite?.color = .blue
+        } else {
+            self.animatedAnxietyFirst = false
+            self.animatedAnxietySecond = false
+            self.anxietyOuterShape?.strokeColor = .white
+            self.anxietyInnerSprite?.color = .systemBlue
+        }
     }
     
     // slowly substracting anxiety
@@ -489,15 +534,99 @@ extension ParkingWorkGame {
         self.miniMapCropNode?.zPosition = 2
     }
     
+    func showMenuScreen() {
+        menuScreen?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.2), completion: {
+            self.isPaused = true
+        })
+    }
+    
+    func hideMenuScreen() {
+        menuScreen?.alpha = 0
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            self.isPaused = false
+        }
+    }
+    
+    func showSettingsScreen() {
+        print("show settings!")
+//        settingsScreen?.run(SKAction.fadeAlpha(to: 0.9, duration: 0.2), completion: {
+//            self.isPaused = true
+//        })
+    }
+    
+    func hideSettingsScreen() {
+        settingsScreen?.alpha = 0
+    }
+    
     
     // creates menu screen to pause game and settings
     func createMenuScreen() {
+        // background
+        menuScreen = SKSpriteNode(texture: SKTexture(imageNamed: "MenuBackground"), size: CGSize(width: displayWidth!, height: displayHeight!))
         
+
+        cameraNode?.addChild(menuScreen!)
+        menuScreen?.position = CGPoint(x: 0, y: 0)
+        menuScreen?.zPosition = 52
+        menuScreen?.alpha = 0
+        
+        // resume game button
+        let resumeGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
+        resumeGameBtn.position = CGPoint(x: 0, y: 50)
+        resumeGameBtn.name = "ui-resumeGameBtn"
+        resumeGameBtn.fillColor = Colors.MenuButtonsColor
+
+        // resume game button label
+        let resumeGameBtnLabel = SKLabelNode(text: "Продолжить")
+        resumeGameBtnLabel.name = "ui-resumeGameBtnLabel"
+        resumeGameBtnLabel.fontSize = 20
+        resumeGameBtnLabel.fontName = "Baskerville-bold"
+        resumeGameBtnLabel.fontColor = .white
+        resumeGameBtnLabel.horizontalAlignmentMode = .center
+        resumeGameBtnLabel.verticalAlignmentMode = .center
+
+        resumeGameBtn.addChild(resumeGameBtnLabel)
+
+        menuScreen?.addChild(resumeGameBtn)
+        
+        // settings game button
+        let settingsGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
+        settingsGameBtn.name = "ui-gameSettingsBtn"
+        settingsGameBtn.fillColor = Colors.MenuButtonsColor
+
+        // settings game button label
+        let settingsGameBtnLabel = SKLabelNode(text: "Настройки")
+        settingsGameBtnLabel.name = "ui-gameSettingsBtnLabel"
+        settingsGameBtnLabel.fontSize = 20
+        settingsGameBtnLabel.fontName = "Baskerville-bold"
+        settingsGameBtnLabel.fontColor = .white
+        settingsGameBtnLabel.horizontalAlignmentMode = .center
+        settingsGameBtnLabel.verticalAlignmentMode = .center
+
+        settingsGameBtn.addChild(settingsGameBtnLabel)
+
+        menuScreen?.addChild(settingsGameBtn)
+        
+        // game name label
+        let gameName = SKLabelNode(text: "Parking Work")
+        gameName.fontSize = 54
+        gameName.fontName = "Chalkduster"
+        gameName.fontColor = Colors.GameNameLabelColor
+        gameName.position = CGPoint(x: 0, y: displayHeight! / 2 - 55)
+        menuScreen?.addChild(gameName)
+
+        // level number label
+        let levelNum = SKLabelNode(text: "Уровень \(levelNum)")
+        levelNum.fontSize = 30
+        levelNum.fontName = "Baskerville-bold"
+        levelNum.position = CGPoint(x: 0, y: displayHeight! / 2 - 120)
+        menuScreen?.addChild(levelNum)
     }
     
     // creates buttons
     func createUIButtons() {
  
+        // task button
         let taskBtn = SKShapeNode(circleOfRadius: 14)
         taskBtn.name = "ui-taskBtn"
         taskBtn.fillColor = UIColor.gray
@@ -505,7 +634,7 @@ extension ParkingWorkGame {
         taskBtn.zPosition = 51
         taskBtn.position = CGPoint(x: -displayWidth! / 2 + 180, y: displayHeight! / 2 - 26)
         
-        // label
+        //  task button label
         let taskBtnLabel = SKLabelNode(text: "?")
         taskBtnLabel.name = "ui-taskLabel"
         taskBtnLabel.fontSize = 20
@@ -517,6 +646,27 @@ extension ParkingWorkGame {
         taskBtn.addChild(taskBtnLabel)
         
         self.cameraNode?.addChild(taskBtn)
+        
+        // menu button
+        let menuBtn = SKShapeNode(rectOf: CGSize(width: 30, height: 30), cornerRadius: 6)
+        menuBtn.name = "ui-menuBtn"
+        menuBtn.fillColor = UIColor.gray
+        menuBtn.alpha = 0.75
+        menuBtn.zPosition = 51
+        menuBtn.position = CGPoint(x: displayWidth! / 2 - 40, y: displayHeight! / 2 - 26)
+        
+        // menu button label
+        let menuBtnLabel = SKLabelNode(text: "\u{23F8}")
+        menuBtnLabel.name = "ui-menuLabel"
+        menuBtnLabel.fontSize = 32
+        menuBtnLabel.fontName = "Baskerville-bold"
+        menuBtnLabel.fontColor = .white
+        menuBtnLabel.horizontalAlignmentMode = .center
+        menuBtnLabel.verticalAlignmentMode = .center
+        
+        menuBtn.addChild(menuBtnLabel)
+        
+        self.cameraNode?.addChild(menuBtn)
     }
     
 }

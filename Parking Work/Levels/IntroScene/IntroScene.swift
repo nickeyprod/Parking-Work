@@ -23,7 +23,10 @@ class IntroScene: ParkingWorkGame {
         setupInitialGameValues()
         
         subtitlesSprite = self.childNode(withName: "subtitlesSprite") as? SKSpriteNode
+        subtitlesSprite?.size.width = displayWidth!
         backImage = self.childNode(withName: "backImage") as? SKSpriteNode
+        backImage?.size.width = displayWidth!
+        backImage?.size.height = 804
         speechLabel = self.subtitlesSprite?.childNode(withName: "speachLabel") as? SKLabelNode
         speechLabel?.preferredMaxLayoutWidth = displayWidth! - 100
         speechLabel?.lineBreakMode = .byWordWrapping
@@ -47,7 +50,6 @@ class IntroScene: ParkingWorkGame {
         
         let t = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { _ in
             self.startSpeach()
-            print("start speech")
         }
         self.speechTimers.append(t)
     }
@@ -80,7 +82,7 @@ class IntroScene: ParkingWorkGame {
         
         let t3 = Timer.scheduledTimer(withTimeInterval: 16, repeats: false) { _ in
             self.speechLabel?.attributedText = nil
-            self.speechLabel?.text = "Если это так, то поздравляю, ты отлично справился."
+            self.speechLabel?.text = "Если ты все действительно сделал сам, то поздравляю, ты отлично справился."
         }
         
         self.speechTimers.append(t3)
@@ -132,7 +134,8 @@ class IntroScene: ParkingWorkGame {
     
     func createSkipButton() {
 
-        let r = CGRect(origin: CGPoint(x: displayWidth! / 2.2, y: displayHeight! / 2), size: CGSize(width: 110, height: 30))
+        let r = CGRect(origin: CGPoint(x: displayWidth! / 2 - 140, y: displayHeight! / 2 - 40), size: CGSize(width: 110, height: 30))
+        
         let button = SKShapeNode(rect: r, cornerRadius: 5)
         button.name = "skip-btn"
         button.fillColor = UIColor.black
@@ -143,7 +146,8 @@ class IntroScene: ParkingWorkGame {
         
         let label = SKLabelNode(text: "Пропустить")
         button.name = "skip-label"
-        label.position = CGPoint(x: displayWidth! / 2.2 + 6, y: displayHeight! / 2 + 4)
+        label.position = CGPoint(x: displayWidth! / 2 - 135, y: displayHeight! / 2 - 36)
+        
         label.horizontalAlignmentMode = .left
         label.verticalAlignmentMode = .bottom
         label.fontSize = 20
@@ -201,14 +205,12 @@ class IntroScene: ParkingWorkGame {
     }
 
     func showLevel1Scene() {
-        print("show")
         let level1Scene = SKScene(fileNamed: "Level1Scene")
         let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
         level1Scene?.scaleMode = .aspectFill
+        level1Scene?.size = displaySize.size
         self.view?.presentScene(level1Scene!, transition: transition)
-    }
-    
-    deinit {
-        print("scene Intro did deallocate")
     }
 }
