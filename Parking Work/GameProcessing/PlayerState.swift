@@ -63,10 +63,11 @@ class RunningState: PlayerState {
     ]
 
     lazy var runAction = {
-        return SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.30))
+        return SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.40))
     }()
 
     override func didEnter(from previousState: GKState?) {
+//        print(previousState)
         player.removeAction(forKey: animationKey)
         player.run(runAction, withKey: animationKey)
     }

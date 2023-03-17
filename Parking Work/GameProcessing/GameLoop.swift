@@ -10,7 +10,7 @@ import SpriteKit
 // Game Loop Processing
 extension ParkingWorkGame {
     override func update(_ currentTime: TimeInterval) {
-    
+        
         var playerMoving = false
         
         var movingLeft = false
@@ -20,10 +20,10 @@ extension ParkingWorkGame {
         
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
-        
+       
         var dx = (playerLocationDestination!.x - (player?.position.x)!) * deltaTime
         var dy = (playerLocationDestination!.y - (player?.position.y)!) * deltaTime
-        
+
         dx = dx > 0 ? PLAYER_SPEED : -PLAYER_SPEED
         dy = dy < 0 ? -PLAYER_SPEED : PLAYER_SPEED
         
@@ -37,21 +37,22 @@ extension ParkingWorkGame {
         if dx != 0 || dy != 0 {
             playerMoving = true
         }
-        
-        if isRunButtonHolded {
+
+        if isRunButtonHolded && (dx != 0 || dy != 0) {
+
             if dx > 0 {
-                dx += 1.0
+                dx += 0.7
             } else {
-                dx -= 1.0
+                dx -= 0.7
             }
-            
+
             if dy > 0 {
-                dy += 1.0
+                dy += 0.7
             } else {
-                dy -= 1.0
+                dy -= 0.7
             }
         }
-        
+
         let displacement = CGVector(dx: dx, dy: dy)
         let move = SKAction.move(by: displacement, duration: 0)
         player?.run(move)
@@ -72,6 +73,7 @@ extension ParkingWorkGame {
         if dy < 0 {
             movingDown = true
         }
+        
         
         // set sprite face direction when moving horizontal/vertical
         if movingUp && !movingLeft && !movingRight {
@@ -104,13 +106,14 @@ extension ParkingWorkGame {
             let action = SKAction.rotate(toAngle: -2.6449, duration: 0.1, shortestUnitArc: true)
             player?.run(action)
         }
-        
+      
         // player state
         if playerMoving && !isRunButtonHolded {
             playerStateMachine.enter(WalkingState.self)
         }
         else if playerMoving && isRunButtonHolded {
             playerStateMachine.enter(RunningState.self)
+            
         }
         else {
             playerStateMachine.enter(IdleState.self)
@@ -136,8 +139,7 @@ extension ParkingWorkGame {
         if self.anxietyLevel >= 140.0 {
             callCops()
         }
- 
-    
+
     }
     
     func callCops() {

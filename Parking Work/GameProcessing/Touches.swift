@@ -12,8 +12,7 @@ extension ParkingWorkGame {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if event?.allTouches?.count == 2  { return }
-        
-       
+
         for touch in touches {
             
             let location = touch.location(in: self)
@@ -61,6 +60,7 @@ extension ParkingWorkGame {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if event?.allTouches?.count == 2 || self.isPaused { return }
+        
             
         cameraMovingByFinger = true
         
@@ -119,7 +119,7 @@ extension ParkingWorkGame {
         if event?.allTouches?.count == 2 { return }
         
         startTouchPosition = nil
-        
+
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
@@ -129,6 +129,7 @@ extension ParkingWorkGame {
             }
 
             if cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
+    
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()
                 setTarget(at: location)
@@ -140,7 +141,6 @@ extension ParkingWorkGame {
     }
     
     func setTarget(at location: CGPoint) {
-        
         // setting 'target' sprite on ground
         currentSpriteTarget = SKSpriteNode(imageNamed: "target")
         currentSpriteTarget!.position = location

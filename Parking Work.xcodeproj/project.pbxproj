@@ -36,6 +36,8 @@
 		D1A3F5B0299F9E0C00084380 /* success_bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5AF299F9E0C00084380 /* success_bell.wav */; };
 		D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B1299FA0B000084380 /* car_door_locked.wav */; };
 		D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B2299FA0B000084380 /* car_signalization.wav */; };
+		D1A717C629C45D4D00A488BF /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A717C529C45D4D00A488BF /* GameOver.swift */; };
+		D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1A717C729C45D5F00A488BF /* GameOverScene.sks */; };
 		D1BC8CDB29B5DA4900F9C597 /* LOCK_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */; };
 		D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */; };
 		D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */; };
@@ -79,6 +81,8 @@
 		D1A3F5AF299F9E0C00084380 /* success_bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_bell.wav; sourceTree = "<group>"; };
 		D1A3F5B1299FA0B000084380 /* car_door_locked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_door_locked.wav; sourceTree = "<group>"; };
 		D1A3F5B2299FA0B000084380 /* car_signalization.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_signalization.wav; sourceTree = "<group>"; };
+		D1A717C529C45D4D00A488BF /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		D1A717C729C45D5F00A488BF /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_TYPES.swift; sourceTree = "<group>"; };
 		D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_TEXTURTE_NAMES.swift; sourceTree = "<group>"; };
 		D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 		D16FD69729A270A70097BC3E /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				D1A717C429C45D0700A488BF /* GameOverScene */,
 				D1BC8CE029B8751100F9C597 /* IntroScene */,
 				D16FD69829A270A70097BC3E /* Level1 */,
 			);
@@ -218,6 +223,15 @@
 				D1A3F5B2299FA0B000084380 /* car_signalization.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		D1A717C429C45D0700A488BF /* GameOverScene */ = {
+			isa = PBXGroup;
+			children = (
+				D1A717C529C45D4D00A488BF /* GameOver.swift */,
+				D1A717C729C45D5F00A488BF /* GameOverScene.sks */,
+			);
+			path = GameOverScene;
 			sourceTree = "<group>";
 		};
 		D1BC8CE029B8751100F9C597 /* IntroScene */ = {
@@ -309,6 +323,7 @@
 				D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */,
 				D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */,
 				D16D775729A4E371004EC225 /* traffic1.wav in Resources */,
+				D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */,
 				D16FD69C29A270A70097BC3E /* Level1Scene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,6 +338,7 @@
 				D18653D4299A3D9F00DEE90D /* WorldSetup.swift in Sources */,
 				D1628B3129AE050700DF817E /* Colors.swift in Sources */,
 				D18653D8299A3FE200DEE90D /* CarLocksSetup.swift in Sources */,
+				D1A717C629C45D4D00A488BF /* GameOver.swift in Sources */,
 				D16FD69B29A270A70097BC3E /* Level1.swift in Sources */,
 				D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */,
 				D1A3F5A7299E52D600084380 /* LOCK_TRANSLATIONS.swift in Sources */,
