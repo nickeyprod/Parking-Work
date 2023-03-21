@@ -61,7 +61,6 @@ extension ParkingWorkGame {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if event?.allTouches?.count == 2 || self.isPaused { return }
         
-            
         cameraMovingByFinger = true
         
         for touch in touches {

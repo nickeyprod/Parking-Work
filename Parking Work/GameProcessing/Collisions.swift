@@ -45,6 +45,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             
             if (abs(diffX) < 150 && abs(diffY) < 150 && !currTargetCar!.signaling) {
                 self.showOpenCarMessage(of: currTargetCar!, lockType: lockType!)
+                raiseAnxiety(to: 1)
             }
             
         default:

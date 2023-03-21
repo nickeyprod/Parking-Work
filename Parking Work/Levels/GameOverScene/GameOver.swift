@@ -7,11 +7,54 @@
 
 import SpriteKit
 
-class GameOverScene: ParkingWorkGame {
+class GameOver: ParkingWorkGame {
+    var backgroundImg: SKSpriteNode?
+    var catchedHeader: SKLabelNode?
+    var restartBtn: SKSpriteNode?
+    var restartBtnLabel: SKLabelNode?
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         setupInitialGameValues()
+        
+        backgroundImg = self.childNode(withName: "background") as? SKSpriteNode
+        
+        backgroundImg?.size.width = displayWidth! + displayWidth! / 3
+        backgroundImg?.size.height = displayHeight! + displayHeight! / 3
+        backgroundImg?.run(.scale(to: 0.8, duration: 0.05), completion: {
+            self.backgroundImg?.run(.scaleX(to: 1.7, duration: 6.0))
+            self.backgroundImg?.run(.scaleY(to: 1.6, duration: 6.0))
+            self.backgroundImg?.run(.move(by: CGVector(dx: -55.0, dy: 20), duration: 6.0), completion: {
+                self.animateBackground()
+            })
+        })
+        
+        self.catchedHeader = self.childNode(withName: "catched-header") as? SKLabelNode
+        self.catchedHeader?.fontColor = .red
+        self.catchedHeader?.fontSize = 44
+        self.catchedHeader?.fontName = "Baskerville-bold"
+        
+        self.restartBtn = self.childNode(withName: "restart-btn-rect") as? SKSpriteNode
+        self.restartBtnLabel = self.childNode(withName: "restart-btn-label") as? SKLabelNode
+       
+    }
+    
+    func animateBackground() {
+  
+        if backgroundImg!.xScale > 1.6  {
+            self.backgroundImg?.run(.scaleX(to: 1.5, duration: 6.0))
+            self.backgroundImg?.run(.scaleY(to: 1.2, duration: 6.0))
+        } else {
+            self.backgroundImg?.run(.scaleX(to: 1.7, duration: 6.0))
+            self.backgroundImg?.run(.scaleY(to: 1.4, duration: 6.0))
+        }
+                                
+        self.backgroundImg?.run(.move(by: CGVector(dx: -55.0, dy: 20), duration: 6.0), completion: {
+            self.backgroundImg?.run(.move(by: CGVector(dx: 55.0, dy: -20), duration: 6.0)) {
+                self.animateBackground()
+            }
+        })
+
     }
     
     override func setupInitialGameValues() {
@@ -38,22 +81,19 @@ class GameOverScene: ParkingWorkGame {
             
             // buttons pressed check
             let touchedNode = atPoint(location)
-            if touchedNode.name == "restart-btn"  {
-                
+            if touchedNode.name == "restart-btn-rect" || touchedNode.name == "restart-btn-label" {
                 restartGame()
             }
         }
     }
-
+    
     func restartGame() {
-        print("restart game")
-        
-//        let level1Scene = SKScene(fileNamed: "Level1Scene")
-//        let transition = SKTransition.fade(with: .black, duration: 1.0)
-//        let displaySize: CGRect = UIScreen.main.bounds
-//        // Set the scale mode to scale to fit the window
-//        level1Scene?.scaleMode = .aspectFill
-//        level1Scene?.size = displaySize.size
-//        self.view?.presentScene(level1Scene!, transition: transition)
+        let level1Scene = SKScene(fileNamed: "Level\(levelNum)Scene")
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        level1Scene?.scaleMode = .aspectFill
+        level1Scene?.size = displaySize.size
+        self.view?.presentScene(level1Scene!, transition: transition)
     }
 }

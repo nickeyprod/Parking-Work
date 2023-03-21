@@ -136,15 +136,24 @@ extension ParkingWorkGame {
         hightLightAnxietyBar()
         
         // if anxiety 140 or above, calling cops
-        if self.anxietyLevel >= 140.0 {
+        if self.anxietyLevel >= 140.0 && (self.anxietyInnerSprite?.frame.width)! >= 138.0 {
             callCops()
         }
 
     }
     
     func callCops() {
-        print("calling COPS!")
-//        self.isPaused = true
+        
+        // remove all actions
+        self.removeAllActions()
+        
+        let gameOverScene = SKScene(fileNamed: "GameOverScene")
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        gameOverScene?.scaleMode = .aspectFill
+        gameOverScene?.size = displaySize.size
+        self.view?.presentScene(gameOverScene!, transition: transition)
     }
        
 }

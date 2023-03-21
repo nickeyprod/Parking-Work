@@ -574,7 +574,8 @@ extension ParkingWorkGame {
         
         // resume game button
         let resumeGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
-        resumeGameBtn.position = CGPoint(x: 0, y: 50)
+        let yPos = resumeGameBtn.frame.height
+        resumeGameBtn.position = CGPoint(x: 0, y: yPos)
         resumeGameBtn.name = "ui-resumeGameBtn"
         resumeGameBtn.fillColor = Colors.MenuButtonsColor
 
@@ -591,8 +592,16 @@ extension ParkingWorkGame {
 
         menuScreen?.addChild(resumeGameBtn)
         
+        // level number label
+        let levelNum = SKLabelNode(text: "Уровень \(levelNum)")
+        levelNum.fontSize = 30
+        levelNum.fontName = "Baskerville-bold"
+        levelNum.position = CGPoint(x: 0, y: yPos * 2)
+        menuScreen?.addChild(levelNum)
+        
         // settings game button
         let settingsGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
+        settingsGameBtn.position = CGPoint(x: 0, y: yPos - yPos - 2 )
         settingsGameBtn.name = "ui-gameSettingsBtn"
         settingsGameBtn.fillColor = Colors.MenuButtonsColor
 
@@ -616,13 +625,6 @@ extension ParkingWorkGame {
         gameName.fontColor = Colors.GameNameLabelColor
         gameName.position = CGPoint(x: 0, y: displayHeight! / 2 - 55)
         menuScreen?.addChild(gameName)
-
-        // level number label
-        let levelNum = SKLabelNode(text: "Уровень \(levelNum)")
-        levelNum.fontSize = 30
-        levelNum.fontName = "Baskerville-bold"
-        levelNum.position = CGPoint(x: 0, y: displayHeight! / 2 - 120)
-        menuScreen?.addChild(levelNum)
     }
     
     // creates buttons
