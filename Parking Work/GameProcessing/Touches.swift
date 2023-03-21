@@ -150,7 +150,7 @@ extension ParkingWorkGame {
 
             }
             
-            if startTouchNode?.name!.split(separator: "-")[0] != "ui" && cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
+            if startTouchNode?.name?.split(separator: "-")[0] != "ui" && cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
     
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()

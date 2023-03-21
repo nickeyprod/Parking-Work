@@ -18,6 +18,8 @@ extension ParkingWorkGame {
         var movingUp = false
         var movingDown = false
         
+        var diagonalMovement = false
+        
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
        
@@ -76,16 +78,16 @@ extension ParkingWorkGame {
         
         // set sprite face direction when moving by diagonal
         if movingLeft && movingDown {
-            let action = SKAction.rotate(toAngle: 2.6449, duration: 0.1, shortestUnitArc: true)
+            let action = SKAction.rotate(toAngle: 2.6449, duration: 0.3, shortestUnitArc: true)
             player?.run(action)
         } else if movingLeft && movingUp {
-            let action = SKAction.rotate(toAngle: 0.6449, duration: 0.1, shortestUnitArc: true)
+            let action = SKAction.rotate(toAngle: 0.6449, duration: 0.3, shortestUnitArc: true)
             player?.run(action)
         } else if movingRight && movingUp {
-            let action = SKAction.rotate(toAngle: -0.6449, duration: 0.1, shortestUnitArc: true)
+            let action = SKAction.rotate(toAngle: -0.6449, duration: 0.3, shortestUnitArc: true)
             player?.run(action)
         } else if movingRight && movingDown {
-            let action = SKAction.rotate(toAngle: -2.6449, duration: 0.1, shortestUnitArc: true)
+            let action = SKAction.rotate(toAngle: -2.6449, duration: 0.3, shortestUnitArc: true)
             player?.run(action)
         }
         
@@ -105,7 +107,7 @@ extension ParkingWorkGame {
             player?.run(action)
 
         }
-        
+    
       
         // player state
         if playerMoving && !isRunButtonHolded {
