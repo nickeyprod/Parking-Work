@@ -87,6 +87,7 @@ class ParkingWorkGame: SKScene {
     // Camera position
     var startTouchPosition: CGPoint? = nil
     var currTouchPosition: CGPoint? = nil
+    var startTouchNode: SKNode? = nil
     
     // Camera Ends
     var rightTopCameraEnd: CGPoint? = nil

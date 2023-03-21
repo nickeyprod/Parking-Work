@@ -74,24 +74,6 @@ extension ParkingWorkGame {
             movingDown = true
         }
         
-        
-        // set sprite face direction when moving horizontal/vertical
-        if movingUp && !movingLeft && !movingRight {
-            let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
-        } else if movingDown && !movingLeft && !movingRight {
-            let action = SKAction.rotate(toAngle: 3.1449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
-        } else if movingLeft && !movingUp && !movingDown {
-            let action = SKAction.rotate(toAngle: 1.6449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
-        } else if movingRight && !movingUp && !movingDown {
-
-            let action = SKAction.rotate(toAngle: 4.6449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
-
-        }
-        
         // set sprite face direction when moving by diagonal
         if movingLeft && movingDown {
             let action = SKAction.rotate(toAngle: 2.6449, duration: 0.1, shortestUnitArc: true)
@@ -106,6 +88,24 @@ extension ParkingWorkGame {
             let action = SKAction.rotate(toAngle: -2.6449, duration: 0.1, shortestUnitArc: true)
             player?.run(action)
         }
+        
+        // set sprite face direction when moving horizontal/vertical
+        if movingUp && !movingLeft && !movingRight && !movingDown {
+            let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
+            player?.run(action)
+        } else if movingDown && !movingLeft && !movingRight && !movingUp {
+            let action = SKAction.rotate(toAngle: 3.1449, duration: 0.1, shortestUnitArc: true)
+            player?.run(action)
+        } else if movingLeft && !movingUp && !movingDown && !movingRight {
+            let action = SKAction.rotate(toAngle: 1.6449, duration: 0.1, shortestUnitArc: true)
+            player?.run(action)
+        } else if movingRight && !movingUp && !movingDown && !movingLeft {
+
+            let action = SKAction.rotate(toAngle: 4.6449, duration: 0.1, shortestUnitArc: true)
+            player?.run(action)
+
+        }
+        
       
         // player state
         if playerMoving && !isRunButtonHolded {
@@ -136,7 +136,7 @@ extension ParkingWorkGame {
         hightLightAnxietyBar()
         
         // if anxiety 140 or above, calling cops
-        if self.anxietyLevel >= 140.0 && (self.anxietyInnerSprite?.frame.width)! >= 138.0 {
+        if self.anxietyLevel >= 140.0 && (self.anxietyInnerSprite?.frame.width)! >= 139.0 {
             callCops()
         }
 

@@ -673,7 +673,7 @@ extension ParkingWorkGame {
         self.cameraNode?.addChild(menuBtn)
         
         // run button
-        let runBtn = SKShapeNode(circleOfRadius: 30)
+        let runBtn = SKShapeNode(circleOfRadius: 38)
         runBtn.name = "ui-runBtn"
         runBtn.fillColor = UIColor.brown
         runBtn.alpha = 0.75

@@ -67,7 +67,6 @@ class RunningState: PlayerState {
     }()
 
     override func didEnter(from previousState: GKState?) {
-//        print(previousState)
         player.removeAction(forKey: animationKey)
         player.run(runAction, withKey: animationKey)
     }

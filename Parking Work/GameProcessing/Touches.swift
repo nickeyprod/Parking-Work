@@ -18,15 +18,25 @@ extension ParkingWorkGame {
             let location = touch.location(in: self)
             if startTouchPosition == nil {
                 startTouchPosition = location
+                
             }
             
             // buttons pressed check
             let touchedNode = atPoint(location)
+            
+            startTouchNode = touchedNode
+            
             if touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel" {
                 showTaskScreen()
             }
             else if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = true
+                if (touchedNode.name == "ui-runBtn") {
+                    touchedNode.run(.scale(to: 1.2, duration: 0))
+                } else {
+                    touchedNode.parent?.run(.scale(to: 1.2, duration: 0))
+                }
+                
             }
             else if touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel" {
                 hideTaskScreen()
@@ -60,7 +70,7 @@ extension ParkingWorkGame {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if event?.allTouches?.count == 2 || self.isPaused { return }
-        
+        if isRunButtonHolded { return }
         cameraMovingByFinger = true
         
         for touch in touches {
@@ -116,7 +126,14 @@ extension ParkingWorkGame {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if event?.allTouches?.count == 2 { return }
-        
+        if startTouchNode?.name == "ui-runBtn" || startTouchNode?.name == "ui-runBtnImg" {
+            isRunButtonHolded = false
+            if (startTouchNode?.name == "ui-runBtn") {
+                startTouchNode?.run(.scale(to: 1.0, duration: 0))
+            } else {
+                startTouchNode?.parent?.run(.scale(to: 1.0, duration: 0))
+            }
+        }
         startTouchPosition = nil
 
         for touch in touches {
@@ -125,9 +142,15 @@ extension ParkingWorkGame {
             
             if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = false
-            }
+                if (touchedNode.name == "ui-runBtn") {
+                    touchedNode.run(.scale(to: 1.0, duration: 0))
+                } else {
+                    touchedNode.parent?.run(.scale(to: 1.0, duration: 0))
+                }
 
-            if cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
+            }
+            
+            if startTouchNode?.name!.split(separator: "-")[0] != "ui" && cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
     
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()
