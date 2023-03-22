@@ -674,6 +674,7 @@ extension ParkingWorkGame {
         
         // run button
         let runBtn = SKShapeNode(circleOfRadius: 38)
+        self.runButton = runBtn
         runBtn.name = "ui-runBtn"
         runBtn.fillColor = UIColor.brown
         runBtn.alpha = 0.75

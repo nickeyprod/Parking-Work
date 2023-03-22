@@ -18,17 +18,22 @@ extension ParkingWorkGame {
         var movingUp = false
         var movingDown = false
         
-        var diagonalMovement = false
-        
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
        
         var dx = (playerLocationDestination!.x - (player?.position.x)!) * deltaTime
         var dy = (playerLocationDestination!.y - (player?.position.y)!) * deltaTime
-
-        dx = dx > 0 ? PLAYER_SPEED : -PLAYER_SPEED
-        dy = dy < 0 ? -PLAYER_SPEED : PLAYER_SPEED
         
+        // if not holded - usual speed
+        if !isRunButtonHolded {
+            dx = dx > 0 ? PLAYER_SPEED : -PLAYER_SPEED
+            dy = dy < 0 ? -PLAYER_SPEED : PLAYER_SPEED
+        } else {
+            // if holded, add 0.7 to speed
+            dx = dx > 0 ? PLAYER_SPEED + 0.7 : -(PLAYER_SPEED + 0.7)
+            dy = dy < 0 ? -(PLAYER_SPEED + 0.7) : PLAYER_SPEED + 0.7
+        }
+
         if floor(playerLocationDestination!.x) == floor((player?.position.x)!) {
             dx = 0
         }
@@ -38,21 +43,6 @@ extension ParkingWorkGame {
         
         if dx != 0 || dy != 0 {
             playerMoving = true
-        }
-
-        if isRunButtonHolded && (dx != 0 || dy != 0) {
-
-            if dx > 0 {
-                dx += 0.7
-            } else {
-                dx -= 0.7
-            }
-
-            if dy > 0 {
-                dy += 0.7
-            } else {
-                dy -= 0.7
-            }
         }
 
         let displacement = CGVector(dx: dx, dy: dy)
@@ -108,7 +98,6 @@ extension ParkingWorkGame {
 
         }
     
-      
         // player state
         if playerMoving && !isRunButtonHolded {
             playerStateMachine.enter(WalkingState.self)
@@ -141,7 +130,6 @@ extension ParkingWorkGame {
         if self.anxietyLevel >= 140.0 && (self.anxietyInnerSprite?.frame.width)! >= 139.0 {
             callCops()
         }
-
     }
     
     func callCops() {

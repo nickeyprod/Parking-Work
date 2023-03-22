@@ -28,6 +28,7 @@ class ParkingWorkGame: SKScene {
     var miniMapCropNode: SKCropNode?
     var anxietyOuterShape: SKShapeNode?
     var anxietyInnerSprite: SKSpriteNode?
+    var runButton: SKShapeNode?
     
     // minimap player dot
     var miniMapPlayerDot: SKShapeNode?
@@ -46,6 +47,7 @@ class ParkingWorkGame: SKScene {
     // Bools
     var sinceTouchPassedTime: Timer?
     var cameraMovingByFinger = false
+    var cameraZooming = false
     var animatedAnxietyFirst: Bool = false
     var animatedAnxietySecond: Bool = false
     var isRunButtonHolded: Bool = false
@@ -128,12 +130,18 @@ class ParkingWorkGame: SKScene {
     // MARK: - Pinch handler (zooming In/Out)
     /// Gesture handling function for zooming in and out map
     @objc func pinchHandler(_ sender: UIPinchGestureRecognizer) {
+
         if self.isPaused { return }
+
         // this prevents camera `jumping` while moving just after zooming
-        currTouchPosition = nil; startTouchPosition = nil
+        currTouchPosition = nil; startTouchPosition = nil;
         
         // change zoom of the map
-        if sender.state == UIGestureRecognizer.State.changed {
+        // num of touches prevents from bug when zooming with run btn pressed
+        if (sender.numberOfTouches != 1) && sender.state == UIGestureRecognizer.State.changed {
+            
+            cameraZooming = true
+            
             if prevScale < sender.scale {
                 if cameraNode!.xScale >= minScale {
                     // Zooming In
@@ -152,6 +160,13 @@ class ParkingWorkGame: SKScene {
 
         }
         
+        if (sender.state == UIGestureRecognizer.State.ended || sender.state == UIGestureRecognizer.State.cancelled ) {
+            cameraZooming = false
+            self.isRunButtonHolded = false
+            self.runButton?.run(.scale(to: 1.0, duration: 0))
+        }
+        
+  
     }
     
     // MARK: - Initial Game Values Setup

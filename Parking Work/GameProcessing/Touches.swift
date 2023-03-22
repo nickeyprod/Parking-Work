@@ -11,8 +11,7 @@ import SpriteKit
 extension ParkingWorkGame {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if event?.allTouches?.count == 2  { return }
-
+//        if event?.allTouches?.count == 2 { return }
         for touch in touches {
             
             let location = touch.location(in: self)
@@ -31,11 +30,8 @@ extension ParkingWorkGame {
             }
             else if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = true
-                if (touchedNode.name == "ui-runBtn") {
-                    touchedNode.run(.scale(to: 1.2, duration: 0))
-                } else {
-                    touchedNode.parent?.run(.scale(to: 1.2, duration: 0))
-                }
+ 
+                self.runButton?.run(.scale(to: 1.2, duration: 0))
                 
             }
             else if touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel" {
@@ -71,6 +67,7 @@ extension ParkingWorkGame {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if event?.allTouches?.count == 2 || self.isPaused { return }
         if isRunButtonHolded { return }
+        
         cameraMovingByFinger = true
         
         for touch in touches {
@@ -125,39 +122,31 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if event?.allTouches?.count == 2 { return }
         if startTouchNode?.name == "ui-runBtn" || startTouchNode?.name == "ui-runBtnImg" {
             isRunButtonHolded = false
-            if (startTouchNode?.name == "ui-runBtn") {
-                startTouchNode?.run(.scale(to: 1.0, duration: 0))
-            } else {
-                startTouchNode?.parent?.run(.scale(to: 1.0, duration: 0))
-            }
+            runButton?.run(.scale(to: 1.0, duration: 0))
         }
+        
         startTouchPosition = nil
-
+        
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             
             if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = false
-                if (touchedNode.name == "ui-runBtn") {
-                    touchedNode.run(.scale(to: 1.0, duration: 0))
-                } else {
-                    touchedNode.parent?.run(.scale(to: 1.0, duration: 0))
-                }
-
+                self.runButton?.run(.scale(to: 1.0, duration: 0))
             }
             
-            if startTouchNode?.name?.split(separator: "-")[0] != "ui" && cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused {
-    
+            if (startTouchNode?.name != "ui-runBtn" && startTouchNode?.name != "ui-runBtnImg") && cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused && !cameraZooming && isRunButtonHolded == false {
+
                 playerLocationDestination = location
                 currentSpriteTarget?.removeFromParent()
                 setTarget(at: location)
             }
             
             cameraMovingByFinger = false
+            startTouchNode = nil
             
         }
     }
@@ -189,6 +178,7 @@ extension ParkingWorkGame {
     }
     
     func isTouchingUI(touchedNode: SKNode) -> Bool {
+
         var isTouchingUI = false
         if touchedNode.name?.split(separator: "-")[0] == "ui" {
             isTouchingUI = true
