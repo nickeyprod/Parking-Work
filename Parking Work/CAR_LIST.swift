@@ -12,12 +12,12 @@ enum CarNameList: String {
 
 enum CAR_LOCK_COMPLEXITY_LIST {
     enum oldCopper {
-        static var driverLock: Float = 0.10
-        static var passengerLock: Float = 0.08
+        static var driverLock: Float = 10.00
+        static var passengerLock: Float = 8.0
     }
     enum chowerler {
-        static var driverLock: Float = 0.90
-        static var passengerLock: Float = 0.87
+        static var driverLock: Float = 90.0
+        static var passengerLock: Float = 90.0
     }
 }
 
