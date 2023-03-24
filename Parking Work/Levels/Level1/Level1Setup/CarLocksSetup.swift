@@ -15,12 +15,12 @@ extension Level1 {
     func setupCarLocks() {
         
         // Old Copper locks
-        let oldCopperDriverLock = oldCopper.node?.childNode(withName: LOCK_TYPES.driverLock)
-        let oldCopperPassengerLock = oldCopper.node?.childNode(withName: LOCK_TYPES.passengerLock)
+        let oldCopperDriverLock = oldCopper!.node?.childNode(withName: LOCK_TYPES.driverLock)
+        let oldCopperPassengerLock = oldCopper!.node?.childNode(withName: LOCK_TYPES.passengerLock)
         
         // Old Copper locks complexity
-        oldCopper.locks[LOCK_TYPES.driverLock] = CAR_LOCK_COMPLEXITY_LIST.oldCopper.driverLock
-        oldCopper.locks[LOCK_TYPES.passengerLock] = CAR_LOCK_COMPLEXITY_LIST.oldCopper.passengerLock
+        oldCopper!.locks[LOCK_TYPES.driverLock] = CAR_LOCK_COMPLEXITY_LIST.oldCopper.driverLock
+        oldCopper!.locks[LOCK_TYPES.passengerLock] = CAR_LOCK_COMPLEXITY_LIST.oldCopper.passengerLock
         
         // OldCopper driver lock
         oldCopperDriverLock?.physicsBody = SKPhysicsBody(rectangleOf: (oldCopperDriverLock?.frame.size)!)
@@ -37,12 +37,12 @@ extension Level1 {
         oldCopperPassengerLock?.physicsBody?.isDynamic = false
         
         // Chowerler locks
-        let chowerlerDriverLock = chowerler.node?.childNode(withName: LOCK_TYPES.driverLock)
-        let chowerlerPassengerLock = chowerler.node?.childNode(withName: LOCK_TYPES.passengerLock)
+        let chowerlerDriverLock = chowerler!.node?.childNode(withName: LOCK_TYPES.driverLock)
+        let chowerlerPassengerLock = chowerler!.node?.childNode(withName: LOCK_TYPES.passengerLock)
         
         // Old Copper locks complexity
-        chowerler.locks[LOCK_TYPES.driverLock] = CAR_LOCK_COMPLEXITY_LIST.chowerler.driverLock
-        chowerler.locks[LOCK_TYPES.passengerLock] = CAR_LOCK_COMPLEXITY_LIST.chowerler.passengerLock
+        chowerler!.locks[LOCK_TYPES.driverLock] = CAR_LOCK_COMPLEXITY_LIST.chowerler.driverLock
+        chowerler!.locks[LOCK_TYPES.passengerLock] = CAR_LOCK_COMPLEXITY_LIST.chowerler.passengerLock
      
         // Chowerler driver lock
         chowerlerDriverLock?.physicsBody = SKPhysicsBody(rectangleOf: (chowerlerDriverLock?.frame.size)!)

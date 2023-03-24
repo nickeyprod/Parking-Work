@@ -21,7 +21,7 @@ class ParkingWorkGame: SKScene {
     var displayHeight: CGFloat?
     
     // Nodes
-    var player: SKNode?
+    var player: Player?
     var cameraNode: SKCameraNode?
     var tileNode: SKTileMapNode?
     var miniMapSprite: SKSpriteNode?
@@ -52,9 +52,12 @@ class ParkingWorkGame: SKScene {
     var animatedAnxietySecond: Bool = false
     var isRunButtonHolded: Bool = false
     
+    var playerInFirstCircle: Bool = false
+    var playerInSecondCircle: Bool = false
+    var playerInThirdCircle: Bool = false
+    
     // Player state
     var playerStateMachine: GKStateMachine!
-    var playerLocationDestination: CGPoint?
     
     // Anxiety Bar
     var anxietyBar: SKSpriteNode?
@@ -79,12 +82,8 @@ class ParkingWorkGame: SKScene {
     var substractAnxietyTimer: Timer?
     
     // Movement target
-    var currentSpriteTarget: SKSpriteNode?
+    var targetCircleSprite: SKSpriteNode?
     var targetMovementTimer: Timer?
-    
-    // Target
-    var currTargetCar: Car?
-    var currLockTarget: SKNode?
     
     // Camera position
     var startTouchPosition: CGPoint? = nil
@@ -108,7 +107,11 @@ class ParkingWorkGame: SKScene {
     let carCategory: UInt32 = 1 << 3
     let boundaryCategory: UInt32 = 1 << 4
     
-    var ownedCars: [Car?] = []
+    let firstCircleCategory: UInt32 = 1 << 5
+    let secondCircleCategory: UInt32 = 1 << 6
+    let thirdCircleCategory: UInt32 = 1 << 7
+    
+
     var signalignCarTimers: [Timer?] = []
     
     var prevScale: CGFloat = 0.0
@@ -172,10 +175,6 @@ class ParkingWorkGame: SKScene {
     // MARK: - Initial Game Values Setup
     /// Setup all initial values (or variables) needed for start the game
     func setupInitialGameValues() {
-
-        
-        // initial player location destionation the same as player position
-        playerLocationDestination = player?.position
         
         // get display width and height
         displayWidth = displaySize.width
@@ -188,6 +187,17 @@ class ParkingWorkGame: SKScene {
         tileMapWidth = tileNode?.frame.width
         tileMapHeight = tileNode?.frame.height
         
+        // initial player location destionation the same as player position
+        player?.destinationPosition = player?.node?.position
+        
+        // sprite for target circle
+//        targetCircleSprite = SKSpriteNode(imageNamed: "target")
+//        targetCircleSprite?.position = player!.node!.position
+//        targetCircleSprite?.zPosition = 999
+////        targetCircleSprite?.alpha = 0
+//        self.addChild(targetCircleSprite!)
+//        print(targetCircleSprite)
+        
         // set mini map sprite dimensions
         miniMapWidth = miniMapSprite?.frame.width
         miniMapHeight = miniMapSprite?.frame.height
@@ -198,20 +208,21 @@ class ParkingWorkGame: SKScene {
         let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 4)
         let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 3)
         
+        // get right TOP and left BOTTOM end points of the tilemap
         rightTopEnd = CGPoint(x: rightX, y: rightY)
         leftBottomEnd = CGPoint(x: leftX, y: leftY)
         
         // intialize possible player states
         playerStateMachine = GKStateMachine(states: [
-            WalkingState(player: player!),
-            RunningState(player: player!),
-            IdleState(player: player!)
+            WalkingState(player: player!.node!),
+            RunningState(player: player!.node!),
+            IdleState(player: player!.node!)
         ])
         
-        // substracting anxiety
+        // initialize timer for substracting anxiety
         self.substractAnxietyTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in
             if (self.isPaused)  { return }
-            self.substractAnxiety()
+            self.reduceAnxiety(to: 1)
         })
     }
     

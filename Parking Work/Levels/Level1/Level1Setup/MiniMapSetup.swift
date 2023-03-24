@@ -18,26 +18,26 @@ extension Level1 {
         let scaleHeightFactor = tileMapHeight! / miniMapHeight!
         
         // Old Copper
-        self.oldCopper.miniMapDot = SKShapeNode(rectOf: CGSize(width: 6, height: 6))
-        self.oldCopper.miniMapDot?.fillColor = .green
+        oldCopper!.miniMapDot = SKShapeNode(rectOf: CGSize(width: 6, height: 6))
+        oldCopper!.miniMapDot?.fillColor = .green
         
-        var miniMapX = (oldCopper.node?.position.x)! / scaleWidthFactor * miniMapScaleFactor
-        var minimapY = (oldCopper.node?.position.y)! / scaleHeightFactor * miniMapScaleFactor
+        var miniMapX = (oldCopper!.node?.position.x)! / scaleWidthFactor * miniMapScaleFactor
+        var minimapY = (oldCopper!.node?.position.y)! / scaleHeightFactor * miniMapScaleFactor
 
-        self.oldCopper.miniMapDot?.position = CGPoint(x: miniMapX, y: minimapY)
+        oldCopper!.miniMapDot?.position = CGPoint(x: miniMapX, y: minimapY)
 
-        self.miniMapCropNode?.addChild(self.oldCopper.miniMapDot!)
+        miniMapCropNode?.addChild(oldCopper!.miniMapDot!)
         
         // chowerler
-        self.chowerler.miniMapDot = SKShapeNode(rectOf: CGSize(width: 6, height: 6))
-        self.chowerler.miniMapDot?.fillColor = .green
+        chowerler!.miniMapDot = SKShapeNode(rectOf: CGSize(width: 6, height: 6))
+        chowerler!.miniMapDot?.fillColor = .green
         
-        miniMapX = (chowerler.node?.position.x)! / scaleWidthFactor * miniMapScaleFactor
-        minimapY = (chowerler.node?.position.y)! / scaleHeightFactor * miniMapScaleFactor
+        miniMapX = (chowerler!.node?.position.x)! / scaleWidthFactor * miniMapScaleFactor
+        minimapY = (chowerler!.node?.position.y)! / scaleHeightFactor * miniMapScaleFactor
 
-        self.chowerler.miniMapDot?.position = CGPoint(x: miniMapX, y: minimapY)
+        chowerler!.miniMapDot?.position = CGPoint(x: miniMapX, y: minimapY)
 
-        self.miniMapCropNode?.addChild(self.chowerler.miniMapDot!)
+        miniMapCropNode?.addChild(chowerler!.miniMapDot!)
     }
     
 }

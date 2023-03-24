@@ -48,7 +48,7 @@ extension ParkingWorkGame {
             }
             else if touchedNode.name == "yesOpenLockBtn" || touchedNode.parent?.name == "yesOpenLockBtn" {
                 // try to open target door of the car
-                tryOpenCarLock(of: currTargetCar!, lockType: (currLockTarget?.name)!)
+                player!.tryOpenCarLock(of: player!.currTargetCar!, lockType: player!.currLockTarget!.name!)
                 run(MenuSounds.button_click.action)
             }
             else if touchedNode.name == "goodButton" || touchedNode.name == "goodLabel" {
@@ -130,8 +130,8 @@ extension ParkingWorkGame {
         startTouchPosition = nil
         
         for touch in touches {
-            let location = touch.location(in: self)
-            let touchedNode = atPoint(location)
+            let touchLocation = touch.location(in: self)
+            let touchedNode = atPoint(touchLocation)
             
             if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = false
@@ -140,9 +140,9 @@ extension ParkingWorkGame {
             
             if (startTouchNode?.name != "ui-runBtn" && startTouchNode?.name != "ui-runBtnImg") && cameraMovingByFinger == false && !isTouchingOpenCarWindow(touchedNode: touchedNode) && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused && !cameraZooming && isRunButtonHolded == false {
 
-                playerLocationDestination = location
-                currentSpriteTarget?.removeFromParent()
-                setTarget(at: location)
+                player?.destinationPosition = touchLocation
+                targetCircleSprite?.removeFromParent()
+                setTarget(at: touchLocation)
             }
             
             cameraMovingByFinger = false
@@ -153,15 +153,15 @@ extension ParkingWorkGame {
     
     func setTarget(at location: CGPoint) {
         // setting 'target' sprite on ground
-        currentSpriteTarget = SKSpriteNode(imageNamed: "target")
-        currentSpriteTarget!.position = location
-        currentSpriteTarget!.xScale = 0.2
-        currentSpriteTarget!.yScale = 0.2
-        currentSpriteTarget?.zPosition = 1
-        currentSpriteTarget?.colorBlendFactor = 0.4
-        addChild(currentSpriteTarget!)
+        targetCircleSprite = SKSpriteNode(imageNamed: "target")
+        targetCircleSprite!.position = location
+        targetCircleSprite!.xScale = 0.2
+        targetCircleSprite!.yScale = 0.2
+        targetCircleSprite?.zPosition = 1
+        targetCircleSprite?.colorBlendFactor = 0.4
+        addChild(targetCircleSprite!)
         
-        targetRotate(target: currentSpriteTarget!)
+        targetRotate(target: targetCircleSprite!)
     }
     
     func targetRotate(target: SKSpriteNode) {

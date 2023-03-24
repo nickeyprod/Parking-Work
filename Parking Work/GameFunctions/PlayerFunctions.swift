@@ -8,7 +8,7 @@
 import SpriteKit
 
 // Player Abilities
-extension ParkingWorkGame {
+extension Player {
     
     // MARK: - Car Locks Opening Logic
     /// Player can try to open any lock of any car on the map
@@ -30,29 +30,30 @@ extension ParkingWorkGame {
             // remove the car from minimap also
             car.miniMapDot?.removeFromParent()
             // play door open sound
-            run(Sound.door_open.action)
+            node?.run(Sound.door_open.action)
+            
             // hide open car window pop-up
-            hideOpenCarMessage()
+            scene.hideOpenCarMessage()
             // play success ring
-            run(Sound.success_bell.action)
+            node?.run(Sound.success_bell.action)
             // show car successfuly opened message
-            showCarOpenedSuccessMessage(of: car)
+            scene.showCarOpenedSuccessMessage(of: car)
             // raise anxiety
-            raiseAnxiety(to: 20.0)
+            scene.raiseAnxiety(to: 20.0)
             
         } else {
             print("The door open has failed")
             // raise anxiety!
-            raiseAnxiety(to: 80.0)
+            scene.raiseAnxiety(to: 80.0)
             // play door closed sound & car signalization sound
-            run(Sound.car_door_locked.action)
-            run(Sound.car_signalization.action, withKey: car.name + "_light_signal")
+            node?.run(Sound.car_door_locked.action)
+            node?.run(Sound.car_signalization.action, withKey: car.name + "_light_signal")
             
             // hide open car message
-            hideOpenCarMessage()
+            scene.hideOpenCarMessage()
             
             // blick lights
-            blinkLightSignals(of: car)
+            scene.blinkLightSignals(of: car)
             car.signaling = true
             
             

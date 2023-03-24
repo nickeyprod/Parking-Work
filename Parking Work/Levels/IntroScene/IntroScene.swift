@@ -42,6 +42,7 @@ class IntroScene: ParkingWorkGame {
         // get display width and height
         displayWidth = displaySize.width
         displayHeight = displaySize.height
+
     }
     
     func animateBackImage() {

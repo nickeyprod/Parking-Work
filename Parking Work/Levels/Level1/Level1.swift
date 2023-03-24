@@ -11,8 +11,8 @@ import GameplayKit
 class Level1: ParkingWorkGame {
     
     // Cars
-    let oldCopper = Car(name: CarNameList.OldCopper.rawValue)
-    let chowerler = Car(name: CarNameList.Chowerler.rawValue)
+    var oldCopper: Car?
+    var chowerler: Car?
 
     override func didMove(to view: SKView) {
         super.didMove(to: view)

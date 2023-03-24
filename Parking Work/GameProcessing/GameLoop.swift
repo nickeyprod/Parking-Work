@@ -21,8 +21,8 @@ extension ParkingWorkGame {
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
        
-        var dx = (playerLocationDestination!.x - (player?.position.x)!) * deltaTime
-        var dy = (playerLocationDestination!.y - (player?.position.y)!) * deltaTime
+        var dx = (player!.destinationPosition!.x - player!.node!.position.x) * deltaTime
+        var dy = (player!.destinationPosition!.y - player!.node!.position.y) * deltaTime
         
         // if not holded - usual speed
         if !isRunButtonHolded {
@@ -34,10 +34,10 @@ extension ParkingWorkGame {
             dy = dy < 0 ? -(PLAYER_SPEED + 0.7) : PLAYER_SPEED + 0.7
         }
 
-        if floor(playerLocationDestination!.x) == floor((player?.position.x)!) {
+        if floor(player!.destinationPosition!.x) == floor(player!.node!.position.x) {
             dx = 0
         }
-        if floor(playerLocationDestination!.y) == floor((player?.position.y)!) {
+        if floor(player!.destinationPosition!.y) == floor(player!.node!.position.y) {
             dy = 0
         }
         
@@ -47,7 +47,7 @@ extension ParkingWorkGame {
 
         let displacement = CGVector(dx: dx, dy: dy)
         let move = SKAction.move(by: displacement, duration: 0)
-        player?.run(move)
+        player!.node!.run(move)
         
         // detect sprite movement direction
         if dx > 0 {
@@ -69,32 +69,32 @@ extension ParkingWorkGame {
         // set sprite face direction when moving by diagonal
         if movingLeft && movingDown {
             let action = SKAction.rotate(toAngle: 2.6449, duration: 0.3, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         } else if movingLeft && movingUp {
             let action = SKAction.rotate(toAngle: 0.6449, duration: 0.3, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         } else if movingRight && movingUp {
             let action = SKAction.rotate(toAngle: -0.6449, duration: 0.3, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         } else if movingRight && movingDown {
             let action = SKAction.rotate(toAngle: -2.6449, duration: 0.3, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         }
         
         // set sprite face direction when moving horizontal/vertical
         if movingUp && !movingLeft && !movingRight && !movingDown {
             let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         } else if movingDown && !movingLeft && !movingRight && !movingUp {
             let action = SKAction.rotate(toAngle: 3.1449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         } else if movingLeft && !movingUp && !movingDown && !movingRight {
             let action = SKAction.rotate(toAngle: 1.6449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
         } else if movingRight && !movingUp && !movingDown && !movingLeft {
 
             let action = SKAction.rotate(toAngle: 4.6449, duration: 0.1, shortestUnitArc: true)
-            player?.run(action)
+            player!.node!.run(action)
 
         }
     
@@ -109,11 +109,11 @@ extension ParkingWorkGame {
         else {
             playerStateMachine.enter(IdleState.self)
             targetMovementTimer?.invalidate()
-            currentSpriteTarget?.removeFromParent()
+            targetCircleSprite?.alpha = 0
         }
         
         // check if need to hide open car window pop-up
-        if currLockTarget != nil {
+        if player?.currLockTarget != nil {
             checkDistanceBetweenPlayerAndTargetLock()
         }
         
@@ -129,6 +129,16 @@ extension ParkingWorkGame {
         // if anxiety 140 or above, calling cops
         if self.anxietyLevel >= 140.0 && (self.anxietyInnerSprite?.frame.width)! >= 139.0 {
             callCops()
+        }
+        
+        if (playerInFirstCircle) {
+            raiseAnxiety(to: 0.2)
+        }
+        else if (playerInSecondCircle) {
+            raiseAnxiety(to: 0.15)
+        }
+        else if (playerInThirdCircle) {
+            raiseAnxiety(to: 0.1)
         }
     }
     

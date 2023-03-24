@@ -38,6 +38,7 @@
 		D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B2299FA0B000084380 /* car_signalization.wav */; };
 		D1A717C629C45D4D00A488BF /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A717C529C45D4D00A488BF /* GameOver.swift */; };
 		D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1A717C729C45D5F00A488BF /* GameOverScene.sks */; };
+		D1A7180529CC405500A488BF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7180429CC405500A488BF /* Player.swift */; };
 		D1BC8CDB29B5DA4900F9C597 /* LOCK_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */; };
 		D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */; };
 		D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */; };
@@ -83,6 +84,7 @@
 		D1A3F5B2299FA0B000084380 /* car_signalization.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_signalization.wav; sourceTree = "<group>"; };
 		D1A717C529C45D4D00A488BF /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		D1A717C729C45D5F00A488BF /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		D1A7180429CC405500A488BF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_TYPES.swift; sourceTree = "<group>"; };
 		D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_TEXTURTE_NAMES.swift; sourceTree = "<group>"; };
 		D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				D1F4CFC429B0C70E003CB541 /* Car.swift */,
+				D1A7180429CC405500A488BF /* Player.swift */,
 			);
 			path = GameModels;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				D1A3F5AB299F9B8B00084380 /* GameSounds.swift in Sources */,
 				D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */,
 				D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */,
+				D1A7180529CC405500A488BF /* Player.swift in Sources */,
 				D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

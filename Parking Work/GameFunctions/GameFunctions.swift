@@ -32,7 +32,7 @@ extension ParkingWorkGame {
         // add one zero at the end if complexity 0.1 to display -> 0.10
         let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
 
-        openCarWindow?.position = player!.position
+        openCarWindow?.position = (player?.node?.position)!
         openCarWindowNameLabel?.text = "\(targetCar.name)"
         openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
         openCarWindowComplexityNum?.text = "\(complexity)/1.00"
@@ -65,15 +65,15 @@ extension ParkingWorkGame {
     
     func checkDistanceBetweenPlayerAndTargetLock() {
  
-        let playerPosition = player?.position
-        let targetLockPosition = currLockTarget?.parent?.position
+        let playerPosition = player?.node?.position
+        let targetLockPosition = player?.currLockTarget?.parent?.position
 
         let diffX = abs(playerPosition!.x) - abs(targetLockPosition!.x)
         let diffY = abs(playerPosition!.y) - abs(targetLockPosition!.y)
 
         if (abs(diffX) > 150 || abs(diffY) > 150) {
             hideOpenCarMessage()
-            currLockTarget = nil
+            player?.currLockTarget = nil
         }
     
     }
@@ -166,7 +166,7 @@ extension ParkingWorkGame {
         window.alpha = 0
         window.zPosition = 12 // player=10, suggestpopUp=11 + 1
         
-        window.position = player!.position
+        window.position = player!.node!.position
         
         window.fillColor = UIColor(named: Colors.OpenCarSuccessWindowColor.rawValue)!
         window.strokeColor = UIColor(named: Colors.OpenCarSuccessWindowColor.rawValue)!
@@ -279,6 +279,7 @@ extension ParkingWorkGame {
     // rising anxiety bar (140max)
     func raiseAnxiety(to num: CGFloat) {
         canReduceAnxiety = false
+        
         let futureWidth = anxietyLevel + num
         
         if futureWidth > 140.0 {
@@ -292,6 +293,7 @@ extension ParkingWorkGame {
  
     }
     
+    // blinks anxiety bar
     func hightLightAnxietyBar() {
         if self.anxietyLevel >= 110.0 {
             self.anxietyOuterShape?.strokeColor = Colors.DangerStrokeRed
@@ -322,18 +324,21 @@ extension ParkingWorkGame {
         }
     }
     
-    // slowly substracting anxiety
-    func substractAnxiety() {
-        if !canReduceAnxiety { return } // false
-        let currWidth = anxietyLevel
+    // reduce anxiety
+    func reduceAnxiety(to num: CGFloat) {
+        canReduceAnxiety = false
         
-        if currWidth > 0 {
-            
-            let futureWidth = currWidth - 1
+        let futureWidth = anxietyLevel - num
+        
+        if futureWidth < 0 {
+            anxietyLevel = 0
+        } else {
             anxietyLevel = futureWidth
-            self.anxietyBar?.run(SKAction.resize(toWidth: anxietyLevel, duration: 0.2))
         }
-
+        anxietyBar!.run(SKAction.resize(toWidth: anxietyLevel, duration: 0.2)) {
+            self.canReduceAnxiety = true
+        }
+ 
     }
     
     // Zooming Out
@@ -452,8 +457,8 @@ extension ParkingWorkGame {
         let scaleWidthFactor = tileMapWidth! / miniMapWidth!
         let scaleHeightFactor = tileMapHeight! / miniMapHeight!
 
-        let miniMapX = (player?.position.x)! / scaleWidthFactor * miniMapScaleFactor
-        let minimapY = (player?.position.y)! / scaleHeightFactor * miniMapScaleFactor
+        let miniMapX = player!.node!.position.x / scaleWidthFactor * miniMapScaleFactor
+        let minimapY = player!.node!.position.y / scaleHeightFactor * miniMapScaleFactor
 
         miniMapPlayerDot?.position = CGPoint(x: miniMapX, y: minimapY)
     }
