@@ -73,6 +73,9 @@ extension ParkingWorkGame {
 
         if (abs(diffX) > 150 || abs(diffY) > 150) {
             hideOpenCarMessage()
+        }
+        // lock target clearing
+        if ( abs(diffX) > 420 || abs(diffY) > 420) {
             player?.currLockTarget = nil
         }
     
@@ -387,14 +390,15 @@ extension ParkingWorkGame {
         let mapWidth: CGFloat = 120
         let mapHeight: CGFloat = 100
         
-        let mapPos = CGPoint(x: -displayWidth! / 2 + 90, y: displayHeight! / 2 - 60)
+        let mapPos = CGPoint(x: -displayWidth! / 2 + 70, y: displayHeight! / 2 - 70)
         
         let cropNode = SKCropNode()
         
         cropNode.zPosition = 20
         cropNode.position = mapPos
         
-        let mask = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
+//        let mask = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
+        let mask = SKShapeNode(circleOfRadius: 60)
         
         mask.fillColor = UIColor.white
         mask.alpha = 0.8
@@ -402,10 +406,13 @@ extension ParkingWorkGame {
         cropNode.maskNode = mask
         
         // border around minimap
-        let strokeShape = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
+//        let strokeShape = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
+        let strokeShape = SKShapeNode(circleOfRadius: 60)
         strokeShape.position = mapPos
-        strokeShape.lineWidth = 6
-        strokeShape.strokeColor = UIColor.darkGray
+        strokeShape.zPosition = 20
+        strokeShape.lineWidth = 2
+        strokeShape.alpha = 0.7
+        strokeShape.strokeColor = UIColor.black
 
 
         // set mini map level sprite
@@ -424,19 +431,19 @@ extension ParkingWorkGame {
         self.cameraNode?.addChild(strokeShape)
         
         // plus minus buttons
-        let plusBtn = SKLabelNode(text: "+")
-        plusBtn.zPosition = 20
-        let minusBtn = SKLabelNode(text: "-")
-        minusBtn.zPosition = 20
-        
-        plusBtn.fontSize = 20
-        minusBtn.fontSize = 20
-        
-        plusBtn.position = CGPoint(x: -displayWidth! / 2 + 100 + 20, y: (displayHeight! / 2) - 80 - (miniMapHeight! / 2 + 25))
-        
-        minusBtn.position = CGPoint(x: (-displayWidth! / 2 ) + 100 - 20, y: (displayHeight! / 2) - 80 - (miniMapHeight! / 2 + 25))
-        self.cameraNode?.addChild(plusBtn)
-        self.cameraNode?.addChild(minusBtn)
+//        let plusBtn = SKLabelNode(text: "+")
+//        plusBtn.zPosition = 20
+//        let minusBtn = SKLabelNode(text: "-")
+//        minusBtn.zPosition = 20
+//
+//        plusBtn.fontSize = 20
+//        minusBtn.fontSize = 20
+//
+//        plusBtn.position = CGPoint(x: -displayWidth! / 2 + 100 + 20, y: (displayHeight! / 2) - 80 - (miniMapHeight! / 2 + 25))
+//
+//        minusBtn.position = CGPoint(x: (-displayWidth! / 2 ) + 100 - 20, y: (displayHeight! / 2) - 80 - (miniMapHeight! / 2 + 25))
+//        self.cameraNode?.addChild(plusBtn)
+//        self.cameraNode?.addChild(minusBtn)
         
         // add player dot to mini map
         self.miniMapPlayerDot = SKShapeNode(circleOfRadius: 3)
@@ -447,6 +454,9 @@ extension ParkingWorkGame {
         // set crop node globally for adding car dots on Level init class
         self.miniMapCropNode = cropNode
         self.miniMapCropNode?.zPosition = 2
+        
+
+    
 
     }
 
@@ -459,9 +469,11 @@ extension ParkingWorkGame {
 
         let miniMapX = player!.node!.position.x / scaleWidthFactor * miniMapScaleFactor
         let minimapY = player!.node!.position.y / scaleHeightFactor * miniMapScaleFactor
-
-        miniMapPlayerDot?.position = CGPoint(x: miniMapX, y: minimapY)
+        
+        miniMapSprite?.position = CGPoint(x: -miniMapX, y: -minimapY)
     }
+    
+    
     
     // creates screen with task for a level message
     func createLevelTaskScreen() {
@@ -479,7 +491,7 @@ extension ParkingWorkGame {
         closeTaskScreenBtn.name = "ui-closeTaskBtn"
         closeTaskScreenBtn.fillColor = UIColor.gray
         closeTaskScreenBtn.alpha = 0.75
-        closeTaskScreenBtn.position = CGPoint(x: -displayWidth! / 2 + 180, y: displayHeight! / 2 - 26)
+        closeTaskScreenBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
         closeTaskScreenBtn.zPosition = 50
         
         // close task screen label
@@ -504,25 +516,27 @@ extension ParkingWorkGame {
         
         // level task message
         let spriteRect = SKSpriteNode()
-        spriteRect.size = CGSize(width: displayWidth! - 260, height: 100)
+//        spriteRect.size = CGSize(width: displayWidth! - 260, height: 100)
         spriteRect.color = UIColor(named: Colors.TaskMessageBackground.rawValue)!
         spriteRect.alpha = 0.9
-        spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 120)
+        spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 130)
         
-        let taskMessage = SKLabelNode(text: "Босс: \"Марка машины мне не важна, на твое усмотрение. Главное,  доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\"")
+        let taskMessage = SKLabelNode(text: "Босс: \(UNICODE.leftChevrone)Марка машины мне не важна, на твое усмотрение. Главное,  доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\(UNICODE.rightChevrone)")
         taskMessage.fontSize = 24
-        taskMessage.fontName = "Baskerville"
+        taskMessage.fontName = FONTS.Baskerville
         taskMessage.fontColor = UIColor.white
-        taskMessage.preferredMaxLayoutWidth = displayWidth! - 280
+        taskMessage.preferredMaxLayoutWidth = displayWidth! - 240
         taskMessage.numberOfLines = 0
         taskMessage.horizontalAlignmentMode = .center
         taskMessage.verticalAlignmentMode = .center
         spriteRect.addChild(taskMessage)
         taskScreen?.addChild(spriteRect)
         
+        spriteRect.size = CGSize(width: displayWidth! - 230, height: taskMessage.frame.height)
+        
         let bossSiluette = SKSpriteNode(texture: SKTexture(imageNamed: "boss-siluette"))
         bossSiluette.setScale(0.48)
-        bossSiluette.position = CGPoint(x: displayWidth! / 2 - 140, y: -displayHeight! / 2 + 100)
+        bossSiluette.position = CGPoint(x: displayWidth! / 2 - 100, y: -displayHeight! / 2 + 20)
         taskScreen?.addChild(bossSiluette)
         
     }
@@ -641,7 +655,7 @@ extension ParkingWorkGame {
         taskBtn.fillColor = UIColor.gray
         taskBtn.alpha = 0.75
         taskBtn.zPosition = 51
-        taskBtn.position = CGPoint(x: -displayWidth! / 2 + 180, y: displayHeight! / 2 - 26)
+        taskBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
         
         //  task button label
         let taskBtnLabel = SKLabelNode(text: "?")
@@ -661,7 +675,7 @@ extension ParkingWorkGame {
         menuBtn.name = "ui-menuBtn"
         menuBtn.fillColor = UIColor.gray
         menuBtn.alpha = 0.75
-        menuBtn.zPosition = 51
+        menuBtn.zPosition = 10
         menuBtn.position = CGPoint(x: displayWidth! / 2 - 40, y: displayHeight! / 2 - 26)
         
         // menu button label
@@ -683,7 +697,7 @@ extension ParkingWorkGame {
         runBtn.name = "ui-runBtn"
         runBtn.fillColor = UIColor.brown
         runBtn.alpha = 0.75
-        runBtn.zPosition = 51
+        runBtn.zPosition = 10
         runBtn.position = CGPoint(x: (displayWidth! / 2) - 90, y: -(displayHeight! / 2) + 90)
         
         let shoe = SKSpriteNode(texture: SKTexture(imageNamed: "shoe"))

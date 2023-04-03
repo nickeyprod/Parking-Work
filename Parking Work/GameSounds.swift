@@ -13,6 +13,13 @@ enum Sound: String {
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
     }
+    
+    var audio: SKAudioNode {
+        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        audio.autoplayLooped = false
+
+        return audio
+    }
 }
 
 enum MenuSounds: String {
@@ -20,6 +27,11 @@ enum MenuSounds: String {
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
+    }
+    
+    var audio: SKAudioNode {
+        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        return audio
     }
 }
 
@@ -29,6 +41,12 @@ enum CitySound: String {
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
     }
+    
+    var audio: SKAudioNode {
+        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        audio.isPositional = true
+        return audio
+    }
 }
 
 enum EngineSound: String {
@@ -36,5 +54,11 @@ enum EngineSound: String {
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
+    }
+    
+    var audio: SKAudioNode {
+        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        audio.isPositional = true
+        return audio
     }
 }

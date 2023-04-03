@@ -45,9 +45,16 @@ extension Player {
             print("The door open has failed")
             // raise anxiety!
             scene.raiseAnxiety(to: 80.0)
+            
+            let signal = Sound.car_signalization.audio
+            let locked = Sound.car_door_locked.audio
+            
             // play door closed sound & car signalization sound
-            node?.run(Sound.car_door_locked.action)
-            node?.run(Sound.car_signalization.action, withKey: car.name + "_light_signal")
+            node?.parent?.addChild(locked)
+            node?.parent?.addChild(signal)
+            
+            locked.run(SKAction.play())
+            signal.run(SKAction.play())
             
             // hide open car message
             scene.hideOpenCarMessage()

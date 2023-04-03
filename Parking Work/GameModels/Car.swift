@@ -43,6 +43,7 @@ class Car {
             circle.physicsBody?.contactTestBitMask = scene.playerCategory
             circle.physicsBody?.affectedByGravity = false
             circle.physicsBody?.isDynamic = false
+            circle.alpha = 0
             firstAnxietyCircle = circle
             
             let radius2 = node!.frame.width - node!.frame.width / 25
@@ -56,6 +57,7 @@ class Car {
             circle2.physicsBody?.contactTestBitMask = scene.playerCategory
             circle2.physicsBody?.affectedByGravity = false
             circle2.physicsBody?.isDynamic = false
+            circle2.alpha = 0
             secondAnxietyCircle = circle2
             
             let radius3 = node!.frame.width + node!.frame.width / 3
@@ -69,6 +71,7 @@ class Car {
             circle3.physicsBody?.contactTestBitMask = scene.playerCategory
             circle3.physicsBody?.affectedByGravity = false
             circle3.physicsBody?.isDynamic = false
+            circle3.alpha = 0
             thirdAnxietyCircle = circle3
             
         }

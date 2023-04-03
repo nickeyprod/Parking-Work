@@ -8,8 +8,6 @@ class ParkingWorkGame: SKScene {
     var levelNum: Int = 1
     var anxietyLevel: CGFloat = 0.0
     
-//    var safeAnxietyDistance: CGFloat = 100
-    
     // additional game screens
     var taskScreen: SKSpriteNode?
     var menuScreen: SKSpriteNode?
@@ -112,23 +110,29 @@ class ParkingWorkGame: SKScene {
     let thirdCircleCategory: UInt32 = 1 << 7
     
 
-    var signalignCarTimers: [Timer?] = []
+//    var signalignCarTimers: [Timer?] = []
     
     var prevScale: CGFloat = 0.0
     let minScale: CGFloat = 1.02
     let maxScale: CGFloat = 2.02
     
+    deinit {
+        print("deinit MAIN")
+        
+    }
+    
     // analog to 'ViewDidLoad' - runs when game scene appears
     override func didMove(to view: SKView) {
         // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
-        
+
         // detect PINCH to increase zoom
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler))
         self.view?.isUserInteractionEnabled = true
         self.view?.addGestureRecognizer(pinch)
-    
+
     }
+
     
     // MARK: - Pinch handler (zooming In/Out)
     /// Gesture handling function for zooming in and out map
@@ -190,14 +194,6 @@ class ParkingWorkGame: SKScene {
         // initial player location destionation the same as player position
         player?.destinationPosition = player?.node?.position
         
-        // sprite for target circle
-//        targetCircleSprite = SKSpriteNode(imageNamed: "target")
-//        targetCircleSprite?.position = player!.node!.position
-//        targetCircleSprite?.zPosition = 999
-////        targetCircleSprite?.alpha = 0
-//        self.addChild(targetCircleSprite!)
-//        print(targetCircleSprite)
-        
         // set mini map sprite dimensions
         miniMapWidth = miniMapSprite?.frame.width
         miniMapHeight = miniMapSprite?.frame.height
@@ -218,6 +214,8 @@ class ParkingWorkGame: SKScene {
             RunningState(player: player!.node!),
             IdleState(player: player!.node!)
         ])
+        
+        self.listener = player!.node!
         
         // initialize timer for substracting anxiety
         self.substractAnxietyTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in

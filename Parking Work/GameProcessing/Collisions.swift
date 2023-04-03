@@ -62,7 +62,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
     
     // performs action on player and car lock contact
     func playerAndLockContact(_ bodyA: SKPhysicsBody,  _ bodyB: SKPhysicsBody) {
-        print("contact lock")
+
         if bodyA.node!.name != "playerNode" {
             player?.currLockTarget = bodyA.node
         }
@@ -83,7 +83,6 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         let diffX = abs(playerPosition.x) - abs(targetLockPosition!.x)
         let diffY = abs(playerPosition.y) - abs(targetLockPosition!.y)
         
-        print(diffX, diffY)
         // if distance not more than 150 and car is not signaling
         if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) {
             self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)

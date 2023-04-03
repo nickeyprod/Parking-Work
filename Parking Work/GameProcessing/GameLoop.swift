@@ -131,21 +131,20 @@ extension ParkingWorkGame {
             callCops()
         }
         
-        if (playerInFirstCircle) {
-            raiseAnxiety(to: 0.2)
-        }
-        else if (playerInSecondCircle) {
-            raiseAnxiety(to: 0.15)
-        }
-        else if (playerInThirdCircle) {
-            raiseAnxiety(to: 0.1)
+        if (player!.currLockTarget != nil) {
+            if (playerInFirstCircle) {
+                raiseAnxiety(to: 0.2)
+            }
+            else if (playerInSecondCircle) {
+                raiseAnxiety(to: 0.15)
+            }
+            else if (playerInThirdCircle) {
+                raiseAnxiety(to: 0.1)
+            }
         }
     }
     
     func callCops() {
-        
-        // remove all actions
-        self.removeAllActions()
         
         let gameOverScene = SKScene(fileNamed: "GameOverScene")
         let transition = SKTransition.fade(with: .black, duration: 1.0)
