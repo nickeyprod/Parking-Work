@@ -133,13 +133,27 @@ extension ParkingWorkGame {
         
         if (player!.currLockTarget != nil) {
             if (playerInFirstCircle) {
-                raiseAnxiety(to: 0.2)
+                if player?.currTargetCar?.signaling == true {
+                    raiseAnxiety(to: 0.4)
+                } else {
+                    raiseAnxiety(to: 0.2)
+                }
+
             }
             else if (playerInSecondCircle) {
-                raiseAnxiety(to: 0.15)
+                if player?.currTargetCar?.signaling == true {
+                    raiseAnxiety(to: 0.25)
+                } else {
+                    raiseAnxiety(to: 0.15)
+                }
             }
             else if (playerInThirdCircle) {
-                raiseAnxiety(to: 0.1)
+                if player?.currTargetCar?.signaling == true {
+                    raiseAnxiety(to: 0.15)
+                } else {
+                    raiseAnxiety(to: 0.1)
+                }
+                
             }
         }
     }

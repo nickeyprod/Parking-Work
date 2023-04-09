@@ -69,6 +69,9 @@ class Level1: ParkingWorkGame {
         zoomOutCamera(to: maxScale)
         
 //        PlusMap()
+        
+        // create target square for selected car
+        createSelectedTarget()
     }
     
     // MARK: - Physic Bodies Setup

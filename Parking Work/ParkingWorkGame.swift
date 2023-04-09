@@ -27,6 +27,7 @@ class ParkingWorkGame: SKScene {
     var anxietyOuterShape: SKShapeNode?
     var anxietyInnerSprite: SKSpriteNode?
     var runButton: SKShapeNode?
+    var targetSquare: SKShapeNode?
     
     // minimap player dot
     var miniMapPlayerDot: SKShapeNode?

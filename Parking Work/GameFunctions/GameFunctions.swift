@@ -24,43 +24,109 @@ extension ParkingWorkGame {
         openCarSuccessWindow?.alpha = 0
     }
     
+    // this creates window text and buttons for open car message pop-up
+    func createOpenCarMessage() {
+
+        // window itself
+        let window = SKShapeNode(rectOf: CGSize(width: 260, height: 40), cornerRadius: 10.0)
+        
+        // hide it initially
+        window.alpha = 0
+        window.zPosition = 11
+        
+        window.fillColor = UIColor(named: Colors.OpenCarWindowColor.rawValue)!
+        window.strokeColor = UIColor(named: Colors.OpenCarWindowColorStroke.rawValue)!
+        window.name = "openCarMessageWindow"
+        
+        window.position = CGPoint(x: 0, y: -((displayHeight! / 2) - 28))
+        self.cameraNode!.addChild(window)
+        
+        // - message label set to 'Попробовать вскрыть?' initially
+        let messageLabel = SKLabelNode(text: "Попробовать вскрыть?")
+        messageLabel.name = "carMessage"
+        messageLabel.position = CGPoint(x: -30, y: 0)
+        messageLabel.verticalAlignmentMode = .center
+        messageLabel.fontName = "Copperplate"
+        messageLabel.fontSize = 16
+        messageLabel.fontColor = UIColor(named: Colors.OpenCarWindowCarMsgColor.rawValue)
+        
+        window.addChild(messageLabel)
+        
+        //  open car button
+        let yesBtn = SKShapeNode(rect: CGRect(x: (window.frame.width / 2) - 64, y: -15, width: 56, height: 28), cornerRadius: 6.0)
+        yesBtn.fillColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
+        yesBtn.strokeColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
+        yesBtn.name = "yesOpenLockBtn"
+        window.addChild(yesBtn)
+        
+        let yesBtnLabel = SKLabelNode(text: "Да")
+        yesBtnLabel.name = "yesBtnLabel"
+        yesBtnLabel.fontName = "Copperplate"
+        yesBtnLabel.fontSize = 20
+        yesBtnLabel.verticalAlignmentMode = .center
+        yesBtnLabel.horizontalAlignmentMode = .center
+        yesBtnLabel.position = CGPoint(x: ((window.frame.width / 2) - 66) + (yesBtn.frame.width / 2), y: 0)
+        
+        yesBtn.addChild(yesBtnLabel)
+        
+        openCarWindow = window
+    }
+    
     /// Shows pop-up window, offering to try to open the lock when player comes сlose to it.
     func showOpenCarMessage(of targetCar: Car, lockType: String) {
-        
-        if openCarWindow?.alpha != 0 { return }
-        
-        // add one zero at the end if complexity 0.1 to display -> 0.10
-        let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
 
-        openCarWindow?.position = (player?.node?.position)!
-        openCarWindowNameLabel?.text = "\(targetCar.name)"
-        openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
-        openCarWindowComplexityNum?.text = "\(complexity)/1.00"
-        
-        
-        // set complexity num color
-        let comp = targetCar.locks[lockType]!!
-   
-        if comp >= 0.0 && comp <= 0.34 {
-            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
-        } else if (comp > 0.34 && comp <= 0.74 ) {
-            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
-        } else {
-            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
-        }
-        
+        if openCarWindow?.alpha != 0 { return }
         openCarWindow?.alpha = 1
         
-        // stop player movement
-        // enter to initial player state
-//        playerLocationDestination = player?.position
-//        playerStateMachine.enter(IdleState.self)
+        
+//        // add one zero at the end if complexity 0.1 to display -> 0.10
+//        let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
+//
+
+//        openCarWindowNameLabel?.text = "\(targetCar.name)"
+//        openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
+//        openCarWindowComplexityNum?.text = "\(complexity)/1.00"
+//
+//        // set complexity num color
+//        let comp = targetCar.locks[lockType]!!
+//
+//        if comp >= 0.0 && comp <= 0.34 {
+//            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+//        } else if (comp > 0.34 && comp <= 0.74 ) {
+//            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
+//        } else {
+//            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
+//        }
+        
+
 
     }
     
     /// Hides pop-up window, that offering to open car lock.
     func hideOpenCarMessage() {
         openCarWindow?.alpha = 0
+    }
+    
+    func showTargetSquare(of targetCar: Car, lockType: String) {
+        
+        // add one zero at the end if complexity 0.1 to display -> 0.10
+        let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
+        
+        let carNameLabel = self.targetSquare?.childNode(withName: "car-name") as? SKLabelNode
+        let lockTypeLabel = self.targetSquare?.childNode(withName: "lockTypeLabel") as? SKLabelNode
+        let complexityLabel = self.targetSquare?.childNode(withName: "complexity-label") as? SKLabelNode
+        let complexityNum = complexityLabel?.childNode(withName: "complexityNumLevel") as? SKLabelNode
+        
+        carNameLabel?.text = "\(targetCar.name)"
+        
+        lockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
+        complexityNum?.text = "\(complexity)/100.00"
+        
+        self.targetSquare?.alpha = 0.8
+    }
+    
+    func hideTargetSquare() {
+        self.targetSquare?.alpha = 0
     }
     
     func checkDistanceBetweenPlayerAndTargetLock() {
@@ -77,89 +143,10 @@ extension ParkingWorkGame {
         // lock target clearing
         if ( abs(diffX) > 420 || abs(diffY) > 420) {
             player?.currLockTarget = nil
+            player!.currTargetCar = nil
+            hideTargetSquare()
         }
     
-    }
-    
-    // this creates window text and buttons for open car message pop-up
-    func createOpenCarMessage() {
-        // window itself
-        let window = SKShapeNode(rectOf: CGSize(width: 260, height: 170), cornerRadius: 10.0)
-        
-        // hide it initially
-        window.alpha = 0
-        window.zPosition = 11 // player=10 + 1
-        
-        window.fillColor = UIColor(named: Colors.OpenCarWindowColor.rawValue)!
-        window.strokeColor = UIColor(named: Colors.OpenCarWindowColorStroke.rawValue)!
-        window.name = "openCarMessageWindow"
-        self.addChild(window)
-        
-        // car name label
-        let carNameLabel = SKLabelNode(text: "Old Copper")
-        carNameLabel.name = "carNameLabel"
-        carNameLabel.fontSize = 30
-        carNameLabel.fontName = "SignPainter-HouseScript"
-        carNameLabel.fontColor = UIColor(named: Colors.OpenCarWindowCarNameColor.rawValue)
-        carNameLabel.position = CGPoint(x: 0, y: 54)
-        
-        window.addChild(carNameLabel)
-        
-        // - message label set to 'Попробовать вскрыть?' initially
-        let messageLabel = SKLabelNode(text: "Попробовать вскрыть?")
-        messageLabel.name = "carMessage"
-        messageLabel.position = CGPoint(x: 0, y: 26)
-        messageLabel.fontName = "Copperplate"
-        messageLabel.fontSize = 21
-        messageLabel.fontColor = UIColor(named: Colors.OpenCarWindowCarMsgColor.rawValue)
-        
-        window.addChild(messageLabel)
-        
-        // - lock type label
-        let lockTypeLabel = SKLabelNode(text: "")
-        lockTypeLabel.name = "lockTypeLabel"
-        lockTypeLabel.text = "Пассажирский замок"
-        lockTypeLabel.fontName = "Hoefler Text"
-        lockTypeLabel.fontSize = 18
-        lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
-        lockTypeLabel.position = CGPoint(x: 0, y: 1)
-        
-        window.addChild(lockTypeLabel)
-        
-        // complexity level label
-        let complexityLabel = SKLabelNode(text: "Cложность")
-        complexityLabel.name = "complexityLabel"
-        complexityLabel.fontName = "Hoefler Text"
-        complexityLabel.fontSize = 18
-        complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
-        complexityLabel.position = CGPoint(x: -30, y: -24)
-        
-        window.addChild(complexityLabel)
-        
-        // complexity level number
-        let complexityNumLabel = SKLabelNode(text: "0.08/1.00")
-        complexityNumLabel.name = "complexityNumLevel"
-        complexityNumLabel.fontName = "Hoefler Text"
-        complexityNumLabel.fontSize = 18
-        complexityNumLabel.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
-        complexityNumLabel.position = CGPoint(x: 90, y: 0)
-        
-        complexityLabel.addChild(complexityNumLabel)
-        
-        //  open car button
-        let yesBtn = SKShapeNode(rect: CGRect(x: -30, y: -70, width: 60, height: 30), cornerRadius: 6.0)
-        yesBtn.fillColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
-        yesBtn.strokeColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
-        yesBtn.name = "yesOpenLockBtn"
-        window.addChild(yesBtn)
-        
-        let yesBtnLabel = SKLabelNode(text: "Да")
-        yesBtnLabel.name = "yesBtnLabel"
-        yesBtnLabel.fontName = "Copperplate"
-        yesBtnLabel.fontSize = 20
-        yesBtnLabel.position = CGPoint(x: 0, y: -60)
-        
-        yesBtn.addChild(yesBtnLabel)
     }
     
     // this creates window text and buttons for open car success message pop-up
@@ -708,6 +695,69 @@ extension ParkingWorkGame {
         runBtn.addChild(shoe)
         
         self.cameraNode?.addChild(runBtn)
+    }
+    
+    
+    func createSelectedTarget() {
+        
+        // square itself
+        targetSquare = SKShapeNode(rectOf: CGSize(width: 210, height: 66))
+        targetSquare?.fillColor = SKColor.black
+        targetSquare?.position = CGPoint(x: 0, y: displayHeight! / 2 - 38)
+        // set z position
+        targetSquare?.zPosition = 11
+        
+        self.cameraNode?.addChild(targetSquare!)
+        
+        // target's car name label
+        let carLabel = SKLabelNode(text: "Some Car")
+        carLabel.name = "car-name"
+        carLabel.horizontalAlignmentMode = .center
+        carLabel.verticalAlignmentMode = .center
+        carLabel.fontSize = 20
+        carLabel.fontName = "\(FONTS.Baskerville)-bold"
+        carLabel.verticalAlignmentMode = .top
+        carLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 6)
+        targetSquare?.addChild(carLabel)
+        
+        // target's car lock complexity
+        // - lock type label
+        let lockTypeLabel = SKLabelNode(text: "")
+        lockTypeLabel.name = "lockTypeLabel"
+        lockTypeLabel.text = "Пассажирский замок"
+        lockTypeLabel.fontName = "Hoefler Text"
+        lockTypeLabel.fontSize = 18
+        lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
+        lockTypeLabel.verticalAlignmentMode = .top
+        lockTypeLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 24)
+        
+        targetSquare?.addChild(lockTypeLabel)
+        
+        // complexity level label
+        let complexityLabel = SKLabelNode(text: "Cложность:")
+        complexityLabel.name = "complexity-label"
+        complexityLabel.fontName = "Hoefler Text"
+        complexityLabel.fontSize = 18
+        complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
+        complexityLabel.verticalAlignmentMode = .top
+        complexityLabel.position = CGPoint(x: -50, y: ((targetSquare?.frame.height)! / 2) - 45)
+        
+        targetSquare?.addChild(complexityLabel)
+        
+        // complexity level number
+        let complexityNumLabel = SKLabelNode(text: "0.08/1.00")
+        complexityNumLabel.name = "complexityNumLevel"
+        complexityNumLabel.fontName = "Hoefler Text"
+        complexityNumLabel.fontSize = 18
+        complexityNumLabel.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+        complexityNumLabel.verticalAlignmentMode = .top
+        complexityNumLabel.position = CGPoint(x: 100, y: 0)
+    
+        complexityLabel.addChild(complexityNumLabel)
+        
+        // hidden initially
+        hideTargetSquare()
+        
     }
     
 }

@@ -87,6 +87,8 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) {
             self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)
             raiseAnxiety(to: 1)
+            // showing target
+            self.showTargetSquare(of: player!.currTargetCar!, lockType: lockType!)
         }
     }
 }

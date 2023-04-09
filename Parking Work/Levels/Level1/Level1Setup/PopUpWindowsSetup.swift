@@ -32,7 +32,7 @@ extension Level1 {
     // Open car suggest - pop-up window
     func setupOpenCarWindowMessage() {
         // get open car window itself
-        openCarWindow = childNode(withName: "openCarMessageWindow")
+//        openCarWindow = childNode(withName: "openCarMessageWindow")
         
         // open car window labels
         //  - car name label
