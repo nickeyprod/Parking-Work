@@ -15,18 +15,28 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
 //        print("didBeginContact entered for \(String(describing: contact.bodyA.node!.name)) and \(String(describing: contact.bodyB.node!.name))")
         
         let contactMask = getContactMask(contact.bodyA, contact.bodyB)
- 
+
         switch contactMask {
         case (playerCategory | lockCategory):
+            
+            // debounce rotation when player comes to lock, so player not rotating when stopped
+            canRotate = false
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                self.canRotate = true
+            }
             playerAndLockContact(contact.bodyA, contact.bodyB)
+
         case (playerCategory | firstCircleCategory):
             playerInFirstCircle = true
+            playerInCircleOfCar = contact.bodyB.node?.parent
             raiseAnxiety(to: 1)
         case (playerCategory | secondCircleCategory):
             playerInSecondCircle = true
+            playerInCircleOfCar = contact.bodyB.node?.parent
             raiseAnxiety(to: 0.5)
         case (playerCategory | thirdCircleCategory):
             playerInThirdCircle = true
+            playerInCircleOfCar = contact.bodyB.node?.parent
             raiseAnxiety(to: 0.3)
             
         default:
@@ -86,7 +96,6 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         // if distance not more than 150 and car is not signaling
         if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) {
             self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)
-            raiseAnxiety(to: 1)
             // showing target
             self.showTargetSquare(of: player!.currTargetCar!, lockType: lockType!)
         }

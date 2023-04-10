@@ -54,6 +54,10 @@ class ParkingWorkGame: SKScene {
     var playerInFirstCircle: Bool = false
     var playerInSecondCircle: Bool = false
     var playerInThirdCircle: Bool = false
+    var canGoFromDoor: Bool = false
+    var canRotate: Bool = true
+    
+    var playerInCircleOfCar: SKNode? = nil
     
     // Player state
     var playerStateMachine: GKStateMachine!

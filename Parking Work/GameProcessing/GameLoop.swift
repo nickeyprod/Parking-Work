@@ -65,39 +65,39 @@ extension ParkingWorkGame {
         if dy < 0 {
             movingDown = true
         }
-        
-        // set sprite face direction when moving by diagonal
-        if movingLeft && movingDown {
-            let action = SKAction.rotate(toAngle: 2.6449, duration: 0.3, shortestUnitArc: true)
-            player!.node!.run(action)
-        } else if movingLeft && movingUp {
-            let action = SKAction.rotate(toAngle: 0.6449, duration: 0.3, shortestUnitArc: true)
-            player!.node!.run(action)
-        } else if movingRight && movingUp {
-            let action = SKAction.rotate(toAngle: -0.6449, duration: 0.3, shortestUnitArc: true)
-            player!.node!.run(action)
-        } else if movingRight && movingDown {
-            let action = SKAction.rotate(toAngle: -2.6449, duration: 0.3, shortestUnitArc: true)
-            player!.node!.run(action)
+        if canRotate == true {
+            // set sprite face direction when moving by diagonal
+            if movingLeft && movingDown {
+                let action = SKAction.rotate(toAngle: 2.6449, duration: 0.3, shortestUnitArc: true)
+                player!.node!.run(action)
+            } else if movingLeft && movingUp {
+                let action = SKAction.rotate(toAngle: 0.6449, duration: 0.3, shortestUnitArc: true)
+                player!.node!.run(action)
+            } else if movingRight && movingUp {
+                let action = SKAction.rotate(toAngle: -0.6449, duration: 0.3, shortestUnitArc: true)
+                player!.node!.run(action)
+            } else if movingRight && movingDown {
+                let action = SKAction.rotate(toAngle: -2.6449, duration: 0.3, shortestUnitArc: true)
+                player!.node!.run(action)
+            }
+            
+            // set sprite face direction when moving horizontal/vertical
+            if movingUp && !movingLeft && !movingRight && !movingDown {
+                let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
+                player!.node!.run(action)
+            } else if movingDown && !movingLeft && !movingRight && !movingUp {
+                let action = SKAction.rotate(toAngle: 3.1449, duration: 0.1, shortestUnitArc: true)
+                player!.node!.run(action)
+            } else if movingLeft && !movingUp && !movingDown && !movingRight {
+                let action = SKAction.rotate(toAngle: 1.6449, duration: 0.1, shortestUnitArc: true)
+                player!.node!.run(action)
+            } else if movingRight && !movingUp && !movingDown && !movingLeft {
+                
+                let action = SKAction.rotate(toAngle: 4.6449, duration: 0.1, shortestUnitArc: true)
+                player!.node!.run(action)
+                
+            }
         }
-        
-        // set sprite face direction when moving horizontal/vertical
-        if movingUp && !movingLeft && !movingRight && !movingDown {
-            let action = SKAction.rotate(toAngle: 0.0449, duration: 0.1, shortestUnitArc: true)
-            player!.node!.run(action)
-        } else if movingDown && !movingLeft && !movingRight && !movingUp {
-            let action = SKAction.rotate(toAngle: 3.1449, duration: 0.1, shortestUnitArc: true)
-            player!.node!.run(action)
-        } else if movingLeft && !movingUp && !movingDown && !movingRight {
-            let action = SKAction.rotate(toAngle: 1.6449, duration: 0.1, shortestUnitArc: true)
-            player!.node!.run(action)
-        } else if movingRight && !movingUp && !movingDown && !movingLeft {
-
-            let action = SKAction.rotate(toAngle: 4.6449, duration: 0.1, shortestUnitArc: true)
-            player!.node!.run(action)
-
-        }
-    
         // player state
         if playerMoving && !isRunButtonHolded {
             playerStateMachine.enter(WalkingState.self)
@@ -116,6 +116,11 @@ extension ParkingWorkGame {
         if player?.currLockTarget != nil {
             checkDistanceBetweenPlayerAndTargetLock()
         }
+        if openCarWindow?.alpha == 1 && canGoFromDoor == false {
+            canGoFromDoor = true
+            player?.destinationPosition = player?.node?.position
+            self.playerStateMachine.enter(IdleState.self)
+        }
         
         // update left bottom and right top angle positions of the camera
         updateCameraEdges()
@@ -127,12 +132,14 @@ extension ParkingWorkGame {
         hightLightAnxietyBar()
         
         // if anxiety 140 or above, calling cops
-        if self.anxietyLevel >= 140.0 && (self.anxietyInnerSprite?.frame.width)! >= 139.0 {
+        if self.anxietyLevel >= 142.0 {
             callCops()
         }
-        
-        if (player!.currLockTarget != nil) {
-            if (playerInFirstCircle) {
+ 
+        if (player!.currLockTarget != nil &&
+            player?.currTargetCar?.node?.name == playerInCircleOfCar?.name) {
+
+            if (playerInFirstCircle ) {
                 if player?.currTargetCar?.signaling == true {
                     raiseAnxiety(to: 0.4)
                 } else {

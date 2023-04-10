@@ -36,14 +36,14 @@ extension ParkingWorkGame {
         
         window.fillColor = UIColor(named: Colors.OpenCarWindowColor.rawValue)!
         window.strokeColor = UIColor(named: Colors.OpenCarWindowColorStroke.rawValue)!
-        window.name = "openCarMessageWindow"
+        window.name = "ui-openCarMessageWindow"
         
         window.position = CGPoint(x: 0, y: -((displayHeight! / 2) - 28))
         self.cameraNode!.addChild(window)
         
         // - message label set to 'Попробовать вскрыть?' initially
         let messageLabel = SKLabelNode(text: "Попробовать вскрыть?")
-        messageLabel.name = "carMessage"
+        messageLabel.name = "ui-carMessage"
         messageLabel.position = CGPoint(x: -30, y: 0)
         messageLabel.verticalAlignmentMode = .center
         messageLabel.fontName = "Copperplate"
@@ -56,11 +56,11 @@ extension ParkingWorkGame {
         let yesBtn = SKShapeNode(rect: CGRect(x: (window.frame.width / 2) - 64, y: -15, width: 56, height: 28), cornerRadius: 6.0)
         yesBtn.fillColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
         yesBtn.strokeColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
-        yesBtn.name = "yesOpenLockBtn"
+        yesBtn.name = "ui-yesOpenLockBtn"
         window.addChild(yesBtn)
         
         let yesBtnLabel = SKLabelNode(text: "Да")
-        yesBtnLabel.name = "yesBtnLabel"
+        yesBtnLabel.name = "ui-yesBtnLabel"
         yesBtnLabel.fontName = "Copperplate"
         yesBtnLabel.fontSize = 20
         yesBtnLabel.verticalAlignmentMode = .center
@@ -74,37 +74,14 @@ extension ParkingWorkGame {
     
     /// Shows pop-up window, offering to try to open the lock when player comes сlose to it.
     func showOpenCarMessage(of targetCar: Car, lockType: String) {
-
         if openCarWindow?.alpha != 0 { return }
         openCarWindow?.alpha = 1
-        
-        
-//        // add one zero at the end if complexity 0.1 to display -> 0.10
-//        let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
-//
-
-//        openCarWindowNameLabel?.text = "\(targetCar.name)"
-//        openCarWindowLockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
-//        openCarWindowComplexityNum?.text = "\(complexity)/1.00"
-//
-//        // set complexity num color
-//        let comp = targetCar.locks[lockType]!!
-//
-//        if comp >= 0.0 && comp <= 0.34 {
-//            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
-//        } else if (comp > 0.34 && comp <= 0.74 ) {
-//            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
-//        } else {
-//            openCarWindowComplexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
-//        }
-        
-
-
     }
     
     /// Hides pop-up window, that offering to open car lock.
     func hideOpenCarMessage() {
         openCarWindow?.alpha = 0
+        canGoFromDoor = false
     }
     
     func showTargetSquare(of targetCar: Car, lockType: String) {
@@ -266,14 +243,14 @@ extension ParkingWorkGame {
     }
     
     
-    // rising anxiety bar (140max)
+    // rising anxiety bar (144max)
     func raiseAnxiety(to num: CGFloat) {
         canReduceAnxiety = false
         
         let futureWidth = anxietyLevel + num
         
-        if futureWidth > 140.0 {
-            anxietyLevel = 140
+        if futureWidth > 144.0 {
+            anxietyLevel = 144
         } else {
             anxietyLevel = futureWidth
         }

@@ -7,7 +7,11 @@
 
 import SpriteKit
 
-class Car {
+class Car: Equatable {
+    static func == (lhs: Car, rhs: Car) -> Bool {
+        lhs.node == rhs.node
+    }
+    
     
     init(scene: SKScene, name: String) {
         self.scene = (scene as? ParkingWorkGame)!
