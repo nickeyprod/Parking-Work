@@ -167,7 +167,7 @@ extension ParkingWorkGame {
     
     func callCops() {
         
-        let gameOverScene = SKScene(fileNamed: "GameOverScene")
+        let gameOverScene = SKScene(fileNamed: "GameOverScene") as? GameOver
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window

@@ -6,6 +6,8 @@
 //
 
 import SpriteKit
+import Foundation
+import GameplayKit
 
 class GameOver: ParkingWorkGame {
     let messages: [String] = [
@@ -103,7 +105,9 @@ class GameOver: ParkingWorkGame {
     }
     
     func restartGame() {
-        let level1Scene = SKScene(fileNamed: "Level\(levelNum)Scene")
+       
+        let currLevelScene = GKScene(fileNamed: "Level\(levelNum)Scene")?.rootNode as! ParkingWorkGame
+        
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         self.removeAllActions()
         self.backgroundImg?.removeAllActions()
@@ -111,12 +115,29 @@ class GameOver: ParkingWorkGame {
         
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window
-        level1Scene?.scaleMode = .aspectFill
-        level1Scene?.size = displaySize.size
-        self.view?.presentScene(level1Scene!, transition: transition)
+        currLevelScene.scaleMode = .aspectFill
+        currLevelScene.size = displaySize.size
+        
+        // set this vars to true when game restarted, to not show tutorials and does not block any UI
+        currLevelScene.tutorialEnded = true
+        currLevelScene.firstCarOpened = true
+        currLevelScene.canMoveCamera = true
+        currLevelScene.restart = true
+        
+        self.view?.presentScene(currLevelScene, transition: transition)
     }
-    
+   
     deinit {
         print("GameOver deinit")
+    }
+}
+
+class Level {
+    var scene: GKScene
+    var fileNamed: String
+    
+    init(scene: GKScene, fileNamed: String) {
+        self.scene = scene
+        self.fileNamed = fileNamed
     }
 }

@@ -20,7 +20,11 @@ class GameViewController: UIViewController {
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! ParkingWorkGame? {
-                
+//                sceneNode.tutorialEnded = true
+//                sceneNode.firstCarOpened = true
+//                sceneNode.canMoveCamera = true
+//                sceneNode.restart = true
+//                
                 // Copy gameplay related content over to the scene
 //                sceneNode.entities = scene.entities
 //                sceneNode.graphs = scene.graphs

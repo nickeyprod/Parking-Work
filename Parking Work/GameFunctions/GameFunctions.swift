@@ -245,6 +245,9 @@ extension ParkingWorkGame {
     
     // rising anxiety bar (144max)
     func raiseAnxiety(to num: CGFloat) {
+        // do not raise anxiety during showing tutorial messages
+        if canMoveCamera == false { return }
+        
         canReduceAnxiety = false
         
         let futureWidth = anxietyLevel + num
@@ -314,7 +317,9 @@ extension ParkingWorkGame {
         let act = SKAction.scale(by: num, duration: 2.0)
         let act2 = SKAction.sequence([act, SKAction.wait(forDuration: 1.5)])
         cameraNode?.run(act2, completion: {
-            self.cameraNode?.run(SKAction.scale(to: self.minScale, duration: 0.7))
+            self.cameraNode?.run(SKAction.scale(to: self.minScale, duration: 0.7), completion: {
+//                self.startTutorial()
+            })
         })
 
         
@@ -340,14 +345,37 @@ extension ParkingWorkGame {
 
                 levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.2))
                 Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                    levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15), completion: {
-//                        self.showLevelTaskDescription()
-                    })
-                    
+                    levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
                 }
             }
         })
     }
+    
+    func showStartLabel() {
+        let levelNumberNode = self.cameraNode?.childNode(withName: "LevelNumberNode")
+        let levelLabelNode = levelNumberNode?.childNode(withName: "LevelLabelNode") as? SKLabelNode
+        levelLabelNode?.run(SKAction.fadeIn(withDuration: 0.8))
+        
+        levelLabelNode?.text = "Игра начинается"
+        let act = SKAction.resize(toWidth: displayWidth!, duration: 0.3)
+        levelNumberNode?.run(act)
+        
+        levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.4), completion: {
+            levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
+            // roll back and hide
+            Timer.scheduledTimer(withTimeInterval: 2.2, repeats: false) { _ in
+                let act = SKAction.resize(toWidth: 0, duration: 0.6)
+                levelNumberNode?.run(act)
+                levelLabelNode?.run(SKAction.fadeOut(withDuration: 0.5))
+
+                levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.2))
+                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                    levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
+                }
+            }
+        })
+    }
+   
     
     func createMinimap() {
             
@@ -372,6 +400,7 @@ extension ParkingWorkGame {
         // border around minimap
 //        let strokeShape = SKShapeNode(rect: CGRect(x: -mapWidth / 2, y: -mapHeight / 2, width: mapWidth, height: mapHeight), cornerRadius: 10)
         let strokeShape = SKShapeNode(circleOfRadius: 60)
+        strokeShape.name = "mini-map-stroke"
         strokeShape.position = mapPos
         strokeShape.zPosition = 20
         strokeShape.lineWidth = 2
@@ -620,6 +649,7 @@ extension ParkingWorkGame {
         taskBtn.alpha = 0.75
         taskBtn.zPosition = 51
         taskBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
+        self.taskButton = taskBtn
         
         //  task button label
         let taskBtnLabel = SKLabelNode(text: "?")
@@ -641,6 +671,8 @@ extension ParkingWorkGame {
         menuBtn.alpha = 0.75
         menuBtn.zPosition = 10
         menuBtn.position = CGPoint(x: displayWidth! / 2 - 40, y: displayHeight! / 2 - 26)
+        
+        self.menuButton = menuBtn
         
         // menu button label
         let menuBtnLabel = SKLabelNode(text: "\u{23F8}")
@@ -735,6 +767,34 @@ extension ParkingWorkGame {
         // hidden initially
         hideTargetSquare()
         
+    }
+    
+    func showCarLocksTutorial(tutorialMsg: Int) {
+        print(tutorialMsg)
+        self.canMoveCamera = false
+
+        let messageLabel = self.tutorialWindow?.childNode(withName: "msg-label") as? SKLabelNode
+        let nextBtn = self.tutorialWindow?.childNode(withName: "ui-next-btn") as? SKShapeNode
+        let nextBtnLabel = nextBtn?.childNode(withName: "ui-next-label-btn") as? SKLabelNode
+        
+        self.tutorialWindow?.alpha = 1
+        
+        if tutorialMsg == 25 {
+            messageLabel?.text = "При вскрытии машин, обращайте внимание на  \(UNICODE.leftChevrone)Тип замка\(UNICODE.rightChevrone) и \(UNICODE.leftChevrone)Сложность\(UNICODE.rightChevrone), они показываются в верхней части экрана, когда вы подходите к замку двери."
+            nextBtnLabel?.text = "Далее"
+        } else if tutorialMsg == 26 {
+            messageLabel?.text = "Сложность может варьироваться от 0 до 100, где 0 - это легкий взлом, а 100 - самый сложный. Успех взлома напрямую зависит от сложности замка и вашего умения взлома."
+        }
+        else if tutorialMsg == 27 {
+            messageLabel?.text = "Более легкая сложность будет отмечена зеленым, а более сложная - синим или еще хуже - красным цветом. Обращайте на это внимание, провальный взлом производит много шума!"
+        }
+        else if tutorialMsg == 28 {
+            messageLabel?.text = "По мере прохождения игры, вы сможете увеличивать свое умение взлома и взламывать более сложные замки."
+            nextBtnLabel?.text = "Понятно"
+        } else if tutorialMsg == 29 {
+            self.tutorialWindow?.alpha = 0
+            canMoveCamera = true
+        }
     }
     
 }

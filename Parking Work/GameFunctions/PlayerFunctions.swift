@@ -13,7 +13,7 @@ extension Player {
     // MARK: - Car Locks Opening Logic
     /// Player can try to open any lock of any car on the map
     func tryOpenCarLock(of car: Car, lockType: String) {
-        
+
 //        let unlockSkill = 10
         
         // 100% - 0.08% = 99,92%

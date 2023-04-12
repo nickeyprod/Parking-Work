@@ -30,6 +30,7 @@
 		D18653D6299A3EAF00DEE90D /* CarsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D5299A3EAF00DEE90D /* CarsSetup.swift */; };
 		D18653D8299A3FE200DEE90D /* CarLocksSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */; };
 		D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */; };
+		D197178A29E42D05001A6537 /* TutorialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197178929E42D05001A6537 /* TutorialFunctions.swift */; };
 		D1A3F5A7299E52D600084380 /* LOCK_TRANSLATIONS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A3F5A6299E52D600084380 /* LOCK_TRANSLATIONS.swift */; };
 		D1A3F5AB299F9B8B00084380 /* GameSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A3F5AA299F9B8B00084380 /* GameSounds.swift */; };
 		D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5AD299F9BB900084380 /* door_open.wav */; };
@@ -78,6 +79,7 @@
 		D18653D5299A3EAF00DEE90D /* CarsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsSetup.swift; sourceTree = "<group>"; };
 		D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLocksSetup.swift; sourceTree = "<group>"; };
 		D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindowsSetup.swift; sourceTree = "<group>"; };
+		D197178929E42D05001A6537 /* TutorialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFunctions.swift; sourceTree = "<group>"; };
 		D1A3F5A6299E52D600084380 /* LOCK_TRANSLATIONS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_TRANSLATIONS.swift; sourceTree = "<group>"; };
 		D1A3F5AA299F9B8B00084380 /* GameSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSounds.swift; sourceTree = "<group>"; };
 		D1A3F5AD299F9BB900084380 /* door_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = door_open.wav; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				D18653CA299A3A3600DEE90D /* GameFunctions.swift */,
 				D18653CD299A3AE200DEE90D /* PlayerFunctions.swift */,
+				D197178929E42D05001A6537 /* TutorialFunctions.swift */,
 			);
 			path = GameFunctions;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				D1A3F5AB299F9B8B00084380 /* GameSounds.swift in Sources */,
 				D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */,
 				D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */,
+				D197178A29E42D05001A6537 /* TutorialFunctions.swift in Sources */,
 				D1A7180529CC405500A488BF /* Player.swift in Sources */,
 				D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */,
 			);

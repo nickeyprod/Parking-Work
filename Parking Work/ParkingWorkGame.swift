@@ -26,8 +26,13 @@ class ParkingWorkGame: SKScene {
     var miniMapCropNode: SKCropNode?
     var anxietyOuterShape: SKShapeNode?
     var anxietyInnerSprite: SKSpriteNode?
+    // UI Buttons
     var runButton: SKShapeNode?
+    var taskButton: SKShapeNode?
+    var menuButton: SKShapeNode?
+    
     var targetSquare: SKShapeNode?
+    var tutorialWindow: SKShapeNode?
     
     // minimap player dot
     var miniMapPlayerDot: SKShapeNode?
@@ -56,6 +61,11 @@ class ParkingWorkGame: SKScene {
     var playerInThirdCircle: Bool = false
     var canGoFromDoor: Bool = false
     var canRotate: Bool = true
+    // this bools are all false when game is first played
+    var tutorialEnded: Bool = false
+    var firstCarOpened: Bool = false
+    var canMoveCamera: Bool = false
+    var restart: Bool = false
     
     var playerInCircleOfCar: SKNode? = nil
     
@@ -143,7 +153,9 @@ class ParkingWorkGame: SKScene {
     /// Gesture handling function for zooming in and out map
     @objc func pinchHandler(_ sender: UIPinchGestureRecognizer) {
 
-        if self.isPaused { return }
+        if self.isPaused || !tutorialEnded || !canMoveCamera {
+            return
+        }
 
         // this prevents camera `jumping` while moving just after zooming
         currTouchPosition = nil; startTouchPosition = nil;

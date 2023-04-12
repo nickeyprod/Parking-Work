@@ -8,11 +8,37 @@
 import SpriteKit
 import GameplayKit
 
+
 class Level1: ParkingWorkGame {
     
     // Cars
     var oldCopper: Car?
     var chowerler: Car?
+    
+    var tutorialMsg = 1
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        for touch in touches {
+            
+            let location = touch.location(in: self)
+            
+            // buttons pressed check
+            let touchedNode = atPoint(location)
+            
+            if touchedNode.name == "ui-next-label-btn" || touchedNode.name == "ui-next-btn" {
+                if self.firstCarOpened == false {
+                    self.nextTutorialMsg()
+                } else {
+                    self.tutorialMsg += 1
+                    self.showCarLocksTutorial(tutorialMsg: self.tutorialMsg)
+                }
+                
+                run(MenuSounds.button_click.action)
+            }
+        }
+
+    }
 
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -59,6 +85,7 @@ class Level1: ParkingWorkGame {
 //            run(SKAction.repeatForever(CitySound.traffic1.action))
 //            SKAction.changeVolume(to: 0.00, duration: 0)
 //        ]))
+        
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)
         
@@ -67,11 +94,16 @@ class Level1: ParkingWorkGame {
         
         // zoom out animation
         zoomOutCamera(to: maxScale)
-        
-//        PlusMap()
-        
+    
         // create target square for selected car
         createSelectedTarget()
+        
+        // tutorial creating
+        if restart == false {
+            createTutorial()
+        }
+        
+    
     }
     
     // MARK: - Physic Bodies Setup

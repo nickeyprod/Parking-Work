@@ -25,6 +25,12 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
                 self.canRotate = true
             }
             playerAndLockContact(contact.bodyA, contact.bodyB)
+            
+            // show tutorial on car locks if first opened
+            if firstCarOpened == false {
+                self.firstCarOpened = true
+                showCarLocksTutorial(tutorialMsg: 25)
+            }
 
         case (playerCategory | firstCircleCategory):
             playerInFirstCircle = true
