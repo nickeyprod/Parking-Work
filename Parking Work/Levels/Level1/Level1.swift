@@ -51,6 +51,9 @@ class Level1: ParkingWorkGame {
         
         // setup all needed initial variables (values)
         setupInitialGameValues()
+        
+        // off tutorial
+        self.tutorial(set: false)
 
         // setup camera of the level
         setupCamera()
@@ -121,6 +124,12 @@ class Level1: ParkingWorkGame {
         
         // car locks
         setupCarLocks()
+        
+        // trashcans physic bodies
+//        setupTrashcans()
+        
+        // setup pigeouns to fly away
+        setupPigeons()
         
     }
 

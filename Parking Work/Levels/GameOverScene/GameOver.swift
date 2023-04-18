@@ -118,11 +118,8 @@ class GameOver: ParkingWorkGame {
         currLevelScene.scaleMode = .aspectFill
         currLevelScene.size = displaySize.size
         
-        // set this vars to true when game restarted, to not show tutorials and does not block any UI
-        currLevelScene.tutorialEnded = true
-        currLevelScene.firstCarOpened = true
-        currLevelScene.canMoveCamera = true
-        currLevelScene.restart = true
+        // off tutorial when restart
+        self.tutorial(set: false)
         
         self.view?.presentScene(currLevelScene, transition: transition)
     }

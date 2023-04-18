@@ -124,6 +124,9 @@ class ParkingWorkGame: SKScene {
     let secondCircleCategory: UInt32 = 1 << 6
     let thirdCircleCategory: UInt32 = 1 << 7
     
+    let pigeonCategory: UInt32 = 1 << 8
+    
+    
 
 //    var signalignCarTimers: [Timer?] = []
     

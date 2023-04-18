@@ -22,7 +22,7 @@ extension Level1 {
         oldCopper!.node?.physicsBody?.categoryBitMask = carCategory
         oldCopper!.node?.physicsBody?.affectedByGravity = false
         oldCopper!.node?.physicsBody?.isDynamic = false
-        oldCopper!.node?.zPosition = 1
+        oldCopper!.node?.zPosition = 2
 
         // Chowerler
         chowerler!.node = childNode(withName: CAR_TEXTURE_NAMES.chowerler)
@@ -33,7 +33,7 @@ extension Level1 {
         chowerler!.node?.physicsBody?.categoryBitMask = carCategory
         chowerler!.node?.physicsBody?.affectedByGravity = false
         chowerler!.node?.physicsBody?.isDynamic = false
-        chowerler!.node?.zPosition = 1
+        chowerler!.node?.zPosition = 2
     }
 
 }

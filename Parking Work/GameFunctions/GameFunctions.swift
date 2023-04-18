@@ -107,7 +107,7 @@ extension ParkingWorkGame {
     }
     
     func checkDistanceBetweenPlayerAndTargetLock() {
- 
+        
         let playerPosition = player?.node?.position
         let targetLockPosition = player?.currLockTarget?.parent?.position
 
@@ -447,10 +447,7 @@ extension ParkingWorkGame {
         // set crop node globally for adding car dots on Level init class
         self.miniMapCropNode = cropNode
         self.miniMapCropNode?.zPosition = 2
-        
-
     
-
     }
 
     
@@ -795,6 +792,44 @@ extension ParkingWorkGame {
             self.tutorialWindow?.alpha = 0
             canMoveCamera = true
         }
+    }
+    
+    func tutorial(set to: Bool) {
+        
+        // set this vars to true when game restarted, to not show tutorials and does not block any UI
+        if to == false {
+            self.tutorialEnded = true
+            self.firstCarOpened = true
+            self.canMoveCamera = true
+            self.restart = true
+        } else {
+            self.tutorialEnded = false
+            self.firstCarOpened = false
+            self.canMoveCamera = false
+            self.restart = false
+        }
+
+        
+    }
+    
+    func getRandomPointOutsideGameWorld() -> CGPoint {
+        let maxX = Int((tileMapWidth! / 2) + 100)
+        let maxY = Int((tileMapHeight! / 2) + 100)
+        
+        let posXTop = Int.random(in: maxX...maxX + 500)
+        let negativeXBottom = Int.random(in: (-maxX - 500)...(-maxX))
+        let posYTop = Int.random(in: maxY...maxY + 500)
+        let negativeYBottom = Int.random(in: -maxY - 500...(-maxY))
+        
+        let r = Int.random(in: 0...1)
+        let point: CGPoint?
+        if r == 0 {
+            point = CGPoint(x: posXTop, y: posYTop)
+        } else {
+            point = CGPoint(x: negativeXBottom, y: negativeYBottom)
+        }
+        
+        return point!
     }
     
 }
