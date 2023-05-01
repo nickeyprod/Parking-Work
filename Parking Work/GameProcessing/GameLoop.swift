@@ -65,6 +65,7 @@ extension ParkingWorkGame {
         if dy < 0 {
             movingDown = true
         }
+        
         if canRotate == true {
             // set sprite face direction when moving by diagonal
             if movingLeft && movingDown {

@@ -32,6 +32,8 @@ class Player {
     // Target
     var currTargetCar: Car?
     var currLockTarget: SKNode?
+    var triedToOpenComplexLockTimes = 0
+    var triedToOpenJammedLockTimes = 0
     
     var ownedCars: [Car?] = []
     

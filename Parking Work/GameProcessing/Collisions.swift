@@ -154,6 +154,13 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         }
         
         spritePigeonFly.run(SKAction.move(to: randPigeonPos, duration: 20))
+    
+        
+        let pigeonFlyAway = CitySound.pigeon_flying_away.audio
+        
+        self.addChild(pigeonFlyAway)
+        
+        pigeonFlyAway.run(SKAction.play())
     }
     
     // just returns contact mask

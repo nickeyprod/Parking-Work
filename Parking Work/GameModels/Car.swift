@@ -7,6 +7,7 @@
 
 import SpriteKit
 
+
 class Car: Equatable {
     static func == (lhs: Car, rhs: Car) -> Bool {
         lhs.node == rhs.node
@@ -28,6 +29,8 @@ class Car: Equatable {
         "driver_lock": nil,
         "passenger_lock": nil,
     ]
+    
+    var jammedLocks: [String?] = []
     
     // other variables
     var signaling: Bool = false

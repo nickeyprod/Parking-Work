@@ -14,9 +14,11 @@
 		D1198F032979B76E00701A24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1198F022979B76E00701A24 /* Assets.xcassets */; };
 		D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1198F042979B76E00701A24 /* LaunchScreen.storyboard */; };
 		D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */; };
-		D11C745429ED634900C0583D /* TrashSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C745329ED634900C0583D /* TrashSetup.swift */; };
 		D11C745629ED703000C0583D /* SetupPigeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C745529ED703000C0583D /* SetupPigeon.swift */; };
 		D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F2E15298972EB008976EA /* CAR_LIST.swift */; };
+		D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */; };
+		D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */; };
+		D15BCD9C29F1380B00726BE3 /* SetupSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BCD9B29F1380B00726BE3 /* SetupSound.swift */; };
 		D1628B3129AE050700DF817E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1628B3029AE050700DF817E /* Colors.swift */; };
 		D16D775729A4E371004EC225 /* traffic1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16D775629A4E371004EC225 /* traffic1.wav */; };
 		D16FD69B29A270A70097BC3E /* Level1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16FD69929A270A70097BC3E /* Level1.swift */; };
@@ -65,9 +67,11 @@
 		D1198F022979B76E00701A24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1198F052979B76E00701A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParkingWorkTileSets.sks; sourceTree = "<group>"; };
-		D11C745329ED634900C0583D /* TrashSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashSetup.swift; sourceTree = "<group>"; };
 		D11C745529ED703000C0583D /* SetupPigeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPigeon.swift; sourceTree = "<group>"; };
 		D13F2E15298972EB008976EA /* CAR_LIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_LIST.swift; sourceTree = "<group>"; };
+		D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pigeon_flying_away.wav; sourceTree = "<group>"; };
+		D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sound_birds.wav; sourceTree = "<group>"; };
+		D15BCD9B29F1380B00726BE3 /* SetupSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSound.swift; sourceTree = "<group>"; };
 		D1628B3029AE050700DF817E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D16D775629A4E371004EC225 /* traffic1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = traffic1.wav; sourceTree = "<group>"; };
 		D16FD69929A270A70097BC3E /* Level1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1.swift; sourceTree = "<group>"; };
@@ -204,8 +208,8 @@
 				D18653D7299A3FE200DEE90D /* CarLocksSetup.swift */,
 				D18653D9299B7CE000DEE90D /* PopUpWindowsSetup.swift */,
 				D1FF461429BE693E0061D819 /* MiniMapSetup.swift */,
-				D11C745329ED634900C0583D /* TrashSetup.swift */,
 				D11C745529ED703000C0583D /* SetupPigeon.swift */,
+				D15BCD9B29F1380B00726BE3 /* SetupSound.swift */,
 			);
 			path = Level1Setup;
 			sourceTree = "<group>";
@@ -233,6 +237,8 @@
 		D1A3F5AC299F9BB900084380 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */,
+				D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */,
 				D16D775629A4E371004EC225 /* traffic1.wav */,
 				D1FDF2A329A929280058040E /* button_click.wav */,
 				D1A3F5AD299F9BB900084380 /* door_open.wav */,
@@ -328,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */,
 				D1A3F5B0299F9E0C00084380 /* success_bell.wav in Resources */,
 				D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */,
 				D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */,
@@ -341,6 +348,7 @@
 				D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */,
 				D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */,
 				D16D775729A4E371004EC225 /* traffic1.wav in Resources */,
+				D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */,
 				D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */,
 				D16FD69C29A270A70097BC3E /* Level1Scene.sks in Resources */,
 			);
@@ -371,13 +379,13 @@
 				D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */,
 				D1BC8CE229B8752900F9C597 /* IntroScene.swift in Sources */,
 				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
-				D11C745429ED634900C0583D /* TrashSetup.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
 				D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */,
 				D18653CB299A3A3600DEE90D /* GameFunctions.swift in Sources */,
 				D1FF461529BE693E0061D819 /* MiniMapSetup.swift in Sources */,
 				D1F4CFC529B0C70E003CB541 /* Car.swift in Sources */,
 				D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */,
+				D15BCD9C29F1380B00726BE3 /* SetupSound.swift in Sources */,
 				D1A3F5AB299F9B8B00084380 /* GameSounds.swift in Sources */,
 				D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */,
 				D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */,

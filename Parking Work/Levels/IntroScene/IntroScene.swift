@@ -23,16 +23,20 @@ class IntroScene: ParkingWorkGame {
         setupInitialGameValues()
         
         subtitlesSprite = self.childNode(withName: "subtitlesSprite") as? SKSpriteNode
+        subtitlesSprite?.anchorPoint = CGPoint(x: 0, y: 0)
+//        subtitlesSprite?.color = .red
+        subtitlesSprite?.position = CGPoint(x: -(displayWidth! / 2) , y: -(displayHeight! / 2) )
         subtitlesSprite?.size.width = displayWidth!
         backImage = self.childNode(withName: "backImage") as? SKSpriteNode
         backImage?.size.width = displayWidth!
         backImage?.size.height = 804
-        speechLabel = self.subtitlesSprite?.childNode(withName: "speachLabel") as? SKLabelNode
+        speechLabel = self.childNode(withName: "speechLabel") as? SKLabelNode
         speechLabel?.preferredMaxLayoutWidth = displayWidth! - 100
         speechLabel?.lineBreakMode = .byWordWrapping
         speechLabel?.numberOfLines = 0
         speechLabel?.verticalAlignmentMode = .center
         speechLabel?.horizontalAlignmentMode = .center
+        speechLabel?.position = CGPoint(x: (subtitlesSprite?.frame.midX)!, y: (subtitlesSprite?.frame.midY)!)
         
         animateBackImage()
         createSkipButton()
@@ -99,9 +103,11 @@ class IntroScene: ParkingWorkGame {
             self.backImage?.yScale = 1.9
             self.backImage?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             self.backImage?.texture = SKTexture(image: UIImage(named: "IntroScene/02")!)
+
             let msg = "Так как теперь ты в нашей команде, сегодня ты отправишься на свою первую парковку. Ничего сложного, обычная стоянка в спальном районе, там ты отработаешь свои навыки."
 
             self.speechLabel?.attributedText = self.createAttributedString(from: msg)
+            self.subtitlesSprite?.run(SKAction.resize(toHeight: (self.speechLabel?.frame.height)!, duration: 0.0))
         }
         
         self.speechTimers.append(t5)
@@ -111,6 +117,7 @@ class IntroScene: ParkingWorkGame {
             let msg = "Марка машины мне не важна, на твое усмотрение. Главное,  доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях."
     
             self.speechLabel?.attributedText = self.createAttributedString(from: msg)
+            self.subtitlesSprite?.run(SKAction.resize(toHeight: (self.speechLabel?.frame.height)!, duration: 0.0))
         }
         
         self.speechTimers.append(t6)

@@ -18,6 +18,20 @@ class ParkingWorkGame: SKScene {
     var displayWidth: CGFloat?
     var displayHeight: CGFloat?
     
+    // Chat Size
+    let CHAT_HEIGHT = 110
+    let CHAT_WIDTH = 200
+    
+    // CHAT
+    var chatSliderBottomPos: CGPoint?
+    var chatSliderTopPos: CGPoint?
+    var currScrollingStep: CGFloat?
+    var chatSliderHeight: CGFloat?
+    var initialSliderDiff: CGFloat?
+    var initialScrollingDiff: CGFloat?
+    var sliderTouchIsHolded: Bool = false
+    var prevTouchPos: CGPoint? = CGPoint(x: 0, y: 0)
+    
     // Nodes
     var player: Player?
     var cameraNode: SKCameraNode?
@@ -82,6 +96,9 @@ class ParkingWorkGame: SKScene {
     var openCarWindowNameLabel: SKLabelNode?
     var openCarWindowLockTypeLabel: SKLabelNode?
     var openCarWindowComplexityNum: SKLabelNode?
+    var windowChat: SKCropNode?
+    var scrollingChatNode: SKSpriteNode?
+    var chatSlider: SKSpriteNode?
     
     // Open Car Success Wibdow
     var openCarSuccessWindow: SKNode?
@@ -126,9 +143,7 @@ class ParkingWorkGame: SKScene {
     
     let pigeonCategory: UInt32 = 1 << 8
     
-    
-
-//    var signalignCarTimers: [Timer?] = []
+    var messagesInChat: [SKLabelNode?] = []
     
     var prevScale: CGFloat = 0.0
     let minScale: CGFloat = 1.02
@@ -136,7 +151,6 @@ class ParkingWorkGame: SKScene {
     
     deinit {
         print("deinit MAIN")
-        
     }
     
     // analog to 'ViewDidLoad' - runs when game scene appears
@@ -242,6 +256,7 @@ class ParkingWorkGame: SKScene {
             if (self.isPaused)  { return }
             self.reduceAnxiety(to: 1)
         })
+        
     }
     
     // detect where is now left bottom and right top angles of camera positions

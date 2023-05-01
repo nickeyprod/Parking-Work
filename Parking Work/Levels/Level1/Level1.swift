@@ -32,8 +32,8 @@ class Level1: ParkingWorkGame {
                 } else {
                     self.tutorialMsg += 1
                     self.showCarLocksTutorial(tutorialMsg: self.tutorialMsg)
+                    
                 }
-                
                 run(MenuSounds.button_click.action)
             }
         }
@@ -53,7 +53,7 @@ class Level1: ParkingWorkGame {
         setupInitialGameValues()
         
         // off tutorial
-        self.tutorial(set: false)
+        self.tutorial(set: true)
 
         // setup camera of the level
         setupCamera()
@@ -71,6 +71,9 @@ class Level1: ParkingWorkGame {
         createOpenCarMessage()
         createOpenCarSuccessMessage()
         
+        // setup chat window for messages
+        setupChatWindow()
+        
         // create anxiety bar
         createAnxietyBar()
         
@@ -82,13 +85,7 @@ class Level1: ParkingWorkGame {
         
         // setup pop-up windows (attach to global variables)
         setupPopUpWindowMessages()
-        
-        // play traffic street background sound
-//        run(SKAction.sequence([
-//            run(SKAction.repeatForever(CitySound.traffic1.action))
-//            SKAction.changeVolume(to: 0.00, duration: 0)
-//        ]))
-        
+    
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)
         
@@ -106,7 +103,14 @@ class Level1: ParkingWorkGame {
             createTutorial()
         }
         
-    
+        pushMessageToChat(text: "Добро пожаловать на 1 уровень.")
+        if tutorialEnded {
+            self.pushMessageToChat(text: "Добро пожаловать! Парковка №17 в спальном районе Чиперово города Сероветска.")
+            
+            Timer.scheduledTimer(withTimeInterval: TimeInterval(Int.random(in: 26...48)), repeats: false) { _ in
+                self.pushMessageToChat(text: "Босс хочет, чтобы вы потренировались на этой парковке и угнали для него машину, марка не важна.")
+            }
+        }
     }
     
     // MARK: - Physic Bodies Setup
@@ -125,11 +129,11 @@ class Level1: ParkingWorkGame {
         // car locks
         setupCarLocks()
         
-        // trashcans physic bodies
-//        setupTrashcans()
-        
         // setup pigeouns to fly away
         setupPigeons()
+        
+        // setup sounds
+        setupSounds()
         
     }
 

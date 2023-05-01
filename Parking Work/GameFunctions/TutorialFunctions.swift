@@ -327,6 +327,12 @@ extension Level1 {
                 self.tutorialEnded = true
                 self.canMoveCamera = true
                 self.tutorialMsg += 1
+                
+                self.pushMessageToChat(text: "Добро пожаловать! Парковка №17 в спальном районе Чиперово города Сероветска.")
+                
+                Timer.scheduledTimer(withTimeInterval: TimeInterval(Int.random(in: 26...48)), repeats: false) { _ in
+                    self.pushMessageToChat(text: "Босс хочет, чтобы вы потренировались на этой парковке и угнали для него машину, марка не важна.")
+                }
             })
         }
     }

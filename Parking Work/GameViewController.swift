@@ -16,7 +16,7 @@ class GameViewController: UIViewController {
         
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
-        if let scene = GKScene(fileNamed: "Level1Scene") {
+        if let scene = GKScene(fileNamed: "IntroScene") {
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! ParkingWorkGame? {
@@ -48,6 +48,7 @@ class GameViewController: UIViewController {
                     
                     view.showsFPS = false
                     view.showsNodeCount = false
+                    view.showsPhysics = false
                 }
             }
         }

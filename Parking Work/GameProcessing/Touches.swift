@@ -31,7 +31,7 @@ extension ParkingWorkGame {
             }
             else if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = true
- 
+                
                 self.runButton?.run(.scale(to: 1.2, duration: 0))
                 
             }
@@ -62,12 +62,14 @@ extension ParkingWorkGame {
                 // hide open success message and play button click sound
                 hideCarOpenedSuccessMessage()
                 run(MenuSounds.button_click.action)
+            } else if touchedNode.name == "ui-scroll-up-chat-btn" {
+                scrollChatUp()
+            } else if touchedNode.name == "ui-scroll-down-chat-btn" {
+                scrollChatDown()
+            } else if touchedNode.name == "ui-scroll-chat-slider" {
+                self.sliderTouchIsHolded = true
             }
-            else if touchedNode.name == "goodButton" || touchedNode.name == "goodLabel" {
-                // hide open success message and play button click sound
-                hideCarOpenedSuccessMessage()
-                run(MenuSounds.button_click.action)
-            }
+            
         }
     }
     
@@ -82,8 +84,24 @@ extension ParkingWorkGame {
             
             currTouchPosition = CGPoint(x: location.x, y: location.y)
             
+            // for chat slider moving
+            let movingSliderUp = prevTouchPos!.y < currTouchPosition!.y
+            let movingSliderDown = prevTouchPos!.y > currTouchPosition!.y
+            
+            // for slider movement
+            prevTouchPos = currTouchPosition
+            
+            // chat slider moving logic
+            if sliderTouchIsHolded {
+                if movingSliderUp && (self.chatSlider?.position.y)! < self.chatSliderTopPos!.y {
+                    self.scrollChatUp()
+                } else if movingSliderDown && (self.chatSlider?.position.y)! > self.chatSliderBottomPos!.y {
+                    self.scrollChatDown()
+                }
+            }
+            
             // movig camera logic
-            if currTouchPosition != nil && startTouchPosition != nil {
+            if !sliderTouchIsHolded && currTouchPosition != nil && startTouchPosition != nil {
                 
                 let diffX = startTouchPosition!.x - currTouchPosition!.x
                 let diffY = startTouchPosition!.y - currTouchPosition!.y
@@ -129,6 +147,8 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        self.sliderTouchIsHolded = false
         if startTouchNode?.name == "ui-runBtn" || startTouchNode?.name == "ui-runBtnImg" {
             isRunButtonHolded = false
             runButton?.run(.scale(to: 1.0, duration: 0))

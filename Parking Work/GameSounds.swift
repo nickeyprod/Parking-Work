@@ -36,7 +36,7 @@ enum MenuSounds: String {
 }
 
 enum CitySound: String {
-    case traffic1
+    case traffic1, street_sound_birds, pigeon_flying_away
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
@@ -44,7 +44,7 @@ enum CitySound: String {
     
     var audio: SKAudioNode {
         let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
-        audio.isPositional = true
+        audio.autoplayLooped = false
         return audio
     }
 }
