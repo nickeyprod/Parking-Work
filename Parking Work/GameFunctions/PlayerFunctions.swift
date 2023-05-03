@@ -145,10 +145,10 @@ extension Player {
     // run this function when open lock successes
     func successfullyOpenedCar(car: Car, lockType: String) {
         // add it to owned cars array
-        ownedCars.append(car)
+//        ownedCars.append(car)
         
         // remove the car from tilemap
-        removeCarFromTileMap(car: car)
+//        removeCarFromTileMap(car: car)
         
         // hide target square
         self.scene.hideTargetSquare()
@@ -168,6 +168,9 @@ extension Player {
         // push message to chat that open was successful
         self.scene.pushMessageToChat(text: "\(car.name) - \(LOCK_TRANSLATIONS[lockType] ?? "Тип неизвестен") - вскрытие удалось!")
         self.scene.pushMessageToChat(text: "Машина появится в вашем гараже")
+        
+        // get in the car
+        self.scene.player?.getIn(the: car)
     }
 
     // removing car node from game and from minimap,
@@ -244,8 +247,48 @@ extension Player {
         signal.run(SKAction.play())
         
         // blick lights
-        scene.blinkLightSignals(of: car)
+        car.blinkLightSignals()
         car.signaling = true
+    }
+    
+    // player enters in the car
+    func getIn(the car: Car) {
+        // hide player
+        self.scene.player?.node?.alpha = 0
+        // position player in the center of car
+        self.scene.player?.node?.position = car.node!.position
+        // position camera to the center of car
+        self.scene.cameraNode?.position = car.node!.position
+        // zoom out camera a bit
+        self.scene.zoomOutCamera(to: self.scene.minScale + 0.70, usual: true)
+        // set player state to sittin in car
+        self.scene.player?.isSittingInCar = true
+        // set moving camera to false
+        self.scene.canMoveCamera = false
+        
+        // hide target
+        self.scene.hideTargetSquare()
+        // hide open suggestion
+        self.scene.hideOpenCarMessage()
+//        self.scene.cameraNode?.zRotation =
+//        self.scene.miniMapSprite?.zRotation = car.node!.zRotation + 90
+        
+        // switch to driving ui
+        self.scene.switchToCarDrivingUI()
+        
+        // set car that player currently driving
+        self.scene.player?.drivingCar = car
+        
+        // unlock all locks when you are got in the car
+        for lock in car.unlockedLocks {
+            car.unlockedLocks[lock.key] = true
+        }
+        
+        car.firstAnxietyCircle?.removeFromParent()
+        car.secondAnxietyCircle?.removeFromParent()
+        car.thirdAnxietyCircle?.removeFromParent()
+        
+        self.node?.physicsBody = nil
     }
     
 }

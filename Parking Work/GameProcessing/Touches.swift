@@ -69,6 +69,15 @@ extension ParkingWorkGame {
             } else if touchedNode.name == "ui-scroll-chat-slider" {
                 self.sliderTouchIsHolded = true
             }
+            else if touchedNode.name == "ui-driveBtn" || touchedNode.name == "ui-driveBtnImg" {
+                self.driveBtnHolded = true
+                self.runButton?.run(.scale(to: 1.1, duration: 0))
+            }
+            else if touchedNode.name == "ui-brakeBtn" || touchedNode.name == "ui-brakeBtnImg" {
+                self.brakeBtnHolded = true
+                self.brakeButton?.run(.scale(to: 1.1, duration: 0))
+            }
+            
             
         }
     }
@@ -149,22 +158,20 @@ extension ParkingWorkGame {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         self.sliderTouchIsHolded = false
-        if startTouchNode?.name == "ui-runBtn" || startTouchNode?.name == "ui-runBtnImg" {
-            isRunButtonHolded = false
-            runButton?.run(.scale(to: 1.0, duration: 0))
-        }
+        
+        self.isRunButtonHolded = false
+        self.runButton?.run(.scale(to: 1.0, duration: 0))
+        self.brakeBtnHolded = false
+        self.brakeButton?.run(.scale(to: 1.0, duration: 0))
+        self.driveBtnHolded = false
+        self.runButton?.run(.scale(to: 1.0, duration: 0))
         
         startTouchPosition = nil
         for touch in touches {
             let touchLocation = touch.location(in: self)
             let touchedNode = atPoint(touchLocation)
-            
-            if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
-                isRunButtonHolded = false
-                self.runButton?.run(.scale(to: 1.0, duration: 0))
-            }
-            
-            if cameraMovingByFinger == false && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused && !cameraZooming && isRunButtonHolded == false && tutorialEnded == true && canMoveCamera == true {
+              
+            if !player!.isSittingInCar && cameraMovingByFinger == false && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused && !cameraZooming && isRunButtonHolded == false && tutorialEnded == true && canMoveCamera == true {
 
                 player?.destinationPosition = touchLocation
                 targetCircleSprite?.removeFromParent()

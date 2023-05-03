@@ -53,7 +53,7 @@ class Level1: ParkingWorkGame {
         setupInitialGameValues()
         
         // off tutorial
-        self.tutorial(set: true)
+        self.tutorial(set: false)
 
         // setup camera of the level
         setupCamera()
@@ -90,7 +90,7 @@ class Level1: ParkingWorkGame {
         playerStateMachine.enter(IdleState.self)
         
         // showing level number at the start
-        showLevelNumLabel()
+        showBannerLabel(text: "Уровень \(levelNum)")
         
         // zoom out animation
         zoomOutCamera(to: maxScale)

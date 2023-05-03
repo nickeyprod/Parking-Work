@@ -35,6 +35,11 @@ class Car: Equatable {
     // other variables
     var signaling: Bool = false
     var stolen: Bool = false
+    
+    var unlockedLocks : [String: Bool] = [
+        "driver_lock": false,
+        "passenger_lock": false
+    ]
 
     // node
     var node: SKNode? = nil {
@@ -91,4 +96,28 @@ class Car: Equatable {
     
     var secondAnxietyCircle: SKShapeNode?
     var thirdAnxietyCircle: SKShapeNode?
+    
+    func blinkLightSignals() {
+        
+        let lightSignals = self.node?.childNode(withName: "light_signals")
+        
+        let signalingTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(blinkLights), userInfo: lightSignals, repeats: true)
+        
+        // stop signal after 15 seconds
+        Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
+            signalingTimer.invalidate()
+            self.signaling = false
+        }
+       
+    }
+    
+    @objc func blinkLights(sender: Timer) {
+        let lightSignals = sender.userInfo as? SKNode
+        if lightSignals?.alpha == 0  {
+            lightSignals?.alpha = 1
+        } else {
+            lightSignals?.alpha = 0
+        }
+        
+    }
 }

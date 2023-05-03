@@ -37,4 +37,7 @@ class Player {
     
     var ownedCars: [Car?] = []
     
+    var isSittingInCar: Bool = false
+    var drivingCar: Car? 
+    
 }

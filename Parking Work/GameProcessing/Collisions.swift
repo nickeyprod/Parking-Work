@@ -190,7 +190,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         let diffY = abs(playerPosition.y) - abs(targetLockPosition!.y)
         
         // if distance not more than 150 and car is not signaling
-        if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) {
+        if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) && !player!.isSittingInCar {
             self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)
             // showing target
             self.showTargetSquare(of: player!.currTargetCar!, lockType: lockType!)

@@ -40,10 +40,14 @@ class ParkingWorkGame: SKScene {
     var miniMapCropNode: SKCropNode?
     var anxietyOuterShape: SKShapeNode?
     var anxietyInnerSprite: SKSpriteNode?
+    
     // UI Buttons
     var runButton: SKShapeNode?
     var taskButton: SKShapeNode?
     var menuButton: SKShapeNode?
+    
+    // Driving button
+    var brakeButton: SKShapeNode?
     
     var targetSquare: SKShapeNode?
     var tutorialWindow: SKShapeNode?
@@ -75,11 +79,16 @@ class ParkingWorkGame: SKScene {
     var playerInThirdCircle: Bool = false
     var canGoFromDoor: Bool = false
     var canRotate: Bool = true
+    
     // this bools are all false when game is first played
     var tutorialEnded: Bool = false
     var firstCarOpened: Bool = false
     var canMoveCamera: Bool = false
     var restart: Bool = false
+    
+    // driving bools
+    var driveBtnHolded: Bool = false
+    var brakeBtnHolded: Bool = false
     
     var playerInCircleOfCar: SKNode? = nil
     

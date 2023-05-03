@@ -136,7 +136,8 @@ extension ParkingWorkGame {
         if self.anxietyLevel >= 142.0 {
             callCops()
         }
- 
+        
+        // rising anxiety when player around the car nad targer is set
         if (player!.currLockTarget != nil &&
             player?.currTargetCar?.node?.name == playerInCircleOfCar?.name) {
 
@@ -163,6 +164,24 @@ extension ParkingWorkGame {
                 }
                 
             }
+        }
+        // if drive button holded - move car
+        if driveBtnHolded {
+            
+            let driveWay = CGVector(dx: 0, dy: -5)
+            let move = SKAction.move(by: driveWay, duration: 0)
+            player!.drivingCar?.node!.run(move)
+            
+            // camera follow driving car
+            cameraNode?.position = (player!.drivingCar?.node!.position)!
+        }
+        else if brakeBtnHolded {
+            let driveWay = CGVector(dx: 0, dy: 2)
+            let move = SKAction.move(by: driveWay, duration: 0)
+            player!.drivingCar?.node!.run(move)
+            
+            // camera follow driving car
+            cameraNode?.position = (player!.drivingCar?.node!.position)!
         }
     }
     
