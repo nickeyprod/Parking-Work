@@ -13,16 +13,25 @@ extension ParkingWorkGame {
     
     // Show message after successful car's lock open
     func showCarOpenedSuccessMessage(of targetCar: Car) {
+        self.isUILocked = true
+        
         let carName = targetCar.name
         
-        openCarSuccessWindow?.position = CGPoint(x: (cameraNode?.frame.midX)!, y: (cameraNode?.frame.midY)!)
-        openCarSuccessWindowGarageLabel?.text = "\(carName) появится в вашем гараже"
+//        let lockType = (player?.currLockTarget?.name)!
+//        let lockName = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
+        
+        openCarSuccessWindow?.position = CGPoint(x: 0, y: 0)
+        openCarSuccessWindowGarageLabel?.text = "Вы успешно вкрыли \(carName)."
+        openCarSuccessWindowGarageLabel?.preferredMaxLayoutWidth = (openCarSuccessWindow?.frame.width)! - 40
+        openCarSuccessWindowGarageLabel?.numberOfLines = 0
+        
         openCarSuccessWindow?.alpha = 1
         
     }
     
     // Hide message about successful car's lock open
     func hideCarOpenedSuccessMessage() {
+        self.isUILocked = false
         if openCarSuccessWindow?.alpha == 0 { return }
         openCarSuccessWindow?.alpha = 0
     }

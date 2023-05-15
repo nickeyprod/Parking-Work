@@ -293,7 +293,7 @@ extension Player {
         self.scene.canMoveCamera = false
         
         // zoom out camera a bit
-        self.scene.zoomCamera(to: self.scene.minScale + 1.00, duration: 0.9)
+        self.scene.zoomCamera(to: self.scene.minScale + 1.20, duration: 0.9)
         
         // Rotate camera to back of the car by shortest axis
         self.scene.cameraNode?.run(SKAction.rotate(toAngle: car.node!.zRotation + (270 * (Double.pi/180)), duration: 0.9, shortestUnitArc: true))

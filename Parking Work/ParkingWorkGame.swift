@@ -97,6 +97,7 @@ class ParkingWorkGame: SKScene {
     var brakeBtnHolded: Bool = false
     var leftArrowHolded: Bool = false
     var rightArrowHolded: Bool = false
+    var isUILocked: Bool = false
     
     var playerInCircleOfCar: SKNode? = nil
     

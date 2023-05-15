@@ -25,7 +25,6 @@ extension Level1 {
     func setupOpenCarSuccessWindowMessage() {
         // get open car succeess window itself
         openCarSuccessWindow = self.cameraNode?.childNode(withName: "openCarSuccessWindow")
-        
         // get car [name] will go to garage label
         openCarSuccessWindowGarageLabel = openCarSuccessWindow?.childNode(withName: "garageLabel") as? SKLabelNode
     }

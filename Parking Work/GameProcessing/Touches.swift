@@ -25,32 +25,32 @@ extension ParkingWorkGame {
             
             startTouchNode = touchedNode
 
-            if (touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel") {
+            if (touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel") && !isUILocked {
                 showTaskScreen()
                 run(MenuSounds.button_click.action)
             }
-            else if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
+            else if (touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg") && !isUILocked {
                 isRunButtonHolded = true
                 self.runButton?.run(.scale(to: 1.2, duration: 0))
                 
             }
-            else if touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel" {
+            else if (touchedNode.name == "ui-closeTaskBtn" || touchedNode.name == "ui-closeTaskLabel") && !isUILocked {
                 hideTaskScreen()
                 run(MenuSounds.button_click.action)
             }
-            else if touchedNode.name == "ui-menuBtn" || touchedNode.name == "ui-menuLabel" {
+            else if (touchedNode.name == "ui-menuBtn" || touchedNode.name == "ui-menuLabel") && !isUILocked {
                 showMenuScreen()
                 run(MenuSounds.button_click.action)
             }
-            else if touchedNode.name == "ui-resumeGameBtn" || touchedNode.name == "ui-resumeGameBtnLabel" {
+            else if (touchedNode.name == "ui-resumeGameBtn" || touchedNode.name == "ui-resumeGameBtnLabel") && !isUILocked {
                 hideMenuScreen()
                 run(MenuSounds.button_click.action)
             }
-            else if touchedNode.name == "ui-gameSettingsBtn" || touchedNode.name == "ui-gameSettingsBtnLabel" {
+            else if (touchedNode.name == "ui-gameSettingsBtn" || touchedNode.name == "ui-gameSettingsBtnLabel") && !isUILocked {
                 showSettingsScreen()
                 run(MenuSounds.button_click.action)
             }
-            else if touchedNode.name == "ui-yesOpenLockBtn" || touchedNode.parent?.name == "ui-yesOpenLockBtn" {
+            else if (touchedNode.name == "ui-yesOpenLockBtn" || touchedNode.parent?.name == "ui-yesOpenLockBtn") && !isUILocked {
                 // off opening car when tutorial message is opened
                 if !canMoveCamera { return }
                 // try to open target door of the car
@@ -61,34 +61,34 @@ extension ParkingWorkGame {
                 // hide open success message and play button click sound
                 hideCarOpenedSuccessMessage()
                 run(MenuSounds.button_click.action)
-            } else if touchedNode.name == "ui-scroll-up-chat-btn" {
+            } else if touchedNode.name == "ui-scroll-up-chat-btn" && !isUILocked {
                 scrollChatUp()
-            } else if touchedNode.name == "ui-scroll-down-chat-btn" {
+            } else if touchedNode.name == "ui-scroll-down-chat-btn" && !isUILocked {
                 scrollChatDown()
-            } else if touchedNode.name == "ui-scroll-chat-slider" {
+            } else if touchedNode.name == "ui-scroll-chat-slider" && !isUILocked {
                 self.sliderTouchIsHolded = true
             }
-            else if touchedNode.name == "ui-driveBtn" || touchedNode.name == "ui-driveBtnImg" {
+            else if (touchedNode.name == "ui-driveBtn" || touchedNode.name == "ui-driveBtnImg") && !isUILocked {
                 self.driveBtnHolded = true
                 self.runButton?.run(.scale(to: 1.1, duration: 0))
             }
-            else if touchedNode.name == "ui-brakeBtn" || touchedNode.name == "ui-brakeBtnImg" {
+            else if (touchedNode.name == "ui-brakeBtn" || touchedNode.name == "ui-brakeBtnImg") && !isUILocked {
                 self.brakeBtnHolded = true
                 self.brakeButton?.run(.scale(to: 1.1, duration: 0))
             }
-            else if touchedNode.name == "ui-arrow-left" {
+            else if touchedNode.name == "ui-arrow-left" && !isUILocked {
                 self.leftArrowHolded = true
                 self.leftButton?.run(.scale(to: 1.1, duration: 0))
             }
-            else if touchedNode.name == "ui-arrow-right" {
+            else if touchedNode.name == "ui-arrow-right" && !isUILocked {
                 self.rightArrowHolded = true
                 self.rightButton?.run(.scale(to: 1.1, duration: 0))
             }
-            else if touchedNode.name == "ui-exit-car-btn" {
+            else if touchedNode.name == "ui-exit-car-btn" && !isUILocked {
                 self.player?.getOutOfCar()
                 self.exitFromCarBtn?.run(.scale(to: 1.1, duration: 0))
             }
-            else if touchedNode.name == "ui-enter-car-btn" {
+            else if touchedNode.name == "ui-enter-car-btn" && !isUILocked {
                 self.player?.getIn(the: player!.currTargetCar!)
             }
             
