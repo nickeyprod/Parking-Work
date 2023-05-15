@@ -10,16 +10,34 @@ import SpriteKit
 // General Game Functions
 extension ParkingWorkGame {
     
-    func checkDistanceBetweenPlayerAndTargetLock() {
-        
-        let playerPosition = player?.node?.position
-        let targetLockPosition = player?.currLockTarget?.parent?.position
+    // this updates position of the player on minimap
+    func updateMiniMapPlayerPos() {
 
-        let diffX = abs(playerPosition!.x) - abs(targetLockPosition!.x)
-        let diffY = abs(playerPosition!.y) - abs(targetLockPosition!.y)
+        let scaleWidthFactor = tileMapWidth! / miniMapWidth!
+        let scaleHeightFactor = tileMapHeight! / miniMapHeight!
+
+        let miniMapX = player!.node!.position.x / scaleWidthFactor * miniMapScaleFactor
+        let minimapY = player!.node!.position.y / scaleHeightFactor * miniMapScaleFactor
+        
+        miniMapSprite?.position = CGPoint(x: -miniMapX, y: -minimapY)
+    }
+
+    
+    func checkDistanceBetweenPlayerAndTargetLock() {
+        let playerPosition = player?.node?.position
+        let targetCarPosition = player?.currLockTarget?.parent?.position
+        
+        let diffX = abs(playerPosition!.x) - abs(targetCarPosition!.x)
+        let diffY = abs(playerPosition!.y) - abs(targetCarPosition!.y)
 
         if (abs(diffX) > 150 || abs(diffY) > 150) {
-            hideOpenCarMessage()
+            if player?.currTargetCar?.stolen == true {
+                self.enterToCarBtn?.removeFromParent()
+                self.enterToCarBtn = nil
+            } else {
+                hideOpenCarMessage()
+            }
+            
         }
         // lock target clearing
         if (abs(diffX) > 420 || abs(diffY) > 420) {
@@ -85,6 +103,18 @@ extension ParkingWorkGame {
         }
         
         return point!
+    }
+    
+    func adjustSizeOfTargetSquare(to height: CGFloat) {
+        self.targetSquare?.run(SKAction.resize(toHeight: height, duration: 0.2))
+    }
+    
+    func getHeightOfAllNodesInTargetSquare() -> CGFloat {
+        var height: CGFloat = 0
+        for node in self.targetSquare!.children {
+            height += node.frame.height
+        }
+        return height + 6
     }
 
 }

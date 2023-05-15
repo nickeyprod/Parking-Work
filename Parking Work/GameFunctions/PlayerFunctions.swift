@@ -151,7 +151,7 @@ extension Player {
 //        removeCarFromTileMap(car: car)
         
         // hide target square
-        self.scene.hideTargetSquare()
+//        self.scene.hideTargetSquare()
         
         // hide open car window pop-up
         scene.hideOpenCarMessage()
@@ -253,42 +253,135 @@ extension Player {
     
     // player enters in the car
     func getIn(the car: Car) {
+        
+        // remove enter to car button
+        self.scene.enterToCarBtn?.removeFromParent()
+        self.scene.enterToCarBtn = nil
+        
+        // change lock type in target square popup
+        self.currLockTarget = nil
+        let lockLabel = self.scene.targetSquare?.childNode(withName: "lockTypeLabel")
+        lockLabel?.removeFromParent()
+        
+        // remove lock complexity square pop up
+        self.scene.targetSquare?.childNode(withName: "complexity-label")?.removeFromParent()
+        
+        // change size of the target square to fit entrail's height
+        let newHeight = self.scene.getHeightOfAllNodesInTargetSquare()
+        self.scene.adjustSizeOfTargetSquare(to: newHeight)
+        
+        // remove target circle sprite from tilemap
+        self.scene.targetCircleSprite?.removeFromParent()
+        
+        // turning off gestures so we can use multitouch for driving
+        self.scene.turnOffGestureRecognizer()
+        
+        // off collision
+        self.node?.physicsBody?.categoryBitMask = 0
+        
         // hide player
-        self.scene.player?.node?.alpha = 0
+        self.node?.alpha = 0
         // position player in the center of car
-        self.scene.player?.node?.position = car.node!.position
+        self.node?.position = car.node!.position
         // position camera to the center of car
         self.scene.cameraNode?.position = car.node!.position
-        // zoom out camera a bit
-        self.scene.zoomOutCamera(to: self.scene.minScale + 0.70, usual: true)
+        
         // set player state to sittin in car
-        self.scene.player?.isSittingInCar = true
+        self.isSittingInCar = true
+        
         // set moving camera to false
         self.scene.canMoveCamera = false
         
-        // hide target
-        self.scene.hideTargetSquare()
-        // hide open suggestion
-        self.scene.hideOpenCarMessage()
-//        self.scene.cameraNode?.zRotation =
-//        self.scene.miniMapSprite?.zRotation = car.node!.zRotation + 90
+        // zoom out camera a bit
+        self.scene.zoomCamera(to: self.scene.minScale + 1.00, duration: 0.9)
+        
+        // Rotate camera to back of the car by shortest axis
+        self.scene.cameraNode?.run(SKAction.rotate(toAngle: car.node!.zRotation + (270 * (Double.pi/180)), duration: 0.9, shortestUnitArc: true))
         
         // switch to driving ui
         self.scene.switchToCarDrivingUI()
         
         // set car that player currently driving
-        self.scene.player?.drivingCar = car
+        self.drivingCar = car
         
         // unlock all locks when you are got in the car
         for lock in car.unlockedLocks {
             car.unlockedLocks[lock.key] = true
         }
         
+        car.stolen = true
+        
         car.firstAnxietyCircle?.removeFromParent()
         car.secondAnxietyCircle?.removeFromParent()
         car.thirdAnxietyCircle?.removeFromParent()
         
-        self.node?.physicsBody = nil
+        // remove dot from minimap sprite node
+        // for to position in at the same place as player dot
+        car.miniMapDot?.removeFromParent()
+        car.miniMapDot = SKShapeNode(rectOf: CGSize(width: 4, height: 4))
+        car.miniMapDot?.fillColor = .green
+        
+        self.scene.miniMapCropNode?.addChild(car.miniMapDot!)
+    }
+    
+    func getOutOfCar() {
+        
+        // turning On gestures so we can use zoom in and out
+        self.scene.setupGestureRecognizer()
+        
+        // return back physic body collision
+        self.node?.physicsBody?.categoryBitMask = self.scene.playerCategory
+        
+        // show player
+        self.node?.alpha = 1
+        
+        // rotate camera back to normal initial position
+        self.scene.cameraNode?.zRotation = self.scene.initialCameraRotation!
+        
+        let futurePlayerPos = CGPoint(x: (self.drivingCar?.node?.frame.maxX)!, y: (self.drivingCar?.node?.frame.midY)!)
+        
+        // nodes at position
+//        let nodesAtPos = self.scene.nodes(at: futurePlayerPos)
+//        print("There are \(nodesAtPos.count) nodes at that point")
+//        print(nodesAtPos)
+        
+        // position player around the car
+        self.node?.position = futurePlayerPos
+        
+        // set destination position the same as player position
+        self.destinationPosition = self.node?.position
+        
+        // position camera to the player
+        self.scene.cameraNode?.position = futurePlayerPos
+        
+//        print("player pos: ", self.node?.position)
+//        print("furure player pos: ", self.node?.position)
+//        print("camera position: ", self.scene.cameraNode?.position)
+        
+        // zoom out camera a bit
+        self.scene.zoomCamera(to: self.scene.minScale + 0.20, duration: 0.7)
+        
+        // set player state to not in car
+        self.scene.player?.isSittingInCar = false
+        
+        // switch to usual ui
+        self.scene.switchToUsualUI()
+        
+        // set car that player currently driving to nil
+        self.scene.player?.drivingCar = nil
+        
+        // now can move camera
+        self.scene.canMoveCamera = true
+        
+        // return back mini map dot of the player
+        // add player dot to mini map
+        let miniMapDot = SKShapeNode(circleOfRadius: 3)
+        miniMapDot.fillColor = .orange
+        self.scene.miniMapCropNode!.addChild(miniMapDot)
+        
+        self.miniMapDot = miniMapDot
+
+        
     }
     
 }

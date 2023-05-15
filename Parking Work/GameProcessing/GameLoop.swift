@@ -167,22 +167,33 @@ extension ParkingWorkGame {
         }
         // if drive button holded - move car
         if driveBtnHolded {
-            
-            let driveWay = CGVector(dx: 0, dy: -5)
-            let move = SKAction.move(by: driveWay, duration: 0)
-            player!.drivingCar?.node!.run(move)
-            
-            // camera follow driving car
-            cameraNode?.position = (player!.drivingCar?.node!.position)!
+            self.player!.drivingCar?.driveForward()
         }
         else if brakeBtnHolded {
-            let driveWay = CGVector(dx: 0, dy: 2)
-            let move = SKAction.move(by: driveWay, duration: 0)
-            player!.drivingCar?.node!.run(move)
-            
-            // camera follow driving car
-            cameraNode?.position = (player!.drivingCar?.node!.position)!
+            self.player!.drivingCar?.driveBackward()
+        } else {
+            self.player!.drivingCar?.stopDriving()
         }
+        
+        if (driveBtnHolded || brakeBtnHolded) && leftArrowHolded {
+            self.player?.drivingCar?.turn(to: Car.TurningDirections.left)
+        }
+        else if (driveBtnHolded || brakeBtnHolded) && rightArrowHolded {
+            self.player?.drivingCar?.turn(to: Car.TurningDirections.right)
+        }
+        
+        if self.player!.isSittingInCar {
+        
+            self.player?.node?.position = (self.player?.drivingCar?.node!.position)!
+        }
+        
+        if brakeBtnHolded {
+            
+        }
+        
+//        print("left arrow holded:", leftArrowHolded)
+//        print("right arrow holded:", rightArrowHolded)
+        
     }
     
     func callCops() {

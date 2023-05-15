@@ -93,7 +93,7 @@ class Level1: ParkingWorkGame {
         showBannerLabel(text: "Уровень \(levelNum)")
         
         // zoom out animation
-        zoomOutCamera(to: maxScale)
+        zoomOutInCameraAnimation(to: maxScale)
     
         // create target square for selected car
         createSelectedTarget()
@@ -111,6 +111,11 @@ class Level1: ParkingWorkGame {
                 self.pushMessageToChat(text: "Босс хочет, чтобы вы потренировались на этой парковке и угнали для него машину, марка не важна.")
             }
         }
+        
+//        self.player?.getIn(the: self.oldCopper!)
+ 
+        // zoom out camera a bit
+//        self.zoomCamera(to: <#T##CGFloat#>)
     }
     
     // MARK: - Physic Bodies Setup

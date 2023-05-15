@@ -52,22 +52,67 @@ extension ParkingWorkGame {
         
         carNameLabel?.text = "\(targetCar.name)"
         
-        
         lockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
         complexityNum?.text = "\(complexity)"
         
         let chance = player!.unlockSkill / Float(complexity)!
         
+        if complexityNum != nil {
+            colorComplexity(chance: chance, complexityNum: complexityNum!)
+        }
+ 
+        self.targetSquare?.alpha = 0.8
+        
+        // if no complexity label, add it
+        if self.targetSquare?.childNode(withName: "complexity-label") == nil {
+            // target's car lock complexity
+            // - lock type label
+            let lockTypeLabel = SKLabelNode(text: "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")")
+            lockTypeLabel.name = "lockTypeLabel"
+            lockTypeLabel.fontName = "Hoefler Text"
+            lockTypeLabel.fontSize = 18
+            lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
+            lockTypeLabel.verticalAlignmentMode = .top
+            lockTypeLabel.position = targetSquareLockTypeLabelPos!
+            
+            targetSquare?.addChild(lockTypeLabel)
+            
+            let complexityLabel = SKLabelNode(text: "Cложность:")
+            complexityLabel.name = "complexity-label"
+            complexityLabel.fontName = "Hoefler Text"
+            complexityLabel.fontSize = 18
+            complexityLabel.position = targetSquareComplexityLabelPos!
+            complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
+            complexityLabel.verticalAlignmentMode = .top
+            
+            targetSquare?.addChild(complexityLabel)
+            
+            // complexity level number
+            let complexityNumLabel = SKLabelNode(text: complexity)
+            complexityNumLabel.name = "complexityNumLevel"
+            complexityNumLabel.fontName = "Hoefler Text"
+            complexityNumLabel.fontSize = 18
+            complexityNumLabel.position = CGPoint(x: 72, y: -3)
+            complexityNumLabel.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+            complexityNumLabel.verticalAlignmentMode = .top
+            
+            complexityLabel.addChild(complexityNumLabel)
+            
+            adjustSizeOfTargetSquare(to: targetSquareInitialHeight!)
+            colorComplexity(chance: chance, complexityNum: complexityNumLabel)
+            
+        }
+    }
+    
+    func colorComplexity(chance: Float, complexityNum: SKLabelNode) {
         if chance < 1.0 {
-            complexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
+            complexityNum.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
         }
         else if chance >= 1.0 && chance <= 2.0 {
-            complexityNum?.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
+            complexityNum.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
         } else if chance >= 2.0 {
-            complexityNum?.fontColor = UIColor(named:  Colors.OpenCarLockComplexityLightColor.rawValue)
+            complexityNum.fontColor = UIColor(named:  Colors.OpenCarLockComplexityLightColor.rawValue)
         }
-        
-        self.targetSquare?.alpha = 0.8
     }
     
     // Hides players' current target pop up, when target cancels

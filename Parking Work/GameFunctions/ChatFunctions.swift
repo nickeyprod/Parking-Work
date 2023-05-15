@@ -34,10 +34,12 @@ extension ParkingWorkGame {
         
         self.windowChat?.maskNode = mask
         self.cameraNode?.addChild(self.windowChat!)
-        let c = SKSpriteNode(imageNamed: "circle")
-        c.name = "c"
-        c.alpha = 0.4
-        self.windowChat?.addChild(c)
+        
+        // black background with alpha for chat
+        let chatBackground = SKSpriteNode(imageNamed: "circle")
+        chatBackground.name = "chat-background"
+        chatBackground.alpha = 0.4
+        self.windowChat?.addChild(chatBackground)
         
         // create node in which we will be adding messages, for scrolling it
         // set color to green for debug
@@ -118,6 +120,8 @@ extension ParkingWorkGame {
     
     // Push new message to chat window
     func pushMessageToChat(text: String) {
+
+        self.chatToBottom()
         
         let date = Date()
         let calendar = Calendar.current
@@ -220,5 +224,12 @@ extension ParkingWorkGame {
     // move slider to bottom, or to the end of chat
     func sliderToBottom() {
         self.chatSlider?.position = self.chatSliderBottomPos!
+    }
+    
+    func chatToBottom() {
+        self.sliderToBottom()
+        let x = self.windowChat?.maskNode!.frame.minX
+        let y = self.windowChat?.maskNode!.frame.minY
+        self.scrollingChatNode!.position = CGPoint(x: x!, y: y!)
     }
 }

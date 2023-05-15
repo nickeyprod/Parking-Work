@@ -31,7 +31,6 @@ extension ParkingWorkGame {
             }
             else if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
                 isRunButtonHolded = true
-                
                 self.runButton?.run(.scale(to: 1.2, duration: 0))
                 
             }
@@ -76,6 +75,21 @@ extension ParkingWorkGame {
             else if touchedNode.name == "ui-brakeBtn" || touchedNode.name == "ui-brakeBtnImg" {
                 self.brakeBtnHolded = true
                 self.brakeButton?.run(.scale(to: 1.1, duration: 0))
+            }
+            else if touchedNode.name == "ui-arrow-left" {
+                self.leftArrowHolded = true
+                self.leftButton?.run(.scale(to: 1.1, duration: 0))
+            }
+            else if touchedNode.name == "ui-arrow-right" {
+                self.rightArrowHolded = true
+                self.rightButton?.run(.scale(to: 1.1, duration: 0))
+            }
+            else if touchedNode.name == "ui-exit-car-btn" {
+                self.player?.getOutOfCar()
+                self.exitFromCarBtn?.run(.scale(to: 1.1, duration: 0))
+            }
+            else if touchedNode.name == "ui-enter-car-btn" {
+                self.player?.getIn(the: player!.currTargetCar!)
             }
             
             
@@ -156,17 +170,13 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        
+        
+        // need to turn off specific buttons! for driving! not all!
         self.sliderTouchIsHolded = false
         
-        self.isRunButtonHolded = false
-        self.runButton?.run(.scale(to: 1.0, duration: 0))
-        self.brakeBtnHolded = false
-        self.brakeButton?.run(.scale(to: 1.0, duration: 0))
-        self.driveBtnHolded = false
-        self.runButton?.run(.scale(to: 1.0, duration: 0))
-        
         startTouchPosition = nil
+        
         for touch in touches {
             let touchLocation = touch.location(in: self)
             let touchedNode = atPoint(touchLocation)
@@ -176,6 +186,29 @@ extension ParkingWorkGame {
                 player?.destinationPosition = touchLocation
                 targetCircleSprite?.removeFromParent()
                 setTarget(at: touchLocation)
+            }
+            if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
+                isRunButtonHolded = false
+                self.runButton?.run(.scale(to: 1.0, duration: 0))
+                
+            } else if touchedNode.name == "ui-driveBtn" || touchedNode.name == "ui-driveBtnImg" {
+                self.driveBtnHolded = false
+                self.runButton?.run(.scale(to: 1.0, duration: 0))
+            }
+            else if touchedNode.name == "ui-brakeBtn" || touchedNode.name == "ui-brakeBtnImg" {
+                self.brakeBtnHolded = false
+                self.brakeButton?.run(.scale(to: 1.0, duration: 0))
+            }
+            else if touchedNode.name == "ui-arrow-left" {
+                self.leftArrowHolded = false
+                self.leftButton?.run(.scale(to: 1.0, duration: 0))
+            }
+            else if touchedNode.name == "ui-arrow-right" {
+                self.rightArrowHolded = false
+                self.rightButton?.run(.scale(to: 1.0, duration: 0))
+            }
+            else if touchedNode.name == "ui-exit-car-btn" {
+                self.exitFromCarBtn?.run(.scale(to: 1.0, duration: 0))
             }
             
             cameraMovingByFinger = false

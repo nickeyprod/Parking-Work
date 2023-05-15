@@ -174,12 +174,15 @@ extension ParkingWorkGame {
 //        self.cameraNode?.addChild(plusBtn)
 //        self.cameraNode?.addChild(minusBtn)
         
-        // add player dot to mini map
-        self.miniMapPlayerDot = SKShapeNode(circleOfRadius: 3)
-        miniMapPlayerDot!.fillColor = .orange
-        cropNode.addChild(miniMapPlayerDot!)
-        
         self.miniMapSprite?.setScale(miniMapScaleFactor)
+        
+        // add player dot to mini map
+        let miniMapDot = SKShapeNode(circleOfRadius: 3)
+        miniMapDot.fillColor = .orange
+        cropNode.addChild(miniMapDot)
+        
+        self.player?.miniMapDot = miniMapDot
+        
         // set crop node globally for adding car dots on Level init class
         self.miniMapCropNode = cropNode
         self.miniMapCropNode?.zPosition = 2

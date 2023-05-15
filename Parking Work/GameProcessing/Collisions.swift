@@ -181,19 +181,38 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         
         // initialize Car object
         player!.currTargetCar = player?.currLockTarget?.parent?.userData?.value(forKey: "self") as? Car
-
-        // show message suggesting to open the target car
-        let playerPosition = player!.node!.position
-        let targetLockPosition = player!.currLockTarget?.parent?.position
-
-        let diffX = abs(playerPosition.x) - abs(targetLockPosition!.x)
-        let diffY = abs(playerPosition.y) - abs(targetLockPosition!.y)
         
-        // if distance not more than 150 and car is not signaling
-        if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) && !player!.isSittingInCar {
-            self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)
-            // showing target
-            self.showTargetSquare(of: player!.currTargetCar!, lockType: lockType!)
+        if player?.currTargetCar?.stolen == true {
+            // if no enter to car button -> show it
+            if  self.enterToCarBtn == nil {
+                self.showTargetSquare(of: self.player!.currTargetCar!, lockType: lockType!)
+                // show enter to car button
+                let enterButton = SKSpriteNode(texture: SKTexture(imageNamed: "car-door"))
+                enterButton.name = "ui-enter-car-btn"
+                enterButton.size.width = 56
+                enterButton.size.height = 56
+                enterButton.position = CGPoint(x: (displayWidth! / 2) - 40, y: -(displayHeight! / 2) + 180)
+                enterButton.zPosition = 25
+                self.enterToCarBtn = enterButton
+                self.cameraNode?.addChild(enterButton)
+                
+            }
+            
+        } else {
+            // show message suggesting to open the target car
+            let playerPosition = player!.node!.position
+            let targetLockPosition = player!.currLockTarget?.parent?.position
+
+            let diffX = abs(playerPosition.x) - abs(targetLockPosition!.x)
+            let diffY = abs(playerPosition.y) - abs(targetLockPosition!.y)
+            
+            // if distance not more than 150 and car is not signaling
+            if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) && !player!.isSittingInCar {
+                self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)
+                // showing target
+                self.showTargetSquare(of: player!.currTargetCar!, lockType: lockType!)
+            }
         }
+        
     }
 }

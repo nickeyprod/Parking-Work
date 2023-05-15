@@ -4,6 +4,9 @@ import GameplayKit
 
 class ParkingWorkGame: SKScene {
     
+    // Initial rotation of the camera at start of the game
+    var initialCameraRotation: CGFloat?
+    
     // Current Level Number
     var levelNum: Int = 1
     var anxietyLevel: CGFloat = 0.0
@@ -48,12 +51,15 @@ class ParkingWorkGame: SKScene {
     
     // Driving button
     var brakeButton: SKShapeNode?
+    var exitFromCarBtn: SKSpriteNode?
+    var enterToCarBtn: SKSpriteNode?
     
-    var targetSquare: SKShapeNode?
+    // Turn driving buttons
+    var leftButton: SKSpriteNode?
+    var rightButton: SKSpriteNode?
+    
+    var targetSquare: SKSpriteNode?
     var tutorialWindow: SKShapeNode?
-    
-    // minimap player dot
-    var miniMapPlayerDot: SKShapeNode?
     
     // tile Map dimensions
     var tileMapWidth: CGFloat?
@@ -89,6 +95,8 @@ class ParkingWorkGame: SKScene {
     // driving bools
     var driveBtnHolded: Bool = false
     var brakeBtnHolded: Bool = false
+    var leftArrowHolded: Bool = false
+    var rightArrowHolded: Bool = false
     
     var playerInCircleOfCar: SKNode? = nil
     
@@ -115,6 +123,12 @@ class ParkingWorkGame: SKScene {
     var openCarSuccessWindowGarageLabel: SKLabelNode?
     var openCarSuccessWindowGoodBtn: SKNode?
     var openCarSuccessWindowGoodBtnLabel: SKLabelNode?
+    
+    // target square label positions
+    var targetSquareInitialHeight: CGFloat?
+    var targetSquareCarNameLabelPos: CGPoint?
+    var targetSquareLockTypeLabelPos: CGPoint?
+    var targetSquareComplexityLabelPos: CGPoint?
     
     // Time
     var previousTimeInterval: TimeInterval = 0
@@ -158,6 +172,8 @@ class ParkingWorkGame: SKScene {
     let minScale: CGFloat = 1.02
     let maxScale: CGFloat = 2.02
     
+    var pinch: UIPinchGestureRecognizer?
+    
     deinit {
         print("deinit MAIN")
     }
@@ -168,9 +184,7 @@ class ParkingWorkGame: SKScene {
         physicsWorld.contactDelegate = self
 
         // detect PINCH to increase zoom
-        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler))
-        self.view?.isUserInteractionEnabled = true
-        self.view?.addGestureRecognizer(pinch)
+        self.setupGestureRecognizer()
 
     }
 
@@ -279,6 +293,16 @@ class ParkingWorkGame: SKScene {
         
         rightTopCameraEnd = CGPoint(x: rightX, y: rightY)
         leftBottomCameraEnd = CGPoint(x: leftX, y: leftY)
+    }
+    
+    func setupGestureRecognizer() {
+        self.pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler))
+        self.view?.isUserInteractionEnabled = true
+        self.view?.addGestureRecognizer(self.pinch!)
+    }
+    
+    func turnOffGestureRecognizer() {
+        self.view?.removeGestureRecognizer(self.pinch!)
     }
     
 }

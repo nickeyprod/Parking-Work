@@ -28,10 +28,43 @@ extension ParkingWorkGame {
         self.cameraNode?.addChild(brakeBtn)
         self.brakeButton?.addChild(brakePedal)
         
+        // add arrows for turning left and right
+        let arrowLeft = SKSpriteNode(texture: SKTexture(imageNamed: "arrow-left"))
+        arrowLeft.name = "ui-arrow-left"
+        
+        arrowLeft.size.width = 56
+        arrowLeft.size.height = 56
+        arrowLeft.position = CGPoint(x: -(displayWidth! / 2) + 46, y: -(displayHeight! / 2) + 190)
+        arrowLeft.zPosition = 25
+        self.leftButton = arrowLeft
+        self.cameraNode?.addChild(arrowLeft)
+        
+        let arrowRight = SKSpriteNode(texture: SKTexture(imageNamed: "arrow-right"))
+        arrowRight.name = "ui-arrow-right"
+        arrowRight.size.width = 56
+        arrowRight.size.height = 56
+        arrowRight.position = CGPoint(x: -(displayWidth! / 2) + 106, y: -(displayHeight! / 2) + 190)
+        arrowRight.zPosition = 25
+        self.rightButton = arrowRight
+        self.cameraNode?.addChild(arrowRight)
+        
+        // exit from car button
+        let exitButton = SKSpriteNode(texture: SKTexture(imageNamed: "car-door"))
+        exitButton.name = "ui-exit-car-btn"
+        exitButton.size.width = 56
+        exitButton.size.height = 56
+        exitButton.position = CGPoint(x: (displayWidth! / 2) - 40, y: -(displayHeight! / 2) + 180)
+        exitButton.zPosition = 25
+        self.exitFromCarBtn = exitButton
+        self.cameraNode?.addChild(exitButton)
+        
     }
     
     func switchDriveButtonToRunButton() {
         self.runButton?.fillColor = UIColor.brown
+        // remove pedal image
+        self.runButton?.childNode(withName: "ui-driveBtnImg")?.removeFromParent()
+        
         self.runButton?.name = "ui-runBtn"
         let shoe = SKSpriteNode(texture: SKTexture(imageNamed: "shoe"))
         shoe.name = "ui-runBtnImg"
@@ -56,6 +89,14 @@ extension ParkingWorkGame {
         pedal.size.height = 50
         
         self.runButton?.addChild(pedal)
+    }
+    
+    func switchToUsualUI() {
+        self.leftButton?.removeFromParent()
+        self.rightButton?.removeFromParent()
+        self.brakeButton?.removeFromParent()
+        self.exitFromCarBtn?.removeFromParent()
+        self.switchDriveButtonToRunButton()
     }
     
     

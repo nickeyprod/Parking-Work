@@ -23,18 +23,22 @@ extension Level1 {
         oldCopper!.locks[LOCK_TYPES.passengerLock] = CAR_LOCK_COMPLEXITY_LIST.oldCopper.passengerLock
         
         // OldCopper driver lock
-        oldCopperDriverLock?.physicsBody = SKPhysicsBody(rectangleOf: (oldCopperDriverLock?.frame.size)!)
+        oldCopperDriverLock?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 20))
         oldCopperDriverLock?.physicsBody?.categoryBitMask = lockCategory
         oldCopperDriverLock?.physicsBody?.contactTestBitMask = playerCategory
         oldCopperDriverLock?.physicsBody?.affectedByGravity = false
-        oldCopperDriverLock?.physicsBody?.isDynamic = false
+        oldCopperDriverLock?.physicsBody?.isDynamic = true
+        oldCopperDriverLock?.physicsBody?.allowsRotation = false
+        oldCopperDriverLock?.physicsBody?.pinned = true
         
         // OldCopper passenger lock
-        oldCopperPassengerLock?.physicsBody = SKPhysicsBody(rectangleOf: (oldCopperPassengerLock?.frame.size)!)
+        oldCopperPassengerLock?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 20))
         oldCopperPassengerLock?.physicsBody?.categoryBitMask = lockCategory
         oldCopperPassengerLock?.physicsBody?.contactTestBitMask = playerCategory
         oldCopperPassengerLock?.physicsBody?.affectedByGravity = false
-        oldCopperPassengerLock?.physicsBody?.isDynamic = false
+        oldCopperPassengerLock?.physicsBody?.allowsRotation = false
+        oldCopperPassengerLock?.physicsBody?.isDynamic = true
+        oldCopperPassengerLock?.physicsBody?.pinned = true
         
         // Chowerler locks
         let chowerlerDriverLock = chowerler!.node?.childNode(withName: LOCK_TYPES.driverLock)
@@ -51,6 +55,8 @@ extension Level1 {
         chowerlerDriverLock?.physicsBody?.contactTestBitMask = playerCategory
         chowerlerDriverLock?.physicsBody?.affectedByGravity = false
         chowerlerDriverLock?.physicsBody?.isDynamic = false
+        chowerlerDriverLock?.physicsBody?.pinned = true
+        chowerlerDriverLock?.physicsBody?.allowsRotation = false
         
         // Chowerler passenger lock
         chowerlerPassengerLock?.physicsBody = SKPhysicsBody(rectangleOf: (chowerlerPassengerLock?.frame.size)!)
@@ -58,6 +64,8 @@ extension Level1 {
         chowerlerPassengerLock?.physicsBody?.contactTestBitMask = playerCategory
         chowerlerPassengerLock?.physicsBody?.affectedByGravity = false
         chowerlerPassengerLock?.physicsBody?.isDynamic = false
+        chowerlerPassengerLock?.physicsBody?.pinned = true
+        chowerlerPassengerLock?.physicsBody?.allowsRotation = false
 
     }
 }

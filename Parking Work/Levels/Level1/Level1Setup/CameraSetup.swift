@@ -13,6 +13,8 @@ extension Level1 {
     func setupCamera() {
         cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
         cameraNode?.position = (player?.node!.position)!
+        // remember initial camera rotation
+        initialCameraRotation = self.cameraNode?.zRotation
     }
     
 }

@@ -115,9 +115,11 @@ extension ParkingWorkGame {
     func createSelectedTarget() {
         
         // square itself
-        targetSquare = SKShapeNode(rectOf: CGSize(width: 210, height: 66))
-        targetSquare?.fillColor = SKColor.black
-        targetSquare?.position = CGPoint(x: 0, y: displayHeight! / 2 - 38)
+//        targetSquare = SKShapeNode(rectOf: CGSize(width: 210, height: 66))
+        targetSquare = SKSpriteNode(color: SKColor.black, size: CGSize(width: 210, height: 66))
+        targetSquare?.anchorPoint = CGPoint(x: 0.5, y: 1)
+        targetSquare?.position = CGPoint(x: 0, y: displayHeight! / 2 - 2)
+        
         // set z position
         targetSquare?.zPosition = 11
         
@@ -131,7 +133,9 @@ extension ParkingWorkGame {
         carLabel.fontSize = 20
         carLabel.fontName = "\(FONTS.Baskerville)-bold"
         carLabel.verticalAlignmentMode = .top
-        carLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 6)
+        carLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 38)
+        targetSquareCarNameLabelPos = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 38)
+        
         targetSquare?.addChild(carLabel)
         
         // target's car lock complexity
@@ -143,7 +147,8 @@ extension ParkingWorkGame {
         lockTypeLabel.fontSize = 18
         lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
         lockTypeLabel.verticalAlignmentMode = .top
-        lockTypeLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 24)
+        lockTypeLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 56)
+        targetSquareLockTypeLabelPos = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 56)
         
         targetSquare?.addChild(lockTypeLabel)
         
@@ -154,8 +159,8 @@ extension ParkingWorkGame {
         complexityLabel.fontSize = 18
         complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
         complexityLabel.verticalAlignmentMode = .top
-        complexityLabel.position = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 45)
-        
+        complexityLabel.position = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 76)
+        targetSquareComplexityLabelPos = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 76)
         targetSquare?.addChild(complexityLabel)
         
         // complexity level number
@@ -168,6 +173,9 @@ extension ParkingWorkGame {
         complexityNumLabel.position = CGPoint(x: 72, y: -3)
     
         complexityLabel.addChild(complexityNumLabel)
+        
+        // remember initial target square height
+        targetSquareInitialHeight = targetSquare?.frame.height
         
         // hidden initially
         hideTargetSquare()
