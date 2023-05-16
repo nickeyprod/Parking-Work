@@ -20,15 +20,12 @@ class Car: Equatable {
         lhs.node == rhs.node
     }
     
-    
     init(scene: SKScene, name: String, maxSpeed: CGFloat, turningSpeed: CGFloat) {
         self.scene = (scene as? ParkingWorkGame)!
         self.name = name
         self.maxSpeed = maxSpeed
         self.turningSpeed = turningSpeed
     }
-    
-//    var frontAt: CGPoint?
     
     let scene: ParkingWorkGame
     
@@ -53,11 +50,6 @@ class Car: Equatable {
     
     var maxSpeed: CGFloat?
     var turningSpeed: CGFloat?
-    
-//    var frontSquare: SKSpriteNode?
-    
-    var y: CGFloat = 0
-    var x: CGFloat = 0
 
     var unlockedLocks : [String: Bool] = [
         "driver_lock": false,
@@ -67,49 +59,8 @@ class Car: Equatable {
     // node
     var node: SKSpriteNode? = nil {
         didSet {
-            let radius = node!.frame.width - node!.frame.width / 3
-            let circle = SKShapeNode(circleOfRadius: radius)
-            circle.strokeColor = .red
-            circle.position = self.node!.position
-            self.scene.addChild(circle)
-
-//            circle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
-//            circle.physicsBody?.categoryBitMask = scene.firstCircleCategory
-//            circle.physicsBody?.contactTestBitMask = scene.playerCategory
-//            circle.physicsBody?.affectedByGravity = false
-//            circle.physicsBody?.isDynamic = false
-            circle.alpha = 0
-            firstAnxietyCircle = circle
-//            
-            let radius2 = node!.frame.width - node!.frame.width / 25
-            let circle2 = SKShapeNode(circleOfRadius: radius2)
-            circle2.strokeColor = .blue
-            circle2.position = CGPoint(x: 0, y: 0)
-            node?.addChild(circle2)
-//
-//            circle2.physicsBody = SKPhysicsBody(circleOfRadius: radius2)
-//            circle2.physicsBody?.categoryBitMask = scene.secondCircleCategory
-//            circle2.physicsBody?.contactTestBitMask = scene.playerCategory
-//            circle2.physicsBody?.affectedByGravity = false
-//            circle2.physicsBody?.isDynamic = false
-            circle2.alpha = 0
-            secondAnxietyCircle = circle2
-//
-            let radius3 = node!.frame.width + node!.frame.width / 3
-            let circle3 = SKShapeNode(circleOfRadius: radius3)
-            circle3.strokeColor = .white
-            circle3.position = CGPoint(x: 0, y: 0)
-            node?.addChild(circle3)
-//
-//            circle3.physicsBody = SKPhysicsBody(circleOfRadius: radius3)
-//            circle3.physicsBody?.categoryBitMask = scene.thirdCircleCategory
-//            circle3.physicsBody?.contactTestBitMask = scene.playerCategory
-//            circle3.physicsBody?.affectedByGravity = false
-//            circle3.physicsBody?.isDynamic = false
-            circle3.alpha = 0
-            thirdAnxietyCircle = circle3
-
-    
+            // add three anxiety circles
+            self.addAnxietyCircles()
         }
     }
     
@@ -120,6 +71,34 @@ class Car: Equatable {
     
     var secondAnxietyCircle: SKShapeNode?
     var thirdAnxietyCircle: SKShapeNode?
+    
+    func addAnxietyCircles() {
+        let radius1 = node!.frame.width - node!.frame.width / 3
+        firstAnxietyCircle = createAnxietyCircle(of: radius1, color: .red, category: scene.firstCircleCategory)
+        
+        let radius2 = node!.frame.width - node!.frame.width / 25
+        secondAnxietyCircle = createAnxietyCircle(of: radius2, color: .blue, category: scene.secondCircleCategory)
+
+        let radius3 = node!.frame.width + node!.frame.width / 3
+        thirdAnxietyCircle = createAnxietyCircle(of: radius3, color: .white, category: scene.thirdCircleCategory)
+    }
+    
+    func createAnxietyCircle(of radius: CGFloat, color: UIColor, category: UInt32) -> SKShapeNode {
+        let circle = SKShapeNode(circleOfRadius: radius)
+        
+        circle.alpha = 0
+        circle.strokeColor = color
+        
+        circle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
+        circle.physicsBody?.categoryBitMask = category
+        circle.physicsBody?.contactTestBitMask = scene.playerCategory
+        circle.physicsBody?.affectedByGravity = false
+        circle.physicsBody?.isDynamic = false
+        
+        self.node?.addChild(circle)
+        
+        return circle
+    }
     
     func blinkLightSignals() {
         
@@ -170,12 +149,10 @@ class Car: Equatable {
         
     }
 
-
     func driveForward() {
     
         self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * 100
         self.node?.physicsBody?.velocity.dy = sin(self.node!.zRotation) * 100
-        
 
 //        print("velocity: ", self.node?.physicsBody?.velocity)
         // camera follow driving car

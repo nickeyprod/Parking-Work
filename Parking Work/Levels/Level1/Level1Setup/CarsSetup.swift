@@ -21,7 +21,7 @@ extension Level1 {
         oldCopper!.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.oldCopper), size: CGSize(width: 460, height: 200))
         
         oldCopper!.node?.physicsBody?.categoryBitMask = carCategory
-        oldCopper!.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory
+        oldCopper!.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | playerCategory
         oldCopper!.node?.physicsBody?.affectedByGravity = false
         oldCopper!.node?.physicsBody?.isDynamic = true
         oldCopper!.node?.zPosition = 2
