@@ -115,7 +115,7 @@ class Level1: ParkingWorkGame {
 //        self.player?.getIn(the: self.oldCopper!)
  
         // zoom out camera a bit
-//        self.zoomCamera(to: <#T##CGFloat#>)
+//        self.zoomCamera(to: self.maxScale)
     }
     
     // MARK: - Physic Bodies Setup

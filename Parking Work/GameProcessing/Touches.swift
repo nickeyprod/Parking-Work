@@ -87,9 +87,11 @@ extension ParkingWorkGame {
             else if touchedNode.name == "ui-exit-car-btn" && !isUILocked {
                 self.player?.getOutOfCar()
                 self.exitFromCarBtn?.run(.scale(to: 1.1, duration: 0))
+                run(MenuSounds.button_click.action)
             }
             else if touchedNode.name == "ui-enter-car-btn" && !isUILocked {
                 self.player?.getIn(the: player!.currTargetCar!)
+                run(MenuSounds.button_click.action)
             }
             
             

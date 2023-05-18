@@ -11,7 +11,7 @@ enum Sound: String {
     case door_open, success_bell, car_door_locked, car_signalization
     
     var action: SKAction {
-        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
     }
     
     var audio: SKAudioNode {
@@ -50,7 +50,7 @@ enum CitySound: String {
 }
 
 enum EngineSound: String {
-    case posblanc_drive
+    case old_copper_engine_start
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)

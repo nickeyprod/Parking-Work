@@ -19,6 +19,7 @@ extension Level1 {
 
         player?.node?.physicsBody?.categoryBitMask = playerCategory
         player?.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory
+        player?.node?.physicsBody?.mass = 84
         player?.node?.zPosition = 10
     }
 }

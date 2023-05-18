@@ -32,11 +32,14 @@ class Car: Equatable {
     // car name
     let name: String
     
+    // car sound
+    var engineStarts: SKAction?
+    
     // locks list
     var locks: [String: Float?] = [
         "driver_lock": nil,
         "passenger_lock": nil,
-    ]
+        ]
     
     var jammedLocks: [String?] = []
     
@@ -67,37 +70,27 @@ class Car: Equatable {
     var miniMapDot: SKShapeNode?
     
     // anxiety circles
-    var firstAnxietyCircle: SKShapeNode?
-    
-    var secondAnxietyCircle: SKShapeNode?
-    var thirdAnxietyCircle: SKShapeNode?
+    var firstAnxietyCircle: CGFloat?
+    var secondAnxietyCircle: CGFloat?
+    var thirdAnxietyCircle: CGFloat?
     
     func addAnxietyCircles() {
-        let radius1 = node!.frame.width - node!.frame.width / 3
-        firstAnxietyCircle = createAnxietyCircle(of: radius1, color: .red, category: scene.firstCircleCategory)
+        let radius1 = (node!.frame.width / 2) - node!.frame.width / 3
+        firstAnxietyCircle = radius1
         
-        let radius2 = node!.frame.width - node!.frame.width / 25
-        secondAnxietyCircle = createAnxietyCircle(of: radius2, color: .blue, category: scene.secondCircleCategory)
+        let radius2 = (node!.frame.width / 2) - node!.frame.width / 25
+        secondAnxietyCircle = radius2
 
-        let radius3 = node!.frame.width + node!.frame.width / 3
-        thirdAnxietyCircle = createAnxietyCircle(of: radius3, color: .white, category: scene.thirdCircleCategory)
+        let radius3 = (node!.frame.width / 2) + node!.frame.width / 3
+        thirdAnxietyCircle = radius3
     }
     
-    func createAnxietyCircle(of radius: CGFloat, color: UIColor, category: UInt32) -> SKShapeNode {
+    func createAnxietyCircle(of radius: CGFloat, color: UIColor) {
         let circle = SKShapeNode(circleOfRadius: radius)
-        
-        circle.alpha = 0
+        circle.alpha = 1
         circle.strokeColor = color
         
-        circle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
-        circle.physicsBody?.categoryBitMask = category
-        circle.physicsBody?.contactTestBitMask = scene.playerCategory
-        circle.physicsBody?.affectedByGravity = false
-        circle.physicsBody?.isDynamic = false
-        
         self.node?.addChild(circle)
-        
-        return circle
     }
     
     func blinkLightSignals() {

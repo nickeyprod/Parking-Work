@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D103322A2A13E41B00F332D2 /* old_copper_engine_start.wav in Resources */ = {isa = PBXBuildFile; fileRef = D10332292A13E41B00F332D2 /* old_copper_engine_start.wav */; };
 		D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EF52979B76D00701A24 /* AppDelegate.swift */; };
 		D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */; };
 		D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EFD2979B76D00701A24 /* GameViewController.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D10332292A13E41B00F332D2 /* old_copper_engine_start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_engine_start.wav; sourceTree = "<group>"; };
 		D1198EF22979B76D00701A24 /* Parking Work.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parking Work.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1198EF52979B76D00701A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingWorkGame.swift; sourceTree = "<group>"; };
@@ -143,6 +145,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D103322C2A13E6C000F332D2 /* CarSounds */ = {
+			isa = PBXGroup;
+			children = (
+				D10332292A13E41B00F332D2 /* old_copper_engine_start.wav */,
+			);
+			path = CarSounds;
+			sourceTree = "<group>";
+		};
 		D1198EE92979B76D00701A24 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +301,7 @@
 		D1A3F5AC299F9BB900084380 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D103322C2A13E6C000F332D2 /* CarSounds */,
 				D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */,
 				D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */,
 				D16D775629A4E371004EC225 /* traffic1.wav */,
@@ -400,6 +411,7 @@
 				D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */,
 				D1EC016C29B8922200390C41 /* PTSansNarrow-Regular.ttf in Resources */,
 				D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */,
+				D103322A2A13E41B00F332D2 /* old_copper_engine_start.wav in Resources */,
 				D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */,
 				D16D775729A4E371004EC225 /* traffic1.wav in Resources */,
 				D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */,

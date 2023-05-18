@@ -54,18 +54,19 @@ extension Level1 {
         chowerlerDriverLock?.physicsBody?.categoryBitMask = lockCategory
         chowerlerDriverLock?.physicsBody?.contactTestBitMask = playerCategory
         chowerlerDriverLock?.physicsBody?.affectedByGravity = false
-        chowerlerDriverLock?.physicsBody?.isDynamic = false
-        chowerlerDriverLock?.physicsBody?.pinned = true
         chowerlerDriverLock?.physicsBody?.allowsRotation = false
+        chowerlerDriverLock?.physicsBody?.isDynamic = true
+        chowerlerDriverLock?.physicsBody?.pinned = true
+        
         
         // Chowerler passenger lock
         chowerlerPassengerLock?.physicsBody = SKPhysicsBody(rectangleOf: (chowerlerPassengerLock?.frame.size)!)
         chowerlerPassengerLock?.physicsBody?.categoryBitMask = lockCategory
         chowerlerPassengerLock?.physicsBody?.contactTestBitMask = playerCategory
         chowerlerPassengerLock?.physicsBody?.affectedByGravity = false
-        chowerlerPassengerLock?.physicsBody?.isDynamic = false
-        chowerlerPassengerLock?.physicsBody?.pinned = true
         chowerlerPassengerLock?.physicsBody?.allowsRotation = false
+        chowerlerPassengerLock?.physicsBody?.isDynamic = true
+        chowerlerPassengerLock?.physicsBody?.pinned = true
 
     }
 }

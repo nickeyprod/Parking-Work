@@ -156,12 +156,6 @@ extension Player {
         // hide open car window pop-up
         scene.hideOpenCarMessage()
         
-        // play door open sound
-        node?.run(Sound.door_open.action)
-        
-        // play success ring
-        node?.run(Sound.success_bell.action)
-        
         // show car successfuly opened message
         scene.showCarOpenedSuccessMessage(of: car)
         
@@ -178,9 +172,6 @@ extension Player {
     func removeCarFromTileMap(car: Car) {
         // remove car itself and its anxiety circles
         car.node?.removeFromParent()
-        car.firstAnxietyCircle?.removeFromParent()
-        car.secondAnxietyCircle?.removeFromParent()
-        car.thirdAnxietyCircle?.removeFromParent()
         
         // remove the car from minimap also
         car.miniMapDot?.removeFromParent()
@@ -253,6 +244,18 @@ extension Player {
     
     // player enters in the car
     func getIn(the car: Car) {
+        if car.stolen == false {
+            // play door open sound and engine starts
+            node?.run(Sound.door_open.action, completion: {
+                if (car.engineStarts != nil) {
+                    self.node?.run(car.engineStarts!)
+                }
+                
+            })
+        } else {
+            // else just engine starts
+            self.node?.run(car.engineStarts!)
+        }
         
         // remove enter to car button
         self.scene.enterToCarBtn?.removeFromParent()
@@ -310,10 +313,6 @@ extension Player {
         }
         
         car.stolen = true
-        
-        car.firstAnxietyCircle?.removeFromParent()
-        car.secondAnxietyCircle?.removeFromParent()
-        car.thirdAnxietyCircle?.removeFromParent()
         
         // remove dot from minimap sprite node
         // for to position in at the same place as player dot

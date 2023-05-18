@@ -22,7 +22,6 @@ extension ParkingWorkGame {
         miniMapSprite?.position = CGPoint(x: -miniMapX, y: -minimapY)
     }
 
-    
     func checkDistanceBetweenPlayerAndTargetLock() {
         let playerPosition = player?.node?.position
         let targetCarPosition = player?.currLockTarget?.parent?.position
@@ -45,6 +44,44 @@ extension ParkingWorkGame {
             player!.currTargetCar = nil
             hideTargetSquare()
         }
+        
+        if player!.currTargetCar == nil {
+            return
+        }
+        // check for rising anxiety
+        if (abs(diffX) < (player!.currTargetCar?.firstAnxietyCircle)! || abs(diffY) < (player!.currTargetCar?.firstAnxietyCircle)! ) {
+            playerInFirstCircle = true
+            playerInCircleOfCar = player?.currTargetCar?.node
+        } else {
+            playerInFirstCircle = false
+        }
+        
+        if (abs(diffX) < (player!.currTargetCar?.secondAnxietyCircle)! || abs(diffY) < (player!.currTargetCar?.secondAnxietyCircle)! ) {
+            playerInSecondCircle = true
+            playerInCircleOfCar = player?.currTargetCar?.node
+        } else {
+            playerInSecondCircle = false
+        }
+        
+        if (abs(diffX) < (player!.currTargetCar?.thirdAnxietyCircle)! || abs(diffY) < (player!.currTargetCar?.thirdAnxietyCircle)! ) {
+            playerInThirdCircle = true
+            playerInCircleOfCar = player?.currTargetCar?.node
+        } else {
+            playerInThirdCircle = false
+        }
+            
+//            case (playerCategory | firstCircleCategory):
+//                playerInFirstCircle = true
+//                playerInCircleOfCar = contact.bodyB.node?.parent
+//                raiseAnxiety(to: 1)
+//            case (playerCategory | secondCircleCategory):
+//                playerInSecondCircle = true
+//                playerInCircleOfCar = contact.bodyB.node?.parent
+//                raiseAnxiety(to: 0.5)
+//            case (playerCategory | thirdCircleCategory):
+//                playerInThirdCircle = true
+//                playerInCircleOfCar = contact.bodyB.node?.parent
+//                raiseAnxiety(to: 0.3)
     
     }
     

@@ -32,18 +32,18 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
                 showCarLocksTutorial(tutorialMsg: 25)
             }
 
-        case (playerCategory | firstCircleCategory):
-            playerInFirstCircle = true
-            playerInCircleOfCar = contact.bodyB.node?.parent
-            raiseAnxiety(to: 1)
-        case (playerCategory | secondCircleCategory):
-            playerInSecondCircle = true
-            playerInCircleOfCar = contact.bodyB.node?.parent
-            raiseAnxiety(to: 0.5)
-        case (playerCategory | thirdCircleCategory):
-            playerInThirdCircle = true
-            playerInCircleOfCar = contact.bodyB.node?.parent
-            raiseAnxiety(to: 0.3)
+//        case (playerCategory | firstCircleCategory):
+//            playerInFirstCircle = true
+//            playerInCircleOfCar = contact.bodyB.node?.parent
+//            raiseAnxiety(to: 1)
+//        case (playerCategory | secondCircleCategory):
+//            playerInSecondCircle = true
+//            playerInCircleOfCar = contact.bodyB.node?.parent
+//            raiseAnxiety(to: 0.5)
+//        case (playerCategory | thirdCircleCategory):
+//            playerInThirdCircle = true
+//            playerInCircleOfCar = contact.bodyB.node?.parent
+//            raiseAnxiety(to: 0.3)
         case (playerCategory | pigeonCategory):
             playerAndPigeonContact(contact.bodyA, contact.bodyB)
             
