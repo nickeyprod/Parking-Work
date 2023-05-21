@@ -62,3 +62,17 @@ enum EngineSound: String {
         return audio
     }
 }
+
+enum CarCollisionSounds: String {
+    case car_collision_01, car_collision_02, car_collision_03
+
+    var action: SKAction {
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
+    }
+    
+    var audio: SKAudioNode {
+        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        audio.isPositional = true
+        return audio
+    }
+}

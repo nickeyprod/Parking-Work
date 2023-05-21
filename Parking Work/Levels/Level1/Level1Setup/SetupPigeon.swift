@@ -8,8 +8,9 @@
 
 import SpriteKit
 
-// Level 1 Cars Setup
+// Level 1 Pigeons Setup
 extension Level1 {
+
   
     
     func setupPigeons() {
@@ -19,7 +20,7 @@ extension Level1 {
             let pigeon = childNode(withName: "pigeon_\(i)")
             pigeon?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "pigeon_1"), size: (pigeon?.frame.size)!)
             pigeon?.physicsBody?.categoryBitMask = pigeonCategory
-            pigeon?.physicsBody?.contactTestBitMask = playerCategory
+            pigeon?.physicsBody?.contactTestBitMask = playerCategory | carCategory | trashBakCategory
             pigeon?.physicsBody?.affectedByGravity = false
             pigeon?.physicsBody?.isDynamic = false
             pigeon?.zPosition = 20

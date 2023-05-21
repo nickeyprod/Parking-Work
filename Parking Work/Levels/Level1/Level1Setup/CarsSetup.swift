@@ -21,12 +21,13 @@ extension Level1 {
         oldCopper!.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.oldCopper), size: CGSize(width: 460, height: 200))
         
         oldCopper!.node?.physicsBody?.categoryBitMask = carCategory
-        oldCopper!.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory
+        oldCopper!.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | trashBakCategory
         oldCopper!.node?.physicsBody?.affectedByGravity = false
         oldCopper!.node?.physicsBody?.isDynamic = true
-        oldCopper!.node?.physicsBody?.angularDamping = 3.4
-        oldCopper!.node?.physicsBody?.linearDamping = 12.0
-        oldCopper!.node?.physicsBody?.restitution = 1.0
+        oldCopper!.node?.physicsBody?.angularDamping = 3.4 // between 0.0 and 1.0
+        oldCopper!.node?.physicsBody?.linearDamping = 12.0 // between 0.0 and 1.0
+        oldCopper!.node?.physicsBody?.restitution = 0.01 // between 0.0 and 1.0
+        oldCopper!.node?.physicsBody?.contactTestBitMask = boundaryCategory | carCategory | trashBakCategory
         
         oldCopper!.node?.physicsBody?.mass = 896
         oldCopper!.node?.zPosition = 2
@@ -41,14 +42,15 @@ extension Level1 {
         chowerler!.node?.userData?.setValue(chowerler.self, forKeyPath: "self")
         chowerler!.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.chowerler), size: CGSize(width: 440, height: 220))
         chowerler!.node?.physicsBody?.categoryBitMask = carCategory
-        chowerler!.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory
+        chowerler!.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | trashBakCategory
+        chowerler!.node?.physicsBody?.contactTestBitMask = boundaryCategory | carCategory | trashBakCategory
         chowerler!.node?.physicsBody?.affectedByGravity = false
         chowerler!.node?.physicsBody?.isDynamic = true
         
         chowerler!.node?.anchorPoint = CGPoint(x: 0.48, y: 0.495)
         chowerler!.node?.physicsBody?.angularDamping = 3.4
         chowerler!.node?.physicsBody?.linearDamping = 12.0
-        chowerler!.node?.physicsBody?.restitution = 1.0
+        chowerler!.node?.physicsBody?.restitution = 0.01
         
         
         chowerler!.node?.physicsBody?.mass = 1061

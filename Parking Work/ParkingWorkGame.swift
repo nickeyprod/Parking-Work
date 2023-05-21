@@ -98,6 +98,9 @@ class ParkingWorkGame: SKScene {
     var leftArrowHolded: Bool = false
     var rightArrowHolded: Bool = false
     var isUILocked: Bool = false
+    var canPlayCrashSound: Bool = true
+    var canPlayBoundaryCrashSound: Bool = true
+    var canShowCompletionLevelMessage: Bool = true
     
     var playerInCircleOfCar: SKNode? = nil
     
@@ -166,6 +169,8 @@ class ParkingWorkGame: SKScene {
     let thirdCircleCategory: UInt32 = 1 << 7
     
     let pigeonCategory: UInt32 = 1 << 8
+    let trashBakCategory: UInt32 = 1 << 9
+    let completionSquareCategory: UInt32 = 1 << 10
     
     var messagesInChat: [SKLabelNode?] = []
     
@@ -257,7 +262,7 @@ class ParkingWorkGame: SKScene {
         miniMapHeight = miniMapSprite?.frame.height
         
         // set right and left boundaries of the tilemap
-        let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 4)
+        let rightX = (tileNode?.position.x)! + ((tileNode?.frame.width)! / 3)
         let rightY = (tileNode?.position.y)! + ((tileNode?.frame.height)! / 3)
         let leftX = (tileNode?.position.x)! - ((tileNode?.frame.width)! / 4)
         let leftY = (tileNode?.position.y)! - ((tileNode?.frame.height)! / 3)

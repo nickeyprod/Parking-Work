@@ -16,9 +16,9 @@ extension Level1 {
         if let playerNode = childNode(withName: "playerNode") {
             player = Player(scene: self, name: "Фёдор", node: playerNode)
         }
-
+        
         player?.node?.physicsBody?.categoryBitMask = playerCategory
-        player?.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory
+        player?.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | trashBakCategory
         player?.node?.physicsBody?.mass = 84
         player?.node?.zPosition = 10
     }

@@ -31,21 +31,71 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
                 self.firstCarOpened = true
                 showCarLocksTutorial(tutorialMsg: 25)
             }
-
-//        case (playerCategory | firstCircleCategory):
-//            playerInFirstCircle = true
-//            playerInCircleOfCar = contact.bodyB.node?.parent
-//            raiseAnxiety(to: 1)
-//        case (playerCategory | secondCircleCategory):
-//            playerInSecondCircle = true
-//            playerInCircleOfCar = contact.bodyB.node?.parent
-//            raiseAnxiety(to: 0.5)
-//        case (playerCategory | thirdCircleCategory):
-//            playerInThirdCircle = true
-//            playerInCircleOfCar = contact.bodyB.node?.parent
-//            raiseAnxiety(to: 0.3)
+        case (carCategory | carCategory):
+            if !canPlayCrashSound { return }
+            else {
+                canPlayCrashSound = false
+            }
+            
+            switch Int.random(in: 1...2) {
+            case 1:
+                self.run(CarCollisionSounds.car_collision_01.action)
+            case 2:
+                self.run(CarCollisionSounds.car_collision_02.action)
+            default:
+                return
+            }
+            
+            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
+                self.canPlayCrashSound = true
+            }
+            
+        case (carCategory | boundaryCategory):
+            if !canPlayBoundaryCrashSound { return }
+            else {
+                canPlayBoundaryCrashSound = false
+            }
+        
+            self.run(CarCollisionSounds.car_collision_01.action)
+            Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { _ in
+                self.canPlayBoundaryCrashSound = true
+            }
+        case (trashBakCategory | carCategory):
+            print("Plastic boom sound")
+        case (trashBakCategory | pigeonCategory):
+            playerAndPigeonContact(contact.bodyA, contact.bodyB)
         case (playerCategory | pigeonCategory):
             playerAndPigeonContact(contact.bodyA, contact.bodyB)
+        case (carCategory | pigeonCategory):
+            playerAndPigeonContact(contact.bodyA, contact.bodyB)
+        case (carCategory | completionSquareCategory):
+            if contact.bodyA.node?.name != "completion-target" {
+                if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
+                    playerStealTheCar()
+                }
+
+            } else if contact.bodyB.node?.name != "completion-target" {
+                if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
+                    playerStealTheCar()
+                }
+            } else {
+                if canShowCompletionLevelMessage {
+                    canShowCompletionLevelMessage = false
+                    pushMessageToChat(text: "Эта машина не угнана тобой! Ты должен сидеть в угоняемой машине.")
+                }
+                
+            }
+
+            
+           
+            
+
+        case (playerCategory | completionSquareCategory):
+            if canShowCompletionLevelMessage {
+                canShowCompletionLevelMessage = false
+                pushMessageToChat(text: "Вы не должны уходить с парковки без машины!")
+            }
+            
             
         default:
             player!.currLockTarget = nil
@@ -69,6 +119,8 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         case (playerCategory | thirdCircleCategory):
             playerInThirdCircle = false
             reduceAnxiety(to: 0.3)
+        case (playerCategory | completionSquareCategory):
+            canShowCompletionLevelMessage = true
         default:
             break
 //            print("Some other contact ended")
@@ -214,5 +266,13 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             }
         }
         
+    }
+    
+    func playerStealTheCar() {
+        if canShowCompletionLevelMessage {
+            canShowCompletionLevelMessage = false
+            pushMessageToChat(text: "Отличная работа!")
+//                levelCompleted()
+        }
     }
 }

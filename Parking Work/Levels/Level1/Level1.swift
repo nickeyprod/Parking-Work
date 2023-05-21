@@ -140,6 +140,12 @@ class Level1: ParkingWorkGame {
         // setup sounds
         setupSounds()
         
+        // setupTrashBaks
+        setupTrashBaks()
+        
+        // setup level completion rules
+        setupLevelCompletion()
+        
     }
 
 }

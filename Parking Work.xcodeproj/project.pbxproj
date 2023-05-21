@@ -21,6 +21,11 @@
 		D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */; };
 		D15BCD9C29F1380B00726BE3 /* SetupSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BCD9B29F1380B00726BE3 /* SetupSound.swift */; };
 		D1628B3129AE050700DF817E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1628B3029AE050700DF817E /* Colors.swift */; };
+		D16ACB032A177AB3000878C4 /* car_collision_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16ACB012A177AB3000878C4 /* car_collision_02.wav */; };
+		D16ACB062A177ABB000878C4 /* car_collision_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16ACB052A177ABB000878C4 /* car_collision_01.wav */; };
+		D16ACB082A1783F8000878C4 /* car_collision_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16ACB072A1783F8000878C4 /* car_collision_03.wav */; };
+		D16ACB0A2A1790CD000878C4 /* SetupTrashCans.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16ACB092A1790CD000878C4 /* SetupTrashCans.swift */; };
+		D16ACB0C2A1A9528000878C4 /* SetupLevelCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16ACB0B2A1A9528000878C4 /* SetupLevelCompletion.swift */; };
 		D16D775729A4E371004EC225 /* traffic1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16D775629A4E371004EC225 /* traffic1.wav */; };
 		D16EA75A2A0238BB001699E5 /* ChatFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA7592A0238BB001699E5 /* ChatFunctions.swift */; };
 		D16EA75C2A023A6B001699E5 /* PopUpAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA75B2A023A6B001699E5 /* PopUpAction.swift */; };
@@ -85,6 +90,11 @@
 		D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sound_birds.wav; sourceTree = "<group>"; };
 		D15BCD9B29F1380B00726BE3 /* SetupSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSound.swift; sourceTree = "<group>"; };
 		D1628B3029AE050700DF817E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D16ACB012A177AB3000878C4 /* car_collision_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_collision_02.wav; sourceTree = "<group>"; };
+		D16ACB052A177ABB000878C4 /* car_collision_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_collision_01.wav; sourceTree = "<group>"; };
+		D16ACB072A1783F8000878C4 /* car_collision_03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_collision_03.wav; sourceTree = "<group>"; };
+		D16ACB092A1790CD000878C4 /* SetupTrashCans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTrashCans.swift; sourceTree = "<group>"; };
+		D16ACB0B2A1A9528000878C4 /* SetupLevelCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupLevelCompletion.swift; sourceTree = "<group>"; };
 		D16D775629A4E371004EC225 /* traffic1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = traffic1.wav; sourceTree = "<group>"; };
 		D16EA7592A0238BB001699E5 /* ChatFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFunctions.swift; sourceTree = "<group>"; };
 		D16EA75B2A023A6B001699E5 /* PopUpAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAction.swift; sourceTree = "<group>"; };
@@ -198,6 +208,16 @@
 			path = "Parking Work";
 			sourceTree = "<group>";
 		};
+		D16ACAFE2A1771AF000878C4 /* CarCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D16ACB052A177ABB000878C4 /* car_collision_01.wav */,
+				D16ACB012A177AB3000878C4 /* car_collision_02.wav */,
+				D16ACB072A1783F8000878C4 /* car_collision_03.wav */,
+			);
+			path = CarCollisions;
+			sourceTree = "<group>";
+		};
 		D16EA7652A0240B3001699E5 /* PopUps */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +294,8 @@
 				D1FF461429BE693E0061D819 /* MiniMapSetup.swift */,
 				D11C745529ED703000C0583D /* SetupPigeon.swift */,
 				D15BCD9B29F1380B00726BE3 /* SetupSound.swift */,
+				D16ACB092A1790CD000878C4 /* SetupTrashCans.swift */,
+				D16ACB0B2A1A9528000878C4 /* SetupLevelCompletion.swift */,
 			);
 			path = Level1Setup;
 			sourceTree = "<group>";
@@ -301,6 +323,7 @@
 		D1A3F5AC299F9BB900084380 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D16ACAFE2A1771AF000878C4 /* CarCollisions */,
 				D103322C2A13E6C000F332D2 /* CarSounds */,
 				D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */,
 				D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */,
@@ -403,11 +426,14 @@
 				D1A3F5B0299F9E0C00084380 /* success_bell.wav in Resources */,
 				D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */,
 				D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */,
+				D16ACB082A1783F8000878C4 /* car_collision_03.wav in Resources */,
 				D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */,
 				D1198F012979B76D00701A24 /* Main.storyboard in Resources */,
 				D1FDF2A429A929280058040E /* button_click.wav in Resources */,
 				D1198F032979B76E00701A24 /* Assets.xcassets in Resources */,
 				D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */,
+				D16ACB062A177ABB000878C4 /* car_collision_01.wav in Resources */,
+				D16ACB032A177AB3000878C4 /* car_collision_02.wav in Resources */,
 				D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */,
 				D1EC016C29B8922200390C41 /* PTSansNarrow-Regular.ttf in Resources */,
 				D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */,
@@ -447,6 +473,7 @@
 				D18653C7299A326900DEE90D /* Collisions.swift in Sources */,
 				D18653C2299A30B900DEE90D /* Touches.swift in Sources */,
 				D1A7180929D1B0B200A488BF /* FONTS.swift in Sources */,
+				D16ACB0A2A1790CD000878C4 /* SetupTrashCans.swift in Sources */,
 				D16EA7602A023D17001699E5 /* UICreation.swift in Sources */,
 				D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */,
 				D1BC8CE229B8752900F9C597 /* IntroScene.swift in Sources */,
@@ -454,6 +481,7 @@
 				D16EA7642A02407D001699E5 /* UIControls.swift in Sources */,
 				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
+				D16ACB0C2A1A9528000878C4 /* SetupLevelCompletion.swift in Sources */,
 				D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */,
 				D18653CB299A3A3600DEE90D /* GameFunctions.swift in Sources */,
 				D1FF461529BE693E0061D819 /* MiniMapSetup.swift in Sources */,

@@ -12,7 +12,7 @@ extension Level1 {
     
     func setupWorldBoundaries() {
         // player collides with this `end of the world` boundaries
-        for i in 0...6 {
+        for i in 0...7 {
             let worldBoundary = childNode(withName: "boundary\(i)")
             worldBoundary?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: (worldBoundary?.frame.width)!, height: (worldBoundary?.frame.height)!))
             worldBoundary?.physicsBody?.categoryBitMask = boundaryCategory
