@@ -62,6 +62,8 @@
 		D1A7180529CC405500A488BF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7180429CC405500A488BF /* Player.swift */; };
 		D1A7180729D1AF7600A488BF /* UNICODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7180629D1AF7600A488BF /* UNICODE.swift */; };
 		D1A7180929D1B0B200A488BF /* FONTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7180829D1B0B200A488BF /* FONTS.swift */; };
+		D1B856432A1BB1A300C8B61B /* old_copper_driving.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1B856412A1BB1A300C8B61B /* old_copper_driving.wav */; };
+		D1B856442A1BB1A300C8B61B /* old_copper_acceleration.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1B856422A1BB1A300C8B61B /* old_copper_acceleration.wav */; };
 		D1BC8CDB29B5DA4900F9C597 /* LOCK_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */; };
 		D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */; };
 		D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */; };
@@ -131,6 +133,8 @@
 		D1A7180429CC405500A488BF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D1A7180629D1AF7600A488BF /* UNICODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNICODE.swift; sourceTree = "<group>"; };
 		D1A7180829D1B0B200A488BF /* FONTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FONTS.swift; sourceTree = "<group>"; };
+		D1B856412A1BB1A300C8B61B /* old_copper_driving.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_driving.wav; sourceTree = "<group>"; };
+		D1B856422A1BB1A300C8B61B /* old_copper_acceleration.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_acceleration.wav; sourceTree = "<group>"; };
 		D1BC8CDA29B5DA4900F9C597 /* LOCK_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_TYPES.swift; sourceTree = "<group>"; };
 		D1BC8CDC29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_TEXTURTE_NAMES.swift; sourceTree = "<group>"; };
 		D1BC8CDE29B8733A00F9C597 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 		D103322C2A13E6C000F332D2 /* CarSounds */ = {
 			isa = PBXGroup;
 			children = (
+				D1B856422A1BB1A300C8B61B /* old_copper_acceleration.wav */,
+				D1B856412A1BB1A300C8B61B /* old_copper_driving.wav */,
 				D10332292A13E41B00F332D2 /* old_copper_engine_start.wav */,
 			);
 			path = CarSounds;
@@ -439,9 +445,11 @@
 				D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */,
 				D103322A2A13E41B00F332D2 /* old_copper_engine_start.wav in Resources */,
 				D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */,
+				D1B856432A1BB1A300C8B61B /* old_copper_driving.wav in Resources */,
 				D16D775729A4E371004EC225 /* traffic1.wav in Resources */,
 				D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */,
 				D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */,
+				D1B856442A1BB1A300C8B61B /* old_copper_acceleration.wav in Resources */,
 				D16FD69C29A270A70097BC3E /* Level1Scene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

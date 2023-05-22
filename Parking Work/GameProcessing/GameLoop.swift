@@ -168,6 +168,7 @@ extension ParkingWorkGame {
         // if drive button holded - move car
         if driveBtnHolded {
             self.player!.drivingCar?.driveForward()
+           
         }
         else if brakeBtnHolded {
             self.player!.drivingCar?.driveBackward()

@@ -94,6 +94,7 @@ class ParkingWorkGame: SKScene {
     
     // driving bools
     var driveBtnHolded: Bool = false
+    
     var brakeBtnHolded: Bool = false
     var leftArrowHolded: Bool = false
     var rightArrowHolded: Bool = false

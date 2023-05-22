@@ -50,7 +50,8 @@ enum CitySound: String {
 }
 
 enum EngineSound: String {
-    case old_copper_engine_start
+    case old_copper_engine_start, old_copper_acceleration, old_copper_driving
+    
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
@@ -58,7 +59,6 @@ enum EngineSound: String {
     
     var audio: SKAudioNode {
         let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
-        audio.isPositional = true
         return audio
     }
 }

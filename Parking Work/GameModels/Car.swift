@@ -20,11 +20,18 @@ class Car: Equatable {
         lhs.node == rhs.node
     }
     
-    init(scene: SKScene, name: String, maxSpeed: CGFloat, turningSpeed: CGFloat) {
+    init(scene: SKScene, name: String, initialSpeed: CGFloat, maxSpeedForward: CGFloat, maxSpeedBackward: CGFloat, turningSpeed: CGFloat, accelerationRate: CGFloat, secondaryAcceleration: CGFloat, brakeRate: CGFloat) {
         self.scene = (scene as? ParkingWorkGame)!
         self.name = name
-        self.maxSpeed = maxSpeed
+        self.currSpeed = initialSpeed
+        self.initialSpeed = initialSpeed
+        self.maxSpeedForward = maxSpeedForward
+        self.maxSpeedBackward = maxSpeedBackward
         self.turningSpeed = turningSpeed
+        self.accelerationRate = accelerationRate
+        self.secondaryAcceleration = secondaryAcceleration
+        self.initialSecondaryAcceleration = secondaryAcceleration
+        self.brakeRate = brakeRate
     }
     
     let scene: ParkingWorkGame
@@ -34,6 +41,8 @@ class Car: Equatable {
     
     // car sound
     var engineStarts: SKAction?
+    var engineAccelerating: SKAudioNode?
+    var engineDriving: SKAudioNode?
     
     // locks list
     var locks: [String: Float?] = [
@@ -46,13 +55,23 @@ class Car: Equatable {
     // other variables
     var signaling: Bool = false
     var stolen: Bool = false
-    var isDriving: Bool = false
-    var prevMoveIsForward: Bool = false
+    var isDrivingForward: Bool = false
+    var isDrivingBackward: Bool = false
+    var isPrevMovementForward: Bool = false
+    var continueBackward: Bool = false
+    
     var currDrivingPoint: CGPoint?
     var movingVector: CGVector?
     
-    var maxSpeed: CGFloat?
+    var maxSpeedForward: CGFloat?
+    var maxSpeedBackward: CGFloat?
     var turningSpeed: CGFloat?
+    var currSpeed: CGFloat?
+    var initialSpeed: CGFloat?
+    var accelerationRate: CGFloat?
+    var secondaryAcceleration: CGFloat?
+    var initialSecondaryAcceleration: CGFloat?
+    var brakeRate: CGFloat?
 
     var unlockedLocks : [String: Bool] = [
         "driver_lock": false,
@@ -119,7 +138,7 @@ class Car: Equatable {
 
     func turn(to direction: TurningDirections) {
         var angleInRadians: CGFloat?, rotateAction: SKAction?
-        
+ 
         switch direction {
         case .left:
             angleInRadians = self.turningSpeed!
@@ -137,39 +156,96 @@ class Car: Equatable {
         self.scene.cameraNode?.run(rotateCamAction)
         
         // update moving vector
-        movingVector = CGVector(dx: cos(self.node!.zRotation) * maxSpeed!, dy: sin(self.node!.zRotation) * maxSpeed!)
+        let currMaxSpeed = isDrivingForward ? maxSpeedForward : maxSpeedBackward
+        movingVector = CGVector(dx: cos(self.node!.zRotation) * currMaxSpeed!, dy: sin(self.node!.zRotation) * currMaxSpeed!)
+
+        
+    }
+    
+    func accelerate(back: Bool) {
+
+        currSpeed! += accelerationRate! + secondaryAcceleration!
+        secondaryAcceleration! = secondaryAcceleration! * 0.5
+        if back == true {
+            self.node?.physicsBody?.velocity.dx = -cos(self.node!.zRotation) * currSpeed!
+            self.node?.physicsBody?.velocity.dy = -sin(self.node!.zRotation) * currSpeed!
+            // set to true because when speed more than speed backward, we just set speed backward to max speed back and continuing driving back
+            continueBackward = true
+        }
+        else {
+            self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * currSpeed!
+            self.node?.physicsBody?.velocity.dy = sin(self.node!.zRotation) * currSpeed!
+        }
 
         
     }
 
     func driveForward() {
-    
-        self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * 100
-        self.node?.physicsBody?.velocity.dy = sin(self.node!.zRotation) * 100
+        isDrivingForward = true; isDrivingBackward = false
+        continueBackward = false
+        
+        if currSpeed! <= maxSpeedForward!{
+            accelerate(back: false)
+        } else {
+            self.secondaryAcceleration = initialSecondaryAcceleration
+            self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * maxSpeedForward!
+            self.node?.physicsBody?.velocity.dy = sin(self.node!.zRotation) * maxSpeedForward!
+        }
 
-//        print("velocity: ", self.node?.physicsBody?.velocity)
         // camera follow driving car
         self.scene.cameraNode?.position = (self.node!.position)
-        
-        self.isDriving = true
     }
     
     func driveBackward() {
         
-        self.node?.physicsBody?.velocity.dx = -cos(self.node!.zRotation) * 80
-        self.node?.physicsBody?.velocity.dy = -sin(self.node!.zRotation) * 80
+        isDrivingForward = false; isDrivingBackward = true
+
+        // slowly increase backward speed
+        if currSpeed! <= maxSpeedBackward!{
+            accelerate(back: true)
+        } else {
+            // continue backward means brake button holded
+            if currSpeed! > maxSpeedBackward! && continueBackward == false {
+                
+                // player brakes -> speed slowly decreases
+                currSpeed! -= brakeRate! + secondaryAcceleration!
+
+                self.secondaryAcceleration = initialSecondaryAcceleration
+                self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * currSpeed!
+                self.node?.physicsBody?.velocity.dy = sin(self.node!.zRotation) * currSpeed!
+            } else {
+                self.secondaryAcceleration = initialSecondaryAcceleration
+                self.node?.physicsBody?.velocity.dx = -cos(self.node!.zRotation) * maxSpeedBackward!
+                self.node?.physicsBody?.velocity.dy = -sin(self.node!.zRotation) * maxSpeedBackward!
+            }
+            
+        }
+    
         
+    
+    
         
+    
         
         // camera follow driving car
         self.scene.cameraNode?.position = (self.node!.position)
-        
-        self.isDriving = true
     }
     
     func stopDriving() {
-        self.node?.physicsBody?.velocity.dx = 0
-        self.node?.physicsBody?.velocity.dy = 0
+        if currSpeed! > self.initialSpeed! {
+            self.currSpeed! -= accelerationRate!
+            if isDrivingForward {
+                self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * currSpeed!
+                self.node?.physicsBody?.velocity.dy = sin(self.node!.zRotation) * currSpeed!
+            }
+            if isDrivingBackward {
+                self.node?.physicsBody?.velocity.dx = -cos(self.node!.zRotation) * currSpeed!
+                self.node?.physicsBody?.velocity.dy = -sin(self.node!.zRotation) * currSpeed!
+            }
+            
+        }
+        // camera follow driving car
+        self.scene.cameraNode?.position = (self.node!.position)
     }
 
 }

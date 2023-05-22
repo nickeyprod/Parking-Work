@@ -11,8 +11,8 @@ import SpriteKit
 extension Level1 {
     func setupCars() {
         
-        oldCopper = Car(scene: self, name: CarNameList.OldCopper.rawValue, maxSpeed: 100, turningSpeed: 0.006)
-        chowerler = Car(scene: self, name: CarNameList.Chowerler.rawValue, maxSpeed: 16, turningSpeed: 0.012)
+        oldCopper = Car(scene: self, name: CarNameList.OldCopper.rawValue, initialSpeed: 4, maxSpeedForward: 150, maxSpeedBackward: 60, turningSpeed: 0.006, accelerationRate: 1, secondaryAcceleration: 0.01, brakeRate: 1.5)
+        chowerler = Car(scene: self, name: CarNameList.Chowerler.rawValue, initialSpeed: 10, maxSpeedForward: 200, maxSpeedBackward: 75, turningSpeed: 0.012, accelerationRate: 1, secondaryAcceleration: 0.01, brakeRate: 2)
         
         // Old Copper
         oldCopper!.node = childNode(withName: CAR_TEXTURE_NAMES.oldCopper) as? SKSpriteNode
@@ -35,6 +35,10 @@ extension Level1 {
         
         // old copper sounds
         oldCopper!.engineStarts = EngineSound.old_copper_engine_start.action
+        oldCopper!.engineAccelerating = EngineSound.old_copper_acceleration.audio
+        oldCopper!.engineDriving = EngineSound.old_copper_driving.audio
+//        oldCopper!.node?.addChild(oldCopper!.engineAccelerating!)
+//        oldCopper!.node?.addChild(oldCopper!.engineDriving!)
     
         // Chowerler
         chowerler!.node = childNode(withName: CAR_TEXTURE_NAMES.chowerler) as? SKSpriteNode

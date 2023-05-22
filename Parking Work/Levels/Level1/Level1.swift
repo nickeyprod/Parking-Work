@@ -90,10 +90,10 @@ class Level1: ParkingWorkGame {
         playerStateMachine.enter(IdleState.self)
         
         // showing level number at the start
-        showBannerLabel(text: "Уровень \(levelNum)")
+//        showBannerLabel(text: "Уровень \(levelNum)")
         
         // zoom out animation
-        zoomOutInCameraAnimation(to: maxScale)
+//        zoomOutInCameraAnimation(to: maxScale)
     
         // create target square for selected car
         createSelectedTarget()
@@ -112,10 +112,7 @@ class Level1: ParkingWorkGame {
             }
         }
         
-//        self.player?.getIn(the: self.oldCopper!)
- 
-        // zoom out camera a bit
-//        self.zoomCamera(to: self.maxScale)
+        self.player?.getIn(the: self.oldCopper!)
     }
     
     // MARK: - Physic Bodies Setup
