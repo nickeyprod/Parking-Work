@@ -33,6 +33,9 @@ extension ParkingWorkGame {
             dx = dx > 0 ? PLAYER_SPEED + 0.7 : -(PLAYER_SPEED + 0.7)
             dy = dy < 0 ? -(PLAYER_SPEED + 0.7) : PLAYER_SPEED + 0.7
         }
+        
+        print("Player dest pos : ", player!.destinationPosition)
+        print("Player curr pos : ", player!.node!.position)
 
         if floor(player!.destinationPosition!.x) == floor(player!.node!.position.x) {
             dx = 0
@@ -41,9 +44,15 @@ extension ParkingWorkGame {
             dy = 0
         }
         
+        print(floor(player!.destinationPosition!.y), floor(player!.node!.position.y))
+        print(floor(player!.destinationPosition!.x), floor(player!.node!.position.x))
+        
         if dx != 0 || dy != 0 {
+            
             playerMoving = true
         }
+            
+  
 
         let displacement = CGVector(dx: dx, dy: dy)
         let move = SKAction.move(by: displacement, duration: 0)
@@ -168,7 +177,6 @@ extension ParkingWorkGame {
         // if drive button holded - move car
         if driveBtnHolded {
             self.player!.drivingCar?.driveForward()
-           
         }
         else if brakeBtnHolded {
             self.player!.drivingCar?.driveBackward()
@@ -176,24 +184,18 @@ extension ParkingWorkGame {
             self.player!.drivingCar?.stopDriving()
         }
         
-        if (driveBtnHolded || brakeBtnHolded) && leftArrowHolded {
-            self.player?.drivingCar?.turn(to: Car.TurningDirections.left)
-        }
-        else if (driveBtnHolded || brakeBtnHolded) && rightArrowHolded {
-            self.player?.drivingCar?.turn(to: Car.TurningDirections.right)
-        }
-        
         if self.player!.isSittingInCar {
         
             self.player?.node?.position = (self.player?.drivingCar?.node!.position)!
-        }
-        
-        if brakeBtnHolded {
             
+            if ((self.player!.drivingCar?.currSpeed)! > 4) && leftArrowHolded {
+                self.player?.drivingCar?.turn(to: Car.TurningDirections.left)
+            }
+            else if ((self.player!.drivingCar?.currSpeed)! > 4) && rightArrowHolded {
+                self.player?.drivingCar?.turn(to: Car.TurningDirections.right)
+            }
         }
-        
-//        print("left arrow holded:", leftArrowHolded)
-//        print("right arrow holded:", rightArrowHolded)
+
         
     }
     

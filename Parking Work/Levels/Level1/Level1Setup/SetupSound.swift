@@ -16,9 +16,12 @@ extension Level1 {
         // play city street background sound
         let citySoundBirds = CitySound.street_sound_birds.audio
         citySoundBirds.autoplayLooped = true
-        self.addChild(citySoundBirds)
+//        self.addChild(citySoundBirds)
         
-        citySoundBirds.run(SKAction.play())
+        // sounds of pigeons flying away
+        let pigeonFlyingAwaySound = CitySound.pigeon_flying_away.audio
+        pigeonFlyingAwaySound.name = "pigeon-flying-away"
+        self.addChild(pigeonFlyingAwaySound)
     }
 
 }

@@ -36,5 +36,6 @@ enum Colors: String {
     static var Danger70Anxiety = UIColor(named: "Danger70Anxiety")
     static var DangerNormalAnxiety = UIColor(named: "DangerNormalAnxiety")
     static var DangerStrokeRed = SKColor(red: 1.0, green: 0.098, blue: 0.126, alpha: 1.0)
+    static var SplashScreenBackgroundColor = UIColor(named: "SplashScreenColor")
     
 }

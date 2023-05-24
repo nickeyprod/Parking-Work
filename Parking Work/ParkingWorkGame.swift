@@ -10,6 +10,7 @@ class ParkingWorkGame: SKScene {
     // Current Level Number
     var levelNum: Int = 1
     var anxietyLevel: CGFloat = 0.0
+    var levelCompleted: Bool = false
     
     // additional game screens
     var taskScreen: SKSpriteNode?
@@ -279,7 +280,7 @@ class ParkingWorkGame: SKScene {
             IdleState(player: player!.node!)
         ])
         
-        self.listener = player!.node!
+        self.listener = cameraNode
         
         // initialize timer for substracting anxiety
         self.substractAnxietyTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in

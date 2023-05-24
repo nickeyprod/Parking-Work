@@ -100,6 +100,11 @@ extension Player {
             // hide open car message
             scene.hideOpenCarMessage()
             
+            // play door closed sound if found it
+            if let doorLockedSound = car.node?.childNode(withName: Sound.car_door_locked.rawValue) {
+                doorLockedSound.run(.play())
+            }
+            
             // turn on signalization
             turnSignalizationOn(of: car)
     
@@ -134,6 +139,11 @@ extension Player {
         
         // raise anxiety!
         scene.raiseAnxiety(to: 80.0)
+        
+        // play door closed sound if found it
+        if let doorLockedSound = car.node?.childNode(withName: Sound.car_door_locked.rawValue) {
+            doorLockedSound.run(.play())
+        }
         
         // turn signalization on!
         turnSignalizationOn(of: car)
@@ -215,6 +225,11 @@ extension Player {
                 // hide open car message
                 scene.hideOpenCarMessage()
                 
+                // play door closed sound if found it
+                if let doorLockedSound = car.node?.childNode(withName: Sound.car_door_locked.rawValue) {
+                    doorLockedSound.run(.play())
+                }
+                
                 // turn on signalization!
                 turnSignalizationOn(of: car)
                 
@@ -227,16 +242,12 @@ extension Player {
     
     // this turns on car signalization sound and light blinking
     func turnSignalizationOn(of car: Car) {
-        let signal = Sound.car_signalization.audio
-        let locked = Sound.car_door_locked.audio
-        
-        // play door closed sound & car signalization sound
-        node?.parent?.addChild(locked)
-        node?.parent?.addChild(signal)
-        
-        locked.run(SKAction.play())
-        signal.run(SKAction.play())
-        
+    
+        // play car signalization sound if found it
+        if let signalizationSound = car.node?.childNode(withName: Sound.car_signalization.rawValue) {
+            signalizationSound.run(.play())
+        }
+    
         // blick lights
         car.blinkLightSignals()
         car.signaling = true
@@ -244,17 +255,24 @@ extension Player {
     
     // player enters in the car
     func getIn(the car: Car) {
+        
         if car.stolen == false {
             // play door open sound and engine starts
-            node?.run(Sound.door_open.action, completion: {
-                if (car.engineStarts != nil) {
-                    self.node?.run(car.engineStarts!)
+            // play door closed sound if found it
+            if let doorLockedSound = car.node?.childNode(withName: Sound.car_door_locked.rawValue) {
+                doorLockedSound.run(.play()) {
+                    // play engine start sound if found it
+                    if let engineStartSound = car.node?.childNode(withName: EngineSound.old_copper_engine_start.rawValue) {
+                        engineStartSound.run(.play())
+                    }
                 }
-                
-            })
+            }
         } else {
             // else just engine starts
-            self.node?.run(car.engineStarts!)
+            // play engine start sound if found it
+            if let engineStartSound = car.node?.childNode(withName: EngineSound.old_copper_engine_start.rawValue) {
+                engineStartSound.run(.play())
+            }
         }
         
         // remove enter to car button
@@ -286,6 +304,7 @@ extension Player {
         self.node?.alpha = 0
         // position player in the center of car
         self.node?.position = car.node!.position
+        
         // position camera to the center of car
         self.scene.cameraNode?.position = car.node!.position
         
@@ -325,11 +344,15 @@ extension Player {
     
     func getOutOfCar() {
         
+        // stop sounds
+        if let drivingSound = self.drivingCar?.engineDrivingSound,
+           let acceleratingSound = self.drivingCar?.engineAcceleratingSound {
+            drivingSound.run(.stop())
+            acceleratingSound.run(.stop())
+        }
+   
         // turning On gestures so we can use zoom in and out
         self.scene.setupGestureRecognizer()
-        
-        // return back physic body collision
-        self.node?.physicsBody?.categoryBitMask = self.scene.playerCategory
         
         // show player
         self.node?.alpha = 1
@@ -348,10 +371,16 @@ extension Player {
         self.node?.position = futurePlayerPos
         
         // set destination position the same as player position
-        self.destinationPosition = self.node?.position
+        self.destinationPosition = futurePlayerPos
         
         // position camera to the player
         self.scene.cameraNode?.position = futurePlayerPos
+        
+        // return back physic body collision
+        self.node?.physicsBody?.categoryBitMask = self.scene.playerCategory
+        
+        
+        print("============>>>>>>>>> set dest pos to: ", futurePlayerPos, "============<<<<<<<<<<<")
         
 //        print("player pos: ", self.node?.position)
 //        print("furure player pos: ", self.node?.position)

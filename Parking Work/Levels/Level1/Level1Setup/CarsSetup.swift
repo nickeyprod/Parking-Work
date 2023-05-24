@@ -34,11 +34,35 @@ extension Level1 {
         oldCopper!.node?.anchorPoint = CGPoint(x: 0.47, y: 0.5)
         
         // old copper sounds
-        oldCopper!.engineStarts = EngineSound.old_copper_engine_start.action
-        oldCopper!.engineAccelerating = EngineSound.old_copper_acceleration.audio
-        oldCopper!.engineDriving = EngineSound.old_copper_driving.audio
-//        oldCopper!.node?.addChild(oldCopper!.engineAccelerating!)
-//        oldCopper!.node?.addChild(oldCopper!.engineDriving!)
+        // old copper engine start sound
+        let oldCopperEngineStartSound = EngineSound.old_copper_engine_start.audio
+        oldCopperEngineStartSound.name = EngineSound.old_copper_engine_start.rawValue
+        oldCopperEngineStartSound.autoplayLooped = false
+        oldCopper!.node?.addChild(oldCopperEngineStartSound)
+        
+        // old copper engine accelerating sound
+        let oldCopperEngineAcceleratingSound = EngineSound.old_copper_acceleration.audio
+        oldCopperEngineAcceleratingSound.name = EngineSound.old_copper_acceleration.rawValue
+        oldCopperEngineAcceleratingSound.autoplayLooped = false
+        oldCopper!.node?.addChild(oldCopperEngineAcceleratingSound)
+        
+        // old copper engine driving sound
+        let oldCopperEngineDrivingSound = EngineSound.old_copper_driving.audio
+        oldCopperEngineDrivingSound.name = EngineSound.old_copper_driving.rawValue
+        oldCopperEngineDrivingSound.autoplayLooped = false
+        oldCopper!.node?.addChild(oldCopperEngineDrivingSound)
+        
+        // old copper signalization sound
+        let oldCopperSignalizationSound = Sound.car_signalization.audio
+        oldCopperSignalizationSound.name = Sound.car_signalization.rawValue
+        oldCopperSignalizationSound.autoplayLooped = false
+        oldCopper!.node?.addChild(oldCopperSignalizationSound)
+        
+        // old copper door locked sound
+        let oldCopperDoorLockedSound = Sound.car_door_locked.audio
+        oldCopperDoorLockedSound.name = Sound.car_door_locked.rawValue
+        oldCopperDoorLockedSound.autoplayLooped = false
+        oldCopper!.node?.addChild(oldCopperDoorLockedSound)
     
         // Chowerler
         chowerler!.node = childNode(withName: CAR_TEXTURE_NAMES.chowerler) as? SKSpriteNode
@@ -59,6 +83,9 @@ extension Level1 {
         
         chowerler!.node?.physicsBody?.mass = 1061
         chowerler!.node?.zPosition = 2
+        
+        // chowerler sounds
+        // ..
         
     }
 

@@ -129,12 +129,12 @@ class GameOver: ParkingWorkGame {
     }
 }
 
-class Level {
-    var scene: GKScene
-    var fileNamed: String
-    
-    init(scene: GKScene, fileNamed: String) {
-        self.scene = scene
-        self.fileNamed = fileNamed
-    }
-}
+//class Level {
+//    var scene: GKScene
+//    var fileNamed: String
+//
+//    init(scene: GKScene, fileNamed: String) {
+//        self.scene = scene
+//        self.fileNamed = fileNamed
+//    }
+//}

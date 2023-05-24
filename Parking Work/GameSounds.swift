@@ -8,7 +8,7 @@
 import SpriteKit
 
 enum Sound: String {
-    case door_open, success_bell, car_door_locked, car_signalization
+    case door_open, success_bell, car_door_locked, car_signalization, cigarette_falling
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)

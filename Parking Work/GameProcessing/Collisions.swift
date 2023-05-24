@@ -75,8 +75,17 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
                 }
 
             } else if contact.bodyB.node?.name != "completion-target" {
+                print("contact")
                 if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
-                    playerStealTheCar()
+                    if levelCompleted == false {
+                        playerStealTheCar()
+                    }
+                }
+                if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyB.node) {
+                    if levelCompleted == false {
+                        playerStealTheCar()
+                    }
+                    
                 }
             } else {
                 if canShowCompletionLevelMessage {
@@ -207,12 +216,10 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         
         spritePigeonFly.run(SKAction.move(to: randPigeonPos, duration: 20))
     
-        
-        let pigeonFlyAway = CitySound.pigeon_flying_away.audio
-        
-        self.addChild(pigeonFlyAway)
-        
-        pigeonFlyAway.run(SKAction.play())
+        // play pigeon flying away sound if we have it
+        if let pigeonSound = self.childNode(withName: "pigeon-flying-away") {
+            pigeonSound.run(.play())
+        }
     }
     
     // just returns contact mask
@@ -269,10 +276,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
     }
     
     func playerStealTheCar() {
-        if canShowCompletionLevelMessage {
-            canShowCompletionLevelMessage = false
-            pushMessageToChat(text: "Отличная работа!")
-//                levelCompleted()
-        }
+        levelCompleted = true
+        pushMessageToChat(text: "Отличная работа!")
     }
 }
