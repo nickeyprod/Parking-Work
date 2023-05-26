@@ -23,6 +23,9 @@ class Player {
     var destinationPosition: CGPoint?
     
     var unlockSkill: Float = 10.0
+    var reputation: Float = 0.0
+    var money: Float = 75.0
+    var inventory: [String: String]?
 
     // node
     var node: SKNode?
@@ -38,6 +41,8 @@ class Player {
     var ownedCars: [Car?] = []
     
     var isSittingInCar: Bool = false
-    var drivingCar: Car? 
+    var drivingCar: Car?
+    
+
     
 }

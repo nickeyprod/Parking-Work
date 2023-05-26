@@ -11,6 +11,7 @@ extension ParkingWorkGame {
     
     func switchToCarDrivingUI() {
         switchRunButtonToDriveButton()
+        inventoryButton?.removeFromParent()
         
         // add break button
         let brakeBtn = SKShapeNode(circleOfRadius: 28)
@@ -97,6 +98,20 @@ extension ParkingWorkGame {
         self.brakeButton?.removeFromParent()
         self.exitFromCarBtn?.removeFromParent()
         self.switchDriveButtonToRunButton()
+        self.addInventoryButton()
+        
+    }
+    
+    func addInventoryButton() {
+        if let inventoryBag = UIImage(named: "sport-bag") {
+            let inventorySprite = SKSpriteNode(texture: SKTexture(image: inventoryBag))
+            self.inventoryButton = inventorySprite
+            inventorySprite.zPosition = 10
+            inventorySprite.name = "ui-inventory-btn"
+            self.cameraNode?.addChild(inventorySprite)
+            inventorySprite.size = CGSize(width: 52, height: 52)
+            inventorySprite.position = CGPoint(x: -displayWidth! / 2 + 40, y: 0)
+        }
     }
     
     

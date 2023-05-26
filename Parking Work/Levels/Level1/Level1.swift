@@ -67,6 +67,9 @@ class Level1: ParkingWorkGame {
         // create UI Buttons - pause, task buttons
         createUIButtons()
         
+        // create Icons (money/reputation)
+        createIcons()
+        
         // create window messages sprites
         createOpenCarMessage()
         createOpenCarSuccessMessage()
@@ -111,8 +114,8 @@ class Level1: ParkingWorkGame {
                 self.pushMessageToChat(text: "Босс хочет, чтобы вы потренировались на этой парковке и угнали для него машину, марка не важна.")
             }
         }
-//
-//        self.player?.getIn(the: self.oldCopper!)
+        self.player?.getIn(the: self.oldCopper!)
+
     }
     
     // MARK: - Physic Bodies Setup

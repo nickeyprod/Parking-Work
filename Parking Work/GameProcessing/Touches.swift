@@ -12,6 +12,7 @@ extension ParkingWorkGame {
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
 //        if event?.allTouches?.count == 2 { return }
         for touch in touches {
             
@@ -93,12 +94,19 @@ extension ParkingWorkGame {
                 self.player?.getIn(the: player!.currTargetCar!)
                 run(MenuSounds.button_click.action)
             }
+            else if (touchedNode.name == "ui-inventory-btn") && !isUILocked {
+                self.inventoryButton?.run(.scale(to: 1.2, duration: 0))
+                run(MenuSounds.bag_open.action)
+
+                print("Open Inventory")
+            }
             
             
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+  
         if event?.allTouches?.count == 2 || self.isPaused || !canMoveCamera  { return }
         if isRunButtonHolded { return }
         
@@ -172,8 +180,7 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
+        print(touches)
         // need to turn off specific buttons! for driving! not all!
         self.sliderTouchIsHolded = false
         
@@ -211,6 +218,9 @@ extension ParkingWorkGame {
             }
             else if touchedNode.name == "ui-exit-car-btn" {
                 self.exitFromCarBtn?.run(.scale(to: 1.0, duration: 0))
+            }
+            else if (touchedNode.name == "ui-inventory-btn") {
+                self.inventoryButton?.run(.scale(to: 1.0, duration: 0))
             }
             
             cameraMovingByFinger = false

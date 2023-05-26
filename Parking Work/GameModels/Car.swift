@@ -20,7 +20,7 @@ class Car: Equatable {
         lhs.node == rhs.node
     }
     
-    init(scene: SKScene, name: String, initialSpeed: CGFloat, maxSpeedForward: CGFloat, maxSpeedBackward: CGFloat, turningSpeed: CGFloat, accelerationRate: CGFloat, secondaryAcceleration: CGFloat, brakeRate: CGFloat) {
+    init(scene: SKScene, name: String, initialSpeed: CGFloat, maxSpeedForward: CGFloat, maxSpeedBackward: CGFloat, turningSpeed: CGFloat, accelerationRate: CGFloat, secondaryAcceleration: CGFloat, brakeRate: CGFloat, smokeRate: CGFloat) {
         self.scene = (scene as? ParkingWorkGame)!
         self.name = name
         self.currSpeed = initialSpeed
@@ -32,6 +32,7 @@ class Car: Equatable {
         self.secondaryAcceleration = secondaryAcceleration
         self.initialSecondaryAcceleration = secondaryAcceleration
         self.brakeRate = brakeRate
+        self.smokeRate = smokeRate
     }
     
     let scene: ParkingWorkGame
@@ -43,6 +44,7 @@ class Car: Equatable {
     var engineStartsSound: SKAudioNode?
     var engineAcceleratingSound: SKAudioNode?
     var engineDrivingSound: SKAudioNode?
+    var engineStillSound: SKAudioNode?
     
     // locks list
     var locks: [String: Float?] = [
@@ -52,9 +54,13 @@ class Car: Equatable {
     
     var jammedLocks: [String?] = []
     
+    // smoke emitter
+    var smokeEmitter: SKEmitterNode?
+    
     // other variables
     var signaling: Bool = false
     var stolen: Bool = false
+    var engineStarted: Bool = false
     var isDrivingForward: Bool = false
     var isDrivingBackward: Bool = false
     var isAccelerating: Bool = false
@@ -73,6 +79,8 @@ class Car: Equatable {
     var secondaryAcceleration: CGFloat?
     var initialSecondaryAcceleration: CGFloat?
     var brakeRate: CGFloat?
+    var smokeRate: CGFloat?
+    
     // driving power cannot be more than 100%
     var currDrivingPower: CGFloat?
 
@@ -138,6 +146,15 @@ class Car: Equatable {
         }
         
     }
+    
+    func startEngine() {
+
+        self.smokeEmitter?.particleBirthRate = smokeRate ?? 20
+    }
+    
+    func stopEngine() {
+        self.smokeEmitter?.particleBirthRate = 0
+    }
 
     func turn(to direction: TurningDirections) {
         var angleInRadians: CGFloat?, rotateAction: SKAction?
@@ -185,6 +202,7 @@ class Car: Equatable {
     }
 
     func driveForward() {
+        self.smokeEmitter?.particleBirthRate = 20
         
         // curr driving power needed for calculating strength of turning
         currDrivingPower = currSpeed! / maxSpeedForward! * 100
@@ -218,6 +236,7 @@ class Car: Equatable {
     }
     
     func driveBackward() {
+        self.smokeEmitter?.particleBirthRate = smokeRate! / 2
         
         // curr driving power needed for calculating strength of turning
         currDrivingPower = currSpeed! / maxSpeedBackward! * 100
@@ -261,7 +280,7 @@ class Car: Equatable {
     }
     
     func stopDriving() {
-        
+        self.smokeEmitter?.particleBirthRate = smokeRate! / 2
         // curr driving power needed for calculating strength of turning
         if isDrivingForward {
             currDrivingPower = currSpeed! / maxSpeedForward! * 100
@@ -285,11 +304,16 @@ class Car: Equatable {
             }
             
         }
+        
+        // playing sound
+        emitEngineStillSound()
+        
         // camera follow driving car
         self.scene.cameraNode?.position = (self.node!.position)
     }
     
     func emitEngineAcceleratingSound() {
+        engineStillSound?.run(.stop())
         if engineAcceleratingSound == nil {
             engineAcceleratingSound = node?.childNode(withName: EngineSound.old_copper_acceleration.rawValue) as? SKAudioNode
             engineStartsSound?.autoplayLooped = false
@@ -298,12 +322,23 @@ class Car: Equatable {
     }
     
     func emitEngineDrivingSound() {
+        engineStillSound?.run(.stop())
         if engineDrivingSound == nil {
             engineDrivingSound = node?.childNode(withName: EngineSound.old_copper_driving.rawValue) as? SKAudioNode
             engineDrivingSound?.autoplayLooped = false
         }
         engineDrivingSound?.run(.play())
     }
+    
+    func emitEngineStillSound() {
+        if !engineStarted { return }
+        if engineStillSound == nil {
+            engineStillSound = node?.childNode(withName: EngineSound.old_copper_engine_still.rawValue) as? SKAudioNode
+            engineStillSound?.autoplayLooped = false
+        }
+        engineStillSound?.run(.play())
+    }
+    
     
     func setSpeedForwardToMax() {
         self.node?.physicsBody?.velocity.dx = cos(self.node!.zRotation) * maxSpeedForward!

@@ -11,8 +11,8 @@ import SpriteKit
 extension Level1 {
     func setupCars() {
         
-        oldCopper = Car(scene: self, name: CarNameList.OldCopper.rawValue, initialSpeed: 4, maxSpeedForward: 150, maxSpeedBackward: 60, turningSpeed: 0.006, accelerationRate: 1, secondaryAcceleration: 0.01, brakeRate: 1.5)
-        chowerler = Car(scene: self, name: CarNameList.Chowerler.rawValue, initialSpeed: 10, maxSpeedForward: 200, maxSpeedBackward: 75, turningSpeed: 0.012, accelerationRate: 1, secondaryAcceleration: 0.01, brakeRate: 2)
+        oldCopper = Car(scene: self, name: CarNameList.OldCopper.rawValue, initialSpeed: 4, maxSpeedForward: 150, maxSpeedBackward: 60, turningSpeed: 0.006, accelerationRate: 1, secondaryAcceleration: 0.01, brakeRate: 1.5, smokeRate: 10)
+        chowerler = Car(scene: self, name: CarNameList.Chowerler.rawValue, initialSpeed: 10, maxSpeedForward: 200, maxSpeedBackward: 75, turningSpeed: 0.012, accelerationRate: 1, secondaryAcceleration: 0.01, brakeRate: 2, smokeRate: 10)
         
         // Old Copper
         oldCopper!.node = childNode(withName: CAR_TEXTURE_NAMES.oldCopper) as? SKSpriteNode
@@ -33,6 +33,12 @@ extension Level1 {
         oldCopper!.node?.zPosition = 2
         oldCopper!.node?.anchorPoint = CGPoint(x: 0.47, y: 0.5)
         
+        
+        // old copper engine smoke
+        var refNode = oldCopper!.node!.childNode(withName: "smoke-emitter")
+        oldCopper!.smokeEmitter = refNode?.children[0] as? SKEmitterNode
+        oldCopper!.stopEngine()
+        
         // old copper sounds
         // old copper engine start sound
         let oldCopperEngineStartSound = EngineSound.old_copper_engine_start.audio
@@ -51,6 +57,13 @@ extension Level1 {
         oldCopperEngineDrivingSound.name = EngineSound.old_copper_driving.rawValue
         oldCopperEngineDrivingSound.autoplayLooped = false
         oldCopper!.node?.addChild(oldCopperEngineDrivingSound)
+        
+        // old copper engine still sound
+        let oldCopperEngineStillSound = EngineSound.old_copper_engine_still.audio
+        oldCopperEngineStillSound.name = EngineSound.old_copper_engine_still.rawValue
+        oldCopperEngineStillSound.autoplayLooped = false
+        oldCopperEngineStillSound.isPositional = true
+        oldCopper!.node?.addChild(oldCopperEngineStillSound)
         
         // old copper signalization sound
         let oldCopperSignalizationSound = Sound.car_signalization.audio
@@ -79,6 +92,11 @@ extension Level1 {
         chowerler!.node?.physicsBody?.angularDamping = 3.4
         chowerler!.node?.physicsBody?.linearDamping = 12.0
         chowerler!.node?.physicsBody?.restitution = 0.01
+        
+        // chowerler engine smoke
+        refNode = chowerler!.node!.childNode(withName: "smoke-emitter")
+        chowerler!.smokeEmitter = refNode?.children[0] as? SKEmitterNode
+        chowerler!.stopEngine()
         
         
         chowerler!.node?.physicsBody?.mass = 1061

@@ -49,6 +49,7 @@ class ParkingWorkGame: SKScene {
     var runButton: SKShapeNode?
     var taskButton: SKShapeNode?
     var menuButton: SKShapeNode?
+    var inventoryButton: SKSpriteNode?
     
     // Driving button
     var brakeButton: SKShapeNode?
@@ -173,6 +174,7 @@ class ParkingWorkGame: SKScene {
     let pigeonCategory: UInt32 = 1 << 8
     let trashBakCategory: UInt32 = 1 << 9
     let completionSquareCategory: UInt32 = 1 << 10
+    let lightCategory: UInt32 = 1 << 11
     
     var messagesInChat: [SKLabelNode?] = []
     

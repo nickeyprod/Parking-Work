@@ -34,8 +34,8 @@ extension ParkingWorkGame {
             dy = dy < 0 ? -(PLAYER_SPEED + 0.7) : PLAYER_SPEED + 0.7
         }
         
-        print("Player dest pos : ", player!.destinationPosition)
-        print("Player curr pos : ", player!.node!.position)
+//        print("Player dest pos : ", player!.destinationPosition)
+//        print("Player curr pos : ", player!.node!.position)
 
         if floor(player!.destinationPosition!.x) == floor(player!.node!.position.x) {
             dx = 0
@@ -44,8 +44,8 @@ extension ParkingWorkGame {
             dy = 0
         }
         
-        print(floor(player!.destinationPosition!.y), floor(player!.node!.position.y))
-        print(floor(player!.destinationPosition!.x), floor(player!.node!.position.x))
+//        print(floor(player!.destinationPosition!.y), floor(player!.node!.position.y))
+//        print(floor(player!.destinationPosition!.x), floor(player!.node!.position.x))
         
         if dx != 0 || dy != 0 {
             

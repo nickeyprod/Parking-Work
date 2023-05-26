@@ -263,7 +263,9 @@ extension Player {
                 doorLockedSound.run(.play()) {
                     // play engine start sound if found it
                     if let engineStartSound = car.node?.childNode(withName: EngineSound.old_copper_engine_start.rawValue) {
-                        engineStartSound.run(.play())
+                        engineStartSound.run(.play()) {
+                            car.engineStarted = true
+                        }
                     }
                 }
             }
@@ -271,9 +273,13 @@ extension Player {
             // else just engine starts
             // play engine start sound if found it
             if let engineStartSound = car.node?.childNode(withName: EngineSound.old_copper_engine_start.rawValue) {
-                engineStartSound.run(.play())
+                engineStartSound.run(.play()) {
+                    car.engineStarted = true
+                }
             }
         }
+        // start smoke
+        car.startEngine()
         
         // remove enter to car button
         self.scene.enterToCarBtn?.removeFromParent()
@@ -299,9 +305,12 @@ extension Player {
         
         // off collision
         self.node?.physicsBody?.categoryBitMask = 0
+        self.node?.physicsBody?.contactTestBitMask = 0
+        self.node?.physicsBody?.collisionBitMask = 0
         
         // hide player
         self.node?.alpha = 0
+        
         // position player in the center of car
         self.node?.position = car.node!.position
         
@@ -360,7 +369,7 @@ extension Player {
         // rotate camera back to normal initial position
         self.scene.cameraNode?.zRotation = self.scene.initialCameraRotation!
         
-        let futurePlayerPos = CGPoint(x: (self.drivingCar?.node?.frame.maxX)!, y: (self.drivingCar?.node?.frame.midY)!)
+        let futurePlayerPos = CGPoint(x: (self.drivingCar?.node?.frame.maxX)! + 50, y: (self.drivingCar?.node?.frame.midY)! + 50)
         
         // nodes at position
 //        let nodesAtPos = self.scene.nodes(at: futurePlayerPos)
@@ -378,13 +387,7 @@ extension Player {
         
         // return back physic body collision
         self.node?.physicsBody?.categoryBitMask = self.scene.playerCategory
-        
-        
-        print("============>>>>>>>>> set dest pos to: ", futurePlayerPos, "============<<<<<<<<<<<")
-        
-//        print("player pos: ", self.node?.position)
-//        print("furure player pos: ", self.node?.position)
-//        print("camera position: ", self.scene.cameraNode?.position)
+        self.node?.physicsBody?.collisionBitMask = self.scene.boundaryCategory | self.scene.carCategory | self.scene.trashBakCategory
         
         // zoom out camera a bit
         self.scene.zoomCamera(to: self.scene.minScale + 0.20, duration: 0.7)

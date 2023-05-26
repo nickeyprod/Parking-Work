@@ -23,14 +23,18 @@ enum Sound: String {
 }
 
 enum MenuSounds: String {
-    case button_click
+    case button_click, bag_open
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
     }
     
-    var audio: SKAudioNode {
-        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+    var audio: SKAudioNode? {
+//        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        guard let urlString = Bundle.main.path(forResource: rawValue, ofType: "wav") else { return nil }
+        print(urlString)
+        let audio = SKAudioNode(url: URL(fileURLWithPath: urlString))
+        
         return audio
     }
 }
@@ -50,7 +54,7 @@ enum CitySound: String {
 }
 
 enum EngineSound: String {
-    case old_copper_engine_start, old_copper_acceleration, old_copper_driving
+    case old_copper_engine_start, old_copper_acceleration, old_copper_driving, old_copper_engine_still
     
     
     var action: SKAction {
@@ -67,10 +71,12 @@ enum CarCollisionSounds: String {
     case car_collision_01, car_collision_02, car_collision_03
 
     var action: SKAction {
+        
+        
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
     }
     
-    var audio: SKAudioNode {
+    var audio: SKAudioNode? {
         let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
         audio.isPositional = true
         return audio
