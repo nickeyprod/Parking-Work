@@ -300,9 +300,6 @@ extension Player {
         // remove target circle sprite from tilemap
         self.scene.targetCircleSprite?.removeFromParent()
         
-        // turning off gestures so we can use multitouch for driving
-        self.scene.turnOffGestureRecognizer()
-        
         // off collision
         self.node?.physicsBody?.categoryBitMask = 0
         self.node?.physicsBody?.contactTestBitMask = 0
@@ -331,6 +328,9 @@ extension Player {
         
         // switch to driving ui
         self.scene.switchToCarDrivingUI()
+        
+        // turning off gestures so we can use multitouch for driving
+        self.scene.turnOffGestureRecognizer()
         
         // set car that player currently driving
         self.drivingCar = car

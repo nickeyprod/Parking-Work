@@ -313,6 +313,10 @@ class ParkingWorkGame: SKScene {
     
     func turnOffGestureRecognizer() {
         self.view?.removeGestureRecognizer(self.pinch!)
+        for gesture in (self.view?.gestureRecognizers)! {
+            gesture.isEnabled = false
+            gesture.removeTarget(self, action: #selector(pinchHandler))
+        }
     }
     
 }

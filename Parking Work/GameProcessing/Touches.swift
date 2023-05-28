@@ -180,13 +180,14 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(touches)
+        
         // need to turn off specific buttons! for driving! not all!
         self.sliderTouchIsHolded = false
         
         startTouchPosition = nil
         
         for touch in touches {
+            
             let touchLocation = touch.location(in: self)
             let touchedNode = atPoint(touchLocation)
               
