@@ -184,6 +184,18 @@ extension ParkingWorkGame {
         // need to turn off specific buttons! for driving! not all!
         self.sliderTouchIsHolded = false
         
+        // off run
+        isRunButtonHolded = false
+        self.runButton?.run(.scale(to: 1.0, duration: 0))
+        
+        // off drive
+        self.driveBtnHolded = false
+        self.runButton?.run(.scale(to: 1.0, duration: 0))
+        
+        // off brake
+        self.brakeBtnHolded = false
+        self.brakeButton?.run(.scale(to: 1.0, duration: 0))
+        
         startTouchPosition = nil
         
         for touch in touches {
@@ -198,8 +210,8 @@ extension ParkingWorkGame {
                 setTarget(at: touchLocation)
             }
             if touchedNode.name == "ui-runBtn" || touchedNode.name == "ui-runBtnImg" {
-                isRunButtonHolded = false
-                self.runButton?.run(.scale(to: 1.0, duration: 0))
+//                isRunButtonHolded = false
+//                self.runButton?.run(.scale(to: 1.0, duration: 0))
                 
             } else if touchedNode.name == "ui-driveBtn" || touchedNode.name == "ui-driveBtnImg" {
                 self.driveBtnHolded = false

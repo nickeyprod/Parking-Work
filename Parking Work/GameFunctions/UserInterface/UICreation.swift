@@ -184,7 +184,7 @@ extension ParkingWorkGame {
 
 
         // set mini map level sprite
-        miniMapSprite = SKSpriteNode(texture: SKTexture(image: UIImage(named: "minimap")!))
+        miniMapSprite = SKSpriteNode(texture: SKTexture(image: UIImage(named: "level\(levelNum)_minimap")!))
         miniMapSprite?.size.width = mapWidth
         miniMapSprite?.size.height = mapHeight
         

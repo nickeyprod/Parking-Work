@@ -1,5 +1,5 @@
 //
-//  IntroScene.swift
+//  Intro.swift
 //  Parking Work
 //
 //  Created by Николай Ногин on 08.03.2023.
@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class IntroScene: ParkingWorkGame {
+class Intro: ParkingWorkGame {
     
     var subtitlesSprite: SKSpriteNode?
     var backImage: SKSpriteNode?
