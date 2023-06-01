@@ -22,6 +22,13 @@ enum Sound: String {
     }
 }
 
+enum LevelListSounds: String {
+    case level_list_car_passing_by
+    var action: SKAction {
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
+    }
+}
+
 enum MenuSounds: String {
     case button_click, bag_open
     

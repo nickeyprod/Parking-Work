@@ -247,6 +247,10 @@ class ParkingWorkGame: SKScene {
     /// Setup all initial values (or variables) needed for start the game
     func setupInitialGameValues() {
         
+        print("setup values")
+        
+        print(player?.node)
+        
         // get display width and height
         displayWidth = displaySize.width
         displayHeight = displaySize.height

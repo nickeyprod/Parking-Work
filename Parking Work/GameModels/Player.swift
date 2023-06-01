@@ -9,7 +9,7 @@ import SpriteKit
 
 class Player {
     
-    init(scene: SKScene, name: String, node: SKNode) {
+    init(scene: SKScene, name: String, node: SKNode? = nil) {
         self.scene = (scene as? ParkingWorkGame)!
         self.name = name
         self.node = node
@@ -21,6 +21,11 @@ class Player {
     let name: String
     
     var destinationPosition: CGPoint?
+    
+    // Last Opened level
+    var processedLevels: [Int: String] = [
+        1: "opened",
+    ]
     
     var unlockSkill: Float = 10.0
     var reputation: Float = 0.0

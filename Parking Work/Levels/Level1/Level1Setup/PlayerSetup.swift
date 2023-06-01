@@ -12,7 +12,7 @@ import SpriteKit
 extension Level1 {
     /// Getting player node from game scene, setting player categoryBitMask, collisionBitMask, for collision processing. Setting player zPosition, so it was above tilemap.
     func setupPlayer() {
-        // player
+        
         if let playerNode = childNode(withName: "playerNode") {
             player = Player(scene: self, name: "Фёдор", node: playerNode)
         }

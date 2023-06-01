@@ -73,7 +73,6 @@ class SplashScreen: ParkingWorkGame {
         // show parking work on asphalt image
         self.videoNode?.removeFromParent()
         parkingWorkImage?.run(SKAction.fadeIn(withDuration: 1.0), completion: {
-            print("11")
             let cigaretteImg = UIImage(named: "sigareta")
             let cigarette = SKSpriteNode(texture: SKTexture(image: cigaretteImg!))
             cigarette.position = CGPoint(x: 90, y: -60)
@@ -107,7 +106,7 @@ class SplashScreen: ParkingWorkGame {
     }
     
     func runGame() {
-        let gameScene = GKScene(fileNamed: "IntroScene")?.rootNode as! ParkingWorkGame
+        let gameScene = GKScene(fileNamed: "LevelListScene")?.rootNode as! ParkingWorkGame
         
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
@@ -140,13 +139,13 @@ class SplashScreen: ParkingWorkGame {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self)
+//        for touch in touches {
+//            let location = touch.location(in: self)
             
             // buttons pressed check
-            let touchedNode = atPoint(location)
-            print("touch")
-        }
+//            let touchedNode = atPoint(location)
+//            print("touch")
+//        }
     }
    
                            

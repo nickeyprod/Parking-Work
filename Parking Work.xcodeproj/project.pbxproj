@@ -17,6 +17,10 @@
 		D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */; };
 		D11C745629ED703000C0583D /* SetupPigeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C745529ED703000C0583D /* SetupPigeon.swift */; };
 		D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F2E15298972EB008976EA /* CAR_LIST.swift */; };
+		D15008632A274B6500F24418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D15008612A274B6500F24418 /* Assets.xcassets */; };
+		D15008692A274BEC00F24418 /* CarsDrivingBy.sks in Resources */ = {isa = PBXBuildFile; fileRef = D15008682A274BEC00F24418 /* CarsDrivingBy.sks */; };
+		D150086B2A28BF5500F24418 /* level_list_car_passing_by.wav in Resources */ = {isa = PBXBuildFile; fileRef = D150086A2A28BF5500F24418 /* level_list_car_passing_by.wav */; };
+		D150086D2A28E02700F24418 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = D150086C2A28E02700F24418 /* Level.swift */; };
 		D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */; };
 		D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */; };
 		D15BCD9C29F1380B00726BE3 /* SetupSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BCD9B29F1380B00726BE3 /* SetupSound.swift */; };
@@ -82,7 +86,6 @@
 		D1BC8CE229B8752900F9C597 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC8CE129B8752900F9C597 /* Intro.swift */; };
 		D1C717EB2A20A13800E36C9D /* bag_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1C717EA2A20A13800E36C9D /* bag_open.wav */; };
 		D1C717EE2A20AA9500E36C9D /* OldCopperEngineSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1C717EC2A20AA9500E36C9D /* OldCopperEngineSmoke.sks */; };
-		D1C717EF2A20AA9500E36C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C717ED2A20AA9500E36C9D /* Assets.xcassets */; };
 		D1C717F52A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1C717F32A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks */; };
 		D1C717F62A20C5BB00E36C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C717F42A20C5BB00E36C9D /* Assets.xcassets */; };
 		D1C717F82A20CB8D00E36C9D /* old_copper_engine_still.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1C717F72A20CB8D00E36C9D /* old_copper_engine_still.wav */; };
@@ -107,6 +110,10 @@
 		D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParkingWorkTileSets.sks; sourceTree = "<group>"; };
 		D11C745529ED703000C0583D /* SetupPigeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPigeon.swift; sourceTree = "<group>"; };
 		D13F2E15298972EB008976EA /* CAR_LIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_LIST.swift; sourceTree = "<group>"; };
+		D15008612A274B6500F24418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../AuxillaryScenes/LevelListScene/Assets.xcassets; sourceTree = "<group>"; };
+		D15008682A274BEC00F24418 /* CarsDrivingBy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CarsDrivingBy.sks; sourceTree = "<group>"; };
+		D150086A2A28BF5500F24418 /* level_list_car_passing_by.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = level_list_car_passing_by.wav; sourceTree = "<group>"; };
+		D150086C2A28E02700F24418 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pigeon_flying_away.wav; sourceTree = "<group>"; };
 		D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sound_birds.wav; sourceTree = "<group>"; };
 		D15BCD9B29F1380B00726BE3 /* SetupSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSound.swift; sourceTree = "<group>"; };
@@ -172,7 +179,6 @@
 		D1BC8CE129B8752900F9C597 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		D1C717EA2A20A13800E36C9D /* bag_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bag_open.wav; sourceTree = "<group>"; };
 		D1C717EC2A20AA9500E36C9D /* OldCopperEngineSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OldCopperEngineSmoke.sks; sourceTree = "<group>"; };
-		D1C717ED2A20AA9500E36C9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1C717F32A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ChowerlerEngineSmoke.sks; sourceTree = "<group>"; };
 		D1C717F42A20C5BB00E36C9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1C717F72A20CB8D00E36C9D /* old_copper_engine_still.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_engine_still.wav; sourceTree = "<group>"; };
@@ -364,6 +370,7 @@
 			children = (
 				D1F4CFC429B0C70E003CB541 /* Car.swift */,
 				D1A7180429CC405500A488BF /* Player.swift */,
+				D150086C2A28E02700F24418 /* Level.swift */,
 			);
 			path = GameModels;
 			sourceTree = "<group>";
@@ -389,6 +396,7 @@
 		D1A3F5AC299F9BB900084380 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D150086A2A28BF5500F24418 /* level_list_car_passing_by.wav */,
 				D1C717EA2A20A13800E36C9D /* bag_open.wav */,
 				D1B259E12A1EB380001C9A05 /* cigarette_falling.wav */,
 				D16ACAFE2A1771AF000878C4 /* CarCollisions */,
@@ -454,7 +462,8 @@
 			isa = PBXGroup;
 			children = (
 				D1C717F22A20C5A200E36C9D /* Cars */,
-				D1C717ED2A20AA9500E36C9D /* Assets.xcassets */,
+				D15008612A274B6500F24418 /* Assets.xcassets */,
+				D15008682A274BEC00F24418 /* CarsDrivingBy.sks */,
 				D1B259DD2A1EAA51001C9A05 /* CigaretteSmoke.sks */,
 			);
 			path = Emitters;
@@ -554,6 +563,7 @@
 				D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */,
 				D1A3F5B0299F9E0C00084380 /* success_bell.wav in Resources */,
 				D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */,
+				D15008692A274BEC00F24418 /* CarsDrivingBy.sks in Resources */,
 				D1C717EE2A20AA9500E36C9D /* OldCopperEngineSmoke.sks in Resources */,
 				D1C717F62A20C5BB00E36C9D /* Assets.xcassets in Resources */,
 				D1C717F82A20CB8D00E36C9D /* old_copper_engine_still.wav in Resources */,
@@ -567,6 +577,7 @@
 				D1B259E22A1EB380001C9A05 /* cigarette_falling.wav in Resources */,
 				D1198F032979B76E00701A24 /* Assets.xcassets in Resources */,
 				D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */,
+				D15008632A274B6500F24418 /* Assets.xcassets in Resources */,
 				D16ACB062A177ABB000878C4 /* car_collision_01.wav in Resources */,
 				D16ACB032A177AB3000878C4 /* car_collision_02.wav in Resources */,
 				D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */,
@@ -578,13 +589,13 @@
 				D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */,
 				D1B856432A1BB1A300C8B61B /* old_copper_driving.wav in Resources */,
 				D16D775729A4E371004EC225 /* traffic1.wav in Resources */,
+				D150086B2A28BF5500F24418 /* level_list_car_passing_by.wav in Resources */,
 				D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */,
 				D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */,
 				D1B259D32A1E1A24001C9A05 /* SplashScreenScene.sks in Resources */,
 				D1C717F52A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks in Resources */,
 				D1B856442A1BB1A300C8B61B /* old_copper_acceleration_old.wav in Resources */,
 				D1B259E02A1EAA51001C9A05 /* Assets.xcassets in Resources */,
-				D1C717EF2A20AA9500E36C9D /* Assets.xcassets in Resources */,
 				D16FD69C29A270A70097BC3E /* Level1Scene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +637,7 @@
 				D1BC8CE229B8752900F9C597 /* Intro.swift in Sources */,
 				D16EA75E2A023C09001699E5 /* PopUpCreation.swift in Sources */,
 				D16EA7642A02407D001699E5 /* UIControls.swift in Sources */,
+				D150086D2A28E02700F24418 /* Level.swift in Sources */,
 				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
 				D16ACB0C2A1A9528000878C4 /* SetupLevelCompletion.swift in Sources */,
