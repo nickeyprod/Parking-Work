@@ -24,7 +24,11 @@ class LevelList: ParkingWorkGame {
     var levelPic: SKSpriteNode?
     var levelDescSprite: SKSpriteNode?
     var startButton: SKSpriteNode?
+    
+    // items panel
     var itemsPanel: SKSpriteNode?
+    var shopLabel: SKLabelNode?
+    var shopButton: SKSpriteNode?
     
     // current selected level
     var currSelectedLevel: Int?
@@ -34,6 +38,9 @@ class LevelList: ParkingWorkGame {
     var reputationNeededLabel: SKLabelNode?
     var levelPicture: SKLabelNode?
     var levelDescLabel: SKLabelNode?
+    
+    // sounds
+    var backgroundSoundCars: SKAudioNode?
 
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -54,7 +61,8 @@ class LevelList: ParkingWorkGame {
         fillCurrSelectedLevelDescription()
         
         // background sound
-        run(.repeatForever(LevelListSounds.level_list_car_passing_by.action))
+        backgroundSoundCars = LevelListSounds.level_list_car_passing_by.audio
+        addChild(backgroundSoundCars!)
     }
     
     func loadPlayerProgress() {
@@ -270,6 +278,13 @@ class LevelList: ParkingWorkGame {
         
         itemsPanel = rightSide?.childNode(withName: "ItemsPanel") as? SKSpriteNode
         
+        shopButton = itemsPanel?.childNode(withName: "ShopButton") as? SKSpriteNode
+        
+        shopLabel = itemsPanel?.childNode(withName: "ShopLabel") as? SKLabelNode
+        shopLabel?.verticalAlignmentMode = .center
+        shopLabel?.horizontalAlignmentMode = .center
+        shopLabel?.position = CGPoint(x: (shopButton?.position.x)!, y: (shopButton?.position.y)! + 28)
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -306,8 +321,10 @@ class LevelList: ParkingWorkGame {
                 }
             } else if nodeName == "ShopButton" {
                 run(MenuSounds.button_click.action)
-                touchedNode.run(.scale(to: 1.1, duration: 0.1)) {
-                    touchedNode.run(.scale(to: 1.0, duration: 0.1))
+                shopLabel?.run(.scale(to: 1.1, duration: 0.1))
+                touchedNode.parent!.run(.scale(to: 1.1, duration: 0.1)) {
+                    touchedNode.parent!.run(.scale(to: 1.0, duration: 0.1))
+                    self.shopLabel?.run(.scale(to: 1.0, duration: 0.1))
                 }
                 print("Shop Open")
             }
@@ -373,6 +390,8 @@ class LevelList: ParkingWorkGame {
     
     func startLevel(num: Int) {
         if player?.processedLevels[num] == "completed" || player?.processedLevels[num] == "opened" {
+            self.removeAllActions()
+            backgroundSoundCars?.run(.stop())
             let levelScene = SKScene(fileNamed: "Level\(num)Scene")
             let transition = SKTransition.fade(with: .black, duration: 1.0)
             let displaySize: CGRect = UIScreen.main.bounds
@@ -382,6 +401,10 @@ class LevelList: ParkingWorkGame {
             self.view?.presentScene(levelScene!, transition: transition)
         }
 
+    }
+    
+    deinit {
+        print("deinit levellist")
     }
     
 }

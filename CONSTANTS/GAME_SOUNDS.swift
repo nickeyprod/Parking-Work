@@ -27,6 +27,13 @@ enum LevelListSounds: String {
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
     }
+    
+    var audio: SKAudioNode? {
+        guard let urlString = Bundle.main.path(forResource: rawValue, ofType: "wav") else { return nil }
+        let audio = SKAudioNode(url: URL(fileURLWithPath: urlString))
+        
+        return audio
+    }
 }
 
 enum MenuSounds: String {
