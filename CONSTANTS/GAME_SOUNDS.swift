@@ -75,12 +75,10 @@ enum EngineSound: String {
 }
 
 enum CarCollisionSounds: String {
-    case car_collision_01, car_collision_02, car_collision_03
+    case car_collision_01, car_collision_02, car_collision_03, plastic_hit
 
     var action: SKAction {
-        
-        
-        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
     }
     
     var audio: SKAudioNode? {

@@ -61,7 +61,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
                 self.canPlayBoundaryCrashSound = true
             }
         case (trashBakCategory | carCategory):
-            print("Plastic boom sound")
+            self.run(CarCollisionSounds.plastic_hit.action)
         case (trashBakCategory | pigeonCategory):
             playerAndPigeonContact(contact.bodyA, contact.bodyB)
         case (playerCategory | pigeonCategory):

@@ -19,8 +19,8 @@ extension ParkingWorkGame {
         window.alpha = 0
         window.zPosition = 11
         
-        window.fillColor = UIColor(named: Colors.OpenCarWindowColor.rawValue)!
-        window.strokeColor = UIColor(named: Colors.OpenCarWindowColorStroke.rawValue)!
+        window.fillColor = UIColor(named: COLORS.OpenCarWindowColor.rawValue)!
+        window.strokeColor = UIColor(named: COLORS.OpenCarWindowColorStroke.rawValue)!
         window.name = "ui-openCarMessageWindow"
         
         window.position = CGPoint(x: 16, y: -((displayHeight! / 2) - 28))
@@ -33,14 +33,14 @@ extension ParkingWorkGame {
         messageLabel.verticalAlignmentMode = .center
         messageLabel.fontName = "Copperplate"
         messageLabel.fontSize = 16
-        messageLabel.fontColor = UIColor(named: Colors.OpenCarWindowCarMsgColor.rawValue)
+        messageLabel.fontColor = UIColor(named: COLORS.OpenCarWindowCarMsgColor.rawValue)
         
         window.addChild(messageLabel)
         
         //  open car button
         let yesBtn = SKShapeNode(rect: CGRect(x: (window.frame.width / 2) - 64, y: -15, width: 56, height: 28), cornerRadius: 6.0)
-        yesBtn.fillColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
-        yesBtn.strokeColor = UIColor(named: Colors.OpenCarYesBtnColor.rawValue)!
+        yesBtn.fillColor = UIColor(named: COLORS.OpenCarYesBtnColor.rawValue)!
+        yesBtn.strokeColor = UIColor(named: COLORS.OpenCarYesBtnColor.rawValue)!
         yesBtn.name = "ui-yesOpenLockBtn"
         window.addChild(yesBtn)
         
@@ -64,8 +64,8 @@ extension ParkingWorkGame {
         window.alpha = 0
         window.zPosition = 200 // player=10, suggestpopUp=11 + 1
         
-        window.fillColor = UIColor(named: Colors.OpenCarSuccessWindowColor.rawValue)!
-        window.strokeColor = UIColor(named: Colors.OpenCarSuccessWindowColor.rawValue)!
+        window.fillColor = UIColor(named: COLORS.OpenCarSuccessWindowColor.rawValue)!
+        window.strokeColor = UIColor(named: COLORS.OpenCarSuccessWindowColor.rawValue)!
         window.name = "openCarSuccessWindow"
         
         self.cameraNode?.addChild(window)
@@ -75,7 +75,7 @@ extension ParkingWorkGame {
         successLabel.name = "successLabel"
         successLabel.fontSize = 32
         successLabel.fontName = "American Typewriter Semibold"
-        successLabel.fontColor = UIColor(named: Colors.OpenCarSuccessWindowSuccessLabelColor.rawValue)
+        successLabel.fontColor = UIColor(named: COLORS.OpenCarSuccessWindowSuccessLabelColor.rawValue)
         successLabel.position = CGPoint(x: 0, y: 80)
         window.addChild(successLabel)
         
@@ -83,7 +83,7 @@ extension ParkingWorkGame {
         let toGarageLabel = SKLabelNode(text: "Old Copper появится в вашем гараже.")
         toGarageLabel.fontName = "American Typewriter Semibold"
         toGarageLabel.fontSize = 24
-        toGarageLabel.fontColor = UIColor(named: Colors.OpenCarSuccessWindowGarageLabelColor.rawValue)
+        toGarageLabel.fontColor = UIColor(named: COLORS.OpenCarSuccessWindowGarageLabelColor.rawValue)
         toGarageLabel.position = CGPoint(x: 0, y: 0)
         toGarageLabel.name = "garageLabel"
         
@@ -145,7 +145,7 @@ extension ParkingWorkGame {
         lockTypeLabel.text = "Пассажирский замок"
         lockTypeLabel.fontName = "Hoefler Text"
         lockTypeLabel.fontSize = 18
-        lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
+        lockTypeLabel.fontColor = UIColor(named: COLORS.OpenCarWindowLockTypeColor.rawValue)
         lockTypeLabel.verticalAlignmentMode = .top
         lockTypeLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 56)
         targetSquareLockTypeLabelPos = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 56)
@@ -157,7 +157,7 @@ extension ParkingWorkGame {
         complexityLabel.name = "complexity-label"
         complexityLabel.fontName = "Hoefler Text"
         complexityLabel.fontSize = 18
-        complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
+        complexityLabel.fontColor = UIColor(named: COLORS.OpenCarWindowComplexityColor.rawValue)
         complexityLabel.verticalAlignmentMode = .top
         complexityLabel.position = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 76)
         targetSquareComplexityLabelPos = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 76)
@@ -168,7 +168,7 @@ extension ParkingWorkGame {
         complexityNumLabel.name = "complexityNumLevel"
         complexityNumLabel.fontName = "Hoefler Text"
         complexityNumLabel.fontSize = 18
-        complexityNumLabel.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+        complexityNumLabel.fontColor = UIColor(named: COLORS.OpenCarLockComplexityLightColor.rawValue)
         complexityNumLabel.verticalAlignmentMode = .top
         complexityNumLabel.position = CGPoint(x: 72, y: -3)
     

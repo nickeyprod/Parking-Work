@@ -24,6 +24,7 @@ class LevelList: ParkingWorkGame {
     var levelPic: SKSpriteNode?
     var levelDescSprite: SKSpriteNode?
     var startButton: SKSpriteNode?
+    var itemsPanel: SKSpriteNode?
     
     // current selected level
     var currSelectedLevel: Int?
@@ -99,7 +100,7 @@ class LevelList: ParkingWorkGame {
             if runFist {
                 runFist = false
                 levelSpriteCell = rightSide?.childNode(withName: "Level_1_Sprite") as? SKSpriteNode
-                levelSpriteCell?.size = CGSize(width: (rightSide?.size.width)!, height: 80)
+                levelSpriteCell?.size = CGSize(width: (displayWidth! / 2) - 50, height: 80)
                 levelSpriteCell?.anchorPoint = CGPoint(x: 0, y: 0)
                 levelSpriteCell?.position = CGPoint(x: 0, y: 0)
                 prevPos = levelSpriteCell?.position
@@ -154,20 +155,8 @@ class LevelList: ParkingWorkGame {
     }
     
     func fillCurrSelectedLevelDescription() {
-        //sprite cells setup
-        // left side sprite
-        leftSide?.size = CGSize(width: displayWidth! / 2, height: displayHeight!)
-        leftSide?.zRotation = 0
-        leftSide?.anchorPoint = CGPoint(x: 1, y: 0)
-        leftSide?.position = CGPoint(x: 0, y: (-displayHeight! / 2))
-        
-        // right side sprite
-        rightSide?.size = CGSize(width: displayWidth! / 2, height: displayHeight!)
-        rightSide?.zRotation = 0
-        rightSide?.anchorPoint = CGPoint(x: 0, y: 0)
-        rightSide?.position = CGPoint(x: 1, y: (-displayHeight!) / 2)
-        rightSide?.color = UIColor.clear
-        
+        //left side setup - level description
+
         // main header (name of level)
         mainHeader?.position = CGPoint(x: -(leftSide?.frame.width)! / 2, y: (leftSide?.frame.height)! - 35)
         mainHeader?.verticalAlignmentMode = .center
@@ -196,6 +185,10 @@ class LevelList: ParkingWorkGame {
         startButton?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         startButton?.position = CGPoint(x: -(leftSide?.frame.width)! / 2, y: (levelDescSprite?.position.y)! - ((levelDescSprite?.frame.height)! + 10))
         
+        itemsPanel?.size = CGSize(width: 50, height: displayHeight!)
+        itemsPanel?.position = CGPoint(x: (rightSide?.frame.width)! + 25, y: (displayHeight! / 2))
+        
+        
     }
     
     func fillLevelDescription(selectedLvlNum: Int) {
@@ -207,16 +200,17 @@ class LevelList: ParkingWorkGame {
         let reputationForEnter = currLevel.reputationForEnter
         reputationNeededLabel?.text = "Репутация входа: \(reputationForEnter) (Ваша \(player!.reputation))"
         
+        
+        let btnLabel = startButton?.childNode(withName: "StartButtonText") as? SKLabelNode
+        
         // reputation label color
         if reputationForEnter > player!.reputation {
             reputationNeededLabel?.fontColor = .red
             startButton?.color = .darkGray
-            let btnLabel = startButton?.childNode(withName: "ButtonText") as? SKLabelNode
             btnLabel?.text = "Закрыто"
         } else {
-            reputationNeededLabel?.fontColor = UIColor(named: Colors.ReputationNeededGreen.rawValue)
-            startButton?.color = UIColor(named: Colors.PlayButtonNormal.rawValue)!
-            let btnLabel = startButton?.childNode(withName: "ButtonText") as? SKLabelNode
+            reputationNeededLabel?.fontColor = UIColor(named: COLORS.ReputationNeededGreen.rawValue)
+            startButton?.color = UIColor(named: COLORS.PlayButtonNormal.rawValue)!
             btnLabel?.text = "Играть"
         }
        
@@ -245,6 +239,19 @@ class LevelList: ParkingWorkGame {
         leftSide = childNode(withName: "LeftSideSprite") as? SKSpriteNode
         rightSide = childNode(withName: "RightSideSprite") as? SKSpriteNode
         
+        // right side sprite
+        rightSide?.size = CGSize(width: (displayWidth! / 2) - 50, height: displayHeight!)
+        rightSide?.zRotation = 0
+        rightSide?.anchorPoint = CGPoint(x: 0, y: 0)
+        rightSide?.position = CGPoint(x: 1, y: (-displayHeight!) / 2)
+        rightSide?.color = UIColor.clear
+        
+        // left side sprite
+        leftSide?.size = CGSize(width: displayWidth! / 2, height: displayHeight!)
+        leftSide?.zRotation = 0
+        leftSide?.anchorPoint = CGPoint(x: 1, y: 0)
+        leftSide?.position = CGPoint(x: 0, y: (-displayHeight! / 2))
+        
         let effectNode = SKEffectNode()
         leftSide?.removeFromParent()
         effectNode.addChild(leftSide!)
@@ -260,6 +267,8 @@ class LevelList: ParkingWorkGame {
         levelDescSprite = leftSide?.childNode(withName: "DescriptionSprite") as? SKSpriteNode
         levelDescLabel = levelDescSprite?.childNode(withName: "LevelDescription") as? SKLabelNode
         startButton = leftSide?.childNode(withName: "StartButton") as? SKSpriteNode
+        
+        itemsPanel = rightSide?.childNode(withName: "ItemsPanel") as? SKSpriteNode
         
     }
     
@@ -295,6 +304,12 @@ class LevelList: ParkingWorkGame {
                     touchedNode.run(.scale(to: 1.0, duration: 0.1))
                     self.startLevel(num: self.currSelectedLevel!)
                 }
+            } else if nodeName == "ShopButton" {
+                run(MenuSounds.button_click.action)
+                touchedNode.run(.scale(to: 1.1, duration: 0.1)) {
+                    touchedNode.run(.scale(to: 1.0, duration: 0.1))
+                }
+                print("Shop Open")
             }
 
         }
@@ -325,13 +340,12 @@ class LevelList: ParkingWorkGame {
         currSelectedLevelSprite?.alpha = 1
         
         currSelectedLevelSprite?.run(.scale(to: 1.1, duration: 0.1))
-        
         // blur animation effect
         let blurFilter = CIFilter(name: "CIBoxBlur",
                                   parameters: ["inputRadius": 30])
         leftSideWithEffect?.filter = blurFilter
         leftSideWithEffect?.blendMode = .multiply
-        
+
         
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
             currSelectedLevelSprite?.run(.scale(to: 1.0, duration: 0.1))
@@ -358,14 +372,16 @@ class LevelList: ParkingWorkGame {
     }
     
     func startLevel(num: Int) {
+        if player?.processedLevels[num] == "completed" || player?.processedLevels[num] == "opened" {
+            let levelScene = SKScene(fileNamed: "Level\(num)Scene")
+            let transition = SKTransition.fade(with: .black, duration: 1.0)
+            let displaySize: CGRect = UIScreen.main.bounds
+            // Set the scale mode to scale to fit the window
+            levelScene?.scaleMode = .aspectFill
+            levelScene?.size = displaySize.size
+            self.view?.presentScene(levelScene!, transition: transition)
+        }
 
-        let levelScene = SKScene(fileNamed: "Level\(num)Scene")
-        let transition = SKTransition.fade(with: .black, duration: 1.0)
-        let displaySize: CGRect = UIScreen.main.bounds
-        // Set the scale mode to scale to fit the window
-        levelScene?.scaleMode = .aspectFill
-        levelScene?.size = displaySize.size
-        self.view?.presentScene(levelScene!, transition: transition)
     }
     
 }

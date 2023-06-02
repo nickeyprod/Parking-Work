@@ -13,7 +13,7 @@ extension ParkingWorkGame {
     // blinks anxiety bar
     func hightLightAnxietyBar() {
         if self.anxietyLevel >= 110.0 {
-            self.anxietyOuterShape?.strokeColor = Colors.DangerStrokeRed
+            self.anxietyOuterShape?.strokeColor = COLORS.DangerStrokeRed
             self.anxietyInnerSprite?.color = .black
             
             if !animatedAnxietyFirst {

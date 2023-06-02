@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-enum Colors: String {
+enum COLORS: String {
     // Open Car Suggest Window
     case OpenCarWindowColor
     case OpenCarWindowColorStroke

@@ -25,7 +25,7 @@ extension ParkingWorkGame {
         let yPos = resumeGameBtn.frame.height
         resumeGameBtn.position = CGPoint(x: 0, y: yPos)
         resumeGameBtn.name = "ui-resumeGameBtn"
-        resumeGameBtn.fillColor = Colors.MenuButtonsColor
+        resumeGameBtn.fillColor = COLORS.MenuButtonsColor
 
         // resume game button label
         let resumeGameBtnLabel = SKLabelNode(text: "Продолжить")
@@ -51,7 +51,7 @@ extension ParkingWorkGame {
         let settingsGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
         settingsGameBtn.position = CGPoint(x: 0, y: yPos - yPos - 2 )
         settingsGameBtn.name = "ui-gameSettingsBtn"
-        settingsGameBtn.fillColor = Colors.MenuButtonsColor
+        settingsGameBtn.fillColor = COLORS.MenuButtonsColor
 
         // settings game button label
         let settingsGameBtnLabel = SKLabelNode(text: "Настройки")
@@ -70,7 +70,7 @@ extension ParkingWorkGame {
         let gameName = SKLabelNode(text: "Parking Work")
         gameName.fontSize = 54
         gameName.fontName = "Chalkduster"
-        gameName.fontColor = Colors.GameNameLabelColor
+        gameName.fontColor = COLORS.GameNameLabelColor
         gameName.position = CGPoint(x: 0, y: displayHeight! / 2 - 55)
         menuScreen?.addChild(gameName)
     }
@@ -117,7 +117,7 @@ extension ParkingWorkGame {
         // level task message
         let spriteRect = SKSpriteNode()
 //        spriteRect.size = CGSize(width: displayWidth! - 260, height: 100)
-        spriteRect.color = UIColor(named: Colors.TaskMessageBackground.rawValue)!
+        spriteRect.color = UIColor(named: COLORS.TaskMessageBackground.rawValue)!
         spriteRect.alpha = 0.9
         spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 130)
         

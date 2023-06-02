@@ -80,7 +80,7 @@ extension ParkingWorkGame {
             lockTypeLabel.name = "lockTypeLabel"
             lockTypeLabel.fontName = "Hoefler Text"
             lockTypeLabel.fontSize = 18
-            lockTypeLabel.fontColor = UIColor(named: Colors.OpenCarWindowLockTypeColor.rawValue)
+            lockTypeLabel.fontColor = UIColor(named: COLORS.OpenCarWindowLockTypeColor.rawValue)
             lockTypeLabel.verticalAlignmentMode = .top
             lockTypeLabel.position = targetSquareLockTypeLabelPos!
             
@@ -91,7 +91,7 @@ extension ParkingWorkGame {
             complexityLabel.fontName = "Hoefler Text"
             complexityLabel.fontSize = 18
             complexityLabel.position = targetSquareComplexityLabelPos!
-            complexityLabel.fontColor = UIColor(named: Colors.OpenCarWindowComplexityColor.rawValue)
+            complexityLabel.fontColor = UIColor(named: COLORS.OpenCarWindowComplexityColor.rawValue)
             complexityLabel.verticalAlignmentMode = .top
             
             targetSquare?.addChild(complexityLabel)
@@ -102,7 +102,7 @@ extension ParkingWorkGame {
             complexityNumLabel.fontName = "Hoefler Text"
             complexityNumLabel.fontSize = 18
             complexityNumLabel.position = CGPoint(x: 72, y: -3)
-            complexityNumLabel.fontColor = UIColor(named: Colors.OpenCarLockComplexityLightColor.rawValue)
+            complexityNumLabel.fontColor = UIColor(named: COLORS.OpenCarLockComplexityLightColor.rawValue)
             complexityNumLabel.verticalAlignmentMode = .top
             
             complexityLabel.addChild(complexityNumLabel)
@@ -115,12 +115,12 @@ extension ParkingWorkGame {
     
     func colorComplexity(chance: Float, complexityNum: SKLabelNode) {
         if chance < 1.0 {
-            complexityNum.fontColor = UIColor(named: Colors.OpenCarLockComplexityHardColor.rawValue)
+            complexityNum.fontColor = UIColor(named: COLORS.OpenCarLockComplexityHardColor.rawValue)
         }
         else if chance >= 1.0 && chance <= 2.0 {
-            complexityNum.fontColor = UIColor(named: Colors.OpenCarLockComplexityMiddleColor.rawValue)
+            complexityNum.fontColor = UIColor(named: COLORS.OpenCarLockComplexityMiddleColor.rawValue)
         } else if chance >= 2.0 {
-            complexityNum.fontColor = UIColor(named:  Colors.OpenCarLockComplexityLightColor.rawValue)
+            complexityNum.fontColor = UIColor(named:  COLORS.OpenCarLockComplexityLightColor.rawValue)
         }
     }
     
