@@ -30,7 +30,7 @@ class Player {
     var unlockSkill: Float = 10.0
     var reputation: Float = 0.0
     var money: Float = 75.0
-    var inventory: [String: String]?
+    var inventory: [GameItem?] = []
 
     // node
     var node: SKNode?
@@ -39,7 +39,9 @@ class Player {
     
     // Target
     var currTargetCar: Car?
+    var currTargetItem: GameItem?
     var currLockTarget: SKNode?
+    
     var triedToOpenComplexLockTimes = 0
     var triedToOpenJammedLockTimes = 0
     

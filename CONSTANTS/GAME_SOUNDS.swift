@@ -94,3 +94,11 @@ enum CarCollisionSounds: String {
         return audio
     }
 }
+
+enum InventorySounds: String {
+    case pickup_inventory
+    
+    var action: SKAction {
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
+    }
+}

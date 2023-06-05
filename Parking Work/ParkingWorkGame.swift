@@ -60,9 +60,6 @@ class ParkingWorkGame: SKScene {
     var leftButton: SKSpriteNode?
     var rightButton: SKSpriteNode?
     
-    var targetSquare: SKSpriteNode?
-    var tutorialWindow: SKShapeNode?
-    
     // tile Map dimensions
     var tileMapWidth: CGFloat?
     var tileMapHeight: CGFloat?
@@ -114,12 +111,18 @@ class ParkingWorkGame: SKScene {
     var anxietyBar: SKSpriteNode?
     var canReduceAnxiety: Bool = true
     
-    // Message windows
-    // Open Car Window
-    var openCarWindow: SKNode?
-    var openCarWindowNameLabel: SKLabelNode?
-    var openCarWindowLockTypeLabel: SKLabelNode?
-    var openCarWindowComplexityNum: SKLabelNode?
+    // Action Message window
+    var actionMessageWindow: SKNode?
+    
+    // Target Window
+    var targetWindow: SKSpriteNode?
+    var targetWindowNameLabel: SKLabelNode?
+    var targetWindowLockTypeLabel: SKLabelNode?
+    var targetWindowComplexityNum: SKLabelNode?
+    
+    // Tutorial Window
+    var tutorialWindow: SKShapeNode?
+    
     var windowChat: SKCropNode?
     var scrollingChatNode: SKSpriteNode?
     var chatSlider: SKSpriteNode?
@@ -131,11 +134,11 @@ class ParkingWorkGame: SKScene {
     var openCarSuccessWindowGoodBtn: SKNode?
     var openCarSuccessWindowGoodBtnLabel: SKLabelNode?
     
-    // target square label positions
-    var targetSquareInitialHeight: CGFloat?
-    var targetSquareCarNameLabelPos: CGPoint?
-    var targetSquareLockTypeLabelPos: CGPoint?
-    var targetSquareComplexityLabelPos: CGPoint?
+    // target window label positions
+    var targetWindowInitialHeight: CGFloat?
+    var targetWindowNameLabelPos: CGPoint?
+    var targetWindowLockTypeLabelPos: CGPoint?
+    var targetWindowComplexityLabelPos: CGPoint?
     
     // Time
     var previousTimeInterval: TimeInterval = 0
@@ -175,6 +178,7 @@ class ParkingWorkGame: SKScene {
     let trashBakCategory: UInt32 = 1 << 9
     let completionSquareCategory: UInt32 = 1 << 10
     let lightCategory: UInt32 = 1 << 11
+    let gameItemCategory: UInt32 = 1 << 12
     
     var messagesInChat: [SKLabelNode?] = []
     
@@ -183,6 +187,12 @@ class ParkingWorkGame: SKScene {
     let maxScale: CGFloat = 2.02
     
     var pinch: UIPinchGestureRecognizer?
+    
+    // all items that it is on the level
+    var itemsOnLevel: [GameItem?] = []
+    
+    // default to open car
+    var actionMessageType: MESSAGES_TYPES = .OpenCarAction
     
     deinit {
         print("deinit MAIN")
@@ -246,10 +256,6 @@ class ParkingWorkGame: SKScene {
     // MARK: - Initial Game Values Setup
     /// Setup all initial values (or variables) needed for start the game
     func setupInitialGameValues() {
-        
-        print("setup values")
-        
-        print(player?.node)
         
         // get display width and height
         displayWidth = displaySize.width

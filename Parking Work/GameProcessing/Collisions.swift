@@ -68,6 +68,8 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             playerAndPigeonContact(contact.bodyA, contact.bodyB)
         case (carCategory | pigeonCategory):
             playerAndPigeonContact(contact.bodyA, contact.bodyB)
+        case (playerCategory | gameItemCategory):
+            playerAndGameItemContact(contact.bodyA, contact.bodyB)
         case (carCategory | completionSquareCategory):
             if contact.bodyA.node?.name != "completion-target" {
                 if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
@@ -135,6 +137,32 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
 //            print("Some other contact ended")
         }
     }
+    
+    func playerAndGameItemContact (_ bodyA: SKPhysicsBody, _ bodyB: SKPhysicsBody) {
+        if (bodyA.node == nil || bodyB.node == nil) { return }
+        
+        // setup action message type
+        switchActionMessageType(to: .PickUpItemAction)
+        
+        var gameItemContacted: SKPhysicsBody?
+        
+        if bodyA.node?.name != "playerNode" {
+            gameItemContacted = bodyA
+        } else if bodyB.node?.name != "playerNode" {
+            gameItemContacted = bodyB
+        }
+        
+        if let gameItem = gameItemContacted?.node?.userData?.value(forKeyPath: "self") as? GameItem {
+            
+            player?.currTargetItem = gameItem
+            
+            self.showActionMessage()
+            self.showTargetWindow(with: gameItem)
+
+        }
+
+    }
+    
     
     func playerAndPigeonContact(_ bodyA: SKPhysicsBody, _ bodyB: SKPhysicsBody ) {
 
@@ -235,6 +263,9 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             player?.currLockTarget = bodyB.node
         }
         
+        // setup action message type
+        switchActionMessageType(to: .OpenCarAction)
+        
         // get lock type
         let lockType = player?.currLockTarget?.name
         
@@ -244,7 +275,8 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         if player?.currTargetCar?.stolen == true {
             // if no enter to car button -> show it
             if  self.enterToCarBtn == nil {
-                self.showTargetSquare(of: self.player!.currTargetCar!, lockType: lockType!)
+                self.showTargetWindow(with: self.player!.currTargetCar!, lockType: lockType!)
+                
                 // show enter to car button
                 let enterButton = SKSpriteNode(texture: SKTexture(imageNamed: "car-door"))
                 enterButton.name = "ui-enter-car-btn"
@@ -258,7 +290,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             }
             
         } else {
-            // show message suggesting to open the target car
+            // show message suggesting to open target car
             let playerPosition = player!.node!.position
             let targetLockPosition = player!.currLockTarget?.parent?.position
 
@@ -267,9 +299,10 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             
             // if distance not more than 150 and car is not signaling
             if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) && !player!.isSittingInCar {
-                self.showOpenCarMessage(of: player!.currTargetCar!, lockType: lockType!)
+                self.showActionMessage()
+                
                 // showing target
-                self.showTargetSquare(of: player!.currTargetCar!, lockType: lockType!)
+                self.showTargetWindow(with: player!.currTargetCar!, lockType: lockType!)
             }
         }
         

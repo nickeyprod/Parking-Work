@@ -21,6 +21,24 @@ extension ParkingWorkGame {
         
         miniMapSprite?.position = CGPoint(x: -miniMapX, y: -minimapY)
     }
+    
+    func checkDistanceBetweenPlayerAndGameItem() {
+        let playerPosition = player?.node?.position
+        let targetGameItem = player?.currTargetItem?.node.position
+        
+        let diffX = abs(playerPosition!.x) - abs(targetGameItem!.x)
+        let diffY = abs(playerPosition!.y) - abs(targetGameItem!.y)
+
+        if (abs(diffX) > 30 || abs(diffY) > 30) {
+            hideActionMessage()
+        }
+    
+        // lock target clearing
+        if (abs(diffX) > 45 || abs(diffY) > 45) {
+            player?.currTargetItem = nil
+            hideTargetWindow()
+        }
+    }
 
     func checkDistanceBetweenPlayerAndTargetLock() {
         let playerPosition = player?.node?.position
@@ -34,7 +52,7 @@ extension ParkingWorkGame {
                 self.enterToCarBtn?.removeFromParent()
                 self.enterToCarBtn = nil
             } else {
-                hideOpenCarMessage()
+                hideActionMessage()
             }
             
         }
@@ -42,12 +60,13 @@ extension ParkingWorkGame {
         if (abs(diffX) > 420 || abs(diffY) > 420) {
             player?.currLockTarget = nil
             player!.currTargetCar = nil
-            hideTargetSquare()
+            hideTargetWindow()
         }
         
         if player!.currTargetCar == nil {
             return
         }
+        
         // check for rising anxiety
         if (abs(diffX) < (player!.currTargetCar?.firstAnxietyCircle)! || abs(diffY) < (player!.currTargetCar?.firstAnxietyCircle)! ) {
             playerInFirstCircle = true
@@ -142,16 +161,43 @@ extension ParkingWorkGame {
         return point!
     }
     
-    func adjustSizeOfTargetSquare(to height: CGFloat) {
-        self.targetSquare?.run(SKAction.resize(toHeight: height, duration: 0.2))
+    func adjustSizeOfTargetWindow(to height: CGFloat, width: CGFloat? = nil) {
+        self.targetWindow?.run(SKAction.resize(toHeight: height, duration: 0.2))
+        if width != nil {
+            self.targetWindow?.run(SKAction.resize(toWidth: width!, duration: 0.2))
+        }
+        
     }
     
     func getHeightOfAllNodesInTargetSquare() -> CGFloat {
         var height: CGFloat = 0
-        for node in self.targetSquare!.children {
+        for node in self.targetWindow!.children {
             height += node.frame.height
         }
         return height + 6
+    }
+    
+    func fillItemsOfLevel() {
+        
+        // pick lock
+        if let pickLockNode = childNode(withName: "pick-lock") as? SKSpriteNode {
+            pickLockNode.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "usual_picklock"), size: CGSize(width: 35, height: 35))
+            pickLockNode.physicsBody?.categoryBitMask = gameItemCategory
+            pickLockNode.physicsBody?.contactTestBitMask = playerCategory
+            pickLockNode.physicsBody?.collisionBitMask = 0
+            pickLockNode.physicsBody?.affectedByGravity = false
+            
+            let pickLock = GameItem(name: "Обыкновенная отмычка", node: pickLockNode)
+            itemsOnLevel.append(pickLock)
+            
+            pickLockNode.userData = NSMutableDictionary()
+            pickLockNode.userData?.setValue(pickLock.self, forKeyPath: "self")
+        }
+        
+    }
+    
+    func switchActionMessageType(to type: MESSAGES_TYPES) {
+        actionMessageType = type
     }
 
 }

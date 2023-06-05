@@ -108,6 +108,7 @@ extension ParkingWorkGame {
                 
             }
         }
+        
         // player state
         if playerMoving && !isRunButtonHolded {
             playerStateMachine.enter(WalkingState.self)
@@ -123,10 +124,14 @@ extension ParkingWorkGame {
         }
         
         // check if need to hide open car window pop-up
-        if player?.currLockTarget != nil {
+        if player?.currLockTarget != nil && actionMessageType == .OpenCarAction {
             checkDistanceBetweenPlayerAndTargetLock()
         }
-        if openCarWindow?.alpha == 1 && canGoFromDoor == false {
+        else if player?.currTargetItem != nil && actionMessageType == .PickUpItemAction {
+            checkDistanceBetweenPlayerAndGameItem()
+        }
+        
+        if (actionMessageType == .OpenCarAction && actionMessageWindow?.alpha == 1) && canGoFromDoor == false {
             canGoFromDoor = true
             player?.destinationPosition = player?.node?.position
             self.playerStateMachine.enter(IdleState.self)

@@ -36,30 +36,39 @@ extension ParkingWorkGame {
         openCarSuccessWindow?.alpha = 0
     }
     
-    /// Shows pop-up window, offering to try to open the lock when player comes сlose to it.
-    func showOpenCarMessage(of targetCar: Car, lockType: String) {
-        if openCarWindow?.alpha != 0 { return }
-        openCarWindow?.alpha = 1
+    /// Shows pop-up window, offering some action, when player comes сlose to some item.
+    func showActionMessage() {
+        if actionMessageWindow?.alpha != 0 { return }
+        let actionMessageLabel = actionMessageWindow?.childNode(withName: "ui-actionMessage") as? SKLabelNode
+        
+        if actionMessageType == .OpenCarAction {
+            actionMessageLabel?.text = "Попробовать вскрыть?"
+        } else if actionMessageType == .PickUpItemAction {
+            actionMessageLabel?.text = "Подобрать вещь?"
+        }
+        
+        actionMessageWindow?.alpha = 1
     }
     
-    // Hides pop-up window, that offering to open car lock.
-    func hideOpenCarMessage() {
-        openCarWindow?.alpha = 0
+    // Hides pop-up window, that offering some action.
+    func hideActionMessage() {
+        actionMessageWindow?.alpha = 0
         canGoFromDoor = false
     }
     
-    // Shows player's target car as a pop up at the top of the screen
-    func showTargetSquare(of targetCar: Car, lockType: String) {
+    // Shows player's target as a pop up at the top of the screen
+    func showTargetWindow(with targetCar: Car, lockType: String) {
         
         // add one zero at the end if complexity 0.1 to display -> 0.10
         let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
         
-        let carNameLabel = self.targetSquare?.childNode(withName: "car-name") as? SKLabelNode
-        let lockTypeLabel = self.targetSquare?.childNode(withName: "lockTypeLabel") as? SKLabelNode
-        let complexityLabel = self.targetSquare?.childNode(withName: "complexity-label") as? SKLabelNode
+        let carNameLabel = self.targetWindow?.childNode(withName: "target-name") as? SKLabelNode
+        let lockTypeLabel = self.targetWindow?.childNode(withName: "lockTypeLabel") as? SKLabelNode
+        let complexityLabel = self.targetWindow?.childNode(withName: "complexity-label") as? SKLabelNode
         let complexityNum = complexityLabel?.childNode(withName: "complexityNumLevel") as? SKLabelNode
         
         carNameLabel?.text = "\(targetCar.name)"
+        carNameLabel?.fontSize = 20
         
         lockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
         complexityNum?.text = "\(complexity)"
@@ -70,10 +79,10 @@ extension ParkingWorkGame {
             colorComplexity(chance: chance, complexityNum: complexityNum!)
         }
  
-        self.targetSquare?.alpha = 0.8
+        self.targetWindow?.alpha = 0.8
         
         // if no complexity label, add it
-        if self.targetSquare?.childNode(withName: "complexity-label") == nil {
+        if self.targetWindow?.childNode(withName: "complexity-label") == nil {
             // target's car lock complexity
             // - lock type label
             let lockTypeLabel = SKLabelNode(text: "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")")
@@ -82,19 +91,19 @@ extension ParkingWorkGame {
             lockTypeLabel.fontSize = 18
             lockTypeLabel.fontColor = UIColor(named: COLORS.OpenCarWindowLockTypeColor.rawValue)
             lockTypeLabel.verticalAlignmentMode = .top
-            lockTypeLabel.position = targetSquareLockTypeLabelPos!
+            lockTypeLabel.position = targetWindowLockTypeLabelPos!
             
-            targetSquare?.addChild(lockTypeLabel)
+            targetWindow?.addChild(lockTypeLabel)
             
             let complexityLabel = SKLabelNode(text: "Cложность:")
             complexityLabel.name = "complexity-label"
             complexityLabel.fontName = "Hoefler Text"
             complexityLabel.fontSize = 18
-            complexityLabel.position = targetSquareComplexityLabelPos!
+            complexityLabel.position = targetWindowComplexityLabelPos!
             complexityLabel.fontColor = UIColor(named: COLORS.OpenCarWindowComplexityColor.rawValue)
             complexityLabel.verticalAlignmentMode = .top
             
-            targetSquare?.addChild(complexityLabel)
+            targetWindow?.addChild(complexityLabel)
             
             // complexity level number
             let complexityNumLabel = SKLabelNode(text: complexity)
@@ -107,10 +116,28 @@ extension ParkingWorkGame {
             
             complexityLabel.addChild(complexityNumLabel)
             
-            adjustSizeOfTargetSquare(to: targetSquareInitialHeight!)
+            adjustSizeOfTargetWindow(to: targetWindowInitialHeight!)
             colorComplexity(chance: chance, complexityNum: complexityNumLabel)
             
         }
+    }
+    
+    // Shows player's target as a pop up at the top of the screen
+    func showTargetWindow(with gameItem: GameItem) {
+        if targetWindow?.alpha == 1 { return }
+    
+        let itemNameLabel = self.targetWindow?.childNode(withName: "target-name") as? SKLabelNode
+        itemNameLabel?.text = "\(gameItem.name)"
+        itemNameLabel?.fontSize = 16
+        
+        targetWindow?.removeAllChildren()
+        targetWindow?.addChild(itemNameLabel!)
+        
+        // change size of the target square to fit entrail's height
+        let newHeight = self.getHeightOfAllNodesInTargetSquare() + 10
+        self.adjustSizeOfTargetWindow(to: newHeight, width: (itemNameLabel?.frame.width)! + 20)
+        
+        targetWindow?.alpha = 1
     }
     
     func colorComplexity(chance: Float, complexityNum: SKLabelNode) {
@@ -125,8 +152,8 @@ extension ParkingWorkGame {
     }
     
     // Hides players' current target pop up, when target cancels
-    func hideTargetSquare() {
-        self.targetSquare?.alpha = 0
+    func hideTargetWindow() {
+        self.targetWindow?.alpha = 0
         
         // tries of open set to 0
         self.player?.triedToOpenComplexLockTimes = 0

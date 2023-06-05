@@ -51,11 +51,16 @@ extension ParkingWorkGame {
                 showSettingsScreen()
                 run(MenuSounds.button_click.action)
             }
-            else if (touchedNode.name == "ui-yesOpenLockBtn" || touchedNode.parent?.name == "ui-yesOpenLockBtn") && !isUILocked {
+            else if (touchedNode.name == "ui-actionYesBtn" || touchedNode.parent?.name == "ui-actionYesBtn") && !isUILocked {
                 // off opening car when tutorial message is opened
                 if !canMoveCamera { return }
-                // try to open target door of the car
-                player!.tryOpenCarLock(of: player!.currTargetCar!, lockType: player!.currLockTarget!.name!)
+                if actionMessageType == .OpenCarAction {
+                    // try to open target door of the car
+                    player!.tryOpenCarLock(of: player!.currTargetCar!, lockType: player!.currLockTarget!.name!)
+                } else if actionMessageType == .PickUpItemAction {
+                    player!.pickUpTargetItem()
+                }
+                
                 run(MenuSounds.button_click.action)
             }
             else if touchedNode.name == "goodButton" || touchedNode.name == "goodLabel" {

@@ -98,7 +98,7 @@ extension Player {
         if Int.random(in: 0...1) == 1 {
             
             // hide open car message
-            scene.hideOpenCarMessage()
+            scene.hideActionMessage()
             
             // play door closed sound if found it
             if let doorLockedSound = car.node?.childNode(withName: Sound.car_door_locked.rawValue) {
@@ -149,7 +149,7 @@ extension Player {
         turnSignalizationOn(of: car)
         
         // hide open car message
-        scene.hideOpenCarMessage()
+        scene.hideActionMessage()
     }
     
     // run this function when open lock successes
@@ -164,7 +164,7 @@ extension Player {
 //        self.scene.hideTargetSquare()
         
         // hide open car window pop-up
-        scene.hideOpenCarMessage()
+        scene.hideActionMessage()
         
         // show car successfuly opened message
         scene.showCarOpenedSuccessMessage(of: car)
@@ -223,7 +223,7 @@ extension Player {
             // 50% that on the next try, signalization turns on
             if chanceOfSignal == 0 {
                 // hide open car message
-                scene.hideOpenCarMessage()
+                scene.hideActionMessage()
                 
                 // play door closed sound if found it
                 if let doorLockedSound = car.node?.childNode(withName: Sound.car_door_locked.rawValue) {
@@ -287,15 +287,15 @@ extension Player {
         
         // change lock type in target square popup
         self.currLockTarget = nil
-        let lockLabel = self.scene.targetSquare?.childNode(withName: "lockTypeLabel")
+        let lockLabel = self.scene.targetWindow?.childNode(withName: "lockTypeLabel")
         lockLabel?.removeFromParent()
         
         // remove lock complexity square pop up
-        self.scene.targetSquare?.childNode(withName: "complexity-label")?.removeFromParent()
+        self.scene.targetWindow?.childNode(withName: "complexity-label")?.removeFromParent()
         
         // change size of the target square to fit entrail's height
         let newHeight = self.scene.getHeightOfAllNodesInTargetSquare()
-        self.scene.adjustSizeOfTargetSquare(to: newHeight)
+        self.scene.adjustSizeOfTargetWindow(to: newHeight)
         
         // remove target circle sprite from tilemap
         self.scene.targetCircleSprite?.removeFromParent()
@@ -413,6 +413,28 @@ extension Player {
         self.miniMapDot = miniMapDot
 
         
+    }
+    
+    func pickUpTargetItem() {
+        if currTargetItem == nil { return }
+        
+        // remove item from level
+        let index = scene.itemsOnLevel.firstIndex(of: currTargetItem!)
+        scene.itemsOnLevel.remove(at: index!)
+        currTargetItem?.node.removeFromParent()
+        
+        // add to inventory
+        inventory.append(currTargetItem)
+        
+        // play sound of pick up
+        scene.run(InventorySounds.pickup_inventory.action)
+        
+        // hide windows
+        scene.hideTargetWindow()
+        scene.hideTaskScreen()
+        
+        print("Now items on level:",  scene.itemsOnLevel)
+        print("Now in inventory: ", self.inventory)
     }
     
 }

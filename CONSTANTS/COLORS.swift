@@ -8,14 +8,16 @@
 import SpriteKit
 
 enum COLORS: String {
-    // Open Car Suggest Window
+    // Open Car Target Window
     case OpenCarWindowColor
     case OpenCarWindowColorStroke
     case OpenCarWindowCarNameColor
-    case OpenCarWindowCarMsgColor
     case OpenCarWindowLockTypeColor
     case OpenCarWindowComplexityColor
-    case OpenCarYesBtnColor
+    
+    // Action Window Message
+    case ActionWindowMsgColor
+    case ActionMsgYesBtnColor
     
     // Open Car Success Window
     case OpenCarSuccessWindowColor

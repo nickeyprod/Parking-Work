@@ -71,7 +71,7 @@ class Level1: ParkingWorkGame {
         createIcons()
         
         // create window messages sprites
-        createOpenCarMessage()
+        createActionMessage()
         createOpenCarSuccessMessage()
         
         // setup chat window for messages
@@ -99,7 +99,7 @@ class Level1: ParkingWorkGame {
         zoomOutInCameraAnimation(to: maxScale)
     
         // create target square for selected car
-        createSelectedTarget()
+        createTargetWindow()
         
         // tutorial creating
         if restart == false {
@@ -114,7 +114,11 @@ class Level1: ParkingWorkGame {
                 self.pushMessageToChat(text: "Босс хочет, чтобы вы потренировались на этой парковке и угнали для него машину, марка не важна.")
             }
         }
-        self.player?.getIn(the: self.oldCopper!)
+//        self.player?.getIn(the: self.oldCopper!)
+        
+        
+        // fill items on this level
+        fillItemsOfLevel()
 
     }
     

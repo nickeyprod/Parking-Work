@@ -9,43 +9,44 @@ import SpriteKit
 
 // Pop Up Creation Game Functions
 extension ParkingWorkGame {
-    // Open car suggestion message pop-up
-    func createOpenCarMessage() {
+    // Creating action message pop-up
+    func createActionMessage() {
 
         // window itself
-        let window = SKShapeNode(rectOf: CGSize(width: 260, height: 40), cornerRadius: 10.0)
+        let window = SKShapeNode(rectOf: CGSize(width: 260, height: 30), cornerRadius: 10.0)
         
         // hide it initially
         window.alpha = 0
         window.zPosition = 11
         
+        // default to open car
         window.fillColor = UIColor(named: COLORS.OpenCarWindowColor.rawValue)!
         window.strokeColor = UIColor(named: COLORS.OpenCarWindowColorStroke.rawValue)!
-        window.name = "ui-openCarMessageWindow"
+        window.name = "ui-actionWindow"
         
         window.position = CGPoint(x: 16, y: -((displayHeight! / 2) - 28))
         self.cameraNode!.addChild(window)
         
         // - message label set to 'Попробовать вскрыть?' initially
         let messageLabel = SKLabelNode(text: "Попробовать вскрыть?")
-        messageLabel.name = "ui-carMessage"
+        messageLabel.name = "ui-actionMessage"
         messageLabel.position = CGPoint(x: -30, y: 0)
         messageLabel.verticalAlignmentMode = .center
         messageLabel.fontName = "Copperplate"
         messageLabel.fontSize = 16
-        messageLabel.fontColor = UIColor(named: COLORS.OpenCarWindowCarMsgColor.rawValue)
+        messageLabel.fontColor = UIColor(named: COLORS.ActionWindowMsgColor.rawValue)
         
         window.addChild(messageLabel)
         
-        //  open car button
-        let yesBtn = SKShapeNode(rect: CGRect(x: (window.frame.width / 2) - 64, y: -15, width: 56, height: 28), cornerRadius: 6.0)
-        yesBtn.fillColor = UIColor(named: COLORS.OpenCarYesBtnColor.rawValue)!
-        yesBtn.strokeColor = UIColor(named: COLORS.OpenCarYesBtnColor.rawValue)!
-        yesBtn.name = "ui-yesOpenLockBtn"
+        // yes action button
+        let yesBtn = SKShapeNode(rect: CGRect(x: (window.frame.width / 2) - 64, y: -12, width: 56, height: (window.frame.height) - 10), cornerRadius: 6.0)
+        yesBtn.fillColor = UIColor(named: COLORS.ActionMsgYesBtnColor.rawValue)!
+        yesBtn.strokeColor = UIColor(named: COLORS.ActionMsgYesBtnColor.rawValue)!
+        yesBtn.name = "ui-actionYesBtn"
         window.addChild(yesBtn)
         
         let yesBtnLabel = SKLabelNode(text: "Да")
-        yesBtnLabel.name = "ui-yesBtnLabel"
+        yesBtnLabel.name = "ui-actionYesBtnLabel"
         yesBtnLabel.fontName = "Copperplate"
         yesBtnLabel.fontSize = 20
         yesBtnLabel.verticalAlignmentMode = .center
@@ -54,7 +55,7 @@ extension ParkingWorkGame {
         
         yesBtn.addChild(yesBtnLabel)
         
-        openCarWindow = window
+        actionMessageWindow = window
     }
     
     // Open car was successful message pop-up
@@ -111,32 +112,31 @@ extension ParkingWorkGame {
     }
     
     
-    // Creates player's current target car window at top of the screen
-    func createSelectedTarget() {
+    // Creates player's current target item window at top of the screen
+    func createTargetWindow() {
         
         // square itself
-//        targetSquare = SKShapeNode(rectOf: CGSize(width: 210, height: 66))
-        targetSquare = SKSpriteNode(color: SKColor.black, size: CGSize(width: 210, height: 66))
-        targetSquare?.anchorPoint = CGPoint(x: 0.5, y: 1)
-        targetSquare?.position = CGPoint(x: 0, y: displayHeight! / 2 - 2)
+        targetWindow = SKSpriteNode(color: SKColor.black, size: CGSize(width: 210, height: 66))
+        targetWindow?.anchorPoint = CGPoint(x: 0.5, y: 1)
+        targetWindow?.position = CGPoint(x: 0, y: displayHeight! / 2 - 2)
         
         // set z position
-        targetSquare?.zPosition = 11
+        targetWindow?.zPosition = 11
         
-        self.cameraNode?.addChild(targetSquare!)
+        self.cameraNode?.addChild(targetWindow!)
         
-        // target's car name label
-        let carLabel = SKLabelNode(text: "Some Car")
-        carLabel.name = "car-name"
-        carLabel.horizontalAlignmentMode = .center
-        carLabel.verticalAlignmentMode = .center
-        carLabel.fontSize = 20
-        carLabel.fontName = "\(FONTS.Baskerville)-bold"
-        carLabel.verticalAlignmentMode = .top
-        carLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 38)
-        targetSquareCarNameLabelPos = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 38)
+        // target's name label
+        let nameLabel = SKLabelNode(text: "Some Target")
+        nameLabel.name = "target-name"
+        nameLabel.horizontalAlignmentMode = .center
+        nameLabel.verticalAlignmentMode = .center
+        nameLabel.fontSize = 20
+        nameLabel.fontName = "\(FONTS.Baskerville)-bold"
+        nameLabel.verticalAlignmentMode = .top
+        nameLabel.position = CGPoint(x: 0, y: (targetWindow?.frame.height)! / 2 - 38)
+        targetWindowNameLabelPos = CGPoint(x: 0, y: (targetWindow?.frame.height)! / 2 - 38)
         
-        targetSquare?.addChild(carLabel)
+        targetWindow?.addChild(nameLabel)
         
         // target's car lock complexity
         // - lock type label
@@ -147,10 +147,10 @@ extension ParkingWorkGame {
         lockTypeLabel.fontSize = 18
         lockTypeLabel.fontColor = UIColor(named: COLORS.OpenCarWindowLockTypeColor.rawValue)
         lockTypeLabel.verticalAlignmentMode = .top
-        lockTypeLabel.position = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 56)
-        targetSquareLockTypeLabelPos = CGPoint(x: 0, y: (targetSquare?.frame.height)! / 2 - 56)
+        lockTypeLabel.position = CGPoint(x: 0, y: (targetWindow?.frame.height)! / 2 - 56)
+        targetWindowLockTypeLabelPos = CGPoint(x: 0, y: (targetWindow?.frame.height)! / 2 - 56)
         
-        targetSquare?.addChild(lockTypeLabel)
+        targetWindow?.addChild(lockTypeLabel)
         
         // complexity level label
         let complexityLabel = SKLabelNode(text: "Cложность:")
@@ -159,9 +159,9 @@ extension ParkingWorkGame {
         complexityLabel.fontSize = 18
         complexityLabel.fontColor = UIColor(named: COLORS.OpenCarWindowComplexityColor.rawValue)
         complexityLabel.verticalAlignmentMode = .top
-        complexityLabel.position = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 76)
-        targetSquareComplexityLabelPos = CGPoint(x: -10, y: ((targetSquare?.frame.height)! / 2) - 76)
-        targetSquare?.addChild(complexityLabel)
+        complexityLabel.position = CGPoint(x: -10, y: ((targetWindow?.frame.height)! / 2) - 76)
+        targetWindowComplexityLabelPos = CGPoint(x: -10, y: ((targetWindow?.frame.height)! / 2) - 76)
+        targetWindow?.addChild(complexityLabel)
         
         // complexity level number
         let complexityNumLabel = SKLabelNode(text: "8.0")
@@ -175,10 +175,10 @@ extension ParkingWorkGame {
         complexityLabel.addChild(complexityNumLabel)
         
         // remember initial target square height
-        targetSquareInitialHeight = targetSquare?.frame.height
+        targetWindowInitialHeight = targetWindow?.frame.height
         
         // hidden initially
-        hideTargetSquare()
+        hideTargetWindow()
         
     }
 }

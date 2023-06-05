@@ -21,6 +21,9 @@
 		D144764F2A29D2F70044C244 /* ShopScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D144764E2A29D2F70044C244 /* ShopScene.sks */; };
 		D14476512A29E9D90044C244 /* CarLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14476502A29E9D90044C244 /* CarLock.swift */; };
 		D14476552A29EE930044C244 /* plastic_hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = D14476542A29EE930044C244 /* plastic_hit.wav */; };
+		D14476582A2B6C470044C244 /* ItemOnGround.sks in Resources */ = {isa = PBXBuildFile; fileRef = D14476562A2B6C470044C244 /* ItemOnGround.sks */; };
+		D14476592A2B6C470044C244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D14476572A2B6C470044C244 /* Assets.xcassets */; };
+		D144765B2A2B83D00044C244 /* MESSSAGE_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144765A2A2B83D00044C244 /* MESSSAGE_TYPES.swift */; };
 		D15008632A274B6500F24418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D15008612A274B6500F24418 /* Assets.xcassets */; };
 		D15008692A274BEC00F24418 /* CarsDrivingBy.sks in Resources */ = {isa = PBXBuildFile; fileRef = D15008682A274BEC00F24418 /* CarsDrivingBy.sks */; };
 		D150086B2A28BF5500F24418 /* level_list_car_passing_by.wav in Resources */ = {isa = PBXBuildFile; fileRef = D150086A2A28BF5500F24418 /* level_list_car_passing_by.wav */; };
@@ -62,7 +65,6 @@
 		D18C66142A25038D00D4F365 /* LevelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18C66132A25038D00D4F365 /* LevelList.swift */; };
 		D197178A29E42D05001A6537 /* TutorialSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197178929E42D05001A6537 /* TutorialSetup.swift */; };
 		D1A10ADC2A1F5CFF003087DF /* GameItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A10ADB2A1F5CFF003087DF /* GameItem.swift */; };
-		D1A10ADE2A1F5EB0003087DF /* KeyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A10ADD2A1F5EB0003087DF /* KeyItem.swift */; };
 		D1A3F5A7299E52D600084380 /* LOCK_TRANSLATIONS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A3F5A6299E52D600084380 /* LOCK_TRANSLATIONS.swift */; };
 		D1A3F5AB299F9B8B00084380 /* GAME_SOUNDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A3F5AA299F9B8B00084380 /* GAME_SOUNDS.swift */; };
 		D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5AD299F9BB900084380 /* door_open.wav */; };
@@ -71,6 +73,7 @@
 		D1A3F5B4299FA0B000084380 /* car_signalization.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A3F5B2299FA0B000084380 /* car_signalization.wav */; };
 		D1A626572A1F55470033D9ED /* LevelCompletionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1A626562A1F55470033D9ED /* LevelCompletionScene.sks */; };
 		D1A626592A1F556F0033D9ED /* LevelCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A626582A1F556F0033D9ED /* LevelCompletion.swift */; };
+		D1A6C1F82A2DD7510049614D /* pickup_inventory.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1A6C1F72A2DD7510049614D /* pickup_inventory.wav */; };
 		D1A717C629C45D4D00A488BF /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A717C529C45D4D00A488BF /* GameOver.swift */; };
 		D1A717C829C45D5F00A488BF /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1A717C729C45D5F00A488BF /* GameOverScene.sks */; };
 		D1A7180529CC405500A488BF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7180429CC405500A488BF /* Player.swift */; };
@@ -118,6 +121,9 @@
 		D144764E2A29D2F70044C244 /* ShopScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ShopScene.sks; sourceTree = "<group>"; };
 		D14476502A29E9D90044C244 /* CarLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLock.swift; sourceTree = "<group>"; };
 		D14476542A29EE930044C244 /* plastic_hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = plastic_hit.wav; sourceTree = "<group>"; };
+		D14476562A2B6C470044C244 /* ItemOnGround.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ItemOnGround.sks; path = "Parking Work/Emitters/ItemOnGround.sks"; sourceTree = SOURCE_ROOT; };
+		D14476572A2B6C470044C244 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Parking Work/Emitters/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		D144765A2A2B83D00044C244 /* MESSSAGE_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MESSSAGE_TYPES.swift; sourceTree = "<group>"; };
 		D15008612A274B6500F24418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../AuxillaryScenes/LevelListScene/Assets.xcassets; sourceTree = "<group>"; };
 		D15008682A274BEC00F24418 /* CarsDrivingBy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CarsDrivingBy.sks; sourceTree = "<group>"; };
 		D150086A2A28BF5500F24418 /* level_list_car_passing_by.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = level_list_car_passing_by.wav; sourceTree = "<group>"; };
@@ -159,7 +165,6 @@
 		D18C66132A25038D00D4F365 /* LevelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelList.swift; sourceTree = "<group>"; };
 		D197178929E42D05001A6537 /* TutorialSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSetup.swift; sourceTree = "<group>"; };
 		D1A10ADB2A1F5CFF003087DF /* GameItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameItem.swift; sourceTree = "<group>"; };
-		D1A10ADD2A1F5EB0003087DF /* KeyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyItem.swift; sourceTree = "<group>"; };
 		D1A3F5A6299E52D600084380 /* LOCK_TRANSLATIONS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_TRANSLATIONS.swift; sourceTree = "<group>"; };
 		D1A3F5AA299F9B8B00084380 /* GAME_SOUNDS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAME_SOUNDS.swift; sourceTree = "<group>"; };
 		D1A3F5AD299F9BB900084380 /* door_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = door_open.wav; sourceTree = "<group>"; };
@@ -168,6 +173,7 @@
 		D1A3F5B2299FA0B000084380 /* car_signalization.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_signalization.wav; sourceTree = "<group>"; };
 		D1A626562A1F55470033D9ED /* LevelCompletionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelCompletionScene.sks; sourceTree = "<group>"; };
 		D1A626582A1F556F0033D9ED /* LevelCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCompletion.swift; sourceTree = "<group>"; };
+		D1A6C1F72A2DD7510049614D /* pickup_inventory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pickup_inventory.wav; sourceTree = "<group>"; };
 		D1A717C529C45D4D00A488BF /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		D1A717C729C45D5F00A488BF /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		D1A7180429CC405500A488BF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -246,7 +252,6 @@
 			children = (
 				D1C717F12A20BFD600E36C9D /* AuxillaryScenes */,
 				D1C717F02A20BF9400E36C9D /* Emitters */,
-				D1A10ADA2A1F5CE9003087DF /* GameItems */,
 				D16FD69729A270A70097BC3E /* Levels */,
 				D18653D0299A3B8400DEE90D /* GameProcessing */,
 				D18653C3299A318500DEE90D /* GameFunctions */,
@@ -285,6 +290,7 @@
 				D1628B3029AE050700DF817E /* COLORS.swift */,
 				D1A7180629D1AF7600A488BF /* UNICODE.swift */,
 				D1A7180829D1B0B200A488BF /* FONTS.swift */,
+				D144765A2A2B83D00044C244 /* MESSSAGE_TYPES.swift */,
 			);
 			path = CONSTANTS;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 		D18653DD299B841400DEE90D /* GameModels */ = {
 			isa = PBXGroup;
 			children = (
+				D1A10ADA2A1F5CE9003087DF /* GameItems */,
 				D1F4CFC429B0C70E003CB541 /* Car.swift */,
 				D1A7180429CC405500A488BF /* Player.swift */,
 				D150086C2A28E02700F24418 /* Level.swift */,
@@ -423,7 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				D1A10ADB2A1F5CFF003087DF /* GameItem.swift */,
-				D1A10ADD2A1F5EB0003087DF /* KeyItem.swift */,
 			);
 			path = GameItems;
 			sourceTree = "<group>";
@@ -431,6 +437,7 @@
 		D1A3F5AC299F9BB900084380 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D1A6C1F92A2DD7A70049614D /* Inventory */,
 				D14476532A29EE2D0044C244 /* Collisions */,
 				D150086A2A28BF5500F24418 /* level_list_car_passing_by.wav */,
 				D1C717EA2A20A13800E36C9D /* bag_open.wav */,
@@ -455,6 +462,14 @@
 				D1A626582A1F556F0033D9ED /* LevelCompletion.swift */,
 			);
 			path = LevelCompletionScene;
+			sourceTree = "<group>";
+		};
+		D1A6C1F92A2DD7A70049614D /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				D1A6C1F72A2DD7510049614D /* pickup_inventory.wav */,
+			);
+			path = Inventory;
 			sourceTree = "<group>";
 		};
 		D1A717C429C45D0700A488BF /* GameOverScene */ = {
@@ -523,6 +538,8 @@
 				D1C717EC2A20AA9500E36C9D /* OldCopperEngineSmoke.sks */,
 				D1C717F32A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks */,
 				D1C717F42A20C5BB00E36C9D /* Assets.xcassets */,
+				D14476562A2B6C470044C244 /* ItemOnGround.sks */,
+				D14476572A2B6C470044C244 /* Assets.xcassets */,
 			);
 			path = Cars;
 			sourceTree = "<group>";
@@ -602,13 +619,16 @@
 				D15008692A274BEC00F24418 /* CarsDrivingBy.sks in Resources */,
 				D1C717EE2A20AA9500E36C9D /* OldCopperEngineSmoke.sks in Resources */,
 				D1C717F62A20C5BB00E36C9D /* Assets.xcassets in Resources */,
+				D14476582A2B6C470044C244 /* ItemOnGround.sks in Resources */,
 				D1C717F82A20CB8D00E36C9D /* old_copper_engine_still.wav in Resources */,
 				D1C717EB2A20A13800E36C9D /* bag_open.wav in Resources */,
+				D1A6C1F82A2DD7510049614D /* pickup_inventory.wav in Resources */,
 				D1A3F5AE299F9BB900084380 /* door_open.wav in Resources */,
 				D16ACB082A1783F8000878C4 /* car_collision_03.wav in Resources */,
 				D144764F2A29D2F70044C244 /* ShopScene.sks in Resources */,
 				D1C717FA2A20CF9C00E36C9D /* old_copper_acceleration.wav in Resources */,
 				D1BC8CDF29B8733A00F9C597 /* IntroScene.sks in Resources */,
+				D14476592A2B6C470044C244 /* Assets.xcassets in Resources */,
 				D1198F012979B76D00701A24 /* Main.storyboard in Resources */,
 				D1FDF2A429A929280058040E /* button_click.wav in Resources */,
 				D1B259E22A1EB380001C9A05 /* cigarette_falling.wav in Resources */,
@@ -645,7 +665,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1A10ADE2A1F5EB0003087DF /* KeyItem.swift in Sources */,
 				D1B259D62A1E1A4A001C9A05 /* SplashScreen.swift in Sources */,
 				D18653D4299A3D9F00DEE90D /* WorldSetup.swift in Sources */,
 				D16EA7622A023DB8001699E5 /* GameScreenCreation.swift in Sources */,
@@ -655,6 +674,7 @@
 				D16FD69B29A270A70097BC3E /* Level1.swift in Sources */,
 				D16EA7682A02413C001699E5 /* TutorialFunctions.swift in Sources */,
 				D144764D2A29D2BE0044C244 /* Shop.swift in Sources */,
+				D144765B2A2B83D00044C244 /* MESSSAGE_TYPES.swift in Sources */,
 				D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */,
 				D16EA76F2A0245E2001699E5 /* AnimationFunctions.swift in Sources */,
 				D1A3F5A7299E52D600084380 /* LOCK_TRANSLATIONS.swift in Sources */,
