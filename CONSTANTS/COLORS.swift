@@ -36,6 +36,9 @@ enum COLORS: String {
     case ReputationNeededGreen
     case PlayButtonNormal
     
+    // InventoryScreen
+    case InventoryHeader
+    
     // menu colors
     static var MenuButtonsColor = SKColor(red: 1.0, green: 0.723, blue: 0.315, alpha: 1.0)
     static var GameNameLabelColor = SKColor(red: 1.0, green: 0.684, blue: 0.213, alpha: 1.0)

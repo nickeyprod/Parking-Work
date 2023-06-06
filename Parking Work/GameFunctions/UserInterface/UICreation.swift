@@ -18,7 +18,7 @@ extension ParkingWorkGame {
         taskBtn.name = "ui-taskBtn"
         taskBtn.fillColor = UIColor.gray
         taskBtn.alpha = 0.75
-        taskBtn.zPosition = 51
+        taskBtn.zPosition = 11
         taskBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
         self.taskButton = taskBtn
         

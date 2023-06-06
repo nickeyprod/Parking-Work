@@ -37,7 +37,7 @@ enum LevelListSounds: String {
 }
 
 enum MenuSounds: String {
-    case button_click, bag_open
+    case button_click
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
@@ -96,7 +96,7 @@ enum CarCollisionSounds: String {
 }
 
 enum InventorySounds: String {
-    case pickup_inventory
+    case bag_open, pickup_inventory
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)

@@ -12,8 +12,7 @@ extension ParkingWorkGame {
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-//        if event?.allTouches?.count == 2 { return }
+    
         for touch in touches {
             
             let location = touch.location(in: self)
@@ -101,10 +100,20 @@ extension ParkingWorkGame {
             }
             else if (touchedNode.name == "ui-inventory-btn") && !isUILocked {
                 self.inventoryButton?.run(.scale(to: 1.2, duration: 0))
-                run(MenuSounds.bag_open.action)
-
-                print("Open Inventory")
+                run(InventorySounds.bag_open.action)
+                if !isInventoryOpened {
+                    openInventory()
+                } else {
+                    closeInventory()
+                }
             }
+            else if (touchedNode.name == "ui-closeInventoryBtn" || touchedNode.parent?.name == "ui-closeInventoryBtn") && !isUILocked {
+                run(InventorySounds.bag_open.action)
+                if isInventoryOpened {
+                    closeInventory()
+                }
+            }
+                        
             
             
         }

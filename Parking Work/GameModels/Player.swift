@@ -30,6 +30,8 @@ class Player {
     var unlockSkill: Float = 10.0
     var reputation: Float = 0.0
     var money: Float = 75.0
+    
+    var inventoryMaxCapacity: Int = 20
     var inventory: [GameItem?] = []
 
     // node

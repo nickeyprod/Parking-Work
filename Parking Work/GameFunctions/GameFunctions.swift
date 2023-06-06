@@ -187,7 +187,7 @@ extension ParkingWorkGame {
             pickLockNode.physicsBody?.collisionBitMask = 0
             pickLockNode.physicsBody?.affectedByGravity = false
             
-            let pickLock = GameItem(name: "Обыкновенная отмычка", node: pickLockNode)
+            let pickLock = GameItem(name: "Обыкновенная отмычка", node: pickLockNode, assetName: "usual_picklock")
             itemsOnLevel.append(pickLock)
             
             pickLockNode.userData = NSMutableDictionary()
@@ -198,6 +198,21 @@ extension ParkingWorkGame {
     
     func switchActionMessageType(to type: MESSAGES_TYPES) {
         actionMessageType = type
+    }
+    
+    func closeInventory() {
+        isInventoryOpened = false
+        let moveAction = SKAction.move(to: CGPoint(x: (displayWidth! / 2) + 20, y: (inventoryScreen?.position.y)!), duration: 0.5)
+        inventoryScreen?.run(moveAction)
+    }
+    
+    func openInventory() {
+        isInventoryOpened = true
+        fillInventoryWithItemSquares {
+            let moveAction = SKAction.move(to: CGPoint(x: 0, y: (inventoryScreen?.position.y)!), duration: 0.5)
+            inventoryScreen?.run(moveAction)
+        }
+        
     }
 
 }

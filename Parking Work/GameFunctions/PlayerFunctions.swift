@@ -431,10 +431,8 @@ extension Player {
         
         // hide windows
         scene.hideTargetWindow()
-        scene.hideTaskScreen()
-        
-        print("Now items on level:",  scene.itemsOnLevel)
-        print("Now in inventory: ", self.inventory)
+        scene.hideActionMessage()
+
     }
     
 }

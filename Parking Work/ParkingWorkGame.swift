@@ -16,6 +16,7 @@ class ParkingWorkGame: SKScene {
     var taskScreen: SKSpriteNode?
     var menuScreen: SKSpriteNode?
     var settingsScreen: SKSpriteNode?
+    var inventoryScreen: SKSpriteNode?
     
     // Display Size
     let displaySize = UIScreen.main.bounds
@@ -101,6 +102,8 @@ class ParkingWorkGame: SKScene {
     var canPlayCrashSound: Bool = true
     var canPlayBoundaryCrashSound: Bool = true
     var canShowCompletionLevelMessage: Bool = true
+    
+    var isInventoryOpened: Bool = false
     
     var playerInCircleOfCar: SKNode? = nil
     

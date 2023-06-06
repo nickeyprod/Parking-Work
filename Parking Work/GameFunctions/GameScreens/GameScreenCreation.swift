@@ -13,7 +13,6 @@ extension ParkingWorkGame {
     func createMenuScreen() {
         // background
         menuScreen = SKSpriteNode(texture: SKTexture(imageNamed: "MenuBackground"), size: CGSize(width: displayWidth!, height: displayHeight!))
-        
 
         cameraNode?.addChild(menuScreen!)
         menuScreen?.position = CGPoint(x: 0, y: 0)
@@ -139,5 +138,140 @@ extension ParkingWorkGame {
         bossSiluette.position = CGPoint(x: displayWidth! / 2 - 100, y: -displayHeight! / 2 + 20)
         taskScreen?.addChild(bossSiluette)
         
+    }
+    
+    func createPlayerInventoryScreen() {
+        inventoryScreen = SKSpriteNode(color: .darkGray, size: CGSize(width: displayWidth! / 2, height: displayHeight!))
+        inventoryScreen?.zPosition = 20
+        
+        cameraNode?.addChild(inventoryScreen!)
+        
+        inventoryScreen?.anchorPoint = CGPoint(x: 0, y: 0.5)
+        inventoryScreen?.position = CGPoint(x: 0, y: 0)
+        inventoryScreen?.zPosition = 52
+//        inventoryScreen?.alpha = 1
+        
+        // Inventory header
+        let inventoryHeaderLabel = SKLabelNode(text: "Сумка")
+        inventoryHeaderLabel.verticalAlignmentMode = .center
+        inventoryHeaderLabel.horizontalAlignmentMode = .center
+        inventoryHeaderLabel.position = CGPoint(x: (inventoryScreen?.frame.width)! / 2, y: (inventoryScreen?.frame.height)! / 2 - 25)
+        inventoryHeaderLabel.fontSize = 25
+        inventoryHeaderLabel.fontName = FONTS.Cochin
+        inventoryHeaderLabel.fontColor = UIColor(named: COLORS.InventoryHeader.rawValue)
+        inventoryScreen?.addChild(inventoryHeaderLabel)
+        
+        // Inventory Capacity
+        let inventoryCapacityLabel = SKLabelNode(text: "Вместимость: \(player!.inventory.count)/\(player!.inventoryMaxCapacity)")
+        inventoryCapacityLabel.name = "inventory-capacity"
+        inventoryCapacityLabel.verticalAlignmentMode = .top
+        inventoryCapacityLabel.horizontalAlignmentMode = .right
+        inventoryCapacityLabel.position = CGPoint(x: (inventoryScreen?.frame.width)! - 60, y: (inventoryScreen?.frame.height)! / 2 - 40)
+        inventoryCapacityLabel.fontSize = 20
+        inventoryCapacityLabel.fontName = FONTS.Cochin
+        inventoryCapacityLabel.fontColor = UIColor(named: COLORS.InventoryHeader.rawValue)
+        inventoryScreen?.addChild(inventoryCapacityLabel)
+        
+        // Close Button
+        let closeInventoryBtn = SKShapeNode(circleOfRadius: 14)
+        closeInventoryBtn.name = "ui-closeInventoryBtn"
+        closeInventoryBtn.fillColor = UIColor.gray
+        closeInventoryBtn.alpha = 0.55
+        closeInventoryBtn.position = CGPoint(x: (inventoryScreen?.frame.width)! - 30, y: (inventoryScreen?.frame.height)! / 2 - 25)
+        closeInventoryBtn.zPosition = 50
+        
+        // close task screen label
+        let closeInventoryLabel = SKLabelNode(text: "X")
+        closeInventoryLabel.name = "ui-closeInventoryLabel"
+        closeInventoryLabel.fontSize = 20
+        closeInventoryLabel.fontName = "Baskerville-bold"
+        closeInventoryLabel.fontColor = .white
+        closeInventoryLabel.horizontalAlignmentMode = .center
+        closeInventoryLabel.verticalAlignmentMode = .center
+        
+        closeInventoryBtn.addChild(closeInventoryLabel)
+        
+        inventoryScreen?.addChild(closeInventoryBtn)
+        
+        fillInventoryWithItemSquares {
+            closeInventory()
+        }
+    }
+    
+    func fillInventoryWithItemSquares(done: () -> Void) {
+        let topPadding: CGFloat = 50
+        let squareDimension: CGFloat = 50
+
+        // calculate number of squares fit in one row according to screen width
+        let numOfSquaresPerRow = Int(floor(((inventoryScreen?.frame.width)! / squareDimension)))
+        // calculate number of rows according to player's capacity
+        let numOfRows = (player?.inventoryMaxCapacity)! / (numOfSquaresPerRow - 1)
+        
+        // calculate square's every X position to distribute them equally
+        var everyXPos = (inventoryScreen?.frame.width)! / CGFloat(numOfSquaresPerRow)
+        
+        // remember initial X position for adding it every loop run
+        let initialXPos = everyXPos
+        
+        // variables reset every loop run
+        var itemSquare: SKSpriteNode?
+        var itemPic: SKSpriteNode?
+        var squarePosition: CGPoint?
+        var yPos: CGFloat = (displayHeight! / 2)
+        
+        var numOfItemsPlaced = 0
+        var placeToRowNum = 1
+        
+        // loop for place rows
+        for z in 1...numOfRows {
+            if z == 1 {
+                yPos = yPos - topPadding
+            } else {
+                yPos = yPos - (squareDimension + 10)
+            }
+            
+            everyXPos = initialXPos
+            
+            // loop for place every square in line row
+            for i in 1...numOfSquaresPerRow - 1 {
+                if i != 1 {
+                    everyXPos += initialXPos
+                }
+                
+                itemSquare = SKSpriteNode(color: .black, size: CGSize(width: squareDimension, height: squareDimension))
+                itemSquare?.anchorPoint = CGPoint(x: 0.5, y: 1)
+                
+                squarePosition = CGPoint(x: everyXPos, y: yPos)
+                itemSquare?.position = squarePosition!
+                inventoryScreen?.addChild(itemSquare!)
+                // continue fill empty cells if no items in inventory
+                if (player?.inventory.count)! == 0 || i > ((player?.inventory.count)!) { continue }
+                
+                if numOfItemsPlaced < player!.inventory.count {
+                    if numOfItemsPlaced == (numOfSquaresPerRow - 1) {
+                        placeToRowNum += 1
+                    }
+                    
+                    if let playerItem = player?.inventory[i - 1] {
+                        itemPic = SKSpriteNode(imageNamed: playerItem.assetName)
+                        itemPic?.size = CGSize(width: squareDimension, height: squareDimension)
+                        itemPic?.position = CGPoint(x: 0, y: -squareDimension / 2)
+                        itemSquare?.addChild(itemPic!)
+                        numOfItemsPlaced += 1
+                        
+                    }
+                    
+                }
+                
+            
+            }
+
+        }
+        
+        // place inventory capacity label at the bottom right and update its text
+        let capacityLabel = inventoryScreen?.childNode(withName: "inventory-capacity") as? SKLabelNode
+        capacityLabel?.position = CGPoint(x: everyXPos + (squareDimension / 2), y: yPos - squareDimension - 10)
+        capacityLabel?.text = "Вместимость: \(player!.inventory.count)/\(player!.inventoryMaxCapacity)"
+        done()
     }
 }

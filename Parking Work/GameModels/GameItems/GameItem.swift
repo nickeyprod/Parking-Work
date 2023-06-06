@@ -10,4 +10,5 @@ import SpriteKit
 struct GameItem: Equatable {
     var name: String
     var node: SKNode
+    var assetName: String
 }

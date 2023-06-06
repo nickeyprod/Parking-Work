@@ -64,6 +64,9 @@ class Level1: ParkingWorkGame {
         // create level task screen
         createLevelTaskScreen()
         
+        // create Inventory screen
+        createPlayerInventoryScreen()
+        
         // create UI Buttons - pause, task buttons
         createUIButtons()
         

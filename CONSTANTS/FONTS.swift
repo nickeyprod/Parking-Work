@@ -8,6 +8,8 @@
 enum FONTS {
     
     static let Baskerville = "Baskerville"
+    static let AmericanTypewriter = "American Typewriter Semibold"
+    static let Cochin = "Cochin"
     
 }
 
