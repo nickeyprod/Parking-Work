@@ -106,7 +106,7 @@ class GameOver: ParkingWorkGame {
     
     func restartGame() {
        
-        let currLevelScene = GKScene(fileNamed: "Level\(levelNum)Scene")?.rootNode as! ParkingWorkGame
+        let currMissionScene = GKScene(fileNamed: "Mission\(missionNum)Scene")?.rootNode as! ParkingWorkGame
         
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         self.removeAllActions()
@@ -115,26 +115,16 @@ class GameOver: ParkingWorkGame {
         
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window
-        currLevelScene.scaleMode = .aspectFill
-        currLevelScene.size = displaySize.size
+        currMissionScene.scaleMode = .aspectFill
+        currMissionScene.size = displaySize.size
         
         // off tutorial when restart
         self.tutorial(set: false)
         
-        self.view?.presentScene(currLevelScene, transition: transition)
+        self.view?.presentScene(currMissionScene, transition: transition)
     }
    
     deinit {
         print("GameOver deinit")
     }
 }
-
-//class Level {
-//    var scene: GKScene
-//    var fileNamed: String
-//
-//    init(scene: GKScene, fileNamed: String) {
-//        self.scene = scene
-//        self.fileNamed = fileNamed
-//    }
-//}

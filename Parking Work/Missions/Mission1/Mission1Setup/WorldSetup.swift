@@ -7,8 +7,8 @@
 
 import SpriteKit
 
-// Level 1 World Bounds Setup
-extension Level1 {
+// Mission 1 World Bounds Setup
+extension Mission1 {
     
     func setupWorldBoundaries() {
         // player collides with this `end of the world` boundaries

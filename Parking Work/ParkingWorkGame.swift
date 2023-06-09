@@ -7,10 +7,10 @@ class ParkingWorkGame: SKScene {
     // Initial rotation of the camera at start of the game
     var initialCameraRotation: CGFloat?
     
-    // Current Level Number
-    var levelNum: Int = 1
+    // Current Mission Number
+    var missionNum: Int = 1
     var anxietyLevel: CGFloat = 0.0
-    var levelCompleted: Bool = false
+    var missionCompleted: Bool = false
     
     // additional game screens
     var taskScreen: SKSpriteNode?
@@ -101,7 +101,7 @@ class ParkingWorkGame: SKScene {
     var isUILocked: Bool = false
     var canPlayCrashSound: Bool = true
     var canPlayBoundaryCrashSound: Bool = true
-    var canShowCompletionLevelMessage: Bool = true
+    var canShowCompletionMissionMessage: Bool = true
     
     var isInventoryOpened: Bool = false
     
@@ -191,8 +191,8 @@ class ParkingWorkGame: SKScene {
     
     var pinch: UIPinchGestureRecognizer?
     
-    // all items that it is on the level
-    var itemsOnLevel: [GameItem?] = []
+    // all items that it is on the mission
+    var itemsOnMission: [GameItem?] = []
     
     // default to open car
     var actionMessageType: MESSAGES_TYPES = .OpenCarAction
@@ -265,7 +265,7 @@ class ParkingWorkGame: SKScene {
         displayHeight = displaySize.height
         
         // get tile map
-        tileNode = childNode(withName: "tilemapLevel1") as? SKTileMapNode
+        tileNode = childNode(withName: "tilemapMission1") as? SKTileMapNode
         
         // set tile map dimensions
         tileMapWidth = tileNode?.frame.width

@@ -1,5 +1,5 @@
 //
-//  Level.swift
+//  Mission.swift
 //  Parking Work
 //
 //  Created by Николай Ногин on 01.06.2023.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Level {
+struct Mission {
     var number: Int
     var mainHeader: String
     var reputationForEnter: Float
@@ -16,7 +16,7 @@ struct Level {
     
     var numberAsString: String {
         get {
-            "Уровень \(number)"
+            "Миссия \(number)"
         }
     }
 }

@@ -42,7 +42,7 @@ extension ParkingWorkGame {
 
     func checkDistanceBetweenPlayerAndTargetLock() {
         let playerPosition = player?.node?.position
-        let targetCarPosition = player?.currLockTarget?.parent?.position
+        let targetCarPosition = player?.currTargetCar!.node?.position
         
         let diffX = abs(playerPosition!.x) - abs(targetCarPosition!.x)
         let diffY = abs(playerPosition!.y) - abs(targetCarPosition!.y)
@@ -58,7 +58,7 @@ extension ParkingWorkGame {
         }
         // lock target clearing
         if (abs(diffX) > 420 || abs(diffY) > 420) {
-            player?.currLockTarget = nil
+            player?.currTargetLock = nil
             player!.currTargetCar = nil
             hideTargetWindow()
         }
@@ -177,7 +177,7 @@ extension ParkingWorkGame {
         return height + 6
     }
     
-    func fillItemsOfLevel() {
+    func fillItemsOfMission() {
         
         // pick lock
         if let pickLockNode = childNode(withName: "pick-lock") as? SKSpriteNode {
@@ -187,8 +187,9 @@ extension ParkingWorkGame {
             pickLockNode.physicsBody?.collisionBitMask = 0
             pickLockNode.physicsBody?.affectedByGravity = false
             
-            let pickLock = GameItem(name: "Обыкновенная отмычка", node: pickLockNode, assetName: "usual_picklock")
-            itemsOnLevel.append(pickLock)
+            let pickLock = GameItem(name: ITEMS_TYPES.PICKLOCKS.usual_picklock.name, node: pickLockNode, type: ITEMS_TYPES.PICKLOCKS.TYPE, assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName, description: ITEMS_TYPES.PICKLOCKS.usual_picklock.description)
+            
+            itemsOnMission.append(pickLock)
             
             pickLockNode.userData = NSMutableDictionary()
             pickLockNode.userData?.setValue(pickLock.self, forKeyPath: "self")
@@ -204,6 +205,9 @@ extension ParkingWorkGame {
         isInventoryOpened = false
         let moveAction = SKAction.move(to: CGPoint(x: (displayWidth! / 2) + 20, y: (inventoryScreen?.position.y)!), duration: 0.5)
         inventoryScreen?.run(moveAction)
+        
+        // hide item's description window
+        hideDescriptionOfItem()
     }
     
     func openInventory() {
@@ -214,6 +218,78 @@ extension ParkingWorkGame {
         }
         
     }
+    
+    func showDescriptionOf(item: GameItem, touchedNode: SKNode) {
+        if inventoryScreen?.childNode(withName: "inventory-item-description") != nil {
+            self.hideDescriptionOfItem()
+            return
+        }
+        
+        var heightOfAllLabels: CGFloat = 0
+        let topPadding: CGFloat = 15
+        let bottomPadding: CGFloat = 15
+        
+        let strokeRect = CGRect(origin: CGPoint(x: 0, y: 0), size:  CGSize(width: touchedNode.frame.width - 2, height: touchedNode.frame.height - 2))
+        let strokePath = CGPath(rect: strokeRect, transform: .none)
+        let strokeShape = SKShapeNode(path: strokePath, centered: true)
+        strokeShape.position = CGPoint(x: 0, y: -touchedNode.frame.height / 2)
+        strokeShape.strokeColor = .blue
+        strokeShape.lineWidth = 2
+        strokeShape.alpha = 0.6
+        strokeShape.name = "inventory-item-selection"
+        touchedNode.parent?.addChild(strokeShape)
+        
+        let descriptionWindow = SKSpriteNode(color: .black, size: CGSize(width: 180, height: 150))
+        descriptionWindow.name = "inventory-item-description"
+        descriptionWindow.anchorPoint = CGPoint(x: 1, y: 1)
+        descriptionWindow.position =  CGPoint(x: touchedNode.parent!.position.x, y: touchedNode.parent!.position.y - (touchedNode.parent?.frame.height)!)
+        self.inventoryScreen?.addChild(descriptionWindow)
+        
+        // item name
+        let itemName = SKLabelNode(text: item.name)
+        itemName.verticalAlignmentMode = .center
+        itemName.horizontalAlignmentMode = .center
+        itemName.lineBreakMode = .byWordWrapping
+        itemName.numberOfLines = 0
+        itemName.preferredMaxLayoutWidth = descriptionWindow.frame.width
+        itemName.fontName = FONTS.AmericanTypewriter
+        itemName.fontSize = 12
+        itemName.position = CGPoint(x: -descriptionWindow.frame.width / 2, y: -topPadding)
+        descriptionWindow.addChild(itemName)
+        
+        heightOfAllLabels += itemName.frame.height
+        
+        let itemDescription = SKLabelNode(text: item.description)
+        itemDescription.verticalAlignmentMode = .top
+        itemDescription.horizontalAlignmentMode = .center
+        itemDescription.lineBreakMode = .byWordWrapping
+        itemDescription.numberOfLines = 0
+        itemDescription.preferredMaxLayoutWidth = descriptionWindow.frame.width
+        itemDescription.fontName = FONTS.Baskerville
+        itemDescription.fontSize = 12
+        itemDescription.position = CGPoint(x: -descriptionWindow.frame.width / 2, y: itemName.position.y - (itemName.frame.height / 2))
+        descriptionWindow.addChild(itemDescription)
+        
+        heightOfAllLabels += itemDescription.frame.height
+        
+        descriptionWindow.size = CGSize(width: 180, height: heightOfAllLabels + bottomPadding)
+    }
+    
+    func hideDescriptionOfItem() {
+        self.inventoryScreen?.childNode(withName: "inventory-item-description")?.removeFromParent()
+        self.inventoryScreen?.children.forEach({ square in
+            square.childNode(withName: "inventory-item-selection")?.removeFromParent()
+        })
+    }
+    
+//    func getTargetLock(of car: Car, lockType: String) -> CarLock? {
+//        for lock in car.locks {
+//            if lock?.type == lockType {
+//                return lock
+//            }
+//        }
+//        return nil
+//    }
 
 }
 

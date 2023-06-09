@@ -1,5 +1,5 @@
 //
-//  LevelCompletion.swift
+//  MissionCompletion.swift
 //  Parking Work
 //
 //  Created by Николай Ногин on 25.05.2023.
@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class LevelCompletion: ParkingWorkGame {
+class MissionCompletion: ParkingWorkGame {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         

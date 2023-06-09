@@ -8,7 +8,7 @@
 import SpriteKit
 
 // General Game Functions
-extension Level1 {
+extension Mission1 {
     // Creates tutorial window with messages in it
     func createTutorial() {
         let tutorialWindow = SKShapeNode(rectOf: CGSize(width: displayWidth! / 2, height: displayHeight! / 2))
@@ -55,7 +55,8 @@ extension Level1 {
         let nextBtn = self.tutorialWindow?.childNode(withName: "ui-next-btn") as? SKShapeNode
         let nextBtnLabel = nextBtn?.childNode(withName: "ui-next-label-btn") as? SKLabelNode
         
-        let moveAct = SKAction.move(to: (self.oldCopper?.node?.position)!, duration: 2.0)
+        let oldCopper = carsOnLevel[0]
+        let moveAct = SKAction.move(to: (oldCopper?.node?.position)!, duration: 2.0)
         if tutorialMsg == 1 {
             self.cameraNode?.run(moveAct, completion: {
                 messageLabel?.text = "Чтобы попытаться вскрыть машину, подойдите к дверям, обозначенным красным цветом."
@@ -64,8 +65,8 @@ extension Level1 {
             })
         }
         else if tutorialMsg == 2 {
-            let driverLock = self.oldCopper?.node?.childNode(withName: "driver_lock")
-            let passengerLock = self.oldCopper?.node?.childNode(withName: "passenger_lock")
+            let driverLock = oldCopper?.node?.childNode(withName: "driver_lock")
+            let passengerLock = oldCopper?.node?.childNode(withName: "passenger_lock")
             
             driverLock?.run(SKAction.scale(to: 3.4, duration: 1.0), completion: {
                 driverLock?.run(SKAction.scale(to: 1.0, duration: 0.4))
@@ -283,7 +284,7 @@ extension Level1 {
             
         }
         else if (tutorialMsg == 19) {
-            messageLabel?.text = "Посмотреть задание на уровень можно, нажав на знак вопроса рядом с мини картой."
+            messageLabel?.text = "Посмотреть задание для миссии можно, нажав на знак вопроса рядом с мини картой."
             self.tutorialMsg += 1
             self.tutorialWindow?.alpha = 1
             nextBtnLabel?.text = "Далее"

@@ -39,12 +39,12 @@ extension ParkingWorkGame {
 
         menuScreen?.addChild(resumeGameBtn)
         
-        // level number label
-        let levelNum = SKLabelNode(text: "Уровень \(levelNum)")
-        levelNum.fontSize = 30
-        levelNum.fontName = "Baskerville-bold"
-        levelNum.position = CGPoint(x: 0, y: yPos * 2)
-        menuScreen?.addChild(levelNum)
+        // mission number label
+        let missionNum = SKLabelNode(text: "Миссия \(missionNum)")
+        missionNum.fontSize = 30
+        missionNum.fontName = "Baskerville-bold"
+        missionNum.position = CGPoint(x: 0, y: yPos * 2)
+        menuScreen?.addChild(missionNum)
         
         // settings game button
         let settingsGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
@@ -74,8 +74,8 @@ extension ParkingWorkGame {
         menuScreen?.addChild(gameName)
     }
     
-    // Creates screen with task for the level description
-    func createLevelTaskScreen() {
+    // Creates screen with task for the mission description
+    func createMissionTaskScreen() {
 
         // background
         taskScreen = SKSpriteNode(color: .black, size: CGSize(width: displayWidth!, height: displayHeight!))
@@ -106,16 +106,15 @@ extension ParkingWorkGame {
         
         taskScreen?.addChild(closeTaskScreenBtn)
         
-        // level number label
-        let levelNum = SKLabelNode(text: "Уровень \(levelNum)")
-        levelNum.fontSize = 30
-        levelNum.fontName = "Baskerville-bold"
-        levelNum.position = CGPoint(x: 70, y: displayHeight! / 2 - 40)
-        taskScreen?.addChild(levelNum)
+        // mission number label
+        let missionNum = SKLabelNode(text: "Миссия \(missionNum)")
+        missionNum.fontSize = 30
+        missionNum.fontName = "Baskerville-bold"
+        missionNum.position = CGPoint(x: 70, y: displayHeight! / 2 - 40)
+        taskScreen?.addChild(missionNum)
         
-        // level task message
+        // mission task message
         let spriteRect = SKSpriteNode()
-//        spriteRect.size = CGSize(width: displayWidth! - 260, height: 100)
         spriteRect.color = UIColor(named: COLORS.TaskMessageBackground.rawValue)!
         spriteRect.alpha = 0.9
         spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 130)
@@ -142,6 +141,7 @@ extension ParkingWorkGame {
     
     func createPlayerInventoryScreen() {
         inventoryScreen = SKSpriteNode(color: .darkGray, size: CGSize(width: displayWidth! / 2, height: displayHeight!))
+        inventoryScreen?.name = "inventory-screen"
         inventoryScreen?.zPosition = 20
         
         cameraNode?.addChild(inventoryScreen!)
@@ -153,6 +153,7 @@ extension ParkingWorkGame {
         
         // Inventory header
         let inventoryHeaderLabel = SKLabelNode(text: "Сумка")
+        inventoryHeaderLabel.name = "inventory-header"
         inventoryHeaderLabel.verticalAlignmentMode = .center
         inventoryHeaderLabel.horizontalAlignmentMode = .center
         inventoryHeaderLabel.position = CGPoint(x: (inventoryScreen?.frame.width)! / 2, y: (inventoryScreen?.frame.height)! / 2 - 25)
@@ -239,6 +240,7 @@ extension ParkingWorkGame {
                 }
                 
                 itemSquare = SKSpriteNode(color: .black, size: CGSize(width: squareDimension, height: squareDimension))
+                itemSquare?.name = "inventory-square"
                 itemSquare?.anchorPoint = CGPoint(x: 0.5, y: 1)
                 
                 squarePosition = CGPoint(x: everyXPos, y: yPos)
@@ -252,10 +254,16 @@ extension ParkingWorkGame {
                         placeToRowNum += 1
                     }
                     
-                    if let playerItem = player?.inventory[i - 1] {
+                    if var playerItem = player?.inventory[i - 1] {
                         itemPic = SKSpriteNode(imageNamed: playerItem.assetName)
+                        playerItem.node = itemPic!
+                    
+                        itemPic?.name = "inventory-item-" + playerItem.type
                         itemPic?.size = CGSize(width: squareDimension, height: squareDimension)
                         itemPic?.position = CGPoint(x: 0, y: -squareDimension / 2)
+                        
+                        itemPic?.userData = NSMutableDictionary()
+                        itemPic?.userData?.setValue(playerItem, forKeyPath: "self")
                         itemSquare?.addChild(itemPic!)
                         numOfItemsPlaced += 1
                         
@@ -273,5 +281,10 @@ extension ParkingWorkGame {
         capacityLabel?.position = CGPoint(x: everyXPos + (squareDimension / 2), y: yPos - squareDimension - 10)
         capacityLabel?.text = "Вместимость: \(player!.inventory.count)/\(player!.inventoryMaxCapacity)"
         done()
+    }
+    
+    func createItemInfoWIndow() {
+        let itemInfoWindow = SKSpriteNode(color: .gray, size: CGSize(width: 100, height: 100))
+        
     }
 }

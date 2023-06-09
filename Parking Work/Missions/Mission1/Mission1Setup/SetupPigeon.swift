@@ -8,11 +8,9 @@
 
 import SpriteKit
 
-// Level 1 Pigeons Setup
-extension Level1 {
+// Mission 1 Pigeons Setup
+extension Mission1 {
 
-  
-    
     func setupPigeons() {
         
         // pigeon collides with player

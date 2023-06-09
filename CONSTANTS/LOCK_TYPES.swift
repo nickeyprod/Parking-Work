@@ -6,7 +6,7 @@
 //
 
 
-enum LOCK_TYPES {
-    static var driverLock = "driver_lock"
-    static var passengerLock = "passenger_lock"
-}
+let LOCK_TYPES_LIST = [
+    "driver_lock",
+    "passenger_lock"
+]

@@ -79,19 +79,19 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             } else if contact.bodyB.node?.name != "completion-target" {
                 print("contact")
                 if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
-                    if levelCompleted == false {
+                    if missionCompleted == false {
                         playerStealTheCar()
                     }
                 }
                 if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyB.node) {
-                    if levelCompleted == false {
+                    if missionCompleted == false {
                         playerStealTheCar()
                     }
                     
                 }
             } else {
-                if canShowCompletionLevelMessage {
-                    canShowCompletionLevelMessage = false
+                if canShowCompletionMissionMessage {
+                    canShowCompletionMissionMessage = false
                     pushMessageToChat(text: "Эта машина не угнана тобой! Ты должен сидеть в угоняемой машине.")
                 }
                 
@@ -102,15 +102,14 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             
 
         case (playerCategory | completionSquareCategory):
-            if canShowCompletionLevelMessage {
-                canShowCompletionLevelMessage = false
+            if canShowCompletionMissionMessage {
+                canShowCompletionMissionMessage = false
                 pushMessageToChat(text: "Вы не должны уходить с парковки без машины!")
             }
             
             
         default:
-            player!.currLockTarget = nil
-//            print("Some other contact occurred")
+            player!.currTargetLock = nil
         }
     }
     
@@ -131,7 +130,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
             playerInThirdCircle = false
             reduceAnxiety(to: 0.3)
         case (playerCategory | completionSquareCategory):
-            canShowCompletionLevelMessage = true
+            canShowCompletionMissionMessage = true
         default:
             break
 //            print("Some other contact ended")
@@ -257,25 +256,23 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
     func playerAndLockContact(_ bodyA: SKPhysicsBody,  _ bodyB: SKPhysicsBody) {
 
         if bodyA.node!.name != "playerNode" {
-            player?.currLockTarget = bodyA.node
+            player?.currTargetLock = bodyA.node!.userData?.value(forKey: "self") as? CarLock
         }
         if bodyB.node!.name != "playerNode" {
-            player?.currLockTarget = bodyB.node
+            player?.currTargetLock = bodyB.node!.userData?.value(forKey: "self") as? CarLock
         }
         
         // setup action message type
         switchActionMessageType(to: .OpenCarAction)
-        
-        // get lock type
-        let lockType = player?.currLockTarget?.name
-        
+    
         // initialize Car object
-        player!.currTargetCar = player?.currLockTarget?.parent?.userData?.value(forKey: "self") as? Car
+        player!.currTargetCar = player?.currTargetLock?.node .parent?.userData?.value(forKey: "self") as? Car
         
         if player?.currTargetCar?.stolen == true {
             // if no enter to car button -> show it
             if  self.enterToCarBtn == nil {
-                self.showTargetWindow(with: self.player!.currTargetCar!, lockType: lockType!)
+                
+                self.showTargetWindow(with: player!.currTargetCar!, targetLock: player!.currTargetLock!)
                 
                 // show enter to car button
                 let enterButton = SKSpriteNode(texture: SKTexture(imageNamed: "car-door"))
@@ -292,24 +289,24 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         } else {
             // show message suggesting to open target car
             let playerPosition = player!.node!.position
-            let targetLockPosition = player!.currLockTarget?.parent?.position
+            let targetCarPosition = player!.currTargetCar!.node?.position
 
-            let diffX = abs(playerPosition.x) - abs(targetLockPosition!.x)
-            let diffY = abs(playerPosition.y) - abs(targetLockPosition!.y)
+            let diffX = abs(playerPosition.x) - abs(targetCarPosition!.x)
+            let diffY = abs(playerPosition.y) - abs(targetCarPosition!.y)
             
             // if distance not more than 150 and car is not signaling
             if (abs(diffX) < 150 && abs(diffY) < 150 && !player!.currTargetCar!.signaling) && !player!.isSittingInCar {
                 self.showActionMessage()
                 
                 // showing target
-                self.showTargetWindow(with: player!.currTargetCar!, lockType: lockType!)
+                self.showTargetWindow(with: player!.currTargetCar!, targetLock: player!.currTargetLock!)
             }
         }
         
     }
     
     func playerStealTheCar() {
-        levelCompleted = true
+        missionCompleted = true
         pushMessageToChat(text: "Отличная работа!")
     }
 }

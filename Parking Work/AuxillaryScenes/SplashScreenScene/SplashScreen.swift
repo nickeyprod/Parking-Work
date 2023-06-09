@@ -106,7 +106,7 @@ class SplashScreen: ParkingWorkGame {
     }
     
     func runGame() {
-        let gameScene = GKScene(fileNamed: "LevelListScene")?.rootNode as! ParkingWorkGame
+        let gameScene = GKScene(fileNamed: "MissionListScene")?.rootNode as! ParkingWorkGame
         
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds

@@ -21,6 +21,7 @@ class Car: Equatable {
     }
     
     init(scene: SKScene, name: String, initialSpeed: CGFloat, maxSpeedForward: CGFloat, maxSpeedBackward: CGFloat, turningSpeed: CGFloat, accelerationRate: CGFloat, secondaryAcceleration: CGFloat, brakeRate: CGFloat, smokeRate: CGFloat) {
+        
         self.scene = (scene as? ParkingWorkGame)!
         self.name = name
         self.currSpeed = initialSpeed
@@ -46,13 +47,7 @@ class Car: Equatable {
     var engineDrivingSound: SKAudioNode?
     var engineStillSound: SKAudioNode?
     
-    // locks list
-    var locks: [String: Float?] = [
-        "driver_lock": nil,
-        "passenger_lock": nil,
-        ]
-    
-    var jammedLocks: [String?] = []
+    var locks: [CarLock?] = []
     
     // smoke emitter
     var smokeEmitter: SKEmitterNode?

@@ -32,7 +32,7 @@ enum COLORS: String {
     // task screen
     case TaskMessageBackground
     
-    // level list 
+    // mission list 
     case ReputationNeededGreen
     case PlayButtonNormal
     

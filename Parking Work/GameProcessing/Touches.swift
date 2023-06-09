@@ -51,14 +51,25 @@ extension ParkingWorkGame {
                 run(MenuSounds.button_click.action)
             }
             else if (touchedNode.name == "ui-actionYesBtn" || touchedNode.parent?.name == "ui-actionYesBtn") && !isUILocked {
+                
                 // off opening car when tutorial message is opened
                 if !canMoveCamera { return }
-                if actionMessageType == .OpenCarAction {
-                    // try to open target door of the car
-                    player!.tryOpenCarLock(of: player!.currTargetCar!, lockType: player!.currLockTarget!.name!)
-                } else if actionMessageType == .PickUpItemAction {
-                    player!.pickUpTargetItem()
-                }
+                
+                let actionYesBtn = touchedNode.name == "ui-actionYesBtn" ? touchedNode : touchedNode.parent
+                actionYesBtn?.run(.scale(to: 1.1, duration: 0.2), completion: {
+                    actionYesBtn?.run(.scale(to: 1.0, duration: 0.1))
+                    if self.actionMessageType == .OpenCarAction {
+                        
+                        // get picklock that player wants to use
+                        let usedPicklock: GameItem? = nil
+                        
+                        // try to open target door of the car
+                        self.player!.tryOpenCarLock(of: self.player!.currTargetCar!, targetLock: self.player!.currTargetLock!, with: usedPicklock)
+                    } else if self.actionMessageType == .PickUpItemAction {
+                        self.player!.pickUpTargetItem()
+                    }
+                })
+                
                 
                 run(MenuSounds.button_click.action)
             }
@@ -99,7 +110,9 @@ extension ParkingWorkGame {
                 run(MenuSounds.button_click.action)
             }
             else if (touchedNode.name == "ui-inventory-btn") && !isUILocked {
-                self.inventoryButton?.run(.scale(to: 1.2, duration: 0))
+                self.inventoryButton?.run(.scale(to: 1.2, duration: 0.2), completion: {
+                    self.inventoryButton?.run(.scale(to: 1.0, duration: 0.1))
+                })
                 run(InventorySounds.bag_open.action)
                 if !isInventoryOpened {
                     openInventory()
@@ -109,13 +122,30 @@ extension ParkingWorkGame {
             }
             else if (touchedNode.name == "ui-closeInventoryBtn" || touchedNode.parent?.name == "ui-closeInventoryBtn") && !isUILocked {
                 run(InventorySounds.bag_open.action)
-                if isInventoryOpened {
-                    closeInventory()
-                }
+                let closeInventoryBtn = touchedNode.name == "ui-closeInventoryBtn" ? touchedNode : touchedNode.parent
+              
+                closeInventoryBtn?.run(.scale(to: 1.2, duration: 0.2), completion: {
+                    closeInventoryBtn?.run(.scale(to: 1.0, duration: 0.1))
+                    if self.isInventoryOpened {
+                        self.closeInventory()
+                    }
+                })
+                
             }
-                        
-            
-            
+            else if (touchedNode.name?.split(separator: "-")[0] == "inventory") {
+                
+                if touchedNode.name?.split(separator: "-")[1] == "item" {
+                    if let item = touchedNode.userData?.value(forKeyPath: "self") as? GameItem {
+                        showDescriptionOf(item: item, touchedNode: touchedNode)
+                    } else if touchedNode.name == "inventory-item-selection" {
+                        hideDescriptionOfItem()
+                    }
+                } else {
+                    hideDescriptionOfItem()
+                }
+
+                
+            }
         }
     }
     
@@ -216,7 +246,9 @@ extension ParkingWorkGame {
             
             let touchLocation = touch.location(in: self)
             let touchedNode = atPoint(touchLocation)
-              
+            
+            if touchedNode.name?.split(separator: "-")[0] == "inventory" { return }
+
             if !player!.isSittingInCar && cameraMovingByFinger == false && !isTouchingUI(touchedNode: touchedNode) && !self.isPaused && !cameraZooming && isRunButtonHolded == false && tutorialEnded == true && canMoveCamera == true {
 
                 player?.destinationPosition = touchLocation

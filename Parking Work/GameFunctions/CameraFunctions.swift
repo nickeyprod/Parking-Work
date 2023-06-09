@@ -10,7 +10,7 @@ import SpriteKit
 // Camera Control Game Functions
 extension ParkingWorkGame {
     
-    // Zooming Out and then in animation for the start of the level
+    // Zooming Out and then in animation for the start of the mission
     func zoomOutInCameraAnimation(to num: CGFloat) {
         
         let act = SKAction.scale(by: num, duration: 2.0)

@@ -1,5 +1,5 @@
 //
-//  Level1.swift
+//  Mission1.swift
 //  Parking Work
 //
 //  Created by Николай Ногин on 19.02.2023.
@@ -9,11 +9,10 @@ import SpriteKit
 import GameplayKit
 
 
-class Level1: ParkingWorkGame {
+class Mission1: ParkingWorkGame {
     
     // Cars
-    var oldCopper: Car?
-    var chowerler: Car?
+    var carsOnLevel: [Car?] = []
     
     var tutorialMsg = 1
     
@@ -43,10 +42,10 @@ class Level1: ParkingWorkGame {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        // set level number
-        self.levelNum = 1
+        // set mission number
+        self.missionNum = 1
         
-        // setup all physic bodies of the level
+        // setup all physic bodies of the mission
         setupPhysicBodies()
         
         // setup all needed initial variables (values)
@@ -55,14 +54,14 @@ class Level1: ParkingWorkGame {
         // off tutorial
         self.tutorial(set: false)
 
-        // setup camera of the level
+        // setup camera of the mission
         setupCamera()
         
         // create menu screen
         createMenuScreen()
         
-        // create level task screen
-        createLevelTaskScreen()
+        // create mission task screen
+        createMissionTaskScreen()
         
         // create Inventory screen
         createPlayerInventoryScreen()
@@ -95,8 +94,8 @@ class Level1: ParkingWorkGame {
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)
         
-        // showing level number at the start
-        showBannerLabel(text: "Уровень \(levelNum)")
+        // showing mission number at the start
+        showBannerLabel(text: "Миссия \(missionNum)")
         
         // zoom out animation
         zoomOutInCameraAnimation(to: maxScale)
@@ -109,7 +108,7 @@ class Level1: ParkingWorkGame {
             createTutorial()
         }
         
-        pushMessageToChat(text: "Добро пожаловать на 1 уровень.")
+        pushMessageToChat(text: "Добро пожаловать на 1 миссию.")
         if tutorialEnded {
             self.pushMessageToChat(text: "Добро пожаловать! Парковка №17 в спальном районе Чиперово города Сероветска.")
             
@@ -120,8 +119,8 @@ class Level1: ParkingWorkGame {
 //        self.player?.getIn(the: self.oldCopper!)
         
         
-        // fill items on this level
-        fillItemsOfLevel()
+        // fill items on this mission
+        fillItemsOfMission()
 
     }
     
@@ -138,8 +137,8 @@ class Level1: ParkingWorkGame {
         // cars
         setupCars()
         
-        // car locks
-        setupCarLocks()
+        // setup all car locks
+        setupLocksForAllCars()
         
         // setup pigeouns to fly away
         setupPigeons()
@@ -150,8 +149,8 @@ class Level1: ParkingWorkGame {
         // setupTrashBaks
         setupTrashBaks()
         
-        // setup level completion rules
-        setupLevelCompletion()
+        // setup mission completion rules
+        setupMissionCompletion()
         
     }
 

@@ -43,25 +43,25 @@ extension ParkingWorkGame {
     
     // rolling some text as banner message at the center of the screens
     func showBannerLabel(text: String) {
-        let levelNumberNode = self.cameraNode?.childNode(withName: "LevelNumberNode")
-        let levelLabelNode = levelNumberNode?.childNode(withName: "LevelLabelNode") as? SKLabelNode
-        levelLabelNode?.run(SKAction.fadeIn(withDuration: 0.8))
+        let missionNumberNode = self.cameraNode?.childNode(withName: "MissionNumberNode")
+        let missionLabelNode = missionNumberNode?.childNode(withName: "MissionLabelNode") as? SKLabelNode
+        missionLabelNode?.run(SKAction.fadeIn(withDuration: 0.8))
         
-        levelLabelNode?.text = text
+        missionLabelNode?.text = text
         let act = SKAction.resize(toWidth: displayWidth!, duration: 0.3)
-        levelNumberNode?.run(act)
+        missionNumberNode?.run(act)
         
-        levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.4), completion: {
-            levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
+        missionLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.4), completion: {
+            missionLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
             // roll back and hide
             Timer.scheduledTimer(withTimeInterval: 2.2, repeats: false) { _ in
                 let act = SKAction.resize(toWidth: 0, duration: 0.6)
-                levelNumberNode?.run(act)
-                levelLabelNode?.run(SKAction.fadeOut(withDuration: 0.5))
+                missionNumberNode?.run(act)
+                missionLabelNode?.run(SKAction.fadeOut(withDuration: 0.5))
 
-                levelLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.2))
+                missionLabelNode?.run(SKAction.scale(to: 1.2, duration: 0.2))
                 Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                    levelLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
+                    missionLabelNode?.run(SKAction.scale(to: 1.0, duration: 0.15))
                 }
             }
         })

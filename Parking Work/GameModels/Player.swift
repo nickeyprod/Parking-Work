@@ -22,8 +22,8 @@ class Player {
     
     var destinationPosition: CGPoint?
     
-    // Last Opened level
-    var processedLevels: [Int: String] = [
+    // Last Opened mission
+    var processedMissions: [Int: String] = [
         1: "opened",
     ]
     
@@ -42,16 +42,13 @@ class Player {
     // Target
     var currTargetCar: Car?
     var currTargetItem: GameItem?
-    var currLockTarget: SKNode?
+    var currTargetLock: CarLock?
     
     var triedToOpenComplexLockTimes = 0
     var triedToOpenJammedLockTimes = 0
-    
-    var ownedCars: [Car?] = []
     
     var isSittingInCar: Bool = false
     var drivingCar: Car?
     
 
-    
 }

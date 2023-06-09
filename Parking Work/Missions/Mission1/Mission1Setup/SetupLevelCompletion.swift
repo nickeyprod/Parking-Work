@@ -1,5 +1,5 @@
 //
-//  SetupLevelCompletion.swift
+//  SetupMissionCompletion.swift
 //  Parking Work
 //
 //  Created by Николай Ногин on 21.05.2023.
@@ -7,12 +7,10 @@
 
 import SpriteKit
 
-
-
-// Level 1 Completion Rules Setup
-extension Level1 {
+// Mission 1 Completion Rules Setup
+extension Mission1 {
     
-    func setupLevelCompletion() {
+    func setupMissionCompletion() {
         let completionTargetSquare = self.childNode(withName: "completion-target")
         completionTargetSquare?.physicsBody = SKPhysicsBody(rectangleOf: (completionTargetSquare?.frame.size)!)
         completionTargetSquare?.physicsBody?.categoryBitMask = completionSquareCategory

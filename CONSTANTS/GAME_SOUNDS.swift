@@ -22,8 +22,8 @@ enum Sound: String {
     }
 }
 
-enum LevelListSounds: String {
-    case level_list_car_passing_by
+enum MissionListSounds: String {
+    case mission_list_car_passing_by
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
     }

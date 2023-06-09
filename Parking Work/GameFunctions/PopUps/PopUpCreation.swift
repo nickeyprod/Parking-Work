@@ -13,7 +13,9 @@ extension ParkingWorkGame {
     func createActionMessage() {
 
         // window itself
-        let window = SKShapeNode(rectOf: CGSize(width: 260, height: 30), cornerRadius: 10.0)
+        let windowRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 260, height: 30))
+        let windowPath = CGPath(roundedRect: windowRect, cornerWidth: 6.0, cornerHeight: 6.0, transform: .none)
+        let window = SKShapeNode(path: windowPath, centered: true)
         
         // hide it initially
         window.alpha = 0
@@ -24,7 +26,7 @@ extension ParkingWorkGame {
         window.strokeColor = UIColor(named: COLORS.OpenCarWindowColorStroke.rawValue)!
         window.name = "ui-actionWindow"
         
-        window.position = CGPoint(x: 16, y: -((displayHeight! / 2) - 28))
+        window.position = CGPoint(x: 20, y: -((displayHeight! / 2) - 28))
         self.cameraNode!.addChild(window)
         
         // - message label set to 'Попробовать вскрыть?' initially
@@ -39,7 +41,10 @@ extension ParkingWorkGame {
         window.addChild(messageLabel)
         
         // yes action button
-        let yesBtn = SKShapeNode(rect: CGRect(x: (window.frame.width / 2) - 64, y: -12, width: 56, height: (window.frame.height) - 10), cornerRadius: 6.0)
+        let rect = CGRect(x: 0, y: 0, width: 56, height: (window.frame.height) - 10)
+        let path = CGPath(roundedRect: rect, cornerWidth: 6.0, cornerHeight: 6.0, transform: .none)
+        let yesBtn = SKShapeNode(path: path, centered: true)
+        yesBtn.position = CGPoint(x: (window.frame.width / 2) - (yesBtn.frame.width / 2) - 5, y: 0)
         yesBtn.fillColor = UIColor(named: COLORS.ActionMsgYesBtnColor.rawValue)!
         yesBtn.strokeColor = UIColor(named: COLORS.ActionMsgYesBtnColor.rawValue)!
         yesBtn.name = "ui-actionYesBtn"
@@ -51,11 +56,25 @@ extension ParkingWorkGame {
         yesBtnLabel.fontSize = 20
         yesBtnLabel.verticalAlignmentMode = .center
         yesBtnLabel.horizontalAlignmentMode = .center
-        yesBtnLabel.position = CGPoint(x: ((window.frame.width / 2) - 66) + (yesBtn.frame.width / 2), y: 0)
+        yesBtnLabel.position = CGPoint(x: 0, y: 0)
         
         yesBtn.addChild(yesBtnLabel)
         
         actionMessageWindow = window
+        
+        // create here panel for choosing pick lock that user will be using
+        createPicklockChoosingPanel()
+    }
+    
+    func createPicklockChoosingPanel() {
+        let chooseWindowRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 260, height: 50))
+        let chooseWindowPath = CGPath(roundedRect: chooseWindowRect, cornerWidth: 6.0, cornerHeight: 6.0, transform: .none)
+        let pickLockChoosingWindow = SKShapeNode(path: chooseWindowPath, centered: true)
+        
+        pickLockChoosingWindow.fillColor = .black
+        pickLockChoosingWindow.position = self.actionMessageWindow!.position
+        
+        self.cameraNode?.addChild(pickLockChoosingWindow)
     }
     
     // Open car was successful message pop-up

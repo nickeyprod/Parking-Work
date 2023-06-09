@@ -12,40 +12,56 @@ extension Player {
     
     // MARK: - Car Locks Opening Logic
     /// Player can try to open any lock of any car on the map
-    func tryOpenCarLock(of car: Car, lockType: String) {
+    func tryOpenCarLock(of car: Car, targetLock: CarLock, with pickLock: GameItem?) {
+        
+        // if no picklock -> player cannot open door
+        if !playerIsHavingAPicklock() {
+            return scene.pushMessageToChat(text: "У вас нет отмычек!")
+        }
         
         // check if player is opening jammed lock
-        if playerIsOpeningJammedLock(car: car, lockType: lockType) {
+        if targetLock.jammed {
+            
+            // add num of tries when opening the same lock again and again
+            tryingOpenLock(car: car, type: "jammed")
+            
             // push message to chat that lock is jammed
-            return self.scene.pushMessageToChat(text: "Этот замок заклинило!")
+            return scene.pushMessageToChat(text: "Этот замок заклинило!")
         }
-    
+        
         // get lock complexity and chance to open
-        let complexity = car.locks[lockType]!!
-        let chance = scene.player!.unlockSkill / complexity
+        let lockComplexity = targetLock.complexity
+        let chance = scene.player!.unlockSkill / lockComplexity
         
         print("chance ", chance)
         
-        // if chance to open bigger than 1, player can try to open
+        // if chance to open is bigger than 1, then player can try to open
         if chance >= 1 {
+            
+            // remove pick lock that is used from inventory
+            removeUsedPicklockFromInventory()
     
             // get probability of the lock to jam (can be from 10% to 20%)
-            let wedgeProbability = Float(Int.random(in: 10...20)) - chance
-            print("wedge probability: ", wedgeProbability)
+            let jamProbability = Float(Int.random(in: 10...20))
+            
+            // reduce possibility if player uses better picklock
+            tryReduceJamProbabilityIfPossible()
+            
+            print("Jam probability: ", jamProbability)
             
             // gen random num between 10 and 100
-            let randomWedgeNum = Float.random(in: 10.0...100.0)
+            let randomJamNum = Float.random(in: 10.0...100.0)
             
-            // lock jammed if randomWedgeNum in wedgeProbability range
+            // lock jammed if randomWedgeNum in jamProbability range
             // if lock jammed, exit
-            if randomWedgeNum <= wedgeProbability  {
-                // run car lock has jammed steps, and return
-                return openCarLockJammed(car: car, lockType: lockType)
+            if randomJamNum <= jamProbability  {
+                // run steps when car lock is jammed, and return
+                return targetLockIsJammed(of: car)
             }
             
-            // if lock is not jammed,
+            // if lock is not jammed
             // calculate percent of successful opening
-            let percentOfSuccess = 100.0 - complexity
+            let percentOfSuccess = 100.0 - lockComplexity
             let randomInt = Float.random(in: 0.0...100.0)
             
             // if randomInt is less than percentOfSuccess, lock opening
@@ -55,10 +71,10 @@ extension Player {
                 calculateLevelOfNoise(with: chance)
                 
                 // car successfully opened steps
-                successfullyOpenedCar(car: car, lockType: lockType)
+                successfullyOpenedCar(car: car, lockType: targetLock.type)
             } else {
                 // else lock open failing steps
-                openCarFailed(car: car, lockType: lockType)
+                openCarFailed(car: car)
             }
             
         // this else runs if chance of open lock is less than 1,
@@ -74,25 +90,33 @@ extension Player {
 
     }
     
-    // returns true if player is trying to open jammed lock
-    func playerIsOpeningJammedLock(car: Car, lockType: String) -> Bool {
-        if car.jammedLocks.count > 0 {
-            for jammedLock in car.jammedLocks {
-                if lockType == jammedLock {
-                    // add num of tries when opening the same lock again and again
-                    tryingOpenLock(car: car, type: "jammed")
-                    return true
+    func removeUsedPicklockFromInventory() {
+        for item in self.inventory {
+            if item?.type == ITEMS_TYPES.PICKLOCKS.TYPE {
+                if let itemIndex = self.inventory.firstIndex(of: item) {
+                    self.inventory.remove(at: itemIndex)
                 }
             }
-            return false
         }
-        return false
     }
     
-    func openCarLockJammed(car: Car, lockType: String) {
-        // add the jammed lock to list of jammed locks of the car
-        car.jammedLocks.append(lockType)
+    func tryReduceJamProbabilityIfPossible() {
         
+    }
+    
+    func playerIsHavingAPicklock() -> Bool {
+        var playerHasPicklock = false
+        
+        for item in self.inventory {
+            if item?.type == ITEMS_TYPES.PICKLOCKS.TYPE {
+                playerHasPicklock = true
+            }
+        }
+        return playerHasPicklock
+    }
+    
+    func targetLockIsJammed(of car: Car) {
+
         // when lock is jammed,
         // 50% probability, that car start signaling
         if Int.random(in: 0...1) == 1 {
@@ -133,7 +157,7 @@ extension Player {
     }
     
     // run this function when open lock fails
-    func openCarFailed(car: Car, lockType: String) {
+    func openCarFailed(car: Car) {
         // push message that open has failed
         self.scene.pushMessageToChat(text: "Попытка вскрытия провалилась.")
         
@@ -286,7 +310,7 @@ extension Player {
         self.scene.enterToCarBtn = nil
         
         // change lock type in target square popup
-        self.currLockTarget = nil
+        self.currTargetLock = nil
         let lockLabel = self.scene.targetWindow?.childNode(withName: "lockTypeLabel")
         lockLabel?.removeFromParent()
         
@@ -418,9 +442,9 @@ extension Player {
     func pickUpTargetItem() {
         if currTargetItem == nil { return }
         
-        // remove item from level
-        let index = scene.itemsOnLevel.firstIndex(of: currTargetItem!)
-        scene.itemsOnLevel.remove(at: index!)
+        // remove item from mission
+        let index = scene.itemsOnMission.firstIndex(of: currTargetItem!)
+        scene.itemsOnMission.remove(at: index!)
         currTargetItem?.node.removeFromParent()
         
         // add to inventory

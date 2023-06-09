@@ -124,7 +124,7 @@ extension ParkingWorkGame {
         }
         
         // check if need to hide open car window pop-up
-        if player?.currLockTarget != nil && actionMessageType == .OpenCarAction {
+        if player?.currTargetLock != nil && actionMessageType == .OpenCarAction {
             checkDistanceBetweenPlayerAndTargetLock()
         }
         else if player?.currTargetItem != nil && actionMessageType == .PickUpItemAction {
@@ -152,7 +152,7 @@ extension ParkingWorkGame {
         }
         
         // rising anxiety when player around the car nad targer is set
-        if (player!.currLockTarget != nil &&
+        if (player!.currTargetLock != nil &&
             player?.currTargetCar?.node?.name == playerInCircleOfCar?.name) {
 
             if (playerInFirstCircle ) {

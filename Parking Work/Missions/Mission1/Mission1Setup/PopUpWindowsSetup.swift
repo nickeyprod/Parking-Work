@@ -7,8 +7,8 @@
 
 import SpriteKit
 
-// Level 1 Pop-up Windows Setup
-extension Level1 {
+// Mission 1 Pop-up Windows Setup
+extension Mission1 {
     
     // MARK: - Pop-up Windows Setup
     /// Setup of all pop-up window messages

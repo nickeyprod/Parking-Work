@@ -57,10 +57,10 @@ extension ParkingWorkGame {
     }
     
     // Shows player's target as a pop up at the top of the screen
-    func showTargetWindow(with targetCar: Car, lockType: String) {
+    func showTargetWindow(with targetCar: Car, targetLock: CarLock) {
         
         // add one zero at the end if complexity 0.1 to display -> 0.10
-        let complexity = "\(targetCar.locks[lockType]!!)".count == 3 ? "\(targetCar.locks[lockType]!!)0" : "\(targetCar.locks[lockType]!!)"
+        let complexity = "\(targetLock.complexity)".count == 3 ? "\(targetLock.complexity)0" : "\(targetLock.complexity)"
         
         let carNameLabel = self.targetWindow?.childNode(withName: "target-name") as? SKLabelNode
         let lockTypeLabel = self.targetWindow?.childNode(withName: "lockTypeLabel") as? SKLabelNode
@@ -70,7 +70,7 @@ extension ParkingWorkGame {
         carNameLabel?.text = "\(targetCar.name)"
         carNameLabel?.fontSize = 20
         
-        lockTypeLabel?.text = "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")"
+        lockTypeLabel?.text = "\(LOCK_TRANSLATIONS[targetLock.type] ?? "тип неизвестен")"
         complexityNum?.text = "\(complexity)"
         
         let chance = player!.unlockSkill / Float(complexity)!
@@ -85,7 +85,7 @@ extension ParkingWorkGame {
         if self.targetWindow?.childNode(withName: "complexity-label") == nil {
             // target's car lock complexity
             // - lock type label
-            let lockTypeLabel = SKLabelNode(text: "\(LOCK_TRANSLATIONS[lockType] ?? "тип неизвестен")")
+            let lockTypeLabel = SKLabelNode(text: "\(LOCK_TRANSLATIONS[targetLock.type] ?? "тип неизвестен")")
             lockTypeLabel.name = "lockTypeLabel"
             lockTypeLabel.fontName = "Hoefler Text"
             lockTypeLabel.fontSize = 18

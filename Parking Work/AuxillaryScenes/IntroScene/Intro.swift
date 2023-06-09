@@ -130,7 +130,7 @@ class Intro: ParkingWorkGame {
             self.speechLabel?.text = "Хорошо, вот такие парни нам нужны!"
         }
         let t9 = Timer.scheduledTimer(withTimeInterval: 54, repeats: false) { _ in
-            self.showLevel1Scene()
+            self.showMission1Scene()
         }
         
         self.speechTimers.append(t7)
@@ -205,20 +205,20 @@ class Intro: ParkingWorkGame {
             // buttons pressed check
             let touchedNode = atPoint(location)
             if touchedNode.name == "skip-btn" || touchedNode.name == "skip-label" {
-                showLevel1Scene()
+                showMission1Scene()
                 self.releaseSpeechTimers()
             }
          
         }
     }
 
-    func showLevel1Scene() {
-        let level1Scene = SKScene(fileNamed: "Level1Scene")
+    func showMission1Scene() {
+        let mission1Scene = SKScene(fileNamed: "Mission1Scene")
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window
-        level1Scene?.scaleMode = .aspectFill
-        level1Scene?.size = displaySize.size
-        self.view?.presentScene(level1Scene!, transition: transition)
+        mission1Scene?.scaleMode = .aspectFill
+        mission1Scene?.size = displaySize.size
+        self.view?.presentScene(mission1Scene!, transition: transition)
     }
 }

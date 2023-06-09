@@ -7,8 +7,8 @@
 
 import SpriteKit
 
-// Level 1 Camera Setup
-extension Level1 {
+// Misson 1 Camera Setup
+extension Mission1 {
     /// Get camera node from game scene and set its position to the same place as player position.
     func setupCamera() {
 //        let mb = childNode(withName: "mysor_bak_2")

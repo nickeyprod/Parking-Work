@@ -8,8 +8,8 @@
 import Foundation
 import SpriteKit
 
-// Level 1 Player Setup
-extension Level1 {
+// Mission 1 Player Setup
+extension Mission1 {
     /// Getting player node from game scene, setting player categoryBitMask, collisionBitMask, for collision processing. Setting player zPosition, so it was above tilemap.
     func setupPlayer() {
         

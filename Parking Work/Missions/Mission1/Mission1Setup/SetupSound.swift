@@ -8,15 +8,14 @@
 
 import SpriteKit
 
-// Level 1 Cars Setup
-extension Level1 {
+// Mission 1 Cars Setup
+extension Mission1 {
   
     
     func setupSounds() {
         // play city street background sound
         let citySoundBirds = CitySound.street_sound_birds.audio
         citySoundBirds.autoplayLooped = true
-//        self.addChild(citySoundBirds)
         
         // sounds of pigeons flying away
         let pigeonFlyingAwaySound = CitySound.pigeon_flying_away.audio

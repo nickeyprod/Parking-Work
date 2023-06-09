@@ -183,8 +183,8 @@ extension ParkingWorkGame {
         strokeShape.strokeColor = UIColor.black
 
 
-        // set mini map level sprite
-        miniMapSprite = SKSpriteNode(texture: SKTexture(image: UIImage(named: "level\(levelNum)_minimap")!))
+        // set mini map mission sprite
+        miniMapSprite = SKSpriteNode(texture: SKTexture(image: UIImage(named: "mission\(missionNum)_minimap")!))
         miniMapSprite?.size.width = mapWidth
         miniMapSprite?.size.height = mapHeight
         
@@ -222,7 +222,7 @@ extension ParkingWorkGame {
         
         self.player?.miniMapDot = miniMapDot
         
-        // set crop node globally for adding car dots on Level init class
+        // set crop node globally for adding car dots on Mission init class
         self.miniMapCropNode = cropNode
         self.miniMapCropNode?.zPosition = 2
     
