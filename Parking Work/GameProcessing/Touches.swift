@@ -60,11 +60,14 @@ extension ParkingWorkGame {
                     actionYesBtn?.run(.scale(to: 1.0, duration: 0.1))
                     if self.actionMessageType == .OpenCarAction {
                         
-                        // get picklock that player wants to use
-                        let usedPicklock: GameItem? = nil
+                        self.hideActionMessage()
                         
-                        // try to open target door of the car
-                        self.player!.tryOpenCarLock(of: self.player!.currTargetCar!, targetLock: self.player!.currTargetLock!, with: usedPicklock)
+                        // create here panel for choosing pick lock(item) that user will be using
+                        let foundItems = self.getItemsFromInventory(with: ITEMS_TYPES.PICKLOCKS.TYPE)
+                        let numOfSquares = foundItems.count < 3 ? 3 : foundItems.count
+                         
+                        self.showChoosingItemWindow(numOfSquares: numOfSquares, with: foundItems)
+
                     } else if self.actionMessageType == .PickUpItemAction {
                         self.player!.pickUpTargetItem()
                     }
@@ -134,6 +137,27 @@ extension ParkingWorkGame {
             }
             else if (touchedNode.name?.split(separator: "-")[0] == "inventory") {
                 
+                // when player presses on item to use it!
+                if touchedNode.name?.split(separator: "-")[1] == "chooseitem" {
+                    if let itemChoosed = touchedNode.userData?.value(forKeyPath: "self") as? GameItem {
+
+                        // remove item choosed from choosing action window square
+                        touchedNode.run(.scale(to: 1.3, duration: 0.1)) {
+                            touchedNode.run(.rotate(byAngle: 100, duration: 0.2))
+                            touchedNode.run(.scale(to: 1.0, duration: 0.1)) {
+   
+                                // remove icon after animation completed
+                                touchedNode.removeFromParent()
+                                self.hideChoosingItemWindow()
+                            }
+                            
+                        }
+                        
+                        selectItemToUse(usedItem: itemChoosed)
+                    }
+                }
+                
+                // when player presses on item in inventory to read item description
                 if touchedNode.name?.split(separator: "-")[1] == "item" {
                     if let item = touchedNode.userData?.value(forKeyPath: "self") as? GameItem {
                         showDescriptionOf(item: item, touchedNode: touchedNode)

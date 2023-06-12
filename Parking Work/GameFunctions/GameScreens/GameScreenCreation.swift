@@ -149,7 +149,6 @@ extension ParkingWorkGame {
         inventoryScreen?.anchorPoint = CGPoint(x: 0, y: 0.5)
         inventoryScreen?.position = CGPoint(x: 0, y: 0)
         inventoryScreen?.zPosition = 52
-//        inventoryScreen?.alpha = 1
         
         // Inventory header
         let inventoryHeaderLabel = SKLabelNode(text: "Сумка")
@@ -225,6 +224,7 @@ extension ParkingWorkGame {
         
         // loop for place rows
         for z in 1...numOfRows {
+            // top padding for first row
             if z == 1 {
                 yPos = yPos - topPadding
             } else {
@@ -283,8 +283,8 @@ extension ParkingWorkGame {
         done()
     }
     
-    func createItemInfoWIndow() {
-        let itemInfoWindow = SKSpriteNode(color: .gray, size: CGSize(width: 100, height: 100))
-        
-    }
+//    func createItemInfoWIndow() {
+//        let itemInfoWindow = SKSpriteNode(color: .gray, size: CGSize(width: 100, height: 100))
+//        
+//    }
 }

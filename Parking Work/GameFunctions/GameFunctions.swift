@@ -53,6 +53,7 @@ extension ParkingWorkGame {
                 self.enterToCarBtn = nil
             } else {
                 hideActionMessage()
+                hideChoosingItemWindow()
             }
             
         }
@@ -190,7 +191,7 @@ extension ParkingWorkGame {
             let pickLock = GameItem(name: ITEMS_TYPES.PICKLOCKS.usual_picklock.name, node: pickLockNode, type: ITEMS_TYPES.PICKLOCKS.TYPE, assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName, description: ITEMS_TYPES.PICKLOCKS.usual_picklock.description)
             
             itemsOnMission.append(pickLock)
-            
+
             pickLockNode.userData = NSMutableDictionary()
             pickLockNode.userData?.setValue(pickLock.self, forKeyPath: "self")
         }
@@ -241,12 +242,14 @@ extension ParkingWorkGame {
         
         let descriptionWindow = SKSpriteNode(color: .black, size: CGSize(width: 180, height: 150))
         descriptionWindow.name = "inventory-item-description"
+        descriptionWindow.zPosition = 12
         descriptionWindow.anchorPoint = CGPoint(x: 1, y: 1)
         descriptionWindow.position =  CGPoint(x: touchedNode.parent!.position.x, y: touchedNode.parent!.position.y - (touchedNode.parent?.frame.height)!)
         self.inventoryScreen?.addChild(descriptionWindow)
         
         // item name
         let itemName = SKLabelNode(text: item.name)
+        itemName.name = "inventory-item-name"
         itemName.verticalAlignmentMode = .center
         itemName.horizontalAlignmentMode = .center
         itemName.lineBreakMode = .byWordWrapping
@@ -260,6 +263,7 @@ extension ParkingWorkGame {
         heightOfAllLabels += itemName.frame.height
         
         let itemDescription = SKLabelNode(text: item.description)
+        itemDescription.name = "inventory-item-desc"
         itemDescription.verticalAlignmentMode = .top
         itemDescription.horizontalAlignmentMode = .center
         itemDescription.lineBreakMode = .byWordWrapping
@@ -282,14 +286,33 @@ extension ParkingWorkGame {
         })
     }
     
-//    func getTargetLock(of car: Car, lockType: String) -> CarLock? {
-//        for lock in car.locks {
-//            if lock?.type == lockType {
-//                return lock
-//            }
-//        }
-//        return nil
-//    }
-
+    func getItemsFromInventory(with type: String) -> [GameItem] {
+        var foundItems: [GameItem] = []
+        for item in player!.inventory {
+            if item!.type == type {
+                foundItems.append(item!)
+            }
+        }
+        return foundItems
+    }
+    
+    func selectItemToUse(usedItem: GameItem) {
+        
+        if usedItem.type == ITEMS_TYPES.PICKLOCKS.TYPE {
+            // try to open target door of the car
+            self.player!.tryOpenCarLock(of: self.player!.currTargetCar!, targetLock: self.player!.currTargetLock!, with: usedItem)
+        }
+        
+    }
+    
+    func removeItemFromInventory(itemToRemove: GameItem) {
+        for item in player!.inventory {
+            if item == itemToRemove {
+                if let index = player!.inventory.firstIndex(of: item) {
+                    player!.inventory.remove(at: index)
+                }
+            }
+        }
+    }
 }
 

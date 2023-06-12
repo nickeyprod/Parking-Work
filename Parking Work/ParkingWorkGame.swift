@@ -116,6 +116,7 @@ class ParkingWorkGame: SKScene {
     
     // Action Message window
     var actionMessageWindow: SKNode?
+    var itemChoosingWindow: SKNode?
     
     // Target Window
     var targetWindow: SKSpriteNode?

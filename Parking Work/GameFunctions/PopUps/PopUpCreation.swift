@@ -62,20 +62,57 @@ extension ParkingWorkGame {
         
         actionMessageWindow = window
         
-        // create here panel for choosing pick lock that user will be using
-        createPicklockChoosingPanel()
+      
     }
     
-    func createPicklockChoosingPanel() {
+    func createItemChoosingPanel(numSquares: Int, with items: [GameItem]) {
+        
         let chooseWindowRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 260, height: 50))
         let chooseWindowPath = CGPath(roundedRect: chooseWindowRect, cornerWidth: 6.0, cornerHeight: 6.0, transform: .none)
-        let pickLockChoosingWindow = SKShapeNode(path: chooseWindowPath, centered: true)
+        let choosingWindow = SKShapeNode(path: chooseWindowPath, centered: true)
         
-        pickLockChoosingWindow.fillColor = .black
-        pickLockChoosingWindow.position = self.actionMessageWindow!.position
+        choosingWindow.fillColor = .clear
+        choosingWindow.strokeColor = .clear
+        choosingWindow.position = self.actionMessageWindow!.position
+
+        itemChoosingWindow = choosingWindow
+        let stroke = 1
+        let squareWidth = 49 + stroke
+        let squareHeight = 49 + stroke
+        let squareSize = CGSize(width: squareWidth, height: squareHeight)
         
-        self.cameraNode?.addChild(pickLockChoosingWindow)
+        let marginBetweenSquares = 5
+        
+        let halfOfSquare = squareWidth / 2
+        let fullWidth = ((squareWidth + marginBetweenSquares) * numSquares)
+        
+        var xPos = -(fullWidth / 2) + (halfOfSquare + marginBetweenSquares / 2)
+        
+        for i in 0...numSquares - 1 {
+            
+            let itemSquare = SKSpriteNode(color: .black, size: squareSize)
+            itemSquare.position = CGPoint(x: xPos, y: 0)
+            choosingWindow.addChild(itemSquare)
+            if i < (items.count) {
+                let itemPic = SKSpriteNode(imageNamed: items[i].assetName)
+                itemPic.name = "inventory-chooseitem-" + items[i].type
+                itemPic.zPosition = 12
+                itemPic.size = CGSize(width: squareWidth, height: squareHeight)
+                itemPic.position = CGPoint(x: 0, y: 0)
+                itemSquare.addChild(itemPic)
+
+                itemPic.userData = NSMutableDictionary()
+                itemPic.userData?.setValue(items[i].self, forKeyPath: "self")
+            }
+
+            xPos += squareWidth + marginBetweenSquares
+            
+            
+        }
+        choosingWindow.setScale(0)
+        self.cameraNode?.addChild(choosingWindow)
     }
+    
     
     // Open car was successful message pop-up
     func createOpenCarSuccessMessage() {
