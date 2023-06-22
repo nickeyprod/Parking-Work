@@ -30,13 +30,15 @@ class WalkingState: PlayerState {
     }
     
     let textures: Array <SKTexture> = [
+        SKTexture(imageNamed: "user_go_00"),
         SKTexture(imageNamed: "user_go_01"),
         SKTexture(imageNamed: "user_go_02"),
+        SKTexture(imageNamed: "user_go_03")
     ]
     
 
     lazy var walkAction = {
-        SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.50))
+        SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.26))
     }()
     
     override func didEnter(from previousState: GKState?) {
@@ -58,12 +60,14 @@ class RunningState: PlayerState {
     }
 
     let textures: Array <SKTexture> = [
+        SKTexture(imageNamed: "user_run_00"),
         SKTexture(imageNamed: "user_run_01"),
         SKTexture(imageNamed: "user_run_02"),
+        SKTexture(imageNamed: "user_run_03")
     ]
 
     lazy var runAction = {
-        return SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.40))
+        return SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.21))
     }()
 
     override func didEnter(from previousState: GKState?) {
@@ -85,11 +89,30 @@ class IdleState: PlayerState {
     
     let textures: Array <SKTexture> = [
         SKTexture(imageNamed: "user_staying_00" ),
+        SKTexture(imageNamed: "user_staying_00" ),
+        SKTexture(imageNamed: "user_staying_01" ),
+        
+        SKTexture(imageNamed: "user_staying_02" ),
+        SKTexture(imageNamed: "user_staying_02" ),
+        SKTexture(imageNamed: "user_staying_02" ),
+        SKTexture(imageNamed: "user_staying_02" ),
+        
+        
+        SKTexture(imageNamed: "user_staying_00" ),
+        SKTexture(imageNamed: "user_staying_01" ),
+        SKTexture(imageNamed: "user_staying_00" ),
+        
+        SKTexture(imageNamed: "user_staying_03" ),
+        SKTexture(imageNamed: "user_staying_03" ),
+        SKTexture(imageNamed: "user_staying_03" ),
+        SKTexture(imageNamed: "user_staying_03" ),
+        
+        SKTexture(imageNamed: "user_staying_00" ),
         SKTexture(imageNamed: "user_staying_01" )
     ]
     
     lazy var action = {
-        SKAction.repeatForever(.animate(with: textures, timePerFrame: 0.8))
+        SKAction.repeatForever(.animate(with: textures, timePerFrame: 1))
     }()
     
     override func didEnter(from previousState: GKState?) {

@@ -63,10 +63,15 @@ extension ParkingWorkGame {
                         self.hideActionMessage()
                         
                         // create here panel for choosing pick lock(item) that user will be using
-                        let foundItems = self.getItemsFromInventory(with: ITEMS_TYPES.PICKLOCKS.TYPE)
-                        let numOfSquares = foundItems.count < 3 ? 3 : foundItems.count
+                        let foundPicklocks = self.getItemsFromInventory(with: ITEMS_TYPES.PICKLOCKS.TYPE)
+                        
+                        if foundPicklocks.count == 0 {
+                            return self.pushMessageToChat(text: "У вас нет отмычек!")
+                        }
+                        
+                        let numOfSquares = foundPicklocks.count < 3 ? 3 : foundPicklocks.count
                          
-                        self.showChoosingItemWindow(numOfSquares: numOfSquares, with: foundItems)
+                        self.showChoosingItemWindow(numOfSquares: numOfSquares, with: foundPicklocks)
 
                     } else if self.actionMessageType == .PickUpItemAction {
                         self.player!.pickUpTargetItem()
@@ -140,14 +145,15 @@ extension ParkingWorkGame {
                 // when player presses on item to use it!
                 if touchedNode.name?.split(separator: "-")[1] == "chooseitem" {
                     if let itemChoosed = touchedNode.userData?.value(forKeyPath: "self") as? GameItem {
-
+                        
+                        self.throwItem(item: touchedNode)
+                        
                         // remove item choosed from choosing action window square
-                        touchedNode.run(.scale(to: 1.3, duration: 0.1)) {
-                            touchedNode.run(.rotate(byAngle: 100, duration: 0.2))
+                        touchedNode.run(.scale(to: 1.3, duration: 0.2)) {
+                            
                             touchedNode.run(.scale(to: 1.0, duration: 0.1)) {
    
                                 // remove icon after animation completed
-                                touchedNode.removeFromParent()
                                 self.hideChoosingItemWindow()
                             }
                             

@@ -321,12 +321,8 @@ class MissionList: ParkingWorkGame {
                 }
             } else if nodeName == "ShopButton" {
                 run(MenuSounds.button_click.action)
-                shopLabel?.run(.scale(to: 1.1, duration: 0.1))
-                touchedNode.parent!.run(.scale(to: 1.1, duration: 0.1)) {
-                    touchedNode.parent!.run(.scale(to: 1.0, duration: 0.1))
-                    self.shopLabel?.run(.scale(to: 1.0, duration: 0.1))
-                }
-                print("Shop Open")
+                animateButtonClick(button: shopButton!)
+                openShopScreen()
             }
 
         }
@@ -401,6 +397,16 @@ class MissionList: ParkingWorkGame {
             self.view?.presentScene(missionScene!, transition: transition)
         }
 
+    }
+    
+    func openShopScreen() {
+        let shopScene = SKScene(fileNamed: "ShopScene")
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        shopScene?.scaleMode = .aspectFill
+        shopScene?.size = displaySize.size
+        self.view?.presentScene(shopScene!, transition: transition)
     }
     
     deinit {

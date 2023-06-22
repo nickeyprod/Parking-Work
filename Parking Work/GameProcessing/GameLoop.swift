@@ -26,16 +26,13 @@ extension ParkingWorkGame {
         
         // if not holded - usual speed
         if !isRunButtonHolded {
-            dx = dx > 0 ? PLAYER_SPEED : -PLAYER_SPEED
-            dy = dy < 0 ? -PLAYER_SPEED : PLAYER_SPEED
+            dx = dx > 0 ? player!.SPEED : -player!.SPEED
+            dy = dy < 0 ? -player!.SPEED : player!.SPEED
         } else {
             // if holded, add 0.7 to speed
-            dx = dx > 0 ? PLAYER_SPEED + 0.7 : -(PLAYER_SPEED + 0.7)
-            dy = dy < 0 ? -(PLAYER_SPEED + 0.7) : PLAYER_SPEED + 0.7
+            dx = dx > 0 ? player!.SPEED + player!.RUN_SPEED : -(player!.SPEED + player!.RUN_SPEED)
+            dy = dy < 0 ? -(player!.SPEED + player!.RUN_SPEED) : player!.SPEED + player!.RUN_SPEED
         }
-        
-//        print("Player dest pos : ", player!.destinationPosition)
-//        print("Player curr pos : ", player!.node!.position)
 
         if floor(player!.destinationPosition!.x) == floor(player!.node!.position.x) {
             dx = 0
@@ -44,15 +41,9 @@ extension ParkingWorkGame {
             dy = 0
         }
         
-//        print(floor(player!.destinationPosition!.y), floor(player!.node!.position.y))
-//        print(floor(player!.destinationPosition!.x), floor(player!.node!.position.x))
-        
         if dx != 0 || dy != 0 {
-            
             playerMoving = true
         }
-            
-  
 
         let displacement = CGVector(dx: dx, dy: dy)
         let move = SKAction.move(by: displacement, duration: 0)

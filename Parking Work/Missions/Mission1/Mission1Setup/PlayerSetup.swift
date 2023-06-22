@@ -17,6 +17,10 @@ extension Mission1 {
             player = Player(scene: self, name: "Фёдор", node: playerNode)
         }
         
+        player?.node!.physicsBody? = SKPhysicsBody(texture: SKTexture(imageNamed: "user_staying_00"), size: player!.node!.frame.size)
+        player?.node!.physicsBody?.affectedByGravity = false
+        player?.node!.physicsBody?.allowsRotation = true
+        
         player?.node?.physicsBody?.categoryBitMask = playerCategory
         player?.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | trashBakCategory
         player?.node?.physicsBody?.mass = 84

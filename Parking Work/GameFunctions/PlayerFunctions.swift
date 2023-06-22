@@ -197,7 +197,7 @@ extension Player {
         scene.hideActionMessage()
         
         // show car successfuly opened message
-        scene.showCarOpenedSuccessMessage(of: car)
+//        scene.showCarOpenedSuccessMessage(of: car)
         
         // push message to chat that open was successful
         self.scene.pushMessageToChat(text: "\(car.name) - \(LOCK_TRANSLATIONS[lockType] ?? "Тип неизвестен") - вскрытие удалось!")

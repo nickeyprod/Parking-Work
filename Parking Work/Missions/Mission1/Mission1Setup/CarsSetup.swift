@@ -18,7 +18,7 @@ extension Mission1 {
         oldCopper.node = childNode(withName: CAR_TEXTURE_NAMES.oldCopper) as? SKSpriteNode
         oldCopper.node?.userData = NSMutableDictionary()
         oldCopper.node?.userData?.setValue(oldCopper.self, forKeyPath: "self")
-        oldCopper.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.oldCopper), size: CGSize(width: 460, height: 200))
+        oldCopper.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.oldCopper), size: oldCopper.node!.size)
         
         oldCopper.node?.physicsBody?.categoryBitMask = carCategory
         oldCopper.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | trashBakCategory
@@ -31,7 +31,7 @@ extension Mission1 {
         
         oldCopper.node?.physicsBody?.mass = 896
         oldCopper.node?.zPosition = 2
-        oldCopper.node?.anchorPoint = CGPoint(x: 0.47, y: 0.5)
+        oldCopper.node?.anchorPoint = CGPoint(x: 0.49, y: 0.5)
         
         
         // old copper engine smoke
@@ -84,14 +84,14 @@ extension Mission1 {
         chowerler.node = childNode(withName: CAR_TEXTURE_NAMES.chowerler) as? SKSpriteNode
         chowerler.node?.userData = NSMutableDictionary()
         chowerler.node?.userData?.setValue(chowerler.self, forKeyPath: "self")
-        chowerler.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.chowerler), size: CGSize(width: 440, height: 220))
+        chowerler.node?.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: CAR_TEXTURE_NAMES.chowerler), size: chowerler.node!.size)
         chowerler.node?.physicsBody?.categoryBitMask = carCategory
         chowerler.node?.physicsBody?.collisionBitMask = boundaryCategory | carCategory | trashBakCategory
         chowerler.node?.physicsBody?.contactTestBitMask = boundaryCategory | carCategory | trashBakCategory
         chowerler.node?.physicsBody?.affectedByGravity = false
         chowerler.node?.physicsBody?.isDynamic = true
         
-        chowerler.node?.anchorPoint = CGPoint(x: 0.48, y: 0.495)
+        chowerler.node?.anchorPoint = CGPoint(x: 0.49, y: 0.495)
         chowerler.node?.physicsBody?.angularDamping = 3.4
         chowerler.node?.physicsBody?.linearDamping = 12.0
         chowerler.node?.physicsBody?.restitution = 0.01

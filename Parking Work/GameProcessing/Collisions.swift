@@ -77,7 +77,6 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
                 }
 
             } else if contact.bodyB.node?.name != "completion-target" {
-                print("contact")
                 if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
                     if missionCompleted == false {
                         playerStealTheCar()

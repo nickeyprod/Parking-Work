@@ -141,13 +141,14 @@ extension ParkingWorkGame {
     
     func createPlayerInventoryScreen() {
         inventoryScreen = SKSpriteNode(color: .darkGray, size: CGSize(width: displayWidth! / 2, height: displayHeight!))
+        
         inventoryScreen?.name = "inventory-screen"
         inventoryScreen?.zPosition = 20
         
         cameraNode?.addChild(inventoryScreen!)
         
         inventoryScreen?.anchorPoint = CGPoint(x: 0, y: 0.5)
-        inventoryScreen?.position = CGPoint(x: 0, y: 0)
+        inventoryScreen?.position = CGPoint(x: (inventoryScreen?.frame.width)!, y: 0)
         inventoryScreen?.zPosition = 52
         
         // Inventory header
@@ -196,6 +197,7 @@ extension ParkingWorkGame {
         fillInventoryWithItemSquares {
             closeInventory()
         }
+        
     }
     
     func fillInventoryWithItemSquares(done: () -> Void) {

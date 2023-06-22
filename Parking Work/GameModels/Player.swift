@@ -20,6 +20,10 @@ class Player {
     // Player name
     let name: String
     
+    // Constants
+    let SPEED = 0.9
+    let RUN_SPEED = 0.9
+    
     var destinationPosition: CGPoint?
     
     // Last Opened mission

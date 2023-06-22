@@ -67,4 +67,70 @@ extension ParkingWorkGame {
         })
     }
     
+    func throwItem(item: SKNode) {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 40))
+        path.addLine(to: CGPoint(x: 10, y: 60))
+        path.addLine(to: CGPoint(x: 20, y: 70))
+        path.addLine(to: CGPoint(x: 30, y: 80))
+        path.addLine(to: CGPoint(x: 40, y: 90))
+        
+        
+        let move = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, speed: 150)
+        
+        item.run(.rotate(byAngle: -20, duration: 2))
+        item.run(.scale(to: 0.0, duration: 1)) {
+            item.removeFromParent()
+        }
+        item.run(move)
+        
+    }
+    
+    func animateShopItem(itemNode: SKSpriteNode) {
+        
+        let scaleAction = SKAction.sequence([.scale(to: 0.80, duration: 0.1), .scale(to: 1.0, duration: 0.1)])
+        
+        itemNode.run(scaleAction) {
+            let scaleAction = SKAction.sequence([.scale(to: 1.05, duration: 0.8), .scale(to: 1.0, duration: 0.8)])
+            
+            let initialPosY = itemNode.position.y
+            let moveUpDownAction = SKAction.sequence([.moveTo(y: -20, duration: 0.8),
+                                                      .moveTo(y: initialPosY, duration: 0.8)])
+            
+            let rotateAction = SKAction.sequence([.rotate(toAngle: 0.05, duration: 1.2), .rotate(toAngle: 0, duration: 1.2)])
+            
+            itemNode.run(.repeatForever(scaleAction), withKey: "scale-anim")
+            itemNode.run(.repeatForever(moveUpDownAction), withKey: "move-anim")
+            itemNode.run(.repeatForever(rotateAction), withKey: "rotate-anim")
+        }
+        
+    }
+    
+    func animateShopBuyButton(button: SKSpriteNode) {
+        
+//        button.color = .gray
+        
+//        let buttonText = button.childNode(withName: "ui-buy-button-label") as? SKLabelNode
+//        buttonText?.text = "Нет денег"
+        
+
+        
+        let scaleAction = SKAction.sequence([.scale(to: 0.94, duration: 0.8), .scale(to: 1.0, duration: 0.4)])
+        
+        let alphaAction = SKAction.sequence([.fadeAlpha(to: 0.6, duration: 0.8), .fadeAlpha(to: 0.9, duration: 0.4)])
+        
+        
+        button.run(.repeatForever(scaleAction))
+        button.run(.repeatForever(alphaAction))
+        
+       
+    }
+    
+    func animateButtonClick(button: SKSpriteNode) {
+        let scaleAction = SKAction.sequence([.scale(to: 0.80, duration: 0.1), .scale(to: 1.0, duration: 0.1)])
+        button.run(scaleAction)
+        
+    }
+    
 }

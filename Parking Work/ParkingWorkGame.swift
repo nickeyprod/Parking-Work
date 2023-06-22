@@ -165,9 +165,6 @@ class ParkingWorkGame: SKScene {
     var rightTopEnd: CGPoint?
     var leftBottomEnd: CGPoint?
     
-    // Constants
-    let PLAYER_SPEED = 1.0
-    
     // Physic body categories
     let playerCategory: UInt32 = 1 << 1
     let lockCategory: UInt32 = 1 << 2
