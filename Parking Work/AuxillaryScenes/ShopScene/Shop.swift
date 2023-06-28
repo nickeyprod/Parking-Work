@@ -94,16 +94,22 @@ class Shop: ParkingWorkGame {
                     
                 }
             } else if nodeName == "ui-buy-button" || nodeName == "ui-buy-button-label"  {
-                animateButtonClick(button: buyButton!)
+                animateButtonClick(button: buyButton!, done: nil)
                 run(MenuSounds.button_click.action)
                 print("buy item!!!")
             } else if nodeName == "ui-inventory-button" {
-                animateButtonClick(button: shopInventoryButton!)
+                animateButtonClick(button: shopInventoryButton!, done: nil)
                 run(InventorySounds.bag_open.action)
                 openInventory()
             } else if nodeName == "ui-closeInventoryBtn" || nodeName == "ui-closeInventoryLabel" {
                 run(InventorySounds.bag_open.action)
                 closeInventory()
+            } else if nodeName == "ui-exit-shop-btn" {
+                run(MenuSounds.button_click.action)
+                animateButtonClick(button: touchedNode as! SKSpriteNode, done: { [self] in
+                    exitShopScreen()
+                })
+                
             }
         }
         
@@ -166,7 +172,7 @@ class Shop: ParkingWorkGame {
                 onlyForRealMoney: false,
                 node: usualPicklockNode,
                 type: ITEMS_TYPES.PICKLOCKS.TYPE,
-                price: Price(rubPrice: 121, gamePrice: 15),
+                price: Price(rubPrice: 5, gamePrice: 15),
                 assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName,
                 description: ITEMS_TYPES.PICKLOCKS.usual_picklock.description,
                 properties: ITEMS_TYPES.PICKLOCKS.usual_picklock.properties
@@ -181,8 +187,8 @@ class Shop: ParkingWorkGame {
                 onlyForRealMoney: false,
                 node: betterPicklockNode,
                 type: ITEMS_TYPES.PICKLOCKS.TYPE,
-                price: Price(rubPrice: 161, gamePrice: 45),
-                assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName,
+                price: Price(rubPrice: 15, gamePrice: 45),
+                assetName: ITEMS_TYPES.PICKLOCKS.better_picklock.assetName,
                 description: ITEMS_TYPES.PICKLOCKS.better_picklock.description,
                 properties: ITEMS_TYPES.PICKLOCKS.better_picklock.properties
             )
@@ -196,8 +202,8 @@ class Shop: ParkingWorkGame {
                 onlyForRealMoney: true,
                 node: professionalPicklockNode,
                 type: ITEMS_TYPES.PICKLOCKS.TYPE,
-                price: Price(rubPrice: 199, gamePrice: 0),
-                assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName,
+                price: Price(rubPrice: 49, gamePrice: 0),
+                assetName: ITEMS_TYPES.PICKLOCKS.professional_picklock.assetName,
                 description: ITEMS_TYPES.PICKLOCKS.professional_picklock.description,
                 properties: ITEMS_TYPES.PICKLOCKS.professional_picklock.properties
             )
@@ -308,6 +314,8 @@ class Shop: ParkingWorkGame {
         mainHeader?.fontSize = 28
         mainHeader?.fontColor = .lightText
         boardPlate.addChild(mainHeader!)
+         
+        // ======= setup UI Buttons =======
         
         // money icon
         moneyIcon = SKSpriteNode(imageNamed: "money")
@@ -318,17 +326,27 @@ class Shop: ParkingWorkGame {
         
         // money label
         moneyLabel = SKLabelNode(text: "20")
-        moneyLabel?.position =  CGPoint(x: -(displayWidth! / 2) + 60, y: (displayHeight! / 2) - 25 )
+        moneyLabel?.position = CGPoint(x: -(displayWidth! / 2) + 60, y: (displayHeight! / 2) - 25 )
         moneyLabel?.verticalAlignmentMode = .center
         moneyLabel?.fontSize = 22
         moneyLabel?.fontName = FONTS.AmericanTypewriter
         addChild(moneyLabel!)
         
+        // exit from shop button
+//        let exitButton = SKSpriteNode(color: .red, size: CGSize(width: 35, height: 35))
+        let exitSprite = SKSpriteNode(imageNamed: "exit-door")
+        exitSprite.name = "ui-exit-shop-btn"
+        exitSprite.size = CGSize(width: 40, height: 40)
+        exitSprite.colorBlendFactor = 0.1
+        exitSprite.position = CGPoint(x: (displayWidth! / 2) - (exitSprite.frame.width / 2 + 10), y: (displayHeight! / 2) - (exitSprite.frame.height / 2) - 10)
+        addChild(exitSprite)
+        
         // inventory ui button
-        shopInventoryButton = SKSpriteNode(imageNamed: "sport-bag")
+        shopInventoryButton = SKSpriteNode(imageNamed: "shoulder-bag")
         shopInventoryButton?.name = "ui-inventory-button"
-        shopInventoryButton?.size = CGSize(width: 50, height: 50)
-        shopInventoryButton?.position = CGPoint(x: (displayWidth! / 2) - ((shopInventoryButton!.frame.width / 2) + 10), y: (displayHeight! / 2) - (shopInventoryButton!.frame.height / 2) - 10)
+        shopInventoryButton?.size = CGSize(width: 41, height: 41)
+        shopInventoryButton?.colorBlendFactor = 0.2
+        shopInventoryButton?.position = CGPoint(x: exitSprite.position.x - (exitSprite.frame.width) - 10, y: (displayHeight! / 2) - (shopInventoryButton!.frame.height / 2) - 10)
         addChild(shopInventoryButton!)
         
         // fill shop cells
@@ -507,6 +525,16 @@ class Shop: ParkingWorkGame {
                 
             }
         }
+    }
+    
+    func exitShopScreen() {
+        let missionScene = SKScene(fileNamed: "MissionListScene")
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        missionScene?.scaleMode = .aspectFill
+        missionScene?.size = displaySize.size
+        self.view?.presentScene(missionScene!, transition: transition)
     }
     
 }

@@ -71,34 +71,10 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         case (playerCategory | gameItemCategory):
             playerAndGameItemContact(contact.bodyA, contact.bodyB)
         case (carCategory | completionSquareCategory):
-            if contact.bodyA.node?.name != "completion-target" {
-                if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
-                    playerStealTheCar()
-                }
-
-            } else if contact.bodyB.node?.name != "completion-target" {
-                if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyA.node) {
-                    if missionCompleted == false {
-                        playerStealTheCar()
-                    }
-                }
-                if player!.isSittingInCar == true && (player!.drivingCar?.node == contact.bodyB.node) {
-                    if missionCompleted == false {
-                        playerStealTheCar()
-                    }
-                    
-                }
-            } else {
-                if canShowCompletionMissionMessage {
-                    canShowCompletionMissionMessage = false
-                    pushMessageToChat(text: "Эта машина не угнана тобой! Ты должен сидеть в угоняемой машине.")
-                }
-                
+            if canShowCompletionMissionMessage {
+                canShowCompletionMissionMessage = false
+                runMissionCompletedScreen()
             }
-
-            
-           
-            
 
         case (playerCategory | completionSquareCategory):
             if canShowCompletionMissionMessage {
@@ -304,8 +280,18 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         
     }
     
-    func playerStealTheCar() {
+    func runMissionCompletedScreen() {
         missionCompleted = true
         pushMessageToChat(text: "Отличная работа!")
+        
+        let missionCompletionScene = SKScene(fileNamed: "MissionCompletionScene") as? MissionCompletion
+        missionCompletionScene?.moneyForMission = 10
+        missionCompletionScene?.reputationForMisson = 2
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        missionCompletionScene?.scaleMode = .aspectFill
+        missionCompletionScene?.size = displaySize.size
+        self.view?.presentScene(missionCompletionScene!, transition: transition)
     }
 }

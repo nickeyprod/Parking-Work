@@ -103,13 +103,13 @@ extension ParkingWorkGame {
     }
     
     func addInventoryButton() {
-        if let inventoryBag = UIImage(named: "sport-bag") {
+        if let inventoryBag = UIImage(named: "shoulder-bag") {
             let inventorySprite = SKSpriteNode(texture: SKTexture(image: inventoryBag))
             self.inventoryButton = inventorySprite
             inventorySprite.zPosition = 10
             inventorySprite.name = "ui-inventory-btn"
             self.cameraNode?.addChild(inventorySprite)
-            inventorySprite.size = CGSize(width: 52, height: 52)
+            inventorySprite.size = CGSize(width: 36, height: 36)
             inventorySprite.position = CGPoint(x: -displayWidth! / 2 + 40, y: 0)
         }
     }

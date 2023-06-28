@@ -127,10 +127,18 @@ extension ParkingWorkGame {
        
     }
     
-    func animateButtonClick(button: SKSpriteNode) {
+    func animateButtonClick(button: SKSpriteNode, done: (() -> Void)? ) {
         let scaleAction = SKAction.sequence([.scale(to: 0.80, duration: 0.1), .scale(to: 1.0, duration: 0.1)])
-        button.run(scaleAction)
+        button.run(scaleAction) {
+            done?()
+        }
         
     }
+    
+    func animateStartButton(button: SKSpriteNode) {
+        button.run(SKAction.repeatForever(.sequence([SKAction.fadeAlpha(to: 0.6, duration: 2.0), SKAction.fadeAlpha(to: 1.0, duration: 2.0)])))
+        button.run(SKAction.repeatForever(.sequence([SKAction.scale(to: 1.05, duration: 1.0), SKAction.scale(to: 1.0, duration: 0.6)])))
+    }
+    
     
 }

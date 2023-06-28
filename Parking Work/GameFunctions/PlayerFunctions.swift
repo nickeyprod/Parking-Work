@@ -462,6 +462,8 @@ extension Player {
         // hide windows
         scene.hideTargetWindow()
         scene.hideActionMessage()
+        
+        scene.pushMessageToChat(text: "Вы подобрали предмет '\(currTargetItem?.name ?? "Неизвестный предмет")'.")
 
     }
     

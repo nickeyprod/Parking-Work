@@ -10,11 +10,46 @@ import SpriteKit
 class MissionList: ParkingWorkGame {
     
     let missionList = [
-        Mission(number: 1, mainHeader: "Привет, Босс", reputationForEnter: 0.0, shortDescription: "Парковка №17, р-н Чиперово, г. Сероветск."),
-        Mission(number: 2, mainHeader: "Header 2", reputationForEnter: 6.0, shortDescription: "... Сообщение .... 2"),
-        Mission(number: 3, mainHeader: "Header 3", reputationForEnter: 16.0, shortDescription: "... Сообщение .... 3"),
-        Mission(number: 4, mainHeader: "Header 4", reputationForEnter: 19.0, shortDescription: "... Сообщение .... 4"),
-        Mission(number: 5, mainHeader: "Header 5", reputationForEnter: 22.0, shortDescription: "... Сообщение .... 5")
+        Mission(
+            number: MISSIONS.Mission1.number,
+            mainHeader: MISSIONS.Mission1.EntryScreen.mainHeader,
+            reputationForEnter: MISSIONS.Mission1.EntryScreen.reputationForEnter,
+            shortDescription: MISSIONS.Mission1.EntryScreen.shortDescrtiption,
+            moneyAward: MISSIONS.Mission1.Awards.money,
+            reputationAward: MISSIONS.Mission1.Awards.reputation
+        ),
+        Mission(
+            number: MISSIONS.Mission2.number,
+            mainHeader: MISSIONS.Mission2.EntryScreen.mainHeader,
+            reputationForEnter: MISSIONS.Mission2.EntryScreen.reputationForEnter,
+            shortDescription: MISSIONS.Mission2.EntryScreen.shortDescrtiption,
+            moneyAward: MISSIONS.Mission2.Awards.money,
+            reputationAward: MISSIONS.Mission2.Awards.reputation
+        ),
+        Mission(
+            number: MISSIONS.Mission3.number,
+            mainHeader: MISSIONS.Mission3.EntryScreen.mainHeader,
+            reputationForEnter: MISSIONS.Mission3.EntryScreen.reputationForEnter,
+            shortDescription: MISSIONS.Mission3.EntryScreen.shortDescrtiption,
+            moneyAward: MISSIONS.Mission3.Awards.money,
+            reputationAward: MISSIONS.Mission3.Awards.reputation
+        ),
+        Mission(
+            number: MISSIONS.Mission4.number,
+            mainHeader: MISSIONS.Mission4.EntryScreen.mainHeader,
+            reputationForEnter: MISSIONS.Mission4.EntryScreen.reputationForEnter,
+            shortDescription: MISSIONS.Mission4.EntryScreen.shortDescrtiption,
+            moneyAward: MISSIONS.Mission4.Awards.money,
+            reputationAward: MISSIONS.Mission4.Awards.reputation
+        ),
+        Mission(
+            number: MISSIONS.Mission5.number,
+            mainHeader: MISSIONS.Mission5.EntryScreen.mainHeader,
+            reputationForEnter: MISSIONS.Mission5.EntryScreen.reputationForEnter,
+            shortDescription: MISSIONS.Mission5.EntryScreen.shortDescrtiption,
+            moneyAward: MISSIONS.Mission5.Awards.money,
+            reputationAward: MISSIONS.Mission5.Awards.reputation
+        ),
     ]
     
     // sprite nodes
@@ -29,6 +64,9 @@ class MissionList: ParkingWorkGame {
     var itemsPanel: SKSpriteNode?
     var shopLabel: SKLabelNode?
     var shopButton: SKSpriteNode?
+    var panelInventoryButton: SKSpriteNode?
+    var panelInventoryLabel: SKLabelNode?
+    var closeInventoryButton: SKShapeNode?
     
     // current selected mission
     var currSelectedMission: Int?
@@ -50,6 +88,12 @@ class MissionList: ParkingWorkGame {
         
         // load player saved progess in the game
         loadPlayerProgress()
+        
+        // setup camera
+        setupCamera()
+        
+        // create inventory
+        createPlayerInventoryScreen()
         
         // setup right pane (mission list cells)
         fillMissionListSpriteCells()
@@ -229,7 +273,7 @@ class MissionList: ParkingWorkGame {
         missionDescLabel?.text = currMission.shortDescription
         
         // run forever animation of start mission button
-        animateStartButton()
+        animateStartButton(button: startButton!)
         
     }
     
@@ -276,14 +320,20 @@ class MissionList: ParkingWorkGame {
         missionDescLabel = missionDescSprite?.childNode(withName: "MissionDescription") as? SKLabelNode
         startButton = leftSide?.childNode(withName: "StartButton") as? SKSpriteNode
         
+        // ui items panel
         itemsPanel = rightSide?.childNode(withName: "ItemsPanel") as? SKSpriteNode
         
+        // shop button
         shopButton = itemsPanel?.childNode(withName: "ShopButton") as? SKSpriteNode
-        
+        // shop label
         shopLabel = itemsPanel?.childNode(withName: "ShopLabel") as? SKLabelNode
         shopLabel?.verticalAlignmentMode = .center
         shopLabel?.horizontalAlignmentMode = .center
         shopLabel?.position = CGPoint(x: (shopButton?.position.x)!, y: (shopButton?.position.y)! + 28)
+        
+        panelInventoryButton = itemsPanel?.childNode(withName: "InventoryButton") as? SKSpriteNode
+        panelInventoryLabel = itemsPanel?.childNode(withName: "InventoryLabel") as? SKLabelNode
+        panelInventoryLabel?.position = CGPoint(x: (panelInventoryButton?.position.x)!, y: (panelInventoryButton?.position.y)! + 20)
         
     }
     
@@ -303,13 +353,15 @@ class MissionList: ParkingWorkGame {
             let touchedNode = atPoint(location)
 
             let nodeName = touchedNode.name
-   
+
             if nodeName == "MissionNumLabel" || nodeName == "SubtextLabel" {
                 if let selectedCellSprite = touchedNode.parent {
+                    run(MenuSounds.button_click.action)
                     selectMission(spriteCell: selectedCellSprite)
                 }
 
             }  else if nodeName?.split(separator: "_")[0] == "Mission" && nodeName?.split(separator: "_")[2] == "Sprite" {
+                run(MenuSounds.button_click.action)
                 selectMission(spriteCell: touchedNode)
                 
             } else if nodeName == "StartButton" || nodeName == "StartButtonText" {
@@ -321,8 +373,19 @@ class MissionList: ParkingWorkGame {
                 }
             } else if nodeName == "ShopButton" {
                 run(MenuSounds.button_click.action)
-                animateButtonClick(button: shopButton!)
-                openShopScreen()
+                animateButtonClick(button: shopButton!, done: {
+                    self.openShopScreen()
+                })
+                
+            } else if nodeName == "InventoryButton" {
+                run(InventorySounds.bag_open.action)
+                animateButtonClick(button: panelInventoryButton!, done: {
+                    self.openInventory()
+                })
+                
+            } else if nodeName == "ui-closeInventoryBtn" || nodeName == "ui-closeInventoryLabel" {
+                run(InventorySounds.bag_open.action)
+                closeInventory()
             }
 
         }
@@ -331,9 +394,6 @@ class MissionList: ParkingWorkGame {
     func selectMission(spriteCell: SKNode) {
         
         var currSelectedMissionSprite: SKSpriteNode?
-        
-        run(MenuSounds.button_click.action)
-        
         deselectAllCells()
         
         if let selectedMissionNum = Int((spriteCell.name!.split(separator: "_")[1])) {
@@ -377,11 +437,6 @@ class MissionList: ParkingWorkGame {
             let cellConnectionSprite = missionSpriteCell.childNode(withName: "ConnectionSprite") as? SKSpriteNode
             cellConnectionSprite?.alpha = 0
         })
-    }
-    
-    func animateStartButton() {
-        startButton?.run(SKAction.repeatForever(.sequence([SKAction.fadeAlpha(to: 0.6, duration: 2.0), SKAction.fadeAlpha(to: 1.0, duration: 2.0)])))
-        startButton?.run(SKAction.repeatForever(.sequence([SKAction.scale(to: 1.05, duration: 1.0), SKAction.scale(to: 1.0, duration: 0.6)])))
     }
     
     func startMission(num: Int) {

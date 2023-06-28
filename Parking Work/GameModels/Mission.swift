@@ -11,7 +11,7 @@ import Foundation
 struct Mission {
     var number: Int
     var mainHeader: String
-    var reputationForEnter: Float
+    var reputationForEnter: Int
     var shortDescription: String
     
     var numberAsString: String {
@@ -19,4 +19,7 @@ struct Mission {
             "Миссия \(number)"
         }
     }
+    
+    var moneyAward: Float
+    var reputationAward: Int
 }
