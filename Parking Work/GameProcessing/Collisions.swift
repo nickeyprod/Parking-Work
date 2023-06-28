@@ -73,6 +73,9 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         case (carCategory | completionSquareCategory):
             if canShowCompletionMissionMessage {
                 canShowCompletionMissionMessage = false
+                
+                saveGameProgress()
+                
                 runMissionCompletedScreen()
             }
 
@@ -287,6 +290,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         let missionCompletionScene = SKScene(fileNamed: "MissionCompletionScene") as? MissionCompletion
         missionCompletionScene?.moneyForMission = 10
         missionCompletionScene?.reputationForMisson = 2
+        
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window

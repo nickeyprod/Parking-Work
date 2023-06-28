@@ -48,13 +48,13 @@ class MissionCompletion: ParkingWorkGame {
     // button labels
     var nextBtnLabel: SKLabelNode?
     
-    
     var initialMissionCompletedLabelPos: CGPoint?
     var initialAwardsLabelPos: CGPoint?
     var initialReputationNodePos: CGPoint?
     var initialMoneyNodePos: CGPoint?
     
     override func didMove(to view: SKView) {
+        
         super.didMove(to: view)
         
         // setup intial variables
@@ -67,6 +67,7 @@ class MissionCompletion: ParkingWorkGame {
         
         // animate screen
         animateMissionCompletedLabel()
+        
     }
     
     override func setupInitialGameValues() {
@@ -128,7 +129,21 @@ class MissionCompletion: ParkingWorkGame {
             
             // buttons pressed check
             let touchedNode = atPoint(location)
-            print("touch")
+            let nodeName = touchedNode.name
+            
+            if nodeName == "ui-nextButtonLabel" || nodeName == "ui-nextButton" {
+
+                if nodeName == "ui-nextButtonLabel" {
+                    animateButtonClick(button: touchedNode.parent! as! SKSpriteNode) {
+                        self.goToMissionListScene()
+                    }
+                } else {
+                    animateButtonClick(button: touchedNode as! SKSpriteNode) {
+                        self.goToMissionListScene()
+                    }
+                }
+                
+            }
         }
     }
     
@@ -276,4 +291,15 @@ class MissionCompletion: ParkingWorkGame {
         displayingReputation += 1
         reputationNum?.text = "+\(displayingReputation)"
     }
+    
+    func goToMissionListScene() {
+        let missionListScene = SKScene(fileNamed: "MissionListScene")
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        missionListScene?.scaleMode = .aspectFill
+        missionListScene?.size = displaySize.size
+        self.view?.presentScene(missionListScene!, transition: transition)
+    }
+
 }

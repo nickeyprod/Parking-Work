@@ -314,5 +314,41 @@ extension ParkingWorkGame {
             }
         }
     }
+    
+    func saveGameProgress(result: (String) -> Void) {
+        print("Save game progress!")
+        
+        let playerMoney = player?.money
+        let playerReputation = player?.reputation
+        
+        let playerMissionProgress = player?.processedMissions
+        let playerUnlockSkill = player?.unlockSkill
+        let playerInventory = player?.inventory
+        let playerInventoryMaxCapacity = player?.inventoryMaxCapacity
+        
+    }
+    
+    func loadPlayerProgress() {
+        
+        
+        if player != nil {
+            setLoadedData()
+        } else {
+            // get player
+            if let playerNode = childNode(withName: "playerNode") {
+                player = Player(scene: self, name: "Фёдор", node: playerNode)
+                setLoadedData()
+            }
+        }
+       
+    }
+    
+    func setLoadedData() {
+//         player?.unlockSkill = ...
+//         player?.reputation = ...
+        // player?.processedMissions[missionNum] = "completed"
+    }
+
+
 }
 

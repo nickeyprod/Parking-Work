@@ -26,17 +26,17 @@ class Player {
     
     var destinationPosition: CGPoint?
     
-    // Last Opened mission
-    var processedMissions: [Int: String] = [
-        1: "opened",
-    ]
-    
+    // Data to save
     var unlockSkill: Float = 10.0
     var reputation: Int = 0
     var money: Float = 0.0
     
     var inventoryMaxCapacity: Int = 20
     var inventory: [GameItem?] = []
+    
+    var processedMissions: [Int: String] = [
+        1: "opened",
+    ]
 
     // node
     var node: SKNode?

@@ -4,6 +4,9 @@ import GameplayKit
 
 class ParkingWorkGame: SKScene {
     
+    // intialize userDefaults
+    let userDefaults = UserDefaults.standard
+    
     // Initial rotation of the camera at start of the game
     var initialCameraRotation: CGFloat?
     

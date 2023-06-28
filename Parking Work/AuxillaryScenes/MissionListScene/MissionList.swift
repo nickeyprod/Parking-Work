@@ -109,15 +109,6 @@ class MissionList: ParkingWorkGame {
         addChild(backgroundSoundCars!)
     }
     
-    func loadPlayerProgress() {
-        // player
-        if let playerNode = childNode(withName: "playerNode") {
-            player = Player(scene: self, name: "Фёдор", node: playerNode)
-        } else {
-            player = Player(scene: self, name: "Фёдор")
-        }
-    }
-    
     func selectLastOpenedMission() {
         self.player?.processedMissions.forEach({ (missionNum, completionStatus) in
             if completionStatus == "opened" {
