@@ -48,6 +48,9 @@ class Mission1: ParkingWorkGame {
         // setup all physic bodies of the mission
         setupPhysicBodies()
         
+        // load from database
+//        loadPlayerData()
+        
         // setup all needed initial variables (values)
         setupInitialGameValues()
         

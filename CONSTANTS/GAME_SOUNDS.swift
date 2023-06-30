@@ -46,7 +46,7 @@ enum MenuSounds: String {
     var audio: SKAudioNode? {
 //        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
         guard let urlString = Bundle.main.path(forResource: rawValue, ofType: "wav") else { return nil }
-        print(urlString)
+
         let audio = SKAudioNode(url: URL(fileURLWithPath: urlString))
         
         return audio

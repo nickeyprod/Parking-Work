@@ -82,12 +82,10 @@ class MissionList: ParkingWorkGame {
 
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+
         
         // setup all needed variables
         setupInitialGameValues()
-        
-        // load player saved progess in the game
-        loadPlayerProgress()
         
         // setup camera
         setupCamera()
@@ -110,8 +108,8 @@ class MissionList: ParkingWorkGame {
     }
     
     func selectLastOpenedMission() {
-        self.player?.processedMissions.forEach({ (missionNum, completionStatus) in
-            if completionStatus == "opened" {
+        self.player?.processedMissions.forEach({ mission in
+            if mission!.opened && !mission!.completed {
                 selectSpriteCell(num: missionNum)
             }
         })
@@ -139,7 +137,7 @@ class MissionList: ParkingWorkGame {
         var prevPos: CGPoint?
         
         for mission in missionList {
-            
+//            print(mission.number)
             if runFist {
                 runFist = false
                 missionSpriteCell = rightSide?.childNode(withName: "Mission_1_Sprite") as? SKSpriteNode
@@ -174,18 +172,20 @@ class MissionList: ParkingWorkGame {
             missionCompletedMarkSprite?.position = CGPoint(x: (missionNumLabel?.frame.minX)! / 2, y: (missionSpriteCell?.frame.height)! / 2)
             missionLockedSprite = missionSpriteCell?.childNode(withName: "MissionLockedSprite") as? SKSpriteNode
             missionLockedSprite?.position = CGPoint(x: (missionNumLabel?.frame.minX)! / 2, y: (missionSpriteCell?.frame.height)! / 2)
+            missionLockedSprite?.alpha = 1
             
-            if player?.processedMissions[mission.number] == "completed" {
-                missionCompletedMarkSprite?.alpha = 1
-                missionLockedSprite?.alpha = 0
-            } else if player?.processedMissions[mission.number] == "opened" {
-                missionCompletedMarkSprite?.alpha = 0
-                missionLockedSprite?.alpha = 0
-            }
-            else {
-                missionCompletedMarkSprite?.alpha = 0
-                missionLockedSprite?.alpha = 1
-                
+            for processedMission in player!.processedMissions {
+                if processedMission?.number == mission.number {
+                    if processedMission!.opened && !processedMission!.completed {
+                        missionCompletedMarkSprite?.alpha = 0
+                        missionLockedSprite?.alpha = 0
+                        
+                    } else if processedMission!.opened && processedMission!.completed {
+                        missionCompletedMarkSprite?.alpha = 1
+                        missionLockedSprite?.alpha = 0
+                    }
+                    break
+                }
             }
             
             subtextLabel = missionSpriteCell?.childNode(withName: "SubtextLabel") as? SKLabelNode
@@ -235,7 +235,7 @@ class MissionList: ParkingWorkGame {
     }
     
     func fillMissionDescription(selectedMissionNum: Int) {
-        
+//        print("run")
         let currMission = missionList[selectedMissionNum - 1]
         
         mainHeader?.text = currMission.mainHeader
@@ -246,9 +246,22 @@ class MissionList: ParkingWorkGame {
         
         let btnLabel = startButton?.childNode(withName: "StartButtonText") as? SKLabelNode
         
+        var currMissionOpened = false
+        
+        for m in player!.processedMissions {
+            if m?.number == selectedMissionNum {
+                if m!.opened {
+                    currMissionOpened = true
+                }
+            }
+        }
         // reputation label color
-        if reputationForEnter > player!.reputation {
-            reputationNeededLabel?.fontColor = .red
+        if player!.reputation > reputationForEnter && !currMissionOpened {
+            print("HERRE")
+            if player!.reputation < reputationForEnter {
+                reputationNeededLabel?.fontColor = .red
+            }
+
             startButton?.color = .darkGray
             btnLabel?.text = "Закрыто"
         } else {
@@ -431,17 +444,22 @@ class MissionList: ParkingWorkGame {
     }
     
     func startMission(num: Int) {
-        if player?.processedMissions[num] == "completed" || player?.processedMissions[num] == "opened" {
-            self.removeAllActions()
-            backgroundSoundCars?.run(.stop())
-            let missionScene = SKScene(fileNamed: "Mission\(num)Scene")
-            let transition = SKTransition.fade(with: .black, duration: 1.0)
-            let displaySize: CGRect = UIScreen.main.bounds
-            // Set the scale mode to scale to fit the window
-            missionScene?.scaleMode = .aspectFill
-            missionScene?.size = displaySize.size
-            self.view?.presentScene(missionScene!, transition: transition)
+        
+        for mission in player!.processedMissions {
+            if mission!.completed || mission!.opened {
+                self.removeAllActions()
+                backgroundSoundCars?.run(.stop())
+                let missionScene = SKScene(fileNamed: "Mission\(num)Scene")
+                let transition = SKTransition.fade(with: .black, duration: 1.0)
+                let displaySize: CGRect = UIScreen.main.bounds
+                // Set the scale mode to scale to fit the window
+                missionScene?.scaleMode = .aspectFill
+                missionScene?.size = displaySize.size
+                self.view?.presentScene(missionScene!, transition: transition)
+            }
         }
+        
+        
 
     }
     

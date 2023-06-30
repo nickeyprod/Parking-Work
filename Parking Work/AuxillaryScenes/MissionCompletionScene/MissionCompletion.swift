@@ -7,6 +7,7 @@
 
 import SpriteKit
 import GameplayKit
+import CoreData
 
 class MissionCompletion: ParkingWorkGame {
     
@@ -57,6 +58,16 @@ class MissionCompletion: ParkingWorkGame {
         
         super.didMove(to: view)
         
+        // add awards to player model
+        addAwards {
+            
+            print("After adding awards: ")
+            print("processedMissions: ", player!.processedMissions)
+            
+            // save game progress
+            saveGameProgress()
+        }
+     
         // setup intial variables
         setupInitialGameValues()
         
@@ -145,6 +156,30 @@ class MissionCompletion: ParkingWorkGame {
                 
             }
         }
+    }
+    
+    func addAwards(done: () -> Void) {
+        print("Adding awards for completion!")
+        player?.money += moneyForMission!
+        player?.reputation += reputationForMisson!
+//        player?.unlockSkill += unlockSkillForMission
+//        player?.inventoryMaxCapacity += inventoryMaxCapacityForLevel
+
+        for i in  0...player!.processedMissions.count - 1 {
+            if player!.processedMissions[i]?.number == missionNum {
+                player!.processedMissions[i]?.completed = true
+                player!.processedMissions[i]?.opened = true
+            }
+        }
+
+        let openedMission = ProcessedMission(
+            number: missionNum + 1,
+            opened: true,
+            completed: false
+        )
+
+        player?.processedMissions.append(openedMission)
+        done()
     }
     
     func animateBackground() {

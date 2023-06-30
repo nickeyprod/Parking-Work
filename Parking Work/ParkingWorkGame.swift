@@ -1,11 +1,12 @@
 
 import SpriteKit
 import GameplayKit
+import CoreData
 
 class ParkingWorkGame: SKScene {
     
-    // intialize userDefaults
-    let userDefaults = UserDefaults.standard
+    // Core Data Game Storage
+    let storage = Storage()
     
     // Initial rotation of the camera at start of the game
     var initialCameraRotation: CGFloat?
@@ -209,7 +210,18 @@ class ParkingWorkGame: SKScene {
 
         // detect PINCH to increase zoom
         self.setupGestureRecognizer()
-
+        
+        storage.persistentContainer.loadPersistentStores { stores, error in
+            if let error = error {
+                print("Error loading Persistent Stores:")
+                print("\(error)")
+            } else {
+                
+//                self.clearProcessedMissions()
+                
+                self.loadGameProgress()
+            }
+        }
     }
 
     

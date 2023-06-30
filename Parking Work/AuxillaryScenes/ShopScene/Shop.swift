@@ -36,9 +36,6 @@ class Shop: ParkingWorkGame {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        // load player data
-        loadPlayerProgress()
-        
         // setup all needed variables
         setupInitialGameValues()
         

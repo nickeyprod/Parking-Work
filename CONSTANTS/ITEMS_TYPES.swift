@@ -15,6 +15,7 @@ enum ITEMS_TYPES: Equatable {
         
         // usual picklock
         enum usual_picklock {
+            static let id = 1
             static let name = "Обыкновенная отмычка"
             static let gamePrice = 12
             static let assetName = "usual_picklock"
@@ -24,6 +25,7 @@ enum ITEMS_TYPES: Equatable {
         
         // better picklock
         enum better_picklock {
+            static let id = 2
             static let name = "Улучшенная отмычка"
             static let gamePrice = 109
             static let assetName = "better_picklock"
@@ -36,6 +38,7 @@ enum ITEMS_TYPES: Equatable {
         
         // professional picklock
         enum professional_picklock {
+            static let id = 3
             static let name = "Профессиональная отмычка"
             static let rubPrice = 15
             static let assetName = "professional_picklock"

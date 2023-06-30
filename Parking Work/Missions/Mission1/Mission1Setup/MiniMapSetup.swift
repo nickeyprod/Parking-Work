@@ -21,8 +21,8 @@ extension Mission1 {
             car?.miniMapDot = SKShapeNode(rectOf: CGSize(width: 4, height: 4))
             car?.miniMapDot?.fillColor = .green
             
-            var miniMapX = (car?.node?.position.x)! / scaleWidthFactor
-            var minimapY = (car?.node?.position.y)! / scaleHeightFactor
+            let miniMapX = (car?.node?.position.x)! / scaleWidthFactor
+            let minimapY = (car?.node?.position.y)! / scaleHeightFactor
 
             car?.miniMapDot?.position = CGPoint(x: miniMapX, y: minimapY)
 

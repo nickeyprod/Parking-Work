@@ -14,7 +14,12 @@ extension Mission1 {
     func setupPlayer() {
         
         if let playerNode = childNode(withName: "playerNode") {
-            player = Player(scene: self, name: "Фёдор", node: playerNode)
+            if player == nil {
+                player = Player(scene: self, name: "Фёдор", node: playerNode)
+            } else {
+                player?.node = playerNode
+            }
+            
         }
         
         player?.node!.physicsBody? = SKPhysicsBody(texture: SKTexture(imageNamed: "user_staying_00"), size: player!.node!.frame.size)

@@ -34,9 +34,12 @@ class Player {
     var inventoryMaxCapacity: Int = 20
     var inventory: [GameItem?] = []
     
-    var processedMissions: [Int: String] = [
-        1: "opened",
-    ]
+    var processedMissions: [ProcessedMission?] = [
+        ProcessedMission(
+            number: MISSIONS.Mission1.number,
+            opened: true,
+            completed: false
+        )]
 
     // node
     var node: SKNode?
