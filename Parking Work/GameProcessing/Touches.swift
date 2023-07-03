@@ -162,7 +162,7 @@ extension ParkingWorkGame {
                         selectItemToUse(usedItem: itemChoosed)
                     }
                 }
-                
+
                 // when player presses on item in inventory to read item description
                 if touchedNode.name?.split(separator: "-")[1] == "item" {
                     if let item = touchedNode.userData?.value(forKeyPath: "self") as? GameItem {

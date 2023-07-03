@@ -12,10 +12,11 @@ struct GameItem: Equatable {
         lhs.type == rhs.type
     }
     
+    var id: Int
     var name: String
-    var node: SKNode
+    var node: SKNode?
     var type: String
     var assetName: String
     var description: String
-//    var properties: GameItemProperties
+    var properties: [Property?]
 }

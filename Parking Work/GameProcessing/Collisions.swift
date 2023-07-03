@@ -71,6 +71,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         case (playerCategory | gameItemCategory):
             playerAndGameItemContact(contact.bodyA, contact.bodyB)
         case (carCategory | completionSquareCategory):
+            print("collision, num:", player?.inventory.count)
             if canShowCompletionMissionMessage {
                 canShowCompletionMissionMessage = false
                 runMissionCompletedScreen()
@@ -288,6 +289,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         missionCompletionScene?.moneyForMission = 10
         missionCompletionScene?.reputationForMisson = 2
         missionCompletionScene?.player = player
+        print("Before passing to completion => num in inv: ", player?.inventory.count)
 
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds

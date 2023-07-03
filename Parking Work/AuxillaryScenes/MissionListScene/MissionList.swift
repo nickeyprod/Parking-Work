@@ -107,6 +107,7 @@ class MissionList: ParkingWorkGame {
         addChild(backgroundSoundCars!)
     }
     
+    
     func selectLastOpenedMission() {
         self.player?.processedMissions.forEach({ mission in
             if mission!.opened && !mission!.completed {
@@ -256,8 +257,7 @@ class MissionList: ParkingWorkGame {
             }
         }
         // reputation label color
-        if player!.reputation > reputationForEnter && !currMissionOpened {
-            print("HERRE")
+        if !currMissionOpened {
             if player!.reputation < reputationForEnter {
                 reputationNeededLabel?.fontColor = .red
             }
@@ -350,6 +350,7 @@ class MissionList: ParkingWorkGame {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         for touch in touches {
             let location = touch.location(in: self)
             

@@ -20,7 +20,7 @@ extension Player {
         } else {
             scene.pushMessageToChat(text: "Вы использовали '\(pickLock.name)'. Предмет исчез из вашего инвентаря.")
             // remove pic from inventory
-            pickLock.node.removeFromParent()
+            pickLock.node?.removeFromParent()
             // remove item object from inventory
             scene.removeItemFromInventory(itemToRemove: pickLock)
         }
@@ -43,10 +43,7 @@ extension Player {
         
         // if chance to open is bigger than 1, then player can try to open
         if chance >= 1 {
-            
-            // remove pick lock that is used from inventory
-            removeUsedPicklockFromInventory()
-    
+          
             // get probability of the lock to jam (can be from 10% to 20%)
             let jamProbability = Float(Int.random(in: 10...20))
             
@@ -94,16 +91,6 @@ extension Player {
 
         }
 
-    }
-    
-    func removeUsedPicklockFromInventory() {
-        for item in self.inventory {
-            if item?.type == ITEMS_TYPES.PICKLOCKS.TYPE {
-                if let itemIndex = self.inventory.firstIndex(of: item) {
-                    self.inventory.remove(at: itemIndex)
-                }
-            }
-        }
     }
     
     func tryReduceJamProbabilityIfPossible() {
@@ -451,7 +438,7 @@ extension Player {
         // remove item from mission
         let index = scene.itemsOnMission.firstIndex(of: currTargetItem!)
         scene.itemsOnMission.remove(at: index!)
-        currTargetItem?.node.removeFromParent()
+        currTargetItem?.node?.removeFromParent()
         
         // add to inventory
         inventory.append(currTargetItem)

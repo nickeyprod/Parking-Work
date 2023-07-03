@@ -24,7 +24,7 @@ extension ParkingWorkGame {
     
     func checkDistanceBetweenPlayerAndGameItem() {
         let playerPosition = player?.node?.position
-        let targetGameItem = player?.currTargetItem?.node.position
+        let targetGameItem = player?.currTargetItem?.node?.position
         
         let diffX = abs(playerPosition!.x) - abs(targetGameItem!.x)
         let diffY = abs(playerPosition!.y) - abs(targetGameItem!.y)
@@ -178,25 +178,6 @@ extension ParkingWorkGame {
         return height + 6
     }
     
-    func fillItemsOfMission() {
-        
-        // pick lock
-        if let pickLockNode = childNode(withName: "pick-lock") as? SKSpriteNode {
-            pickLockNode.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "usual_picklock"), size: CGSize(width: 35, height: 35))
-            pickLockNode.physicsBody?.categoryBitMask = gameItemCategory
-            pickLockNode.physicsBody?.contactTestBitMask = playerCategory
-            pickLockNode.physicsBody?.collisionBitMask = 0
-            pickLockNode.physicsBody?.affectedByGravity = false
-            
-            let pickLock = GameItem(name: ITEMS_TYPES.PICKLOCKS.usual_picklock.name, node: pickLockNode, type: ITEMS_TYPES.PICKLOCKS.TYPE, assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName, description: ITEMS_TYPES.PICKLOCKS.usual_picklock.description)
-            
-            itemsOnMission.append(pickLock)
-
-            pickLockNode.userData = NSMutableDictionary()
-            pickLockNode.userData?.setValue(pickLock.self, forKeyPath: "self")
-        }
-        
-    }
     
     func switchActionMessageType(to type: MESSAGES_TYPES) {
         actionMessageType = type
@@ -306,13 +287,16 @@ extension ParkingWorkGame {
     }
     
     func removeItemFromInventory(itemToRemove: GameItem) {
+        print("~~~~~~~>>>> Before removing: ", player!.inventory.count)
         for item in player!.inventory {
             if item == itemToRemove {
                 if let index = player!.inventory.firstIndex(of: item) {
                     player!.inventory.remove(at: index)
+                    break
                 }
             }
         }
+        print("~~~~~>>>>> AFTER REMOVING: ", player!.inventory.count)
     }
 
 }

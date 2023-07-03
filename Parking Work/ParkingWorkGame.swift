@@ -218,6 +218,7 @@ class ParkingWorkGame: SKScene {
             } else {
                 
 //                self.clearProcessedMissions()
+//                self.clearPlayerData()
                 
                 self.loadGameProgress()
             }

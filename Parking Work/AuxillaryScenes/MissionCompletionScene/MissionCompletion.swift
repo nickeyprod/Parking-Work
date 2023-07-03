@@ -54,16 +54,16 @@ class MissionCompletion: ParkingWorkGame {
     var initialReputationNodePos: CGPoint?
     var initialMoneyNodePos: CGPoint?
     
+    override func didBegin(_ contact: SKPhysicsContact) {
+        super.didBegin(contact)
+    }
+    
     override func didMove(to view: SKView) {
         
         super.didMove(to: view)
         
         // add awards to player model
         addAwards {
-            
-            print("After adding awards: ")
-            print("processedMissions: ", player!.processedMissions)
-            
             // save game progress
             saveGameProgress()
         }
@@ -127,7 +127,6 @@ class MissionCompletion: ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -135,6 +134,7 @@ class MissionCompletion: ParkingWorkGame {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
         for touch in touches {
             let location = touch.location(in: self)
             
@@ -159,7 +159,7 @@ class MissionCompletion: ParkingWorkGame {
     }
     
     func addAwards(done: () -> Void) {
-        print("Adding awards for completion!")
+        
         player?.money += moneyForMission!
         player?.reputation += reputationForMisson!
 //        player?.unlockSkill += unlockSkillForMission

@@ -34,5 +34,13 @@ class Storage {
         let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultsController
     }()
+    
+    lazy var itemProperties: NSFetchedResultsController<ItemProperty> = {
+        let fetchRequest = ItemProperty.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "type", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchResultsController
+    }()
 
 }
