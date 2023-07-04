@@ -81,8 +81,13 @@ class MissionList: ParkingWorkGame {
     var backgroundSoundCars: SKAudioNode?
 
     override func didMove(to view: SKView) {
-        super.didMove(to: view)
+        
+        // clear database
+//        clearGameDatabase()
 
+        
+        // load saved progress
+        loadGameProgress()
         
         // setup all needed variables
         setupInitialGameValues()
@@ -106,7 +111,6 @@ class MissionList: ParkingWorkGame {
         backgroundSoundCars = MissionListSounds.mission_list_car_passing_by.audio
         addChild(backgroundSoundCars!)
     }
-    
     
     func selectLastOpenedMission() {
         self.player?.processedMissions.forEach({ mission in
@@ -447,7 +451,7 @@ class MissionList: ParkingWorkGame {
     func startMission(num: Int) {
         
         for mission in player!.processedMissions {
-            if mission!.completed || mission!.opened {
+            if mission?.number == num && (mission!.completed || mission!.opened) {
                 self.removeAllActions()
                 backgroundSoundCars?.run(.stop())
                 let missionScene = SKScene(fileNamed: "Mission\(num)Scene")
@@ -457,10 +461,9 @@ class MissionList: ParkingWorkGame {
                 missionScene?.scaleMode = .aspectFill
                 missionScene?.size = displaySize.size
                 self.view?.presentScene(missionScene!, transition: transition)
+                break
             }
         }
-        
-        
 
     }
     

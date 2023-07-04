@@ -2,7 +2,7 @@
 //  ItemProperty+CoreDataProperties.swift
 //  Parking Work
 //
-//  Created by Николай Ногин on 02.07.2023.
+//  Created by Николай Ногин on 04.07.2023.
 //
 //
 
@@ -21,7 +21,24 @@ extension ItemProperty {
     @NSManaged public var propDescription: String?
     @NSManaged public var type: String?
     @NSManaged public var value: Float
-    @NSManaged public var inventoryRel: InventoryItem?
+    @NSManaged public var inventoryRel: NSSet?
+
+}
+
+// MARK: Generated accessors for inventoryRel
+extension ItemProperty {
+
+    @objc(addInventoryRelObject:)
+    @NSManaged public func addToInventoryRel(_ value: InventoryItem)
+
+    @objc(removeInventoryRelObject:)
+    @NSManaged public func removeFromInventoryRel(_ value: InventoryItem)
+
+    @objc(addInventoryRel:)
+    @NSManaged public func addToInventoryRel(_ values: NSSet)
+
+    @objc(removeInventoryRel:)
+    @NSManaged public func removeFromInventoryRel(_ values: NSSet)
 
 }
 

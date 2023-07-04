@@ -38,20 +38,20 @@ extension Mission1 {
         
         // pick lock 2
         if let pickLockNode2 = childNode(withName: "pick-lock2") as? SKSpriteNode {
-            pickLockNode2.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: "usual_picklock"), size: CGSize(width: 35, height: 35))
+            pickLockNode2.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: ITEMS_TYPES.PICKLOCKS.professional_picklock.assetName), size: CGSize(width: 35, height: 35))
             pickLockNode2.physicsBody?.categoryBitMask = gameItemCategory
             pickLockNode2.physicsBody?.contactTestBitMask = playerCategory
             pickLockNode2.physicsBody?.collisionBitMask = 0
             pickLockNode2.physicsBody?.affectedByGravity = false
             
             let pickLock2 = GameItem(
-                id: ITEMS_TYPES.PICKLOCKS.usual_picklock.id,
-                name: ITEMS_TYPES.PICKLOCKS.usual_picklock.name,
+                id: ITEMS_TYPES.PICKLOCKS.professional_picklock.id,
+                name: ITEMS_TYPES.PICKLOCKS.professional_picklock.name,
                 node: pickLockNode2,
                 type: ITEMS_TYPES.PICKLOCKS.TYPE,
-                assetName: ITEMS_TYPES.PICKLOCKS.usual_picklock.assetName,
-                description: ITEMS_TYPES.PICKLOCKS.usual_picklock.description,
-                properties: ITEMS_TYPES.PICKLOCKS.usual_picklock.properties
+                assetName: ITEMS_TYPES.PICKLOCKS.professional_picklock.assetName,
+                description: ITEMS_TYPES.PICKLOCKS.professional_picklock.description,
+                properties: ITEMS_TYPES.PICKLOCKS.professional_picklock.properties
             )
             
             itemsOnMission.append(pickLock2)

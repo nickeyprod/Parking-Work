@@ -230,6 +230,7 @@ extension ParkingWorkGame {
         
         // item name
         let itemName = SKLabelNode(text: item.name)
+    
         itemName.name = "inventory-item-name"
         itemName.verticalAlignmentMode = .center
         itemName.horizontalAlignmentMode = .center
@@ -243,19 +244,44 @@ extension ParkingWorkGame {
         
         heightOfAllLabels += itemName.frame.height
         
+        // short description of item
         let itemDescription = SKLabelNode(text: item.description)
         itemDescription.name = "inventory-item-desc"
         itemDescription.verticalAlignmentMode = .top
         itemDescription.horizontalAlignmentMode = .center
         itemDescription.lineBreakMode = .byWordWrapping
         itemDescription.numberOfLines = 0
-        itemDescription.preferredMaxLayoutWidth = descriptionWindow.frame.width
+        itemDescription.preferredMaxLayoutWidth = descriptionWindow.frame.width - 1
         itemDescription.fontName = FONTS.Baskerville
         itemDescription.fontSize = 12
         itemDescription.position = CGPoint(x: -descriptionWindow.frame.width / 2, y: itemName.position.y - (itemName.frame.height / 2))
         descriptionWindow.addChild(itemDescription)
         
         heightOfAllLabels += itemDescription.frame.height
+        
+        var prevPropPos: CGPoint = CGPoint(x: -descriptionWindow.frame.width / 2, y: itemDescription.position.y - (itemDescription.frame.height) - (itemDescription.frame.height) / 2 - 2)
+        // fill item properties
+        for (i, prop) in item.properties.enumerated() {
+            let itemPropertyLabel = SKLabelNode(text: prop?.description)
+            itemPropertyLabel.fontColor = .green
+            itemPropertyLabel.verticalAlignmentMode = .top
+            itemPropertyLabel.horizontalAlignmentMode = .center
+            itemPropertyLabel.lineBreakMode = .byWordWrapping
+            itemPropertyLabel.numberOfLines = 0
+            itemPropertyLabel.preferredMaxLayoutWidth = descriptionWindow.frame.width
+            itemPropertyLabel.fontName = FONTS.Baskerville
+            itemPropertyLabel.fontSize = 12
+            if i > 0 {
+                itemPropertyLabel.position = CGPoint(x: prevPropPos.x, y: prevPropPos.y + itemPropertyLabel.frame.height)
+            } else {
+                itemPropertyLabel.position = prevPropPos
+            }
+            
+            prevPropPos = itemPropertyLabel.position
+            descriptionWindow.addChild(itemPropertyLabel)
+            heightOfAllLabels += itemPropertyLabel.frame.height
+            
+        }
         
         descriptionWindow.size = CGSize(width: 180, height: heightOfAllLabels + bottomPadding)
     }
@@ -287,7 +313,7 @@ extension ParkingWorkGame {
     }
     
     func removeItemFromInventory(itemToRemove: GameItem) {
-        print("~~~~~~~>>>> Before removing: ", player!.inventory.count)
+        print("=====> Befaore removing: ", player!.inventory.count)
         for item in player!.inventory {
             if item == itemToRemove {
                 if let index = player!.inventory.firstIndex(of: item) {
@@ -296,7 +322,7 @@ extension ParkingWorkGame {
                 }
             }
         }
-        print("~~~~~>>>>> AFTER REMOVING: ", player!.inventory.count)
+        print("~~~~~ AFTER REMOVING: ", player!.inventory.count)
     }
 
 }

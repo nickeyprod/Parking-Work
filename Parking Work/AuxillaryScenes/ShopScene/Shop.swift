@@ -34,13 +34,16 @@ class Shop: ParkingWorkGame {
     var shopItems: [ShopItem] = []
 
     override func didMove(to view: SKView) {
-        super.didMove(to: view)
+        // load
+        loadGameProgress()
         
         // setup all needed variables
         setupInitialGameValues()
         
         // setup camera for adding inventory screen to camera node
         setupCamera()
+ 
+  
         
         // create inventory (add it to camera node)
         createPlayerInventoryScreen()

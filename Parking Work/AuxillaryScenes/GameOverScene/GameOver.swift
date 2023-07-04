@@ -25,7 +25,6 @@ class GameOver: ParkingWorkGame {
     var animateBackgroundTimer: Timer?
     
     override func didMove(to view: SKView) {
-        super.didMove(to: view)
         setupInitialGameValues()
         
         backgroundImg = self.childNode(withName: "background") as? SKSpriteNode

@@ -60,8 +60,6 @@ class MissionCompletion: ParkingWorkGame {
     
     override func didMove(to view: SKView) {
         
-        super.didMove(to: view)
-        
         // add awards to player model
         addAwards {
             // save game progress

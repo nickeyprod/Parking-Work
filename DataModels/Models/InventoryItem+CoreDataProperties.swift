@@ -2,7 +2,7 @@
 //  InventoryItem+CoreDataProperties.swift
 //  Parking Work
 //
-//  Created by Николай Ногин on 02.07.2023.
+//  Created by Николай Ногин on 04.07.2023.
 //
 //
 
@@ -20,6 +20,7 @@ extension InventoryItem {
     @NSManaged public var id: Int
     @NSManaged public var itemDescription: String?
     @NSManaged public var name: String?
+    @NSManaged public var quantity: Int
     @NSManaged public var type: String?
     @NSManaged public var propRel: NSSet?
 

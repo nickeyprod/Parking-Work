@@ -29,8 +29,6 @@ class SplashScreen: ParkingWorkGame {
     }()
     
     override func didMove(to view: SKView) {
-        super.didMove(to: view)
-        
         // setup intial variables
         setupInitialGameValues()
         

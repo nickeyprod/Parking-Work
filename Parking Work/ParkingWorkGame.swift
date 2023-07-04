@@ -205,24 +205,16 @@ class ParkingWorkGame: SKScene {
     
     // analog to 'ViewDidLoad' - runs when game scene appears
     override func didMove(to view: SKView) {
+        print("PW DID MOVE")
+        // load game progress
+        loadGameProgress()
+        
         // setup physic world contact delegate to track collisions
         physicsWorld.contactDelegate = self
-
+        
         // detect PINCH to increase zoom
         self.setupGestureRecognizer()
-        
-        storage.persistentContainer.loadPersistentStores { stores, error in
-            if let error = error {
-                print("Error loading Persistent Stores:")
-                print("\(error)")
-            } else {
                 
-//                self.clearProcessedMissions()
-//                self.clearPlayerData()
-                
-                self.loadGameProgress()
-            }
-        }
     }
 
     

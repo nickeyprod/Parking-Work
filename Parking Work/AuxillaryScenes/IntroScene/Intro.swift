@@ -19,7 +19,6 @@ class Intro: ParkingWorkGame {
     var speechTimers: [Timer?] = []
     
     override func didMove(to view: SKView) {
-        super.didMove(to: view)
         setupInitialGameValues()
         
         subtitlesSprite = self.childNode(withName: "subtitlesSprite") as? SKSpriteNode

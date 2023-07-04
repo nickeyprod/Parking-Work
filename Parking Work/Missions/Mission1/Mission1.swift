@@ -10,7 +10,7 @@ import GameplayKit
 
 
 class Mission1: ParkingWorkGame {
-    
+
     // Cars
     var carsOnLevel: [Car?] = []
     
@@ -40,6 +40,7 @@ class Mission1: ParkingWorkGame {
     }
 
     override func didMove(to view: SKView) {
+
         super.didMove(to: view)
         
         // set mission number

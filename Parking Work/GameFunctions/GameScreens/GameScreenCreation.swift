@@ -140,6 +140,12 @@ extension ParkingWorkGame {
     }
     
     func createPlayerInventoryScreen() {
+        
+        // if no player, create it
+        if player == nil {
+            player = Player(scene: scene!, name: "Фёдор")
+        }
+        
         inventoryScreen = SKSpriteNode(color: .darkGray, size: CGSize(width: displayWidth! / 2, height: displayHeight!))
         
         inventoryScreen?.name = "inventory-screen"
@@ -161,7 +167,7 @@ extension ParkingWorkGame {
         inventoryHeaderLabel.fontName = FONTS.Cochin
         inventoryHeaderLabel.fontColor = UIColor(named: COLORS.InventoryHeader.rawValue)
         inventoryScreen?.addChild(inventoryHeaderLabel)
-        
+
         // Inventory Capacity
         let inventoryCapacityLabel = SKLabelNode(text: "Вместимость: \(player!.inventory.count)/\(player!.inventoryMaxCapacity)")
         inventoryCapacityLabel.name = "inventory-capacity"
@@ -284,9 +290,4 @@ extension ParkingWorkGame {
         capacityLabel?.text = "Вместимость: \(player!.inventory.count)/\(player!.inventoryMaxCapacity)"
         done()
     }
-    
-//    func createItemInfoWIndow() {
-//        let itemInfoWindow = SKSpriteNode(color: .gray, size: CGSize(width: 100, height: 100))
-//        
-//    }
 }

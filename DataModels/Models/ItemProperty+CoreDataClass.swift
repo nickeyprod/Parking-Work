@@ -2,7 +2,7 @@
 //  ItemProperty+CoreDataClass.swift
 //  Parking Work
 //
-//  Created by Николай Ногин on 02.07.2023.
+//  Created by Николай Ногин on 04.07.2023.
 //
 //
 

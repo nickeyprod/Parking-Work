@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D101C6702A5472D900752DF4 /* InventoryItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101C66C2A5472D900752DF4 /* InventoryItem+CoreDataClass.swift */; };
+		D101C6712A5472D900752DF4 /* InventoryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101C66D2A5472D900752DF4 /* InventoryItem+CoreDataProperties.swift */; };
+		D101C6722A5472D900752DF4 /* ItemProperty+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101C66E2A5472D900752DF4 /* ItemProperty+CoreDataClass.swift */; };
+		D101C6732A5472D900752DF4 /* ItemProperty+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101C66F2A5472D900752DF4 /* ItemProperty+CoreDataProperties.swift */; };
 		D103322A2A13E41B00F332D2 /* old_copper_engine_start.wav in Resources */ = {isa = PBXBuildFile; fileRef = D10332292A13E41B00F332D2 /* old_copper_engine_start.wav */; };
 		D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EF52979B76D00701A24 /* AppDelegate.swift */; };
 		D1198EFC2979B76D00701A24 /* ParkingWorkGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1198EFB2979B76D00701A24 /* ParkingWorkGame.swift */; };
@@ -111,10 +115,6 @@
 		D1CE9B482A4EDFD500A3A3CA /* MissionCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A626582A1F556F0033D9ED /* MissionCompletion.swift */; };
 		D1D50C752A33175B00306898 /* LOCK_COMPLEXITIES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D50C742A33175B00306898 /* LOCK_COMPLEXITIES.swift */; };
 		D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerState.swift */; };
-		D1E3FBBF2A51C0C900C21D6A /* InventoryItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E3FBBB2A51C0C900C21D6A /* InventoryItem+CoreDataClass.swift */; };
-		D1E3FBC02A51C0C900C21D6A /* InventoryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E3FBBC2A51C0C900C21D6A /* InventoryItem+CoreDataProperties.swift */; };
-		D1E3FBC12A51C0C900C21D6A /* ItemProperty+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E3FBBD2A51C0C900C21D6A /* ItemProperty+CoreDataClass.swift */; };
-		D1E3FBC22A51C0C900C21D6A /* ItemProperty+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E3FBBE2A51C0C900C21D6A /* ItemProperty+CoreDataProperties.swift */; };
 		D1E3FBC42A51FB4E00C21D6A /* SetupItemsOnMission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E3FBC32A51FB4E00C21D6A /* SetupItemsOnMission.swift */; };
 		D1E73F1C2A48D359009F76BF /* CompletionScreenBokeh.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1E73F1A2A48D359009F76BF /* CompletionScreenBokeh.sks */; };
 		D1E73F1D2A48D359009F76BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1E73F1B2A48D359009F76BF /* Assets.xcassets */; };
@@ -126,6 +126,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D101C66C2A5472D900752DF4 /* InventoryItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D101C66D2A5472D900752DF4 /* InventoryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D101C66E2A5472D900752DF4 /* ItemProperty+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemProperty+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D101C66F2A5472D900752DF4 /* ItemProperty+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemProperty+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D10332292A13E41B00F332D2 /* old_copper_engine_start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_engine_start.wav; sourceTree = "<group>"; };
 		D1198EF22979B76D00701A24 /* Parking Work.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parking Work.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1198EF52979B76D00701A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,10 +235,6 @@
 		D1C717F92A20CF9C00E36C9D /* old_copper_acceleration.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_acceleration.wav; sourceTree = "<group>"; };
 		D1D50C742A33175B00306898 /* LOCK_COMPLEXITIES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_COMPLEXITIES.swift; sourceTree = "<group>"; };
 		D1DAC79D29819DD900B60AED /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
-		D1E3FBBB2A51C0C900C21D6A /* InventoryItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D1E3FBBC2A51C0C900C21D6A /* InventoryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D1E3FBBD2A51C0C900C21D6A /* ItemProperty+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemProperty+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D1E3FBBE2A51C0C900C21D6A /* ItemProperty+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemProperty+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D1E3FBC32A51FB4E00C21D6A /* SetupItemsOnMission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupItemsOnMission.swift; sourceTree = "<group>"; };
 		D1E73F1A2A48D359009F76BF /* CompletionScreenBokeh.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CompletionScreenBokeh.sks; sourceTree = "<group>"; };
 		D1E73F1B2A48D359009F76BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../AuxillaryScenes/MissionCompletionScene/Assets.xcassets; sourceTree = "<group>"; };
@@ -361,10 +361,10 @@
 		D1594E622A4C4B9D00B2E5C6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D1E3FBBB2A51C0C900C21D6A /* InventoryItem+CoreDataClass.swift */,
-				D1E3FBBC2A51C0C900C21D6A /* InventoryItem+CoreDataProperties.swift */,
-				D1E3FBBD2A51C0C900C21D6A /* ItemProperty+CoreDataClass.swift */,
-				D1E3FBBE2A51C0C900C21D6A /* ItemProperty+CoreDataProperties.swift */,
+				D101C66C2A5472D900752DF4 /* InventoryItem+CoreDataClass.swift */,
+				D101C66D2A5472D900752DF4 /* InventoryItem+CoreDataProperties.swift */,
+				D101C66E2A5472D900752DF4 /* ItemProperty+CoreDataClass.swift */,
+				D101C66F2A5472D900752DF4 /* ItemProperty+CoreDataProperties.swift */,
 				D1A385152A4DF43600E791B6 /* ProcessedMissionData+CoreDataClass.swift */,
 				D1A385162A4DF43600E791B6 /* ProcessedMissionData+CoreDataProperties.swift */,
 				D1594E582A4C4B7300B2E5C6 /* PlayerData+CoreDataClass.swift */,
@@ -742,6 +742,7 @@
 				D1A385172A4DF43600E791B6 /* ProcessedMissionData+CoreDataClass.swift in Sources */,
 				D1628B3129AE050700DF817E /* COLORS.swift in Sources */,
 				D1A385182A4DF43600E791B6 /* ProcessedMissionData+CoreDataProperties.swift in Sources */,
+				D101C6732A5472D900752DF4 /* ItemProperty+CoreDataProperties.swift in Sources */,
 				D18653D8299A3FE200DEE90D /* CarLocksSetup.swift in Sources */,
 				D1A717C629C45D4D00A488BF /* GameOver.swift in Sources */,
 				D16FD69B29A270A70097BC3E /* Mission1.swift in Sources */,
@@ -757,11 +758,14 @@
 				D1C699BD2A3C7B500094860B /* Property.swift in Sources */,
 				D18C66142A25038D00D4F365 /* MissionList.swift in Sources */,
 				D18653D6299A3EAF00DEE90D /* CarsSetup.swift in Sources */,
+				D101C6702A5472D900752DF4 /* InventoryItem+CoreDataClass.swift in Sources */,
 				D16EA75A2A0238BB001699E5 /* ChatFunctions.swift in Sources */,
+				D101C6712A5472D900752DF4 /* InventoryItem+CoreDataProperties.swift in Sources */,
 				D16EA76A2A024418001699E5 /* GameScreenContols.swift in Sources */,
 				D1BC8CDB29B5DA4900F9C597 /* LOCK_TYPES.swift in Sources */,
 				D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */,
 				D149E68C2A30741E00342564 /* ITEMS_TYPES.swift in Sources */,
+				D101C6722A5472D900752DF4 /* ItemProperty+CoreDataClass.swift in Sources */,
 				D16FD69E29A289840097BC3E /* CameraSetup.swift in Sources */,
 				D18653C7299A326900DEE90D /* Collisions.swift in Sources */,
 				D1CE9B482A4EDFD500A3A3CA /* MissionCompletion.swift in Sources */,
@@ -773,12 +777,10 @@
 				D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */,
 				D1BC8CE229B8752900F9C597 /* Intro.swift in Sources */,
 				D16EA75E2A023C09001699E5 /* PopUpCreation.swift in Sources */,
-				D1E3FBBF2A51C0C900C21D6A /* InventoryItem+CoreDataClass.swift in Sources */,
 				D16EA7642A02407D001699E5 /* UIControls.swift in Sources */,
 				D1594E642A4C9E5900B2E5C6 /* Storage.swift in Sources */,
 				D150086D2A28E02700F24418 /* Mission.swift in Sources */,
 				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
-				D1E3FBC22A51C0C900C21D6A /* ItemProperty+CoreDataProperties.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
 				D16ACB0C2A1A9528000878C4 /* SetupLevelCompletion.swift in Sources */,
 				D11FB7082A3B77E40047D7FC /* Price.swift in Sources */,
@@ -789,13 +791,11 @@
 				D14476512A29E9D90044C244 /* CarLock.swift in Sources */,
 				D16EA76D2A0245AF001699E5 /* CameraFunctions.swift in Sources */,
 				D1594E082A4C253800B2E5C6 /* MISSIONS_LIST.swift in Sources */,
-				D1E3FBC02A51C0C900C21D6A /* InventoryItem+CoreDataProperties.swift in Sources */,
 				D1A385142A4DEEBE00E791B6 /* ProcessedMission.swift in Sources */,
 				D1BC8CDD29B5DBC400F9C597 /* CAR_TEXTURTE_NAMES.swift in Sources */,
 				D15BCD9C29F1380B00726BE3 /* SetupSound.swift in Sources */,
 				D16EA75C2A023A6B001699E5 /* PopUpAction.swift in Sources */,
 				D1A3F5AB299F9B8B00084380 /* GAME_SOUNDS.swift in Sources */,
-				D1E3FBC12A51C0C900C21D6A /* ItemProperty+CoreDataClass.swift in Sources */,
 				D1594E612A4C4B7300B2E5C6 /* PlayerData+CoreDataProperties.swift in Sources */,
 				D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */,
 				D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */,

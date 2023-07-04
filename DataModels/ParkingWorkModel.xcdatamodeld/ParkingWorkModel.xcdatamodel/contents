@@ -7,7 +7,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
-        <relationship name="propRel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItemProperty"/>
+        <relationship name="propRel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItemProperty" inverseName="inventoryRel" inverseEntity="ItemProperty"/>
     </entity>
     <entity name="ItemProperty" representedClassName="ItemProperty" syncable="YES">
         <attribute name="inPercentages" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -15,7 +15,7 @@
         <attribute name="propDescription" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="inventoryRel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InventoryItem"/>
+        <relationship name="inventoryRel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InventoryItem" inverseName="propRel" inverseEntity="InventoryItem"/>
     </entity>
     <entity name="PlayerData" representedClassName="PlayerData" syncable="YES">
         <attribute name="inventoryMaxCapacity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
