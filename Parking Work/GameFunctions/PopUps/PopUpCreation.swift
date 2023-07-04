@@ -237,4 +237,45 @@ extension ParkingWorkGame {
         hideTargetWindow()
         
     }
+    
+    func createUpperPopUp() {
+        
+        
+        
+        let someLabel = SKLabelNode(text: "Данные игры успешно загружены")
+        someLabel.name = "msg-text"
+        someLabel.verticalAlignmentMode = .center
+        someLabel.position = CGPoint(x: 12, y: 0)
+        someLabel.fontName = FONTS.AmericanTypewriter
+        someLabel.fontSize = 16
+    
+        // Pop Up itself
+        let popUpRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: someLabel.frame.width + 25 + 10, height: 30))
+        let popUpPath = CGPath(roundedRect: popUpRect, cornerWidth: 6.0, cornerHeight: 6.0, transform: .none)
+        
+        let popUpWindow = SKShapeNode(path: popUpPath, centered: true)
+        
+        popUpWindow.position = CGPoint(x: 0, y: (displayHeight! / 2))
+        
+        popUpWindow.fillColor = .black
+        popUpWindow.alpha = 0.90
+        
+        popUpWindow.addChild(someLabel)
+        
+        // sync icon
+        let syncIcon = SKSpriteNode(imageNamed: "sync-circle")
+        syncIcon.name = "sync-circle"
+        syncIcon.size = CGSize(width: 20, height: 20)
+        syncIcon.position = CGPoint(x: -(popUpWindow.frame.width / 2) + 18, y: 2)
+        syncIcon.run(.rotate(toAngle: 0.2, duration: 0.3))
+        popUpWindow.addChild(syncIcon)
+        
+        
+        visibleUpperPopUpPos =  CGPoint(x: 0, y: (displayHeight! / 2) - (popUpWindow.frame.height / 2) - 20)
+        upperPopUpMessage = popUpWindow
+        upperPopUpMessage?.setScale(0)
+        
+        addChild(popUpWindow)
+        
+    }
 }

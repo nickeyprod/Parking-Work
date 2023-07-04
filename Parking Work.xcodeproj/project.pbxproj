@@ -43,6 +43,7 @@
 		D15BCD9429EF18AD00726BE3 /* pigeon_flying_away.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */; };
 		D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */; };
 		D15BCD9C29F1380B00726BE3 /* SetupSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15BCD9B29F1380B00726BE3 /* SetupSound.swift */; };
+		D15E2AE52A54BF3F0029279E /* upper_popup_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = D15E2AE42A54BF3E0029279E /* upper_popup_sound.wav */; };
 		D1628B3129AE050700DF817E /* COLORS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1628B3029AE050700DF817E /* COLORS.swift */; };
 		D16ACB032A177AB3000878C4 /* car_collision_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16ACB012A177AB3000878C4 /* car_collision_02.wav */; };
 		D16ACB062A177ABB000878C4 /* car_collision_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D16ACB052A177ABB000878C4 /* car_collision_01.wav */; };
@@ -163,6 +164,7 @@
 		D15BCD9329EF18AD00726BE3 /* pigeon_flying_away.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pigeon_flying_away.wav; sourceTree = "<group>"; };
 		D15BCD9929F1376F00726BE3 /* street_sound_birds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = street_sound_birds.wav; sourceTree = "<group>"; };
 		D15BCD9B29F1380B00726BE3 /* SetupSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSound.swift; sourceTree = "<group>"; };
+		D15E2AE42A54BF3E0029279E /* upper_popup_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upper_popup_sound.wav; sourceTree = "<group>"; };
 		D1628B3029AE050700DF817E /* COLORS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COLORS.swift; sourceTree = "<group>"; };
 		D16ACB012A177AB3000878C4 /* car_collision_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_collision_02.wav; sourceTree = "<group>"; };
 		D16ACB052A177ABB000878C4 /* car_collision_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_collision_01.wav; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 		D1A3F5AC299F9BB900084380 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D15E2AE42A54BF3E0029279E /* upper_popup_sound.wav */,
 				D1A6C1F92A2DD7A70049614D /* Inventory */,
 				D14476532A29EE2D0044C244 /* Collisions */,
 				D150086A2A28BF5500F24418 /* mission_list_car_passing_by.wav */,
@@ -681,6 +684,7 @@
 			files = (
 				D1A626572A1F55470033D9ED /* MissionCompletionScene.sks in Resources */,
 				D1B259DC2A1E7703001C9A05 /* pinplay_logo.mp4 in Resources */,
+				D15E2AE52A54BF3F0029279E /* upper_popup_sound.wav in Resources */,
 				D15BCD9A29F1376F00726BE3 /* street_sound_birds.wav in Resources */,
 				D1A3F5B0299F9E0C00084380 /* success_bell.wav in Resources */,
 				D1A3F5B3299FA0B000084380 /* car_door_locked.wav in Resources */,

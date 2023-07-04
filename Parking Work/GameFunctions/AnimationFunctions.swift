@@ -140,5 +140,32 @@ extension ParkingWorkGame {
         button.run(SKAction.repeatForever(.sequence([SKAction.scale(to: 1.05, duration: 1.0), SKAction.scale(to: 1.0, duration: 0.6)])))
     }
     
+    func runUpperPopUpAnimation(with text: String) {
+        
+        if let label = upperPopUpMessage?.childNode(withName: "msg-text") as? SKLabelNode {
+            label.text = text
+        }
+        if let syncCircle = upperPopUpMessage?.childNode(withName: "sync-circle") {
+            syncCircle.run(.rotate(toAngle: -6, duration: 1.0))
+        }
+
+        upperPopUpMessage?.run(.move(to: CGPoint(x: 0, y: visibleUpperPopUpPos!.y), duration: 0.3))
+        
+        upperPopUpMessage?.run(.scale(to: 1.1, duration: 0.3), completion: {
+            // run sound of pop buble
+            self.run(MenuSounds.upper_popup_sound.action)
+            
+            self.upperPopUpMessage?.run(.scale(to: 1.0, duration: 0.1), completion: {
+                Timer.scheduledTimer(withTimeInterval: 1.8, repeats: false) { _ in
+                    self.upperPopUpMessage?.run(.scale(to: 1.1, duration: 0.3),completion: {
+                        self.upperPopUpMessage?.run(.move(to: CGPoint(x: 0, y: self.displayHeight! / 2), duration: 0.3))
+                        self.upperPopUpMessage?.run(.scale(to: 0, duration: 0.1))
+                    })
+                }
+                
+            })
+        })
+    }
+    
     
 }

@@ -158,16 +158,22 @@ class MissionCompletion: ParkingWorkGame {
     
     func addAwards(done: () -> Void) {
         
-        player?.money += moneyForMission!
-        player?.reputation += reputationForMisson!
-//        player?.unlockSkill += unlockSkillForMission
-//        player?.inventoryMaxCapacity += inventoryMaxCapacityForLevel
-
+        var levelAlreadyCompleted = false
+        
         for i in  0...player!.processedMissions.count - 1 {
-            if player!.processedMissions[i]?.number == missionNum {
-                player!.processedMissions[i]?.completed = true
-                player!.processedMissions[i]?.opened = true
+            if player!.processedMissions[i]?.number == missionNum  {
+                if player!.processedMissions[i]?.completed == false {
+                    player!.processedMissions[i]?.completed = true
+                } else {
+                    levelAlreadyCompleted = true
+                }
             }
+        }
+        
+        if !levelAlreadyCompleted {
+            player?.money += moneyForMission!
+            player?.reputation += reputationForMisson!
+    //        player?.unlockSkill += unlockSkillForMission
         }
 
         let openedMission = ProcessedMission(

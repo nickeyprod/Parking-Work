@@ -37,7 +37,7 @@ enum MissionListSounds: String {
 }
 
 enum MenuSounds: String {
-    case button_click
+    case button_click, upper_popup_sound
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)

@@ -199,13 +199,15 @@ class ParkingWorkGame: SKScene {
     // default to open car
     var actionMessageType: MESSAGES_TYPES = .OpenCarAction
     
+    var upperPopUpMessage: SKShapeNode?
+    var visibleUpperPopUpPos: CGPoint?
+    
     deinit {
         print("deinit MAIN")
     }
     
     // analog to 'ViewDidLoad' - runs when game scene appears
     override func didMove(to view: SKView) {
-        print("PW DID MOVE")
         // load game progress
         loadGameProgress()
         

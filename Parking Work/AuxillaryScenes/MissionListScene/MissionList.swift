@@ -84,13 +84,15 @@ class MissionList: ParkingWorkGame {
         
         // clear database
 //        clearGameDatabase()
-
-        
-        // load saved progress
-        loadGameProgress()
         
         // setup all needed variables
         setupInitialGameValues()
+        
+        // pop up window
+        createUpperPopUp()
+
+        // load saved progress
+        loadGameProgress()
         
         // setup camera
         setupCamera()
@@ -110,6 +112,7 @@ class MissionList: ParkingWorkGame {
         // background sound
         backgroundSoundCars = MissionListSounds.mission_list_car_passing_by.audio
         addChild(backgroundSoundCars!)
+
     }
     
     func selectLastOpenedMission() {
@@ -142,7 +145,6 @@ class MissionList: ParkingWorkGame {
         var prevPos: CGPoint?
         
         for mission in missionList {
-//            print(mission.number)
             if runFist {
                 runFist = false
                 missionSpriteCell = rightSide?.childNode(withName: "Mission_1_Sprite") as? SKSpriteNode
@@ -240,7 +242,6 @@ class MissionList: ParkingWorkGame {
     }
     
     func fillMissionDescription(selectedMissionNum: Int) {
-//        print("run")
         let currMission = missionList[selectedMissionNum - 1]
         
         mainHeader?.text = currMission.mainHeader
@@ -455,6 +456,7 @@ class MissionList: ParkingWorkGame {
                 self.removeAllActions()
                 backgroundSoundCars?.run(.stop())
                 let missionScene = SKScene(fileNamed: "Mission\(num)Scene")
+                
                 let transition = SKTransition.fade(with: .black, duration: 1.0)
                 let displaySize: CGRect = UIScreen.main.bounds
                 // Set the scale mode to scale to fit the window
@@ -468,9 +470,12 @@ class MissionList: ParkingWorkGame {
     }
     
     func openShopScreen() {
-        let shopScene = SKScene(fileNamed: "ShopScene")
+        let shopScene = SKScene(fileNamed: "ShopScene") as? Shop
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
+        
+        // pass player data
+        shopScene?.player = player
         // Set the scale mode to scale to fit the window
         shopScene?.scaleMode = .aspectFill
         shopScene?.size = displaySize.size

@@ -27,6 +27,8 @@ extension ParkingWorkGame {
                 self.loadPlayerData()
                 self.loadProcessedMissions()
                 self.loadPlayerInventory()
+                // show pop up message
+                self.runUpperPopUpAnimation(with: "Данные игры успешно загружены")
             }
 
         }
@@ -50,6 +52,8 @@ extension ParkingWorkGame {
                 do {
                     // save all changes
                     try self.storage.persistentContainer.viewContext.save()
+                    // show pop up message
+                    self.runUpperPopUpAnimation(with: "Данные игры успешно cохранены")
                     print("CONTEXT SAVED")
 
                 } catch {

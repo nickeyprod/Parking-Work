@@ -198,7 +198,6 @@ extension ParkingWorkGame {
             let moveAction = SKAction.move(to: CGPoint(x: 0, y: (inventoryScreen?.position.y)!), duration: 0.5)
             inventoryScreen?.run(moveAction)
         }
-        
     }
     
     func showDescriptionOf(item: GameItem, touchedNode: SKNode) {
