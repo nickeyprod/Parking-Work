@@ -113,6 +113,8 @@
 		D1C717F62A20C5BB00E36C9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1C717F42A20C5BB00E36C9D /* Assets.xcassets */; };
 		D1C717F82A20CB8D00E36C9D /* old_copper_engine_still.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1C717F72A20CB8D00E36C9D /* old_copper_engine_still.wav */; };
 		D1C717FA2A20CF9C00E36C9D /* old_copper_acceleration.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1C717F92A20CF9C00E36C9D /* old_copper_acceleration.wav */; };
+		D1CAD2FB2A570C4E00ED139B /* DetailsScreenScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1CAD2FA2A570C4E00ED139B /* DetailsScreenScene.sks */; };
+		D1CAD2FD2A570C6500ED139B /* DetailsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAD2FC2A570C6500ED139B /* DetailsScene.swift */; };
 		D1CE9B482A4EDFD500A3A3CA /* MissionCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A626582A1F556F0033D9ED /* MissionCompletion.swift */; };
 		D1D50C752A33175B00306898 /* LOCK_COMPLEXITIES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D50C742A33175B00306898 /* LOCK_COMPLEXITIES.swift */; };
 		D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerState.swift */; };
@@ -235,6 +237,8 @@
 		D1C717F42A20C5BB00E36C9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1C717F72A20CB8D00E36C9D /* old_copper_engine_still.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_engine_still.wav; sourceTree = "<group>"; };
 		D1C717F92A20CF9C00E36C9D /* old_copper_acceleration.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = old_copper_acceleration.wav; sourceTree = "<group>"; };
+		D1CAD2FA2A570C4E00ED139B /* DetailsScreenScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DetailsScreenScene.sks; sourceTree = "<group>"; };
+		D1CAD2FC2A570C6500ED139B /* DetailsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScene.swift; sourceTree = "<group>"; };
 		D1D50C742A33175B00306898 /* LOCK_COMPLEXITIES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_COMPLEXITIES.swift; sourceTree = "<group>"; };
 		D1DAC79D29819DD900B60AED /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		D1E3FBC32A51FB4E00C21D6A /* SetupItemsOnMission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupItemsOnMission.swift; sourceTree = "<group>"; };
@@ -593,6 +597,7 @@
 		D1C717F12A20BFD600E36C9D /* AuxillaryScenes */ = {
 			isa = PBXGroup;
 			children = (
+				D1CAD2F72A570C1500ED139B /* DetailsScene */,
 				D144764B2A29D27E0044C244 /* ShopScene */,
 				D18C66102A24F62800D4F365 /* MissionListScene */,
 				D1BC8CE029B8751100F9C597 /* IntroScene */,
@@ -613,6 +618,15 @@
 				D14476572A2B6C470044C244 /* Assets.xcassets */,
 			);
 			path = Cars;
+			sourceTree = "<group>";
+		};
+		D1CAD2F72A570C1500ED139B /* DetailsScene */ = {
+			isa = PBXGroup;
+			children = (
+				D1CAD2FA2A570C4E00ED139B /* DetailsScreenScene.sks */,
+				D1CAD2FC2A570C6500ED139B /* DetailsScene.swift */,
+			);
+			path = DetailsScene;
 			sourceTree = "<group>";
 		};
 		D1EC016629B88FB200390C41 /* Fonts */ = {
@@ -728,6 +742,7 @@
 				D1B856442A1BB1A300C8B61B /* old_copper_acceleration_old.wav in Resources */,
 				D1B259E02A1EAA51001C9A05 /* Assets.xcassets in Resources */,
 				D16FD69C29A270A70097BC3E /* Mission1Scene.sks in Resources */,
+				D1CAD2FB2A570C4E00ED139B /* DetailsScreenScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,6 +754,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1594E602A4C4B7300B2E5C6 /* PlayerData+CoreDataClass.swift in Sources */,
+				D1CAD2FD2A570C6500ED139B /* DetailsScene.swift in Sources */,
 				D1B259D62A1E1A4A001C9A05 /* SplashScreen.swift in Sources */,
 				D11FB7062A3A37F20047D7FC /* ShopItem.swift in Sources */,
 				D18653D4299A3D9F00DEE90D /* WorldSetup.swift in Sources */,

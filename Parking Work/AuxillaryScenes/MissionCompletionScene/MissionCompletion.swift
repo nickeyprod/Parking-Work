@@ -12,7 +12,7 @@ import CoreData
 class MissionCompletion: ParkingWorkGame {
     
     var moneyForMission: Float?
-    var displayingMoney: Float = 0
+    var displayingMoney: Float = 1
     
     var reputationForMisson: Int?
     var displayingReputation: Int = 0
@@ -59,6 +59,12 @@ class MissionCompletion: ParkingWorkGame {
     }
     
     override func didMove(to view: SKView) {
+
+        // setup intial variables
+        setupInitialGameValues()
+        
+        // pop up for saving progress or other messages
+        createUpperPopUp()
         
         // add awards to player model
         addAwards {
@@ -66,8 +72,7 @@ class MissionCompletion: ParkingWorkGame {
             saveGameProgress()
         }
      
-        // setup intial variables
-        setupInitialGameValues()
+   
         
         setupCompletionScreen()
         
@@ -173,6 +178,9 @@ class MissionCompletion: ParkingWorkGame {
         if !levelAlreadyCompleted {
             player?.money += moneyForMission!
             player?.reputation += reputationForMisson!
+            
+            print("adding money: ", moneyForMission)
+            print("adding repu: ", reputationForMisson)
     //        player?.unlockSkill += unlockSkillForMission
         }
 
@@ -318,12 +326,14 @@ class MissionCompletion: ParkingWorkGame {
     }
     
     func animateMoneyDigits() {
+        
         let percent = (displayingMoney / moneyForMission!) * 100
-        let a = 100 - percent
+        let a = (100 - percent) / 100
         
-        displayingMoney += a
+        let addingNum = moneyForMission! * a
+
+        displayingMoney += addingNum
         moneyNum?.text = "\(String(format: "%.1f", displayingMoney))"
-        
     }
         
     func animateReputationDigits() {
@@ -332,9 +342,13 @@ class MissionCompletion: ParkingWorkGame {
     }
     
     func goToMissionListScene() {
-        let missionListScene = SKScene(fileNamed: "MissionListScene")
+        let missionListScene = SKScene(fileNamed: "MissionListScene") as? MissionList
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
+        
+        missionListScene?.player = player
+        missionListScene?.gameLoaded = gameLoaded
+        
         // Set the scale mode to scale to fit the window
         missionListScene?.scaleMode = .aspectFill
         missionListScene?.size = displaySize.size

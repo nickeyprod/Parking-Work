@@ -195,11 +195,29 @@ extension ParkingWorkGame {
         
     }
     
+    func clearPlayer() {
+        self.playerInFirstCircle = false
+        self.playerInSecondCircle = false
+        self.playerInThirdCircle = false
+        self.player?.isSittingInCar = false
+        self.player?.currTargetCar = nil
+        self.player?.currTargetLock = nil
+        self.player?.currTargetItem = nil
+        self.anxietyLevel = 0.0
+    }
+    
     func callCops() {
         
         let gameOverScene = SKScene(fileNamed: "GameOverScene") as? GameOver
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
+        
+        // set all player variables to initial values
+        clearPlayer()
+        
+        gameOverScene?.player = player
+        gameOverScene?.gameLoaded = gameLoaded
+
         // Set the scale mode to scale to fit the window
         gameOverScene?.scaleMode = .aspectFill
         gameOverScene?.size = displaySize.size

@@ -66,6 +66,8 @@ class MissionList: ParkingWorkGame {
     var shopButton: SKSpriteNode?
     var panelInventoryButton: SKSpriteNode?
     var panelInventoryLabel: SKLabelNode?
+    var panelInfoButton: SKSpriteNode?
+    var panelInfoLabel: SKLabelNode?
     var closeInventoryButton: SKShapeNode?
     
     // current selected mission
@@ -344,6 +346,9 @@ class MissionList: ParkingWorkGame {
         panelInventoryLabel = itemsPanel?.childNode(withName: "InventoryLabel") as? SKLabelNode
         panelInventoryLabel?.position = CGPoint(x: (panelInventoryButton?.position.x)!, y: (panelInventoryButton?.position.y)! + 20)
         
+        panelInfoButton = itemsPanel?.childNode(withName: "InfoButton") as? SKSpriteNode
+        panelInfoLabel = itemsPanel?.childNode(withName: "InfoLabel") as? SKLabelNode
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -393,10 +398,17 @@ class MissionList: ParkingWorkGame {
                     self.openInventory()
                 })
                 
-            } else if nodeName == "ui-closeInventoryBtn" || nodeName == "ui-closeInventoryLabel" {
+            } else if nodeName == "InfoButton"  {
+                run(MenuSounds.button_click.action)
+                animateButtonClick(button: panelInfoButton!) {
+                    self.openDetailsScreen()
+                }
+
+            }
+            else if nodeName == "ui-closeInventoryBtn" || nodeName == "ui-closeInventoryLabel" {
                 run(InventorySounds.bag_open.action)
                 closeInventory()
-            }
+            } 
 
         }
     }
@@ -476,6 +488,23 @@ class MissionList: ParkingWorkGame {
         
         // pass player data
         shopScene?.player = player
+        shopScene?.gameLoaded = gameLoaded
+        
+        // Set the scale mode to scale to fit the window
+        shopScene?.scaleMode = .aspectFill
+        shopScene?.size = displaySize.size
+        self.view?.presentScene(shopScene!, transition: transition)
+    }
+    
+    func openDetailsScreen() {
+        let shopScene = SKScene(fileNamed: "DetailsScreenScene") as? DetailsScene
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        
+        // pass player data
+        shopScene?.player = player
+        shopScene?.gameLoaded = gameLoaded
+        
         // Set the scale mode to scale to fit the window
         shopScene?.scaleMode = .aspectFill
         shopScene?.size = displaySize.size

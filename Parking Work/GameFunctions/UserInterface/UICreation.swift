@@ -89,33 +89,7 @@ extension ParkingWorkGame {
         
     }
     
-    func createIcons() {
-        
-        // money
-        if let moneyIcon = UIImage(named: "money") {
-            let moneySprite = SKSpriteNode(texture: SKTexture(image: moneyIcon))
-            self.taskScreen?.addChild(moneySprite)
-            moneySprite.size = CGSize(width: 25, height: 25)
-            moneySprite.position = CGPoint(x: displayWidth! / 2 - 20, y: displayHeight! / 2 - 30)
-        }
-        
-        let moneyLabel = SKLabelNode(text: String(player!.money))
-        moneyLabel.fontName = "Menlo-regular"
-        moneyLabel.fontSize = 16
-        self.taskScreen?.addChild(moneyLabel)
-        moneyLabel.horizontalAlignmentMode = .right
-        moneyLabel.position = CGPoint(x: displayWidth! / 2 - 36, y: displayHeight! / 2 - 40)
-        
-        // reputation
-        let reputation = SKLabelNode(text: "Репутация:  \(player!.reputation)")
-        reputation.fontName = "Gill Sans"
-        reputation.fontSize = 18
-        reputation.horizontalAlignmentMode = .left
-        reputation.position = CGPoint(x: -displayWidth! / 2 + 16, y: -displayHeight! / 2 + 14)
-        self.taskScreen?.addChild(reputation)
-        
-    }
-    
+
     
     // Creates anxiety bar
     func createAnxietyBar() {

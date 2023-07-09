@@ -312,16 +312,12 @@ extension ParkingWorkGame {
     }
     
     func removeItemFromInventory(itemToRemove: GameItem) {
-        print("=====> Befaore removing: ", player!.inventory.count)
-        for item in player!.inventory {
-            if item == itemToRemove {
-                if let index = player!.inventory.firstIndex(of: item) {
-                    player!.inventory.remove(at: index)
-                    break
-                }
+        for (i, item) in player!.inventory.enumerated() {
+            if item!.id == itemToRemove.id {
+                player!.inventory.remove(at: i)
+                break
             }
         }
-        print("~~~~~ AFTER REMOVING: ", player!.inventory.count)
     }
 
 }

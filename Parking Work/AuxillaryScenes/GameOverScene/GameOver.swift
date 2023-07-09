@@ -25,7 +25,16 @@ class GameOver: ParkingWorkGame {
     var animateBackgroundTimer: Timer?
     
     override func didMove(to view: SKView) {
+        
+       
+        // initial variables
         setupInitialGameValues()
+        
+        // creating upper popup for messages
+        createUpperPopUp()
+        
+        // save game progress
+        saveGameProgress()
         
         backgroundImg = self.childNode(withName: "background") as? SKSpriteNode
         
@@ -111,6 +120,9 @@ class GameOver: ParkingWorkGame {
         self.removeAllActions()
         self.backgroundImg?.removeAllActions()
         animateBackgroundTimer?.invalidate()
+        
+        currMissionScene.player = player
+        currMissionScene.gameLoaded = gameLoaded
         
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window

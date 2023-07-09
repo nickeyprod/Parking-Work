@@ -23,12 +23,19 @@ extension ParkingWorkGame {
             if let error = error {
                 print("Error loading Persistent Stores:")
                 print("\(error)")
+                self.runUpperPopUpAnimation(with: "Ошибка загрузки данных игры")
             } else {
                 self.loadPlayerData()
                 self.loadProcessedMissions()
                 self.loadPlayerInventory()
-                // show pop up message
-                self.runUpperPopUpAnimation(with: "Данные игры успешно загружены")
+
+                if !self.gameLoaded {
+                    self.gameLoaded = true
+                    
+                    // show pop up message
+                    self.runUpperPopUpAnimation(with: "Данные игры успешно загружены")
+                }
+                
             }
 
         }
@@ -43,6 +50,7 @@ extension ParkingWorkGame {
         }
         storage.persistentContainer.loadPersistentStores { stores, error in
             if let error = error {
+                self.runUpperPopUpAnimation(with: "Ошибка cохранения данных игры")
                 print("Error loading Persistent Stores:")
                 print("\(error)")
             } else {
@@ -52,11 +60,8 @@ extension ParkingWorkGame {
                 do {
                     // save all changes
                     try self.storage.persistentContainer.viewContext.save()
-                    // show pop up message
-                    self.runUpperPopUpAnimation(with: "Данные игры успешно cохранены")
-                    print("CONTEXT SAVED")
-
                 } catch {
+                    self.runUpperPopUpAnimation(with: "Ошибка cохранения данных игры")
                     print("ERROR SAVING", error)
                 }
                 
@@ -161,11 +166,9 @@ extension ParkingWorkGame {
     // saving properties for item
     func saveProperties(for item: InventoryItem, props: [Property?], done:
                         () -> Void) {
-        print("need to save \(props.count) properties")
         do {
             try self.storage.itemProperties.performFetch()
             let allProps = self.storage.itemProperties.fetchedObjects
-            print("Now properties count in databse: ", allProps?.count as Any)
             
             ml: for prop in props {
                 for loadedProp in allProps! {
@@ -186,8 +189,6 @@ extension ParkingWorkGame {
                 self.storage.persistentContainer.viewContext.insert(newProperty)
                 
                 item.addToPropRel(newProperty)
-                
-                print("Inserted property: ", newProperty)
             }
             done()
         } catch {

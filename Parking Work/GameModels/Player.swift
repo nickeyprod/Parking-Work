@@ -53,6 +53,7 @@ class Player {
     
     var triedToOpenComplexLockTimes = 0
     var triedToOpenJammedLockTimes = 0
+    var triedToOpenWithNoPickLocksTimes = 0
     
     var isSittingInCar: Bool = false
     var drivingCar: Car?

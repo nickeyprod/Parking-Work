@@ -41,3 +41,15 @@ extension MissionList {
     }
     
 }
+
+extension DetailsScene {
+    
+    /// Get camera node from game scene and set its position to the same place as player position.
+    func setupCamera() {
+        cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
+        // remember initial camera rotation
+        initialCameraRotation = self.cameraNode?.zRotation
+    }
+    
+}
+

@@ -119,7 +119,7 @@ extension ParkingWorkGame {
         spriteRect.alpha = 0.9
         spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 130)
         
-        let taskMessage = SKLabelNode(text: "Босс: \(UNICODE.leftChevrone)Марка машины мне не важна, на твое усмотрение. Главное,  доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\(UNICODE.rightChevrone)")
+        let taskMessage = SKLabelNode(text: "Босс: \(UNICODE.leftChevrone)Я спрятал отмычку для тебя под одним из мусорных баков. Марка машины мне не важна, на твое усмотрение. Главное, доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\(UNICODE.rightChevrone)")
         taskMessage.fontSize = 24
         taskMessage.fontName = FONTS.Baskerville
         taskMessage.fontColor = UIColor.white
@@ -136,6 +136,30 @@ extension ParkingWorkGame {
         bossSiluette.setScale(0.48)
         bossSiluette.position = CGPoint(x: displayWidth! / 2 - 100, y: -displayHeight! / 2 + 20)
         taskScreen?.addChild(bossSiluette)
+        
+        // money
+        if let moneyIcon = UIImage(named: "money") {
+            let moneySprite = SKSpriteNode(texture: SKTexture(image: moneyIcon))
+            self.taskScreen?.addChild(moneySprite)
+            moneySprite.size = CGSize(width: 25, height: 25)
+            moneySprite.position = CGPoint(x: displayWidth! / 2 - 20, y: displayHeight! / 2 - 30)
+        }
+        
+        let moneyLabel = SKLabelNode(text: String(player!.money))
+        
+        moneyLabel.fontName = "Menlo-regular"
+        moneyLabel.fontSize = 16
+        self.taskScreen?.addChild(moneyLabel)
+        moneyLabel.horizontalAlignmentMode = .right
+        moneyLabel.position = CGPoint(x: displayWidth! / 2 - 36, y: displayHeight! / 2 - 40)
+        
+        // reputation
+        let reputation = SKLabelNode(text: "Репутация: \(player!.reputation)")
+        reputation.fontName = "Gill Sans"
+        reputation.fontSize = 18
+        reputation.horizontalAlignmentMode = .left
+        reputation.position = CGPoint(x: -displayWidth! / 2 + 16, y: -displayHeight! / 2 + 14)
+        self.taskScreen?.addChild(reputation)
         
     }
     

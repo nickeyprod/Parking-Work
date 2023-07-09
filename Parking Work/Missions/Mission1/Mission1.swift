@@ -70,9 +70,6 @@ class Mission1: ParkingWorkGame {
         // create UI Buttons - pause, task buttons
         createUIButtons()
         
-        // create Icons (money/reputation)
-        createIcons()
-        
         // create window messages sprites
         createActionMessage()
         createOpenCarSuccessMessage()
@@ -122,6 +119,7 @@ class Mission1: ParkingWorkGame {
         
         // fill items on this mission
         fillItemsOfMission()
+        
 
     }
     

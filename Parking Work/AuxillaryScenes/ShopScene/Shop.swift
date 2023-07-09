@@ -515,9 +515,13 @@ class Shop: ParkingWorkGame {
     }
     
     func exitShopScreen() {
-        let missionScene = SKScene(fileNamed: "MissionListScene")
+        let missionScene = SKScene(fileNamed: "MissionListScene") as? MissionList
         let transition = SKTransition.fade(with: .black, duration: 1.0)
         let displaySize: CGRect = UIScreen.main.bounds
+        
+        missionScene?.player = player
+        missionScene?.gameLoaded = gameLoaded
+        
         // Set the scale mode to scale to fit the window
         missionScene?.scaleMode = .aspectFill
         missionScene?.size = displaySize.size

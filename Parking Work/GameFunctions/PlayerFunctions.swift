@@ -13,17 +13,13 @@ extension Player {
     // MARK: - Car Locks Opening Logic
     /// Player can try to open any lock of any car on the map
     func tryOpenCarLock(of car: Car, targetLock: CarLock, with pickLock: GameItem) {
-        
-        // if no picklock -> player cannot open door
-        if !playerIsHavingAPicklock() {
-            return scene.pushMessageToChat(text: "У вас нет отмычек!")
-        } else {
-            scene.pushMessageToChat(text: "Вы использовали '\(pickLock.name)'. Предмет исчез из вашего инвентаря.")
-            // remove pic from inventory
-            pickLock.node?.removeFromParent()
-            // remove item object from inventory
-            scene.removeItemFromInventory(itemToRemove: pickLock)
-        }
+
+        scene.pushMessageToChat(text: "Вы использовали '\(pickLock.name)'. Предмет исчез из вашего инвентаря.")
+        // remove pic from inventory
+        pickLock.node?.removeFromParent()
+        // remove item object from inventory
+        scene.removeItemFromInventory(itemToRemove: pickLock)
+
         
         // check if player is opening jammed lock
         if targetLock.jammed {
@@ -222,6 +218,9 @@ extension Player {
         } else if type == "complex" {
             self.triedToOpenComplexLockTimes += 1
             numOfTries = self.triedToOpenComplexLockTimes
+        } else if type == "no-picklocks" {
+            self.triedToOpenWithNoPickLocksTimes += 1
+            numOfTries = self.triedToOpenWithNoPickLocksTimes
         }
         
         if numOfTries == 1 {

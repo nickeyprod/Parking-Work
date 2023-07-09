@@ -66,7 +66,11 @@ extension ParkingWorkGame {
                         let foundPicklocks = self.getItemsFromInventory(with: ITEMS_TYPES.PICKLOCKS.TYPE)
                         
                         if foundPicklocks.count == 0 {
-                            return self.pushMessageToChat(text: "У вас нет отмычек!")
+                            // show message that no picklocks
+                            self.pushMessageToChat(text: "У вас нет отмычек!")
+                            // add tries if player trying to open again and again
+                            self.player?.tryingOpenLock(car: self.player!.currTargetCar!, type: "no-picklocks")
+                            return
                         }
                         
                         let numOfSquares = foundPicklocks.count < 3 ? 3 : foundPicklocks.count
@@ -77,7 +81,6 @@ extension ParkingWorkGame {
                         self.player!.pickUpTargetItem()
                     }
                 })
-                
                 
                 run(MenuSounds.button_click.action)
             }
@@ -145,7 +148,7 @@ extension ParkingWorkGame {
                 // when player presses on item to use it!
                 if touchedNode.name?.split(separator: "-")[1] == "chooseitem" {
                     if let itemChoosed = touchedNode.userData?.value(forKeyPath: "self") as? GameItem {
-                        
+
                         self.throwItem(item: touchedNode)
                         
                         // remove item choosed from choosing action window square

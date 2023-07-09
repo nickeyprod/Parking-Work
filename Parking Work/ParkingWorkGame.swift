@@ -202,6 +202,8 @@ class ParkingWorkGame: SKScene {
     var upperPopUpMessage: SKShapeNode?
     var visibleUpperPopUpPos: CGPoint?
     
+    var gameLoaded = false
+    
     deinit {
         print("deinit MAIN")
     }
