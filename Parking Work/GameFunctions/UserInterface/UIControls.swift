@@ -19,7 +19,7 @@ extension ParkingWorkGame {
         brakeBtn.name = "ui-brakeBtn"
         brakeBtn.fillColor = UIColor.lightGray
         brakeBtn.alpha = 0.75
-        brakeBtn.zPosition = 10
+        brakeBtn.zPosition = 15
         brakeBtn.position = CGPoint(x: (displayWidth! / 2) - 160, y: -(displayHeight! / 2) + 80)
         
         let brakePedal = SKSpriteNode(texture: SKTexture(imageNamed: "brake-pedal"))

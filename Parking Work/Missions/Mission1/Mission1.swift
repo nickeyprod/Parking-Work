@@ -11,20 +11,18 @@ import GameplayKit
 
 class Mission1: ParkingWorkGame {
 
-    // Cars
-    var carsOnLevel: [Car?] = []
-    
     var tutorialMsg = 1
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+
         for touch in touches {
             
             let location = touch.location(in: self)
             
             // buttons pressed check
             let touchedNode = atPoint(location)
-            
+
             if touchedNode.name == "ui-next-label-btn" || touchedNode.name == "ui-next-btn" {
                 if self.firstCarOpened == false {
                     self.nextTutorialMsg()
@@ -45,6 +43,7 @@ class Mission1: ParkingWorkGame {
         
         // set mission number
         self.missionNum = 1
+        self.tutorialEnded = true
         
         // setup all physic bodies of the mission
         setupPhysicBodies()
@@ -52,8 +51,8 @@ class Mission1: ParkingWorkGame {
         // setup all needed initial variables (values)
         setupInitialGameValues()
         
-        // off tutorial
-        self.tutorial(set: false)
+        // off/or on tutorial according to loaded state
+        self.setTutorial()
 
         // setup camera of the mission
         setupCamera()
@@ -114,11 +113,14 @@ class Mission1: ParkingWorkGame {
                 self.pushMessageToChat(text: "Босс хочет, чтобы вы потренировались на этой парковке и угнали для него машину, марка не важна.")
             }
         }
-//        self.player?.getIn(the: self.oldCopper!)
+//        self.player?.getIn(the: self.carsOnLevel[0]!)
         
         
         // fill items on this mission
         fillItemsOfMission()
+        
+        // scene listener
+        self.listener = self.player?.node
         
 
     }

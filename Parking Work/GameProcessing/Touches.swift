@@ -12,7 +12,7 @@ extension ParkingWorkGame {
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
+
         for touch in touches {
             
             let location = touch.location(in: self)
@@ -22,9 +22,9 @@ extension ParkingWorkGame {
             }
             // buttons pressed check
             let touchedNode = atPoint(location)
-            
-            startTouchNode = touchedNode
 
+            startTouchNode = touchedNode
+            
             if (touchedNode.name == "ui-taskBtn" || touchedNode.name == "ui-taskLabel") && !isUILocked {
                 showTaskScreen()
                 run(MenuSounds.button_click.action)
@@ -183,7 +183,7 @@ extension ParkingWorkGame {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-  
+
         if event?.allTouches?.count == 2 || self.isPaused || !canMoveCamera  { return }
         if isRunButtonHolded { return }
         
@@ -257,6 +257,7 @@ extension ParkingWorkGame {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+ 
         
         // need to turn off specific buttons! for driving! not all!
         self.sliderTouchIsHolded = false
@@ -274,6 +275,8 @@ extension ParkingWorkGame {
         self.brakeButton?.run(.scale(to: 1.0, duration: 0))
         
         startTouchPosition = nil
+        
+        if isUILocked { return }
         
         for touch in touches {
             

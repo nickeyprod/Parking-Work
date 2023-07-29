@@ -10,4 +10,6 @@ import Foundation
 enum CAR_TEXTURE_NAMES {
     static var oldCopper = "OldCopper"
     static var chowerler = "Chowerler"
+    static var posblanc = "Posblanc"
+    static var policia = "Policia"
 }

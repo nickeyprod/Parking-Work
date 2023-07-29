@@ -25,8 +25,8 @@ enum MISSIONS {
     enum Mission2 {
         static let number = 2
         enum EntryScreen {
-            static let mainHeader = "В разработке"
-            static let shortDescrtiption = "Миссия 2 всё ещё в разработке..."
+            static let mainHeader = "Владик"
+            static let shortDescrtiption = "Владик живет в районе Зеленой Аллеи, и вам нужно его навестить."
             static let reputationForEnter: Int = 6
         }
         enum Awards {

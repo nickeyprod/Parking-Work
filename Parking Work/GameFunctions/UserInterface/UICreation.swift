@@ -18,7 +18,7 @@ extension ParkingWorkGame {
         taskBtn.name = "ui-taskBtn"
         taskBtn.fillColor = UIColor.gray
         taskBtn.alpha = 0.75
-        taskBtn.zPosition = 11
+        taskBtn.zPosition = 15
         taskBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
         self.taskButton = taskBtn
         
@@ -40,7 +40,7 @@ extension ParkingWorkGame {
         menuBtn.name = "ui-menuBtn"
         menuBtn.fillColor = UIColor.gray
         menuBtn.alpha = 0.75
-        menuBtn.zPosition = 10
+        menuBtn.zPosition = 15
         menuBtn.position = CGPoint(x: displayWidth! / 2 - 40, y: displayHeight! / 2 - 26)
         
         self.menuButton = menuBtn
@@ -64,7 +64,7 @@ extension ParkingWorkGame {
         runBtn.name = "ui-runBtn"
         runBtn.fillColor = UIColor.brown
         runBtn.alpha = 0.75
-        runBtn.zPosition = 10
+        runBtn.zPosition = 15
         runBtn.position = CGPoint(x: (displayWidth! / 2) - 90, y: -(displayHeight! / 2) + 90)
         
         let shoe = SKSpriteNode(texture: SKTexture(imageNamed: "shoe"))
@@ -80,7 +80,7 @@ extension ParkingWorkGame {
         if let inventoryBag = UIImage(named: "shoulder-bag") {
             let inventorySprite = SKSpriteNode(texture: SKTexture(image: inventoryBag))
             self.inventoryButton = inventorySprite
-            inventorySprite.zPosition = 10
+            inventorySprite.zPosition = 15
             inventorySprite.name = "ui-inventory-btn"
             self.cameraNode?.addChild(inventorySprite)
             inventorySprite.size = CGSize(width: 36, height: 36)

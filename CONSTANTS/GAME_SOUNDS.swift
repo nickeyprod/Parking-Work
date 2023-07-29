@@ -8,7 +8,7 @@
 import SpriteKit
 
 enum Sound: String {
-    case door_open, success_bell, car_door_locked, car_signalization, cigarette_falling
+    case door_open, success_bell, car_door_locked, car_signalization, cigarette_falling, door_bell, breaking_glass
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
@@ -69,7 +69,7 @@ enum CitySound: String {
 
 enum EngineSound: String {
     case old_copper_engine_start, old_copper_acceleration, old_copper_driving, old_copper_engine_still
-    
+    case posblanc_driving_by_streets, chowerler_driving_by_streets
     
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: false)
@@ -82,7 +82,7 @@ enum EngineSound: String {
 }
 
 enum CarCollisionSounds: String {
-    case car_collision_01, car_collision_02, car_collision_03, plastic_hit
+    case car_collision_01, car_collision_02, car_collision_03, plastic_hit, brake_bump
 
     var action: SKAction {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
@@ -102,3 +102,18 @@ enum InventorySounds: String {
         return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
     }
 }
+
+enum ExplosionSounds: String {
+    case car_on_fire, explosion
+    
+    var action: SKAction {
+        return SKAction.playSoundFileNamed(rawValue + ".wav", waitForCompletion: true)
+    }
+    
+    var audio: SKAudioNode? {
+        let audio = SKAudioNode(fileNamed: "\(rawValue).wav")
+        audio.isPositional = true
+        return audio
+    }
+}
+

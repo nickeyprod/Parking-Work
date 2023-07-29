@@ -8,5 +8,9 @@
 import Foundation
 
 enum MESSAGES_TYPES {
+    // GENERAL ACTIONS
     case OpenCarAction, PickUpItemAction
+    
+    // Mission 2 Actions
+    case DoorRingAction, fireOldCopperWindow
 }

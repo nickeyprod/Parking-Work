@@ -25,6 +25,7 @@ extension ParkingWorkGame {
                 print("\(error)")
                 self.runUpperPopUpAnimation(with: "Ошибка загрузки данных игры")
             } else {
+                self.loadGameState()
                 self.loadPlayerData()
                 self.loadProcessedMissions()
                 self.loadPlayerInventory()
@@ -54,6 +55,7 @@ extension ParkingWorkGame {
                 print("Error loading Persistent Stores:")
                 print("\(error)")
             } else {
+                self.saveGameState()
                 self.savePlayerData()
                 self.saveProcessedMissions()
                 self.savePlayerInventory()
@@ -99,6 +101,30 @@ extension ParkingWorkGame {
             }
         } catch {
             print("Error saving PlayerData")
+            print(error)
+        }
+    }
+    
+    func saveGameState() {
+        do {
+            try self.storage.gameState.performFetch()
+            if let gameState = self.storage.gameState.fetchedObjects {
+                
+                if gameState.isEmpty {
+                    // create
+                    let entity = NSEntityDescription.entity(forEntityName: "GameState", in: self.storage.persistentContainer.viewContext)!
+                    
+                    let gameState = GameState(entity: entity, insertInto: self.storage.persistentContainer.viewContext)
+                    gameState.tutorialEnded = self.tutorialEnded
+                    self.storage.persistentContainer.viewContext.insert(gameState)
+                } else {
+                    let gameStateEntity = gameState[0]
+                    // Set usual entities
+                    gameStateEntity.tutorialEnded = self.tutorialEnded
+                }
+            }
+        } catch {
+            print("Error saving GameState")
             print(error)
         }
     }
@@ -264,7 +290,7 @@ extension ParkingWorkGame {
         do {
             try self.storage.processedMission.performFetch()
             let loadedData = self.storage.processedMission.fetchedObjects
-            
+
             if loadedData!.isEmpty {
                 print("Fetched ProcessedMissions array is empty")
                 return
@@ -290,6 +316,23 @@ extension ParkingWorkGame {
             }
         } catch {
             print("Error loading ProcessedMissions:")
+            print(error)
+        }
+    }
+    
+    func loadGameState() {
+        do {
+            try self.storage.gameState.performFetch()
+            if let gameState = self.storage.gameState.fetchedObjects {
+                if gameState.count > 0 {
+                    let state = gameState[0]
+                    self.tutorialEnded = state.tutorialEnded
+                } else {
+                    print("GameStateData is empty")
+                }
+            }
+        } catch {
+            print("Error loading GameState: ")
             print(error)
         }
     }
@@ -320,12 +363,27 @@ extension ParkingWorkGame {
                 print("Error loading Persistent Stores:")
                 print("\(error)")
             } else {
+                self.clearGameState()
                 self.clearProcessedMissions()
                 self.clearPlayerData()
                 self.clearPlayerDatabaseInventory {
                     print("clear database ok")
                 }
             }
+        }
+    }
+    
+    func clearGameState() {
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "GameState")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try storage.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: storage.persistentContainer.viewContext)
+        } catch let error as NSError {
+            // TODO: handle the error
+            print("Error clearing GameState: ")
+            print(error)
         }
     }
     

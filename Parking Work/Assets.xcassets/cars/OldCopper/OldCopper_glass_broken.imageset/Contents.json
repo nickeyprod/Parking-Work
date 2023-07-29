@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "OldCopper_glass_broken.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

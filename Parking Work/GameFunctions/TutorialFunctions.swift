@@ -12,7 +12,6 @@ extension ParkingWorkGame {
     
     // Show tutorial about car locks
     func showCarLocksTutorial(tutorialMsg: Int) {
-        print(tutorialMsg)
         self.canMoveCamera = false
 
         let messageLabel = self.tutorialWindow?.childNode(withName: "msg-label") as? SKLabelNode
@@ -40,11 +39,10 @@ extension ParkingWorkGame {
     }
     
     // Set showing tutorial at the start of the game to true/false
-    func tutorial(set to: Bool) {
+    func setTutorial() {
         
         // set this vars to true when game restarted, to not show tutorials and does not block any UI
-        if to == false {
-            self.tutorialEnded = true
+        if self.tutorialEnded == true {
             self.firstCarOpened = true
             self.canMoveCamera = true
             self.restart = true

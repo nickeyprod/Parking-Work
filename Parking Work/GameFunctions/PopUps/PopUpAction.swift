@@ -45,6 +45,10 @@ extension ParkingWorkGame {
             actionMessageLabel?.text = "Попробовать вскрыть?"
         } else if actionMessageType == .PickUpItemAction {
             actionMessageLabel?.text = "Подобрать вещь?"
+        } else if actionMessageType == .DoorRingAction {
+            actionMessageLabel?.text = "Позвонить в дверь?"
+        } else if actionMessageType == .fireOldCopperWindow {
+            actionMessageLabel?.text = "Бросить в окно бычок?"
         }
         
         actionMessageWindow?.alpha = 1
@@ -128,6 +132,24 @@ extension ParkingWorkGame {
     
         let itemNameLabel = self.targetWindow?.childNode(withName: "target-name") as? SKLabelNode
         itemNameLabel?.text = "\(gameItem.name)"
+        itemNameLabel?.fontSize = 16
+        
+        targetWindow?.removeAllChildren()
+        targetWindow?.addChild(itemNameLabel!)
+        
+        // change size of the target square to fit entrail's height
+        let newHeight = self.getHeightOfAllNodesInTargetSquare() + 10
+        self.adjustSizeOfTargetWindow(to: newHeight, width: (itemNameLabel?.frame.width)! + 20)
+        
+        targetWindow?.alpha = 1
+    }
+    
+    // Shows player's target as a pop up at the top of the screen
+    func showTargetWindow(with car: Car) {
+        if targetWindow?.alpha == 1 { return }
+    
+        let itemNameLabel = self.targetWindow?.childNode(withName: "target-name") as? SKLabelNode
+        itemNameLabel?.text = "\(car.name)"
         itemNameLabel?.fontSize = 16
         
         targetWindow?.removeAllChildren()

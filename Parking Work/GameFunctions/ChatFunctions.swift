@@ -15,7 +15,7 @@ extension ParkingWorkGame {
         
         // get messages chat window
         self.windowChat = SKCropNode()
-        self.windowChat?.zPosition = 5
+        self.windowChat?.zPosition = 12
   
         let chatPos = CGPoint(x: -displayWidth! / 2 + 110, y: -displayHeight! / 2 + 95)
         self.windowChat?.position = chatPos
@@ -39,6 +39,7 @@ extension ParkingWorkGame {
         let chatBackground = SKSpriteNode(imageNamed: "circle")
         chatBackground.name = "chat-background"
         chatBackground.alpha = 0.4
+        chatBackground.zPosition = -1
         self.windowChat?.addChild(chatBackground)
         
         // create node in which we will be adding messages, for scrolling it

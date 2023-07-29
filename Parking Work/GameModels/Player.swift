@@ -57,6 +57,7 @@ class Player {
     
     var isSittingInCar: Bool = false
     var drivingCar: Car?
+    var onCrosswalk: Bool = false
     
 
 }

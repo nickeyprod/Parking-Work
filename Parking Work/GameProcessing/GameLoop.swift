@@ -120,6 +120,8 @@ extension ParkingWorkGame {
         }
         else if player?.currTargetItem != nil && actionMessageType == .PickUpItemAction {
             checkDistanceBetweenPlayerAndGameItem()
+        } else if player?.currTargetCar != nil && player?.currTargetLock == nil {
+            checkDistanceBetweenPlayerAndTargetLock()
         }
         
         if (actionMessageType == .OpenCarAction && actionMessageWindow?.alpha == 1) && canGoFromDoor == false {
@@ -142,7 +144,7 @@ extension ParkingWorkGame {
             callCops()
         }
         
-        // rising anxiety when player around the car nad targer is set
+        // rising anxiety when player around the car and targer is set
         if (player!.currTargetLock != nil &&
             player?.currTargetCar?.node?.name == playerInCircleOfCar?.name) {
 
@@ -191,7 +193,6 @@ extension ParkingWorkGame {
                 self.player?.drivingCar?.turn(to: Car.TurningDirections.right)
             }
         }
-
         
     }
     
@@ -217,11 +218,35 @@ extension ParkingWorkGame {
         
         gameOverScene?.player = player
         gameOverScene?.gameLoaded = gameLoaded
+        gameOverScene?.tutorialEnded = tutorialEnded
+        gameOverScene?.missionNum = missionNum
 
         // Set the scale mode to scale to fit the window
         gameOverScene?.scaleMode = .aspectFill
         gameOverScene?.size = displaySize.size
         self.view?.presentScene(gameOverScene!, transition: transition)
     }
+    
+    func carBumped() {
+        
+        let gameOverScene = SKScene(fileNamed: "GameOverScene") as? GameOver
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        
+        // set all player variables to initial values
+        clearPlayer()
+        
+        gameOverScene?.player = player
+        gameOverScene?.gameLoaded = gameLoaded
+        gameOverScene?.type = "carBump"
+        gameOverScene?.missionNum = missionNum
+
+        // Set the scale mode to scale to fit the window
+        gameOverScene?.scaleMode = .aspectFill
+        gameOverScene?.size = displaySize.size
+        self.view?.presentScene(gameOverScene!, transition: transition)
+    }
+    
+    
        
 }

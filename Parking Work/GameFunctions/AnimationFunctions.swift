@@ -45,6 +45,7 @@ extension ParkingWorkGame {
     func showBannerLabel(text: String) {
         let missionNumberNode = self.cameraNode?.childNode(withName: "MissionNumberNode")
         let missionLabelNode = missionNumberNode?.childNode(withName: "MissionLabelNode") as? SKLabelNode
+        
         missionLabelNode?.run(SKAction.fadeIn(withDuration: 0.8))
         
         missionLabelNode?.text = text
@@ -135,10 +136,24 @@ extension ParkingWorkGame {
         
     }
     
+    func animateButtonClick(button: SKShapeNode, done: (() -> Void)? ) {
+        let scaleAction = SKAction.sequence([.scale(to: 0.80, duration: 0.1), .scale(to: 1.0, duration: 0.1)])
+        button.run(scaleAction) {
+            done?()
+        }
+        
+    }
+    
     func animateStartButton(button: SKSpriteNode) {
         button.run(SKAction.repeatForever(.sequence([SKAction.fadeAlpha(to: 0.6, duration: 2.0), SKAction.fadeAlpha(to: 1.0, duration: 2.0)])))
         button.run(SKAction.repeatForever(.sequence([SKAction.scale(to: 1.05, duration: 1.0), SKAction.scale(to: 1.0, duration: 0.6)])))
     }
+    
+    func animateTutorialButton(button: SKShapeNode) {
+        button.run(SKAction.repeatForever(.sequence([SKAction.fadeAlpha(to: 0.6, duration: 2.0), SKAction.fadeAlpha(to: 1.0, duration: 2.0)])))
+        button.run(SKAction.repeatForever(.sequence([SKAction.scale(to: 1.05, duration: 1.0), SKAction.scale(to: 1.0, duration: 0.6)])))
+    }
+    
     
     func runUpperPopUpAnimation(with text: String) {
         

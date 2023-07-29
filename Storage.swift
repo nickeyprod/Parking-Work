@@ -42,5 +42,13 @@ class Storage {
         let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultsController
     }()
+    
+    lazy var gameState: NSFetchedResultsController<GameState> = {
+        let fetchRequest = GameState.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "tutorialEnded", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchResultsController
+    }()
 
 }

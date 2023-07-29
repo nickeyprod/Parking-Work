@@ -19,7 +19,7 @@ extension ParkingWorkGame {
         
         // hide it initially
         window.alpha = 0
-        window.zPosition = 11
+        window.zPosition = 15
         
         // default to open car
         window.fillColor = UIColor(named: COLORS.OpenCarWindowColor.rawValue)!
@@ -96,7 +96,7 @@ extension ParkingWorkGame {
             if i < (items.count) {
                 let itemPic = SKSpriteNode(imageNamed: items[i].assetName)
                 itemPic.name = "inventory-chooseitem-" + items[i].type
-                itemPic.zPosition = 12
+                itemPic.zPosition = 15
                 itemPic.size = CGSize(width: squareWidth, height: squareHeight)
                 itemPic.position = CGPoint(x: 0, y: 0)
                 itemSquare.addChild(itemPic)
@@ -177,7 +177,7 @@ extension ParkingWorkGame {
         targetWindow?.position = CGPoint(x: 0, y: displayHeight! / 2 - 2)
         
         // set z position
-        targetWindow?.zPosition = 11
+        targetWindow?.zPosition = 15
         
         self.cameraNode?.addChild(targetWindow!)
         

@@ -89,6 +89,7 @@ class ParkingWorkGame: SKScene {
     var playerInThirdCircle: Bool = false
     var canGoFromDoor: Bool = false
     var canRotate: Bool = true
+    var carBumpedVar: Bool = false
     
     // this bools are all false when game is first played
     var tutorialEnded: Bool = false
@@ -129,7 +130,7 @@ class ParkingWorkGame: SKScene {
     var targetWindowComplexityNum: SKLabelNode?
     
     // Tutorial Window
-    var tutorialWindow: SKShapeNode?
+    var tutorialWindow: SKSpriteNode?
     
     var windowChat: SKCropNode?
     var scrollingChatNode: SKSpriteNode?
@@ -184,6 +185,8 @@ class ParkingWorkGame: SKScene {
     let completionSquareCategory: UInt32 = 1 << 10
     let lightCategory: UInt32 = 1 << 11
     let gameItemCategory: UInt32 = 1 << 12
+    let crosswalkCategory: UInt32 = 1 << 13
+    let actionCategory: UInt32 = 1 << 14
     
     var messagesInChat: [SKLabelNode?] = []
     
@@ -203,6 +206,9 @@ class ParkingWorkGame: SKScene {
     var visibleUpperPopUpPos: CGPoint?
     
     var gameLoaded = false
+    
+    // Cars
+    var carsOnLevel: [Car?] = []
     
     deinit {
         print("deinit MAIN")
@@ -275,7 +281,7 @@ class ParkingWorkGame: SKScene {
         displayHeight = displaySize.height
         
         // get tile map
-        tileNode = childNode(withName: "tilemapMission1") as? SKTileMapNode
+        tileNode = childNode(withName: "tilemapMission\(missionNum)") as? SKTileMapNode
         
         // set tile map dimensions
         tileMapWidth = tileNode?.frame.width
@@ -304,8 +310,6 @@ class ParkingWorkGame: SKScene {
             RunningState(player: player!.node!),
             IdleState(player: player!.node!)
         ])
-        
-        self.listener = cameraNode
         
         // initialize timer for substracting anxiety
         self.substractAnxietyTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { _ in

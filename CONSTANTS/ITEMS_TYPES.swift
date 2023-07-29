@@ -49,4 +49,18 @@ enum ITEMS_TYPES: Equatable {
             static let description = "Шанс провала с ней всего 10% - вам не о чем беспокоиться."
         }
     }
+    
+    enum AUXILLARIES {
+        static let TYPE = "auxillary"
+        
+        // smoldering cigarette
+        enum smolderingCigarette {
+            static let id = 4
+            static let name = "Тлеющая сигарета"
+            static let rubPrice = 0
+            static let assetName = "sigareta"
+            static let properties: [Property] = []
+            static let description = "Тлеющий бычок, можно докурить или ... ?"
+        }
+    }
 }

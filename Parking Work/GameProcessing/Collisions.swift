@@ -17,13 +17,17 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         let contactMask = getContactMask(contact.bodyA, contact.bodyB)
 
         switch contactMask {
+        case (playerCategory | crosswalkCategory):
+            player?.onCrosswalk = true
         case (playerCategory | lockCategory):
             
             // debounce rotation when player comes to lock, so player not rotating when stopped
+            
             canRotate = false
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                 self.canRotate = true
             }
+            
             playerAndLockContact(contact.bodyA, contact.bodyB)
             
             // show tutorial on car locks if first opened
@@ -95,6 +99,8 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
 //        print("didEndContact entered for \(String(describing: contact.bodyA.node!.name)) and \(String(describing: contact.bodyB.node!.name))")
         
         switch contactMask {
+        case (playerCategory | crosswalkCategory):
+            player?.onCrosswalk = false
         case (playerCategory | firstCircleCategory):
             playerInFirstCircle = false
             reduceAnxiety(to: 1)
@@ -287,6 +293,7 @@ extension ParkingWorkGame: SKPhysicsContactDelegate {
         let missionCompletionScene = SKScene(fileNamed: "MissionCompletionScene") as? MissionCompletion
         missionCompletionScene?.moneyForMission = 10
         missionCompletionScene?.reputationForMisson = 2
+        missionCompletionScene?.tutorialEnded = tutorialEnded
         missionCompletionScene?.player = player
         missionCompletionScene?.gameLoaded = gameLoaded
         

@@ -179,8 +179,6 @@ class MissionCompletion: ParkingWorkGame {
             player?.money += moneyForMission!
             player?.reputation += reputationForMisson!
             
-            print("adding money: ", moneyForMission)
-            print("adding repu: ", reputationForMisson)
     //        player?.unlockSkill += unlockSkillForMission
         }
 

@@ -89,19 +89,6 @@ extension ParkingWorkGame {
         } else {
             playerInThirdCircle = false
         }
-            
-//            case (playerCategory | firstCircleCategory):
-//                playerInFirstCircle = true
-//                playerInCircleOfCar = contact.bodyB.node?.parent
-//                raiseAnxiety(to: 1)
-//            case (playerCategory | secondCircleCategory):
-//                playerInSecondCircle = true
-//                playerInCircleOfCar = contact.bodyB.node?.parent
-//                raiseAnxiety(to: 0.5)
-//            case (playerCategory | thirdCircleCategory):
-//                playerInThirdCircle = true
-//                playerInCircleOfCar = contact.bodyB.node?.parent
-//                raiseAnxiety(to: 0.3)
     
     }
     

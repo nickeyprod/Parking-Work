@@ -114,6 +114,8 @@ class MissionList: ParkingWorkGame {
         // background sound
         backgroundSoundCars = MissionListSounds.mission_list_car_passing_by.audio
         addChild(backgroundSoundCars!)
+        
+ 
 
     }
     
@@ -182,7 +184,7 @@ class MissionList: ParkingWorkGame {
             missionLockedSprite = missionSpriteCell?.childNode(withName: "MissionLockedSprite") as? SKSpriteNode
             missionLockedSprite?.position = CGPoint(x: (missionNumLabel?.frame.minX)! / 2, y: (missionSpriteCell?.frame.height)! / 2)
             missionLockedSprite?.alpha = 1
-            
+  
             for processedMission in player!.processedMissions {
                 if processedMission?.number == mission.number {
                     if processedMission!.opened && !processedMission!.completed {
@@ -230,7 +232,7 @@ class MissionList: ParkingWorkGame {
         
         missionDescLabel?.horizontalAlignmentMode = .center
         missionDescLabel?.verticalAlignmentMode = .center
-        missionDescLabel?.preferredMaxLayoutWidth = displayWidth! * 2
+        missionDescLabel?.preferredMaxLayoutWidth = displayWidth! * 1.5
         missionDescLabel?.position = CGPoint(x: 0, y: 0)
 
         // start playing current selected mission button
@@ -384,6 +386,7 @@ class MissionList: ParkingWorkGame {
                 let animationNode = nodeName == "StartButton" ? touchedNode : touchedNode.parent
                 animationNode?.run(.scale(to: 1.1, duration: 0.1)) {
                     touchedNode.run(.scale(to: 1.0, duration: 0.1))
+                   
                     self.startMission(num: self.currSelectedMission!)
                 }
             } else if nodeName == "ShopButton" {
@@ -467,8 +470,8 @@ class MissionList: ParkingWorkGame {
             if mission?.number == num && (mission!.completed || mission!.opened) {
                 self.removeAllActions()
                 backgroundSoundCars?.run(.stop())
-                let missionScene = SKScene(fileNamed: "Mission\(num)Scene")
                 
+                let missionScene = SKScene(fileNamed: "Mission\(num)IntroScene")
                 let transition = SKTransition.fade(with: .black, duration: 1.0)
                 let displaySize: CGRect = UIScreen.main.bounds
                 // Set the scale mode to scale to fit the window
@@ -509,10 +512,6 @@ class MissionList: ParkingWorkGame {
         shopScene?.scaleMode = .aspectFill
         shopScene?.size = displaySize.size
         self.view?.presentScene(shopScene!, transition: transition)
-    }
-    
-    deinit {
-        print("deinit mission list")
     }
     
 }

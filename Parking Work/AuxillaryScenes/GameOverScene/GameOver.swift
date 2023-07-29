@@ -16,11 +16,20 @@ class GameOver: ParkingWorkGame {
         "Тебя застали за угоном, игра окончена.",
         "Теперь тебя отправят в участок, игра окончена."
     ]
+    
+    let carBumpMessages: [String] = [
+        "Так смело ходить по проезжей части?",
+        "Так можно и на тот свет отправиться!",
+        "Скорая уже выехала...",
+        "Всегда рассчитывай только на себя и свою внимательность!",
+        "Всегда лучше смотреть по сторонам..."
+    ]
     var backgroundImg: SKSpriteNode?
     var catchedHeader: SKLabelNode?
     var message: SKLabelNode?
     var restartBtn: SKSpriteNode?
     var restartBtnLabel: SKLabelNode?
+    var type: String = "catched"
     
     var animateBackgroundTimer: Timer?
     
@@ -36,7 +45,18 @@ class GameOver: ParkingWorkGame {
         // save game progress
         saveGameProgress()
         
-        backgroundImg = self.childNode(withName: "background") as? SKSpriteNode
+        if type == "carBump" {
+            let bumpedImg = self.childNode(withName: "background2") as? SKSpriteNode
+            bumpedImg?.alpha = 1
+            let catchedImg = self.childNode(withName: "background") as? SKSpriteNode
+            catchedImg?.alpha = 0
+        } else {
+            let catchedImg = self.childNode(withName: "background") as? SKSpriteNode
+            catchedImg?.alpha = 1
+            let bumpedImg = self.childNode(withName: "background2") as? SKSpriteNode
+            bumpedImg?.alpha = 0
+            
+        }
         
         backgroundImg?.size.width = displayWidth! + displayWidth! / 3
         backgroundImg?.size.height = displayHeight! + displayHeight! / 3
@@ -57,12 +77,20 @@ class GameOver: ParkingWorkGame {
         self.catchedHeader?.fontSize = 44
         self.catchedHeader?.fontName = "Baskerville-bold"
         
+        if type == "carBump" {
+            self.catchedHeader?.text = "Cбит"
+        }
+        
         self.restartBtn = self.childNode(withName: "restart-btn-rect") as? SKSpriteNode
         self.restartBtnLabel = self.childNode(withName: "restart-btn-label") as? SKLabelNode
         
         self.message = self.childNode(withName: "message") as? SKLabelNode
         
         message?.text = messages.randomElement() ?? "Копы взяли тебя, игра окончена."
+        
+        if type == "carBump" {
+            message?.text = carBumpMessages.randomElement() ?? "Роботы за рулем только в будущем..."
+        }
        
     }
     
@@ -122,20 +150,19 @@ class GameOver: ParkingWorkGame {
         animateBackgroundTimer?.invalidate()
         
         currMissionScene.player = player
+        currMissionScene.missionNum = missionNum
         currMissionScene.gameLoaded = gameLoaded
+        currMissionScene.tutorialEnded = tutorialEnded
         
         let displaySize: CGRect = UIScreen.main.bounds
         // Set the scale mode to scale to fit the window
         currMissionScene.scaleMode = .aspectFill
         currMissionScene.size = displaySize.size
         
-        // off tutorial when restart
-        self.tutorial(set: false)
+        // on/off tutorial when restart according to saved state
+        self.setTutorial()
         
         self.view?.presentScene(currMissionScene, transition: transition)
     }
    
-    deinit {
-        print("GameOver deinit")
-    }
 }

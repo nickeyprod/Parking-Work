@@ -387,11 +387,6 @@ extension Player {
         
         let futurePlayerPos = CGPoint(x: (self.drivingCar?.node?.frame.maxX)! + 50, y: (self.drivingCar?.node?.frame.midY)! + 50)
         
-        // nodes at position
-//        let nodesAtPos = self.scene.nodes(at: futurePlayerPos)
-//        print("There are \(nodesAtPos.count) nodes at that point")
-//        print(nodesAtPos)
-        
         // position player around the car
         self.node?.position = futurePlayerPos
         
