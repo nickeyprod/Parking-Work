@@ -57,7 +57,6 @@ extension ParkingWorkGame {
         // policia engine smoke
         let refNode = policiaNode.childNode(withName: "smoke-emitter")
         policia.smokeEmitter = refNode?.children[0] as? SKEmitterNode
-        print(refNode)
 
         if startEngine {
             policia.startEngine()

@@ -134,7 +134,7 @@ class M2Intro: ParkingWorkGame {
             
         }
         
-        let t10 = Timer.scheduledTimer(withTimeInterval: 65, repeats: false) { _ in
+        _ = Timer.scheduledTimer(withTimeInterval: 65, repeats: false) { _ in
             self.showMission2Scene()
         }
         

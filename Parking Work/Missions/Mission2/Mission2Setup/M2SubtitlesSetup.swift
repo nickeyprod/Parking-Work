@@ -9,6 +9,46 @@ import Foundation
 import SpriteKit
 
 extension Mission2 {
+    
+    func runVladikScreamingSubtitles1() {
+        subtitlesLabel?.text = "Владик: - Что за ... !??"
+        self.subtitlesSquare?.alpha = 1
+        
+        
+        Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { _ in
+            self.subtitlesSquare?.alpha = 0
+            self.subtitlesLabel?.text = "Владик: - Эй!! Какого хрена!?? Это ты cделал, сукин сын!?? Ты заплатишь мне за эту тачку!"
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { _ in
+                self.runGoToVadikInstruction()
+            }
+        }
+        
+    }
+    
+    func runVladikScreamingSubtitles2() {
+        self.subtitlesSquare?.alpha = 1
+ 
+        Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
+            self.subtitlesLabel?.text = "Федор: Слушай, я же сказал что мне нужно передать тебе информацию, а ты никак не выходил, так вот слушай."
+        }
+        Timer.scheduledTimer(withTimeInterval: 24, repeats: false) { _ in
+            self.subtitlesLabel?.text = "Федор: То, что ты должен Алеку Чангису отдашь в течение недели, в другом случае - в этой тачке гореть уже будет твоя девушка или ты сам, усек!?."
+        }
+        Timer.scheduledTimer(withTimeInterval: 34, repeats: false) { _ in
+            self.subtitlesLabel?.text = "Владик: Ааай, послушай теперь как же я отдам, если ты мою тачку спалил, на которой я таксовал и зарабатывал себе на жизнь?"
+        }
+        Timer.scheduledTimer(withTimeInterval: 46, repeats: false) { _ in
+            self.subtitlesLabel?.text = "Федор: Раньше надо было думать, Владик, когда долг у Алека брал. Неужели не знал, что долги нужно возвращать!? Мне пора Владик! Ждем с ответом в течение недели. Пока!"
+        }
+        Timer.scheduledTimer(withTimeInterval: 50, repeats: false) { _ in
+            self.vladikGoingBackHome()
+        }
+        Timer.scheduledTimer(withTimeInterval: 56, repeats: false) { _ in
+            self.subtitlesSquare?.alpha = 0
+
+        }
+    }
+    
     func runVladikDoorRingSubtitles() {
         
         // remove action sprite 
@@ -25,27 +65,29 @@ extension Mission2 {
         
         isUILocked = true
         
-        let subtitlesSquare = SKSpriteNode(color: .black, size: CGSize(width: displayWidth!, height: 60))
-        subtitlesSquare.alpha = 0.85
-        subtitlesSquare.zPosition = 16
-        subtitlesSquare.anchorPoint = CGPoint(x: 0.5, y: 0)
-        subtitlesSquare.position = CGPoint(x: 0, y: -(displayHeight! / 2))
+        let subtitSquare = SKSpriteNode(color: .black, size: CGSize(width: displayWidth!, height: 60))
+        subtitlesSquare = subtitSquare
+        
+        subtitlesSquare?.alpha = 0.85
+        subtitlesSquare?.zPosition = 16
+        subtitlesSquare?.anchorPoint = CGPoint(x: 0.5, y: 0)
+        subtitlesSquare?.position = CGPoint(x: 0, y: -(displayHeight! / 2))
         
         let label = SKLabelNode(text: "Владик: - Да, кто здесь?")
         label.fontName = FONTS.AmericanTypewriter
         label.fontSize = 16
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .center
-        label.position = CGPoint(x: 0, y: subtitlesSquare.frame.height / 2)
-        label.preferredMaxLayoutWidth = subtitlesSquare.frame.width - 100
+        label.position = CGPoint(x: 0, y: (subtitlesSquare?.frame.height)! / 2)
+        label.preferredMaxLayoutWidth = (subtitlesSquare?.frame.width)! - 100
         label.numberOfLines = 0
-        subtitlesSquare.addChild(label)
+        subtitlesSquare?.addChild(label)
         subtitlesLabel = label
         
 
         
         Timer.scheduledTimer(withTimeInterval: 6, repeats: false) { _ in
-            self.cameraNode?.addChild(subtitlesSquare)
+            self.cameraNode?.addChild(self.subtitlesSquare!)
         }
         
         Timer.scheduledTimer(withTimeInterval: 12.5, repeats: false) { _ in
@@ -68,7 +110,7 @@ extension Mission2 {
         Timer.scheduledTimer(withTimeInterval: 49, repeats: false) { _ in
             self.isUILocked = false
             self.canRotate = true
-            subtitlesSquare.removeFromParent()
+            self.subtitlesSquare?.alpha = 0
         }
         
         Timer.scheduledTimer(withTimeInterval: 52, repeats: false) { _ in
@@ -77,9 +119,18 @@ extension Mission2 {
     
     }
     
+    func runGoToVadikInstruction() {
+        
+        // setup square when collides start speaking
+        setupVladikSpeakingSquare()
+        
+        vladikCrashInstructionsMessageLabel?.text = "А вот и Владик! Подойдите к нему и поговорите с ним."
+        vladikCrashInstructionsMessage?.alpha = 1
+        
+    }
+    
     func runVladikCarCrashInstructions() {
-        
-        
+    
         // change (update) task message in task screen here!!
         
         let messageSquare = SKSpriteNode(color: .black, size: CGSize(width: displayWidth! / 2, height: displayHeight! / 2))

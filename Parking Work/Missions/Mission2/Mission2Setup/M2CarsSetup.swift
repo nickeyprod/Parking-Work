@@ -172,14 +172,9 @@ extension Mission2 {
                 self.runMainFireFromOldCopper()
                 
                 node.run(blownAction)
+                
+                self.vladikGoingOutFromHome()
             }
-            
-        
-            
-            
         }
-        
-
     }
-
 }

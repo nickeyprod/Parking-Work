@@ -46,8 +46,8 @@
             filePath = "Parking Work/GameFunctions/PopUps/PopUpCreation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "createTargetWindow()"
             landmarkType = "7">
          </BreakpointContent>
@@ -98,6 +98,69 @@
             endingLineNumber = "353"
             landmarkName = "nextTutorialMsg()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D300CDD6-9BC5-4166-87FB-88E4D75FAA23"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parking Work/GameProcessing/Touches/InventoryTouches.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "processInventoryTouches(touchedNode:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D300CDD6-9BC5-4166-87FB-88E4D75FAA23 - 2936b25ae107c657"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Parking_Work.ParkingWorkGame.processInventoryTouches(touchedNode: __C.SKNode) -&gt; ()"
+                  moduleName = "Parking Work"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikolajnogin/code/Parking%20Work/Parking%20Work/GameProcessing/Touches/InventoryTouches.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "D300CDD6-9BC5-4166-87FB-88E4D75FAA23 - 54a4764b42730f85"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Parking_Work.ParkingWorkGame.processInventoryTouches(touchedNode: __C.SKNode) -&gt; ()"
+                  moduleName = "Parking Work"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikolajnogin/code/Parking%20Work/Parking%20Work/GameProcessing/Touches/InventoryTouches.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "760">
+               </Location>
+               <Location
+                  uuid = "D300CDD6-9BC5-4166-87FB-88E4D75FAA23 - 2936b25ae107c6b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Parking_Work.ParkingWorkGame.processInventoryTouches(touchedNode: __C.SKNode) -&gt; ()"
+                  moduleName = "Parking Work"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikolajnogin/code/Parking%20Work/Parking%20Work/GameProcessing/Touches/InventoryTouches.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

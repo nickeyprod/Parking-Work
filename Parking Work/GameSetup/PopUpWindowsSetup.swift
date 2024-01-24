@@ -22,6 +22,7 @@ extension ParkingWorkGame {
     }
     
     
+    
     // Open car success pop-up window
     func setupOpenCarSuccessWindowMessage() {
         // get open car succeess window itself
@@ -46,5 +47,15 @@ extension ParkingWorkGame {
         // complexity level number
         targetWindowComplexityNum = openCarWindowComplexityLabel?.childNode(withName: "complexityNumLevel") as? SKLabelNode
     
+    }
+    
+    // Initialize empty Fast Access Panel and hide it initially
+    func setupFastAccessPanel() {
+        // Initialize Panel
+        self.fastAccessPanel = FastAccessPanel()
+        
+        // Create and hide Shape Node of the panel
+        self.fastAccessPanel?.scene = self
+        self.fastAccessPanel?.createPanel()
     }
 }

@@ -430,8 +430,9 @@ extension Player {
         if currTargetItem == nil { return }
         
         // remove item from mission
-        let index = scene.itemsOnMission.firstIndex(of: currTargetItem!)
-        scene.itemsOnMission.remove(at: index!)
+        if let index = scene.itemsOnMission.firstIndex(of: currTargetItem!) {
+            scene.itemsOnMission.remove(at: index)
+        }
         currTargetItem?.node?.removeFromParent()
         
         // add to inventory

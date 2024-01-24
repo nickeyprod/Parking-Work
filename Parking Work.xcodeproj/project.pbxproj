@@ -20,8 +20,14 @@
 		D1198F062979B76E00701A24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1198F042979B76E00701A24 /* LaunchScreen.storyboard */; };
 		D1198F0D2979B7A900701A24 /* ParkingWorkTileSets.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */; };
 		D11C745629ED703000C0583D /* PigeonsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C745529ED703000C0583D /* PigeonsSetup.swift */; };
+		D11CB5F62B4C411B00E10581 /* ButtonPresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11CB5F52B4C411B00E10581 /* ButtonPresses.swift */; };
+		D11CB5F82B4C47DF00E10581 /* GameChatPresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11CB5F72B4C47DF00E10581 /* GameChatPresses.swift */; };
+		D11CB5FA2B4C491700E10581 /* ActionButtonsPresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11CB5F92B4C491700E10581 /* ActionButtonsPresses.swift */; };
+		D11CB5FC2B4C4AA900E10581 /* CarDriveButtonPresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11CB5FB2B4C4AA900E10581 /* CarDriveButtonPresses.swift */; };
 		D11FB7062A3A37F20047D7FC /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FB7052A3A37F20047D7FC /* ShopItem.swift */; };
 		D11FB7082A3B77E40047D7FC /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FB7072A3B77E40047D7FC /* Price.swift */; };
+		D12892252B602ECC00AC7D26 /* FastAccessPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12892242B602ECC00AC7D26 /* FastAccessPanel.swift */; };
+		D12892272B6044D100AC7D26 /* FastAccessPanelTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12892262B6044D100AC7D26 /* FastAccessPanelTouches.swift */; };
 		D12922332A740C0A00BA6384 /* mainSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = D12922322A740C0A00BA6384 /* mainSmoke.sks */; };
 		D12922352A740C9A00BA6384 /* fireFromWindow.sks in Resources */ = {isa = PBXBuildFile; fileRef = D12922342A740C9A00BA6384 /* fireFromWindow.sks */; };
 		D12922372A74152E00BA6384 /* M2SetupEmitters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12922362A74152E00BA6384 /* M2SetupEmitters.swift */; };
@@ -29,12 +35,12 @@
 		D139204C2A7409C0003A6813 /* cigarette_in_game.sks in Resources */ = {isa = PBXBuildFile; fileRef = D139204A2A7409C0003A6813 /* cigarette_in_game.sks */; };
 		D139204F2A740A43003A6813 /* SmokeFromCarWindow.sks in Resources */ = {isa = PBXBuildFile; fileRef = D139204E2A740A43003A6813 /* SmokeFromCarWindow.sks */; };
 		D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13F2E15298972EB008976EA /* CAR_LIST.swift */; };
+		D14465682B4DDEB700BBEA85 /* InventoryTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14465672B4DDEB700BBEA85 /* InventoryTouches.swift */; };
 		D144764D2A29D2BE0044C244 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144764C2A29D2BE0044C244 /* Shop.swift */; };
 		D144764F2A29D2F70044C244 /* ShopScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D144764E2A29D2F70044C244 /* ShopScene.sks */; };
 		D14476512A29E9D90044C244 /* CarLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14476502A29E9D90044C244 /* CarLock.swift */; };
 		D14476552A29EE930044C244 /* plastic_hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = D14476542A29EE930044C244 /* plastic_hit.wav */; };
 		D14476582A2B6C470044C244 /* ItemOnGround.sks in Resources */ = {isa = PBXBuildFile; fileRef = D14476562A2B6C470044C244 /* ItemOnGround.sks */; };
-		D14476592A2B6C470044C244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D14476572A2B6C470044C244 /* Assets.xcassets */; };
 		D144765B2A2B83D00044C244 /* MESSSAGE_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144765A2A2B83D00044C244 /* MESSSAGE_TYPES.swift */; };
 		D149E68C2A30741E00342564 /* ITEMS_TYPES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149E68B2A30741E00342564 /* ITEMS_TYPES.swift */; };
 		D15008692A274BEC00F24418 /* CarsDrivingBy.sks in Resources */ = {isa = PBXBuildFile; fileRef = D15008682A274BEC00F24418 /* CarsDrivingBy.sks */; };
@@ -68,7 +74,7 @@
 		D16EA7622A023DB8001699E5 /* GameScreenCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA7612A023DB8001699E5 /* GameScreenCreation.swift */; };
 		D16EA7642A02407D001699E5 /* UIControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA7632A02407D001699E5 /* UIControls.swift */; };
 		D16EA7682A02413C001699E5 /* TutorialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA7672A02413C001699E5 /* TutorialFunctions.swift */; };
-		D16EA76A2A024418001699E5 /* GameScreenContols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA7692A024418001699E5 /* GameScreenContols.swift */; };
+		D16EA76A2A024418001699E5 /* GameScreenControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA7692A024418001699E5 /* GameScreenControls.swift */; };
 		D16EA76D2A0245AF001699E5 /* CameraFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA76C2A0245AF001699E5 /* CameraFunctions.swift */; };
 		D16EA76F2A0245E2001699E5 /* AnimationFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EA76E2A0245E2001699E5 /* AnimationFunctions.swift */; };
 		D16FD69B29A270A70097BC3E /* Mission1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16FD69929A270A70097BC3E /* Mission1.swift */; };
@@ -76,7 +82,7 @@
 		D16FD69E29A289840097BC3E /* CameraSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16FD69D29A289840097BC3E /* CameraSetup.swift */; };
 		D18653C2299A30B900DEE90D /* Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C1299A30B900DEE90D /* Touches.swift */; };
 		D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C4299A31D400DEE90D /* GameLoop.swift */; };
-		D18653C7299A326900DEE90D /* Collisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C6299A326900DEE90D /* Collisions.swift */; };
+		D18653C7299A326900DEE90D /* CollisionsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653C6299A326900DEE90D /* CollisionsDelegate.swift */; };
 		D18653CB299A3A3600DEE90D /* GameFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653CA299A3A3600DEE90D /* GameFunctions.swift */; };
 		D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653CD299A3AE200DEE90D /* PlayerFunctions.swift */; };
 		D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18653D1299A3C6F00DEE90D /* PlayerSetup.swift */; };
@@ -108,7 +114,6 @@
 		D1B259D62A1E1A4A001C9A05 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B259D52A1E1A4A001C9A05 /* SplashScreen.swift */; };
 		D1B259DC2A1E7703001C9A05 /* pinplay_logo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D1B259DB2A1E7703001C9A05 /* pinplay_logo.mp4 */; };
 		D1B259DF2A1EAA51001C9A05 /* CigaretteSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1B259DD2A1EAA51001C9A05 /* CigaretteSmoke.sks */; };
-		D1B259E02A1EAA51001C9A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1B259DE2A1EAA51001C9A05 /* Assets.xcassets */; };
 		D1B259E22A1EB380001C9A05 /* cigarette_falling.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1B259E12A1EB380001C9A05 /* cigarette_falling.wav */; };
 		D1B6B5992A6C261F0036AC38 /* M2CrosswalkSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B6B5982A6C261F0036AC38 /* M2CrosswalkSetup.swift */; };
 		D1B6B59D2A715C880036AC38 /* M2VladikSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B6B59C2A715C880036AC38 /* M2VladikSetup.swift */; };
@@ -135,6 +140,9 @@
 		D1CAD2FB2A570C4E00ED139B /* DetailsScreenScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1CAD2FA2A570C4E00ED139B /* DetailsScreenScene.sks */; };
 		D1CAD2FD2A570C6500ED139B /* DetailsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAD2FC2A570C6500ED139B /* DetailsScene.swift */; };
 		D1CE9B482A4EDFD500A3A3CA /* MissionCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A626582A1F556F0033D9ED /* MissionCompletion.swift */; };
+		D1CEDEE32B3EB7870083F888 /* MissionCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CEDEE22B3EB7870083F888 /* MissionCollisions.swift */; };
+		D1CEDEE52B3EB7F00083F888 /* GeneralCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CEDEE42B3EB7F00083F888 /* GeneralCollisions.swift */; };
+		D1CEDEEB2B3F2AA80083F888 /* GameButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CEDEEA2B3F2AA80083F888 /* GameButtons.swift */; };
 		D1D50C752A33175B00306898 /* LOCK_COMPLEXITIES.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D50C742A33175B00306898 /* LOCK_COMPLEXITIES.swift */; };
 		D1DAC79E29819DD900B60AED /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAC79D29819DD900B60AED /* PlayerState.swift */; };
 		D1E3FBC42A51FB4E00C21D6A /* M1ItemsOnMissionSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E3FBC32A51FB4E00C21D6A /* M1ItemsOnMissionSetup.swift */; };
@@ -142,6 +150,15 @@
 		D1E73F1D2A48D359009F76BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1E73F1B2A48D359009F76BF /* Assets.xcassets */; };
 		D1EC016C29B8922200390C41 /* PTSansNarrow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1EC016A29B8922200390C41 /* PTSansNarrow-Regular.ttf */; };
 		D1EC016D29B8922200390C41 /* PTSansNarrow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */; };
+		D1F1C9982B3DD91100E36FB6 /* M1Collisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9972B3DD91100E36FB6 /* M1Collisions.swift */; };
+		D1F1C99B2B3DDC5000E36FB6 /* CarCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C99A2B3DDC5000E36FB6 /* CarCollisions.swift */; };
+		D1F1C99E2B3DE1A500E36FB6 /* TrashTankCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C99D2B3DE1A500E36FB6 /* TrashTankCollisions.swift */; };
+		D1F1C9A12B3DE48900E36FB6 /* CarLockCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9A02B3DE48900E36FB6 /* CarLockCollisions.swift */; };
+		D1F1C9A42B3DE5B400E36FB6 /* PigeonCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9A32B3DE5B400E36FB6 /* PigeonCollisions.swift */; };
+		D1F1C9A72B3DE72400E36FB6 /* GameItemCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9A62B3DE72400E36FB6 /* GameItemCollisions.swift */; };
+		D1F1C9A92B3DF32B00E36FB6 /* M2Collisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9A82B3DF32B00E36FB6 /* M2Collisions.swift */; };
+		D1F1C9AC2B3DF42000E36FB6 /* CrosswalkCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9AB2B3DF42000E36FB6 /* CrosswalkCollisions.swift */; };
+		D1F1C9AF2B3DF59700E36FB6 /* AnxietyCirclesCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1C9AE2B3DF59700E36FB6 /* AnxietyCirclesCollisions.swift */; };
 		D1F4CFC529B0C70E003CB541 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4CFC429B0C70E003CB541 /* Car.swift */; };
 		D1F723D92A684DF7007362DB /* car_horns.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1F723D72A684DF7007362DB /* car_horns.wav */; };
 		D1F723DA2A684DF7007362DB /* brake_bump.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1F723D82A684DF7007362DB /* brake_bump.wav */; };
@@ -170,8 +187,14 @@
 		D1198F052979B76E00701A24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D1198F0C2979B7A900701A24 /* ParkingWorkTileSets.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParkingWorkTileSets.sks; sourceTree = "<group>"; };
 		D11C745529ED703000C0583D /* PigeonsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonsSetup.swift; sourceTree = "<group>"; };
+		D11CB5F52B4C411B00E10581 /* ButtonPresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPresses.swift; sourceTree = "<group>"; };
+		D11CB5F72B4C47DF00E10581 /* GameChatPresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChatPresses.swift; sourceTree = "<group>"; };
+		D11CB5F92B4C491700E10581 /* ActionButtonsPresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsPresses.swift; sourceTree = "<group>"; };
+		D11CB5FB2B4C4AA900E10581 /* CarDriveButtonPresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDriveButtonPresses.swift; sourceTree = "<group>"; };
 		D11FB7052A3A37F20047D7FC /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		D11FB7072A3B77E40047D7FC /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
+		D12892242B602ECC00AC7D26 /* FastAccessPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastAccessPanel.swift; sourceTree = "<group>"; };
+		D12892262B6044D100AC7D26 /* FastAccessPanelTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastAccessPanelTouches.swift; sourceTree = "<group>"; };
 		D12922322A740C0A00BA6384 /* mainSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = mainSmoke.sks; sourceTree = "<group>"; };
 		D12922342A740C9A00BA6384 /* fireFromWindow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireFromWindow.sks; sourceTree = "<group>"; };
 		D12922362A74152E00BA6384 /* M2SetupEmitters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M2SetupEmitters.swift; sourceTree = "<group>"; };
@@ -179,12 +202,12 @@
 		D139204A2A7409C0003A6813 /* cigarette_in_game.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = cigarette_in_game.sks; sourceTree = "<group>"; };
 		D139204E2A740A43003A6813 /* SmokeFromCarWindow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeFromCarWindow.sks; sourceTree = "<group>"; };
 		D13F2E15298972EB008976EA /* CAR_LIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAR_LIST.swift; sourceTree = "<group>"; };
+		D14465672B4DDEB700BBEA85 /* InventoryTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTouches.swift; sourceTree = "<group>"; };
 		D144764C2A29D2BE0044C244 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		D144764E2A29D2F70044C244 /* ShopScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ShopScene.sks; sourceTree = "<group>"; };
 		D14476502A29E9D90044C244 /* CarLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLock.swift; sourceTree = "<group>"; };
 		D14476542A29EE930044C244 /* plastic_hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = plastic_hit.wav; sourceTree = "<group>"; };
 		D14476562A2B6C470044C244 /* ItemOnGround.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ItemOnGround.sks; path = "Parking Work/Emitters/ItemOnGround.sks"; sourceTree = SOURCE_ROOT; };
-		D14476572A2B6C470044C244 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Parking Work/Emitters/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		D144765A2A2B83D00044C244 /* MESSSAGE_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MESSSAGE_TYPES.swift; sourceTree = "<group>"; };
 		D149E68B2A30741E00342564 /* ITEMS_TYPES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITEMS_TYPES.swift; sourceTree = "<group>"; };
 		D15008682A274BEC00F24418 /* CarsDrivingBy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CarsDrivingBy.sks; sourceTree = "<group>"; };
@@ -218,7 +241,7 @@
 		D16EA7612A023DB8001699E5 /* GameScreenCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenCreation.swift; sourceTree = "<group>"; };
 		D16EA7632A02407D001699E5 /* UIControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControls.swift; sourceTree = "<group>"; };
 		D16EA7672A02413C001699E5 /* TutorialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFunctions.swift; sourceTree = "<group>"; };
-		D16EA7692A024418001699E5 /* GameScreenContols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenContols.swift; sourceTree = "<group>"; };
+		D16EA7692A024418001699E5 /* GameScreenControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenControls.swift; sourceTree = "<group>"; };
 		D16EA76C2A0245AF001699E5 /* CameraFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFunctions.swift; sourceTree = "<group>"; };
 		D16EA76E2A0245E2001699E5 /* AnimationFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFunctions.swift; sourceTree = "<group>"; };
 		D16FD69929A270A70097BC3E /* Mission1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mission1.swift; sourceTree = "<group>"; };
@@ -226,7 +249,7 @@
 		D16FD69D29A289840097BC3E /* CameraSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSetup.swift; sourceTree = "<group>"; };
 		D18653C1299A30B900DEE90D /* Touches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Touches.swift; sourceTree = "<group>"; };
 		D18653C4299A31D400DEE90D /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
-		D18653C6299A326900DEE90D /* Collisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collisions.swift; sourceTree = "<group>"; };
+		D18653C6299A326900DEE90D /* CollisionsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionsDelegate.swift; sourceTree = "<group>"; };
 		D18653CA299A3A3600DEE90D /* GameFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFunctions.swift; sourceTree = "<group>"; };
 		D18653CD299A3AE200DEE90D /* PlayerFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerFunctions.swift; sourceTree = "<group>"; };
 		D18653D1299A3C6F00DEE90D /* PlayerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSetup.swift; sourceTree = "<group>"; };
@@ -259,7 +282,6 @@
 		D1B259D52A1E1A4A001C9A05 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		D1B259DB2A1E7703001C9A05 /* pinplay_logo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = pinplay_logo.mp4; sourceTree = "<group>"; };
 		D1B259DD2A1EAA51001C9A05 /* CigaretteSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CigaretteSmoke.sks; sourceTree = "<group>"; };
-		D1B259DE2A1EAA51001C9A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1B259E12A1EB380001C9A05 /* cigarette_falling.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cigarette_falling.wav; sourceTree = "<group>"; };
 		D1B6B5982A6C261F0036AC38 /* M2CrosswalkSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M2CrosswalkSetup.swift; sourceTree = "<group>"; };
 		D1B6B59C2A715C880036AC38 /* M2VladikSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M2VladikSetup.swift; sourceTree = "<group>"; };
@@ -285,6 +307,9 @@
 		D1C858612A756D6900BDF5AD /* breaking_glass.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = breaking_glass.wav; sourceTree = "<group>"; };
 		D1CAD2FA2A570C4E00ED139B /* DetailsScreenScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DetailsScreenScene.sks; sourceTree = "<group>"; };
 		D1CAD2FC2A570C6500ED139B /* DetailsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScene.swift; sourceTree = "<group>"; };
+		D1CEDEE22B3EB7870083F888 /* MissionCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCollisions.swift; sourceTree = "<group>"; };
+		D1CEDEE42B3EB7F00083F888 /* GeneralCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCollisions.swift; sourceTree = "<group>"; };
+		D1CEDEEA2B3F2AA80083F888 /* GameButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameButtons.swift; sourceTree = "<group>"; };
 		D1D50C742A33175B00306898 /* LOCK_COMPLEXITIES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOCK_COMPLEXITIES.swift; sourceTree = "<group>"; };
 		D1DAC79D29819DD900B60AED /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		D1E3FBC32A51FB4E00C21D6A /* M1ItemsOnMissionSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M1ItemsOnMissionSetup.swift; sourceTree = "<group>"; };
@@ -293,6 +318,15 @@
 		D1EC016929B8911F00390C41 /* Parking-Work-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Parking-Work-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D1EC016A29B8922200390C41 /* PTSansNarrow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTSansNarrow-Regular.ttf"; sourceTree = "<group>"; };
 		D1EC016B29B8922200390C41 /* PTSansNarrow-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTSansNarrow-Bold.ttf"; sourceTree = "<group>"; };
+		D1F1C9972B3DD91100E36FB6 /* M1Collisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M1Collisions.swift; sourceTree = "<group>"; };
+		D1F1C99A2B3DDC5000E36FB6 /* CarCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCollisions.swift; sourceTree = "<group>"; };
+		D1F1C99D2B3DE1A500E36FB6 /* TrashTankCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTankCollisions.swift; sourceTree = "<group>"; };
+		D1F1C9A02B3DE48900E36FB6 /* CarLockCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLockCollisions.swift; sourceTree = "<group>"; };
+		D1F1C9A32B3DE5B400E36FB6 /* PigeonCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonCollisions.swift; sourceTree = "<group>"; };
+		D1F1C9A62B3DE72400E36FB6 /* GameItemCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameItemCollisions.swift; sourceTree = "<group>"; };
+		D1F1C9A82B3DF32B00E36FB6 /* M2Collisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M2Collisions.swift; sourceTree = "<group>"; };
+		D1F1C9AB2B3DF42000E36FB6 /* CrosswalkCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswalkCollisions.swift; sourceTree = "<group>"; };
+		D1F1C9AE2B3DF59700E36FB6 /* AnxietyCirclesCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnxietyCirclesCollisions.swift; sourceTree = "<group>"; };
 		D1F4CFC429B0C70E003CB541 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		D1F723D72A684DF7007362DB /* car_horns.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = car_horns.wav; sourceTree = "<group>"; };
 		D1F723D82A684DF7007362DB /* brake_bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = brake_bump.wav; sourceTree = "<group>"; };
@@ -350,6 +384,8 @@
 		D1198EF42979B76D00701A24 /* Parking Work */ = {
 			isa = PBXGroup;
 			children = (
+				D1C5ADE22B61051200C8B0BF /* Models */,
+				D1CEDEE92B3F2A700083F888 /* UIButtons */,
 				D15E7E0C2A6A71F000388E0B /* CarsInitializers */,
 				D1943A9C2A66E41200AA2214 /* GameSetup */,
 				D1C717F12A20BFD600E36C9D /* AuxillaryScenes */,
@@ -480,7 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				D16EA7612A023DB8001699E5 /* GameScreenCreation.swift */,
-				D16EA7692A024418001699E5 /* GameScreenContols.swift */,
+				D16EA7692A024418001699E5 /* GameScreenControls.swift */,
 			);
 			path = GameScreens;
 			sourceTree = "<group>";
@@ -500,6 +536,7 @@
 				D16FD69929A270A70097BC3E /* Mission1.swift */,
 				D16FD69A29A270A70097BC3E /* Mission1Scene.sks */,
 				D18653CF299A3B6300DEE90D /* Mission1Setup */,
+				D1F1C9972B3DD91100E36FB6 /* M1Collisions.swift */,
 			);
 			path = Mission1;
 			sourceTree = "<group>";
@@ -538,9 +575,9 @@
 		D18653D0299A3B8400DEE90D /* GameProcessing */ = {
 			isa = PBXGroup;
 			children = (
-				D18653C1299A30B900DEE90D /* Touches.swift */,
+				D1CEDEE62B3F29C00083F888 /* Touches */,
+				D1CEDEDF2B3EB6BD0083F888 /* Collisions */,
 				D18653C4299A31D400DEE90D /* GameLoop.swift */,
-				D18653C6299A326900DEE90D /* Collisions.swift */,
 				D1DAC79D29819DD900B60AED /* PlayerState.swift */,
 			);
 			path = GameProcessing;
@@ -640,7 +677,6 @@
 			children = (
 				D1B259D22A1E1A24001C9A05 /* SplashScreenScene.sks */,
 				D1B259D52A1E1A4A001C9A05 /* SplashScreen.swift */,
-				D1B259DE2A1EAA51001C9A05 /* Assets.xcassets */,
 			);
 			path = SplashScreenScene;
 			sourceTree = "<group>";
@@ -677,6 +713,7 @@
 				D1C5948B2A5C482700A2C216 /* Mission2Setup */,
 				D1C594872A5C480200A2C216 /* Mission2.swift */,
 				D1C594892A5C481E00A2C216 /* Mission2Scene.sks */,
+				D1F1C9A82B3DF32B00E36FB6 /* M2Collisions.swift */,
 			);
 			path = Mission2;
 			sourceTree = "<group>";
@@ -694,9 +731,18 @@
 			path = Mission2Setup;
 			sourceTree = "<group>";
 		};
+		D1C5ADE22B61051200C8B0BF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D12892242B602ECC00AC7D26 /* FastAccessPanel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D1C717F02A20BF9400E36C9D /* Emitters */ = {
 			isa = PBXGroup;
 			children = (
+				D1C717F22A20C5A200E36C9D /* Cars */,
 				D13920462A7407A0003A6813 /* CarOnFire.sks */,
 				D12922342A740C9A00BA6384 /* fireFromWindow.sks */,
 				D12922322A740C0A00BA6384 /* mainSmoke.sks */,
@@ -705,7 +751,6 @@
 				D1E73F1A2A48D359009F76BF /* CompletionScreenBokeh.sks */,
 				D1E73F1B2A48D359009F76BF /* Assets.xcassets */,
 				D14476562A2B6C470044C244 /* ItemOnGround.sks */,
-				D1C717F22A20C5A200E36C9D /* Cars */,
 				D15008682A274BEC00F24418 /* CarsDrivingBy.sks */,
 				D1B259DD2A1EAA51001C9A05 /* CigaretteSmoke.sks */,
 			);
@@ -731,7 +776,6 @@
 			children = (
 				D1C717EC2A20AA9500E36C9D /* OldCopperEngineSmoke.sks */,
 				D1C717F32A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks */,
-				D14476572A2B6C470044C244 /* Assets.xcassets */,
 			);
 			path = Cars;
 			sourceTree = "<group>";
@@ -745,6 +789,61 @@
 			path = DetailsScene;
 			sourceTree = "<group>";
 		};
+		D1CEDEDF2B3EB6BD0083F888 /* Collisions */ = {
+			isa = PBXGroup;
+			children = (
+				D18653C6299A326900DEE90D /* CollisionsDelegate.swift */,
+				D1CEDEE12B3EB7470083F888 /* MissionCollisions */,
+				D1CEDEE02B3EB7170083F888 /* GeneralCollisions */,
+			);
+			path = Collisions;
+			sourceTree = "<group>";
+		};
+		D1CEDEE02B3EB7170083F888 /* GeneralCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1CEDEE42B3EB7F00083F888 /* GeneralCollisions.swift */,
+				D1F1C9AD2B3DF57900E36FB6 /* AnxietyCirclesCollisions */,
+				D1F1C9AA2B3DF3FE00E36FB6 /* CrosswalkCollisions */,
+				D1F1C9A52B3DE71000E36FB6 /* GameItemCollisions */,
+				D1F1C9A22B3DE59900E36FB6 /* PigeonCollisions */,
+				D1F1C99F2B3DE3F900E36FB6 /* CarLockCollisions */,
+				D1F1C99C2B3DE14700E36FB6 /* TrashTankCollisions */,
+				D1F1C9992B3DDC3700E36FB6 /* CarCollisions */,
+			);
+			path = GeneralCollisions;
+			sourceTree = "<group>";
+		};
+		D1CEDEE12B3EB7470083F888 /* MissionCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1CEDEE22B3EB7870083F888 /* MissionCollisions.swift */,
+			);
+			path = MissionCollisions;
+			sourceTree = "<group>";
+		};
+		D1CEDEE62B3F29C00083F888 /* Touches */ = {
+			isa = PBXGroup;
+			children = (
+				D18653C1299A30B900DEE90D /* Touches.swift */,
+				D11CB5F92B4C491700E10581 /* ActionButtonsPresses.swift */,
+				D11CB5F52B4C411B00E10581 /* ButtonPresses.swift */,
+				D11CB5F72B4C47DF00E10581 /* GameChatPresses.swift */,
+				D11CB5FB2B4C4AA900E10581 /* CarDriveButtonPresses.swift */,
+				D14465672B4DDEB700BBEA85 /* InventoryTouches.swift */,
+				D12892262B6044D100AC7D26 /* FastAccessPanelTouches.swift */,
+			);
+			path = Touches;
+			sourceTree = "<group>";
+		};
+		D1CEDEE92B3F2A700083F888 /* UIButtons */ = {
+			isa = PBXGroup;
+			children = (
+				D1CEDEEA2B3F2AA80083F888 /* GameButtons.swift */,
+			);
+			path = UIButtons;
+			sourceTree = "<group>";
+		};
 		D1EC016629B88FB200390C41 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +851,62 @@
 				D1EC016A29B8922200390C41 /* PTSansNarrow-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D1F1C9992B3DDC3700E36FB6 /* CarCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C99A2B3DDC5000E36FB6 /* CarCollisions.swift */,
+			);
+			path = CarCollisions;
+			sourceTree = "<group>";
+		};
+		D1F1C99C2B3DE14700E36FB6 /* TrashTankCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C99D2B3DE1A500E36FB6 /* TrashTankCollisions.swift */,
+			);
+			path = TrashTankCollisions;
+			sourceTree = "<group>";
+		};
+		D1F1C99F2B3DE3F900E36FB6 /* CarLockCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C9A02B3DE48900E36FB6 /* CarLockCollisions.swift */,
+			);
+			path = CarLockCollisions;
+			sourceTree = "<group>";
+		};
+		D1F1C9A22B3DE59900E36FB6 /* PigeonCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C9A32B3DE5B400E36FB6 /* PigeonCollisions.swift */,
+			);
+			path = PigeonCollisions;
+			sourceTree = "<group>";
+		};
+		D1F1C9A52B3DE71000E36FB6 /* GameItemCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C9A62B3DE72400E36FB6 /* GameItemCollisions.swift */,
+			);
+			path = GameItemCollisions;
+			sourceTree = "<group>";
+		};
+		D1F1C9AA2B3DF3FE00E36FB6 /* CrosswalkCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C9AB2B3DF42000E36FB6 /* CrosswalkCollisions.swift */,
+			);
+			path = CrosswalkCollisions;
+			sourceTree = "<group>";
+		};
+		D1F1C9AD2B3DF57900E36FB6 /* AnxietyCirclesCollisions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1C9AE2B3DF59700E36FB6 /* AnxietyCirclesCollisions.swift */,
+			);
+			path = AnxietyCirclesCollisions;
 			sourceTree = "<group>";
 		};
 		D1F723DB2A685205007362DB /* OldCopper */ = {
@@ -827,7 +982,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					D1198EF12979B76D00701A24 = {
 						CreatedOnToolsVersion = 14.1;
@@ -877,7 +1032,6 @@
 				D144764F2A29D2F70044C244 /* ShopScene.sks in Resources */,
 				D1C717FA2A20CF9C00E36C9D /* old_copper_acceleration.wav in Resources */,
 				D1BC8CDF29B8733A00F9C597 /* Mission1IntroScene.sks in Resources */,
-				D14476592A2B6C470044C244 /* Assets.xcassets in Resources */,
 				D1198F012979B76D00701A24 /* Main.storyboard in Resources */,
 				D1FDF2A429A929280058040E /* button_click.wav in Resources */,
 				D1B259E22A1EB380001C9A05 /* cigarette_falling.wav in Resources */,
@@ -913,7 +1067,6 @@
 				D139204F2A740A43003A6813 /* SmokeFromCarWindow.sks in Resources */,
 				D1C717F52A20C5BB00E36C9D /* ChowerlerEngineSmoke.sks in Resources */,
 				D1F723DA2A684DF7007362DB /* brake_bump.wav in Resources */,
-				D1B259E02A1EAA51001C9A05 /* Assets.xcassets in Resources */,
 				D16FD69C29A270A70097BC3E /* Mission1Scene.sks in Resources */,
 				D1C858622A756D6900BDF5AD /* breaking_glass.wav in Resources */,
 				D1CAD2FB2A570C4E00ED139B /* DetailsScreenScene.sks in Resources */,
@@ -929,9 +1082,13 @@
 			files = (
 				D1B6B59F2A715EFA0036AC38 /* M2ActionsSetup.swift in Sources */,
 				D1594E602A4C4B7300B2E5C6 /* PlayerData+CoreDataClass.swift in Sources */,
+				D14465682B4DDEB700BBEA85 /* InventoryTouches.swift in Sources */,
 				D1CAD2FD2A570C6500ED139B /* DetailsScene.swift in Sources */,
 				D1B259D62A1E1A4A001C9A05 /* SplashScreen.swift in Sources */,
+				D1F1C99E2B3DE1A500E36FB6 /* TrashTankCollisions.swift in Sources */,
+				D11CB5FA2B4C491700E10581 /* ActionButtonsPresses.swift in Sources */,
 				D11FB7062A3A37F20047D7FC /* ShopItem.swift in Sources */,
+				D1F1C9A12B3DE48900E36FB6 /* CarLockCollisions.swift in Sources */,
 				D18653D4299A3D9F00DEE90D /* WorldBoundariesSetup.swift in Sources */,
 				D16EA7622A023DB8001699E5 /* GameScreenCreation.swift in Sources */,
 				D1C594882A5C480200A2C216 /* Mission2.swift in Sources */,
@@ -953,24 +1110,31 @@
 				D1C5948D2A5C491C00A2C216 /* M2CarsSetup.swift in Sources */,
 				D16EA76F2A0245E2001699E5 /* AnimationFunctions.swift in Sources */,
 				D1A3F5A7299E52D600084380 /* LOCK_TRANSLATIONS.swift in Sources */,
+				D1F1C9A42B3DE5B400E36FB6 /* PigeonCollisions.swift in Sources */,
 				D1F724032A6931E8007362DB /* M2Intro.swift in Sources */,
 				D15E7E102A6A744C00388E0B /* Chowerler.swift in Sources */,
 				D1A7180729D1AF7600A488BF /* UNICODE.swift in Sources */,
 				D1C699BD2A3C7B500094860B /* Property.swift in Sources */,
 				D15E7E122A6A76F000388E0B /* Posblanc.swift in Sources */,
+				D12892272B6044D100AC7D26 /* FastAccessPanelTouches.swift in Sources */,
 				D18C66142A25038D00D4F365 /* MissionList.swift in Sources */,
 				D18653D6299A3EAF00DEE90D /* M1CarsSetup.swift in Sources */,
 				D101C6702A5472D900752DF4 /* InventoryItem+CoreDataClass.swift in Sources */,
 				D16EA75A2A0238BB001699E5 /* ChatFunctions.swift in Sources */,
+				D12892252B602ECC00AC7D26 /* FastAccessPanel.swift in Sources */,
+				D1F1C9AC2B3DF42000E36FB6 /* CrosswalkCollisions.swift in Sources */,
+				D1F1C99B2B3DDC5000E36FB6 /* CarCollisions.swift in Sources */,
 				D101C6712A5472D900752DF4 /* InventoryItem+CoreDataProperties.swift in Sources */,
-				D16EA76A2A024418001699E5 /* GameScreenContols.swift in Sources */,
+				D16EA76A2A024418001699E5 /* GameScreenControls.swift in Sources */,
+				D1CEDEEB2B3F2AA80083F888 /* GameButtons.swift in Sources */,
 				D1F723FC2A691A30007362DB /* GameState+CoreDataClass.swift in Sources */,
 				D1BC8CDB29B5DA4900F9C597 /* LOCK_TYPES.swift in Sources */,
 				D13F2E16298972EB008976EA /* CAR_LIST.swift in Sources */,
 				D149E68C2A30741E00342564 /* ITEMS_TYPES.swift in Sources */,
 				D101C6722A5472D900752DF4 /* ItemProperty+CoreDataClass.swift in Sources */,
 				D16FD69E29A289840097BC3E /* CameraSetup.swift in Sources */,
-				D18653C7299A326900DEE90D /* Collisions.swift in Sources */,
+				D1F1C9A72B3DE72400E36FB6 /* GameItemCollisions.swift in Sources */,
+				D18653C7299A326900DEE90D /* CollisionsDelegate.swift in Sources */,
 				D1CE9B482A4EDFD500A3A3CA /* MissionCompletion.swift in Sources */,
 				D18653C2299A30B900DEE90D /* Touches.swift in Sources */,
 				D1A7180929D1B0B200A488BF /* FONTS.swift in Sources */,
@@ -978,12 +1142,16 @@
 				D16ACB0A2A1790CD000878C4 /* TrashCansSetup.swift in Sources */,
 				D16EA7602A023D17001699E5 /* UICreation.swift in Sources */,
 				D1B6B59D2A715C880036AC38 /* M2VladikSetup.swift in Sources */,
+				D11CB5F62B4C411B00E10581 /* ButtonPresses.swift in Sources */,
 				D18653DA299B7CE000DEE90D /* PopUpWindowsSetup.swift in Sources */,
 				D1BC8CE229B8752900F9C597 /* Intro.swift in Sources */,
 				D16EA75E2A023C09001699E5 /* PopUpCreation.swift in Sources */,
 				D16EA7642A02407D001699E5 /* UIControls.swift in Sources */,
 				D1594E642A4C9E5900B2E5C6 /* Storage.swift in Sources */,
+				D1F1C9982B3DD91100E36FB6 /* M1Collisions.swift in Sources */,
+				D1F1C9A92B3DF32B00E36FB6 /* M2Collisions.swift in Sources */,
 				D150086D2A28E02700F24418 /* Mission.swift in Sources */,
+				D11CB5F82B4C47DF00E10581 /* GameChatPresses.swift in Sources */,
 				D18653C5299A31D400DEE90D /* GameLoop.swift in Sources */,
 				D1F723FD2A691A30007362DB /* GameState+CoreDataProperties.swift in Sources */,
 				D1198EFE2979B76D00701A24 /* GameViewController.swift in Sources */,
@@ -1002,14 +1170,18 @@
 				D15BCD9C29F1380B00726BE3 /* M1SoundSetup.swift in Sources */,
 				D16EA75C2A023A6B001699E5 /* PopUpAction.swift in Sources */,
 				D1A3F5AB299F9B8B00084380 /* GAME_SOUNDS.swift in Sources */,
+				D1CEDEE32B3EB7870083F888 /* MissionCollisions.swift in Sources */,
 				D1594E612A4C4B7300B2E5C6 /* PlayerData+CoreDataProperties.swift in Sources */,
 				D1B6B5992A6C261F0036AC38 /* M2CrosswalkSetup.swift in Sources */,
 				D18653CE299A3AE200DEE90D /* PlayerFunctions.swift in Sources */,
 				D18653D2299A3C6F00DEE90D /* PlayerSetup.swift in Sources */,
 				D197178A29E42D05001A6537 /* M1TutorialSetup.swift in Sources */,
 				D15E7E0E2A6A720B00388E0B /* OldCopper.swift in Sources */,
+				D11CB5FC2B4C4AA900E10581 /* CarDriveButtonPresses.swift in Sources */,
 				D1A10ADC2A1F5CFF003087DF /* GameItem.swift in Sources */,
 				D1D50C752A33175B00306898 /* LOCK_COMPLEXITIES.swift in Sources */,
+				D1F1C9AF2B3DF59700E36FB6 /* AnxietyCirclesCollisions.swift in Sources */,
+				D1CEDEE52B3EB7F00083F888 /* GeneralCollisions.swift in Sources */,
 				D1A7180529CC405500A488BF /* Player.swift in Sources */,
 				D1198EF62979B76D00701A24 /* AppDelegate.swift in Sources */,
 				D11C745629ED703000C0583D /* PigeonsSetup.swift in Sources */,
@@ -1074,6 +1246,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1134,6 +1307,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

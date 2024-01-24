@@ -38,7 +38,7 @@ extension ParkingWorkGame {
     
     /// Shows pop-up window, offering some action, when player comes сlose to some item.
     func showActionMessage() {
-        if actionMessageWindow?.alpha != 0 || itemChoosingWindow?.alpha == 1 { return }
+        if actionMessageWindow?.alpha != 0 || fastAccessPanel?.node?.alpha == 1 { return }
         let actionMessageLabel = actionMessageWindow?.childNode(withName: "ui-actionMessage") as? SKLabelNode
         
         if actionMessageType == .OpenCarAction {
@@ -180,23 +180,5 @@ extension ParkingWorkGame {
         // tries of open set to 0
         self.player?.triedToOpenComplexLockTimes = 0
         self.player?.triedToOpenComplexLockTimes = 0
-    }
-    
-    func showChoosingItemWindow(numOfSquares: Int, with items: [GameItem]) {
-        itemChoosingWindow?.setScale(0)
-        
-        createItemChoosingPanel(numSquares: numOfSquares, with: items)
-        
-        itemChoosingWindow?.alpha = 1
-        itemChoosingWindow?.run(.scale(to: 1.15, duration: 0.3), completion: {
-            self.itemChoosingWindow?.run(.scale(to: 1.0, duration: 0.15))
-        })
-        
-    }
-    
-    func hideChoosingItemWindow() {
-        itemChoosingWindow?.run(.scale(to: 0.0, duration: 0.2)) {
-            self.itemChoosingWindow?.alpha = 0
-        }
     }
 }

@@ -61,7 +61,7 @@ class Mission1: ParkingWorkGame {
         createMenuScreen()
         
         // create mission task screen
-        createMissionTaskScreen()
+        createMissionTaskScreen(taskMessage: "Босс: \(UNICODE.leftChevrone)Я спрятал отмычку для тебя под одним из мусорных баков. Марка машины мне не важна, на твое усмотрение. Главное, доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\(UNICODE.rightChevrone)")
         
         // create Inventory screen
         createPlayerInventoryScreen()
@@ -87,6 +87,9 @@ class Mission1: ParkingWorkGame {
         
         // setup pop-up windows (attach to global variables)
         setupPopUpWindowMessages()
+        
+        // setup Fast Access Panel (initially hidden)
+        setupFastAccessPanel()
     
         // enter to initial player state
         playerStateMachine.enter(IdleState.self)

@@ -55,7 +55,7 @@ extension ParkingWorkGame {
         chowerlerNode.anchorPoint = CGPoint(x: 0.49, y: 0.5)
 
         // old copper engine smoke
-        var refNode = chowerlerNode.childNode(withName: "smoke-emitter")
+        let refNode = chowerlerNode.childNode(withName: "smoke-emitter")
         chowerler.smokeEmitter = refNode?.children[0] as? SKEmitterNode
 
         if startEngine {

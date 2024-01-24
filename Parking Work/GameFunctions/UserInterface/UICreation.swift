@@ -7,6 +7,40 @@
 
 import SpriteKit
 
+
+extension SKNode {
+    var buttonType: GameButtons {
+        
+        if let button = self.userData?.value(forKey: "btn-type") as? GameButtons {
+            return button
+        } else {
+            return GameButtons.notAButton
+        }
+    }
+    
+    var itemLocation: ItemLocation {
+        if let location = self.userData?.value(forKey: "item-location") as? ItemLocation {
+            return location
+        } else {
+            return ItemLocation.Unknown
+        }
+        
+    }
+    
+    var firstChild: SKNode {
+        return self.children[0]
+    }
+    
+    var buttonShape: SKNode {
+        if let buttonShape = self as? SKShapeNode {
+            return buttonShape
+        } else {
+            return self.parent as! SKShapeNode
+        }
+    }
+    
+}
+
 // User Interface Creation Game Functions
 extension ParkingWorkGame {
     
@@ -15,45 +49,46 @@ extension ParkingWorkGame {
  
         // task button
         let taskBtn = SKShapeNode(circleOfRadius: 14)
-        taskBtn.name = "ui-taskBtn"
         taskBtn.fillColor = UIColor.gray
         taskBtn.alpha = 0.75
         taskBtn.zPosition = 15
         taskBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
+        taskBtn.userData = NSMutableDictionary()
+        taskBtn.userData?.setValue(GameButtons.TaskButton, forKey: "btn-type")
         self.taskButton = taskBtn
         
         //  task button label
         let taskBtnLabel = SKLabelNode(text: "?")
-        taskBtnLabel.name = "ui-taskLabel"
         taskBtnLabel.fontSize = 20
         taskBtnLabel.fontName = "Baskerville-bold"
         taskBtnLabel.fontColor = .white
         taskBtnLabel.horizontalAlignmentMode = .center
         taskBtnLabel.verticalAlignmentMode = .center
-        
+        taskBtnLabel.userData = NSMutableDictionary()
+        taskBtnLabel.userData?.setValue(GameButtons.TaskButton, forKey: "btn-type")
         taskBtn.addChild(taskBtnLabel)
         
         self.cameraNode?.addChild(taskBtn)
         
         // menu button
         let menuBtn = SKShapeNode(rectOf: CGSize(width: 30, height: 30), cornerRadius: 6)
-        menuBtn.name = "ui-menuBtn"
         menuBtn.fillColor = UIColor.gray
         menuBtn.alpha = 0.75
         menuBtn.zPosition = 15
         menuBtn.position = CGPoint(x: displayWidth! / 2 - 40, y: displayHeight! / 2 - 26)
-        
+        menuBtn.userData = NSMutableDictionary()
+        menuBtn.userData?.setValue(GameButtons.MenuButton, forKey: "btn-type")
         self.menuButton = menuBtn
         
         // menu button label
         let menuBtnLabel = SKLabelNode(text: "\u{23F8}")
-        menuBtnLabel.name = "ui-menuLabel"
         menuBtnLabel.fontSize = 32
         menuBtnLabel.fontName = "Baskerville-bold"
         menuBtnLabel.fontColor = .white
         menuBtnLabel.horizontalAlignmentMode = .center
         menuBtnLabel.verticalAlignmentMode = .center
-        
+        menuBtnLabel.userData = NSMutableDictionary()
+        menuBtnLabel.userData?.setValue(GameButtons.MenuButton, forKey: "btn-type")
         menuBtn.addChild(menuBtnLabel)
         
         self.cameraNode?.addChild(menuBtn)
@@ -61,18 +96,22 @@ extension ParkingWorkGame {
         // run button
         let runBtn = SKShapeNode(circleOfRadius: 38)
         self.runButton = runBtn
-        runBtn.name = "ui-runBtn"
         runBtn.fillColor = UIColor.brown
         runBtn.alpha = 0.75
         runBtn.zPosition = 15
         runBtn.position = CGPoint(x: (displayWidth! / 2) - 90, y: -(displayHeight! / 2) + 90)
         
+        runBtn.userData = NSMutableDictionary()
+        runBtn.userData?.setValue(GameButtons.RunButton, forKey: "btn-type")
+        
         let shoe = SKSpriteNode(texture: SKTexture(imageNamed: "shoe"))
-        shoe.name = "ui-runBtnImg"
         shoe.size.width = 50
         shoe.size.height = 50
+        shoe.userData = NSMutableDictionary()
+        shoe.userData?.setValue(GameButtons.RunButton, forKey: "btn-type")
         
         runBtn.addChild(shoe)
+        
         
         self.cameraNode?.addChild(runBtn)
         
@@ -81,7 +120,9 @@ extension ParkingWorkGame {
             let inventorySprite = SKSpriteNode(texture: SKTexture(image: inventoryBag))
             self.inventoryButton = inventorySprite
             inventorySprite.zPosition = 15
-            inventorySprite.name = "ui-inventory-btn"
+            inventorySprite.userData = NSMutableDictionary()
+            inventorySprite.userData?.setValue(GameButtons.InventoryButton, forKey: "btn-type")
+            
             self.cameraNode?.addChild(inventorySprite)
             inventorySprite.size = CGSize(width: 36, height: 36)
             inventorySprite.position = CGPoint(x: -displayWidth! / 2 + 40, y: 0)

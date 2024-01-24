@@ -13,7 +13,7 @@ import SpriteKit
 extension Mission2 {
     func setupEmitters() {
         
-        if let node = OldCopperCar?.node {
+        if (OldCopperCar?.node) != nil {
             OldCopperWindowSmokeEmitter?.particleBirthRate = 0
             OldCopperWindowFireEmitter?.particleBirthRate = 0
             OldCopperMainFireEmitter?.particleBirthRate = 0

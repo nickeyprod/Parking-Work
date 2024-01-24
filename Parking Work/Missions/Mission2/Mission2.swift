@@ -17,6 +17,8 @@ class Mission2: ParkingWorkGame {
     var PosblancCar: Car? = nil
     var OldCopperCar: Car? = nil
     var playerPickedUpCigarette: Bool = false
+    var vladik: SKNode? = nil
+    var vladikStateMachine: GKStateMachine? = nil
 
     lazy var cigaretteFire: SKSpriteNode? = {
         return childNode(withName: "cigarette-fire") as? SKSpriteNode
@@ -55,9 +57,11 @@ class Mission2: ParkingWorkGame {
     
     var doorRinged: Bool = false
     
+    var subtitlesSquare: SKSpriteNode? = nil
     var subtitlesLabel: SKLabelNode? = nil
     var vladikCrashInstructionsMessage: SKSpriteNode? = nil
     var vladikCrashInstructionsMessageLabel: SKLabelNode? = nil
+    var vladikSpeakingSquare: SKSpriteNode? = nil
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -85,7 +89,7 @@ class Mission2: ParkingWorkGame {
         createMenuScreen()
         
         // create mission task screen
-        createMissionTaskScreen()
+        createMissionTaskScreen(taskMessage: "В этом районе живет Владик, Вам нужно напомнить ему про долг вашему Боссу. Босс: \(UNICODE.leftChevrone)Придумай что-нибудь, запугай его, но не убивай! И шепни ему на ушко мое имя, может вспомнит...\(UNICODE.rightChevrone)")
         
         // create Inventory screen
         createPlayerInventoryScreen()
@@ -140,8 +144,6 @@ class Mission2: ParkingWorkGame {
         // fill items on this mission
 //        fillItemsOfMission()
         
-        
-        
     }
     
     // MARK: - Physic Bodies Setup
@@ -162,18 +164,13 @@ class Mission2: ParkingWorkGame {
         
         // setup all car locks
 //        setupLocksForAllCars()
-        
-        // setup pigeouns to fly away
-//        setupPigeons()
+
         
         // setup sounds
 //        setupSounds()
         
         // setupTrashBaks
         setupTrashBaks()
-        
-        // setup mission completion rules
-//        setupMissionCompletion()
         
     }
     
@@ -186,14 +183,13 @@ class Mission2: ParkingWorkGame {
             // buttons pressed check
             let touchedNode = atPoint(location)
             
-            if (touchedNode.name == "ui-actionYesBtn" || touchedNode.parent?.name == "ui-actionYesBtn") && !isUILocked {
+            if (touchedNode.buttonType == .ActionYesButton) && !isUILocked {
                 
                 // off opening car when tutorial message is opened
                 if !canMoveCamera { return }
                 
-                let actionYesBtn = touchedNode.name == "ui-actionYesBtn" ? touchedNode : touchedNode.parent
-                actionYesBtn?.run(.scale(to: 1.1, duration: 0.2), completion: {
-                    actionYesBtn?.run(.scale(to: 1.0, duration: 0.1))
+                touchedNode.buttonShape.run(.scale(to: 1.1, duration: 0.2), completion: {
+                    touchedNode.buttonShape.run(.scale(to: 1.0, duration: 0.1))
                     if self.actionMessageType == .DoorRingAction {
                         self.hideActionMessage()
                         
@@ -403,7 +399,7 @@ extension Mission2 {
     
     override func didBegin(_ contact: SKPhysicsContact) {
         super.didBegin(contact)
-        //        print("didBeginContact entered for \(String(describing: contact.bodyA.node!.name)) and \(String(describing: contact.bodyB.node!.name))")
+//                print("didBeginContact entered for \(String(describing: contact.bodyA.node!.name)) and \(String(describing: contact.bodyB.node!.name))")
         
         let contactMask = getContactMask(contact.bodyA, contact.bodyB)
         
@@ -445,6 +441,14 @@ extension Mission2 {
                     }
                 }
             }
+        case (playerCategory | speakingCategory):
+            vladikSpeakingSquare?.physicsBody?.categoryBitMask = 0
+            vladikSpeakingSquare?.physicsBody = nil
+            vladikSpeakingSquare?.removeFromParent()
+            
+            self.runVladikScreamingSubtitles2()
+            
+            self.player?.node?.physicsBody?.pinned = true
             
         default:
             return

@@ -23,18 +23,19 @@ extension ParkingWorkGame {
         let resumeGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
         let yPos = resumeGameBtn.frame.height
         resumeGameBtn.position = CGPoint(x: 0, y: yPos)
-        resumeGameBtn.name = "ui-resumeGameBtn"
         resumeGameBtn.fillColor = COLORS.MenuButtonsColor
+        resumeGameBtn.userData = NSMutableDictionary()
+        resumeGameBtn.userData?.setValue(GameButtons.ResumeGameButton, forKey: "btn-type")
 
         // resume game button label
         let resumeGameBtnLabel = SKLabelNode(text: "Продолжить")
-        resumeGameBtnLabel.name = "ui-resumeGameBtnLabel"
         resumeGameBtnLabel.fontSize = 20
         resumeGameBtnLabel.fontName = "Baskerville-bold"
         resumeGameBtnLabel.fontColor = .white
         resumeGameBtnLabel.horizontalAlignmentMode = .center
         resumeGameBtnLabel.verticalAlignmentMode = .center
-
+        resumeGameBtnLabel.userData = NSMutableDictionary()
+        resumeGameBtnLabel.userData?.setValue(GameButtons.ResumeGameButton, forKey: "btn-type")
         resumeGameBtn.addChild(resumeGameBtnLabel)
 
         menuScreen?.addChild(resumeGameBtn)
@@ -49,18 +50,19 @@ extension ParkingWorkGame {
         // settings game button
         let settingsGameBtn = SKShapeNode(rectOf: CGSize(width: 200, height: 40))
         settingsGameBtn.position = CGPoint(x: 0, y: yPos - yPos - 2 )
-        settingsGameBtn.name = "ui-gameSettingsBtn"
         settingsGameBtn.fillColor = COLORS.MenuButtonsColor
+        settingsGameBtn.userData = NSMutableDictionary()
+        settingsGameBtn.userData?.setValue(GameButtons.OpenGameSettingsButton, forKey: "btn-type")
 
         // settings game button label
         let settingsGameBtnLabel = SKLabelNode(text: "Настройки")
-        settingsGameBtnLabel.name = "ui-gameSettingsBtnLabel"
         settingsGameBtnLabel.fontSize = 20
         settingsGameBtnLabel.fontName = "Baskerville-bold"
         settingsGameBtnLabel.fontColor = .white
         settingsGameBtnLabel.horizontalAlignmentMode = .center
         settingsGameBtnLabel.verticalAlignmentMode = .center
-
+        settingsGameBtnLabel.userData = NSMutableDictionary()
+        settingsGameBtnLabel.userData?.setValue(GameButtons.OpenGameSettingsButton, forKey: "btn-type")
         settingsGameBtn.addChild(settingsGameBtnLabel)
 
         menuScreen?.addChild(settingsGameBtn)
@@ -75,7 +77,7 @@ extension ParkingWorkGame {
     }
     
     // Creates screen with task for the mission description
-    func createMissionTaskScreen() {
+    func createMissionTaskScreen(taskMessage: String) {
 
         // background
         taskScreen = SKSpriteNode(color: .black, size: CGSize(width: displayWidth!, height: displayHeight!))
@@ -87,21 +89,23 @@ extension ParkingWorkGame {
         
         // close task screen button
         let closeTaskScreenBtn = SKShapeNode(circleOfRadius: 14)
-        closeTaskScreenBtn.name = "ui-closeTaskBtn"
         closeTaskScreenBtn.fillColor = UIColor.gray
         closeTaskScreenBtn.alpha = 0.75
         closeTaskScreenBtn.position = CGPoint(x: -displayWidth! / 2 + 150, y: displayHeight! / 2 - 26)
         closeTaskScreenBtn.zPosition = 50
         
+        closeTaskScreenBtn.userData = NSMutableDictionary()
+        closeTaskScreenBtn.userData?.setValue(GameButtons.CloseTaskScreenButton, forKey: "btn-type")
+        
         // close task screen label
         let closeTaskScreenLabel = SKLabelNode(text: "X")
-        closeTaskScreenLabel.name = "ui-closeTaskLabel"
         closeTaskScreenLabel.fontSize = 20
         closeTaskScreenLabel.fontName = "Baskerville-bold"
         closeTaskScreenLabel.fontColor = .white
         closeTaskScreenLabel.horizontalAlignmentMode = .center
         closeTaskScreenLabel.verticalAlignmentMode = .center
-        
+        closeTaskScreenLabel.userData = NSMutableDictionary()
+        closeTaskScreenLabel.userData?.setValue(GameButtons.CloseTaskScreenButton, forKey: "btn-type")
         closeTaskScreenBtn.addChild(closeTaskScreenLabel)
         
         taskScreen?.addChild(closeTaskScreenBtn)
@@ -119,7 +123,7 @@ extension ParkingWorkGame {
         spriteRect.alpha = 0.9
         spriteRect.position = CGPoint(x: 70, y: displayHeight! / 2 - 130)
         
-        let taskMessage = SKLabelNode(text: "Босс: \(UNICODE.leftChevrone)Я спрятал отмычку для тебя под одним из мусорных баков. Марка машины мне не важна, на твое усмотрение. Главное, доставь её к нам без полиции на хвосте, так чтобы мы убедились в твоих намерениях.\(UNICODE.rightChevrone)")
+        let taskMessage = SKLabelNode(text: taskMessage)
         taskMessage.fontSize = 24
         taskMessage.fontName = FONTS.Baskerville
         taskMessage.fontColor = UIColor.white
@@ -206,6 +210,8 @@ extension ParkingWorkGame {
         // Close Button
         let closeInventoryBtn = SKShapeNode(circleOfRadius: 14)
         closeInventoryBtn.name = "ui-closeInventoryBtn"
+        closeInventoryBtn.userData = NSMutableDictionary()
+        closeInventoryBtn.userData?.setValue(GameButtons.CloseInventoryButton, forKey: "btn-type")
         closeInventoryBtn.fillColor = UIColor.gray
         closeInventoryBtn.alpha = 0.55
         closeInventoryBtn.position = CGPoint(x: (inventoryScreen?.frame.width)! - 30, y: (inventoryScreen?.frame.height)! / 2 - 25)
@@ -213,13 +219,14 @@ extension ParkingWorkGame {
         
         // close task screen label
         let closeInventoryLabel = SKLabelNode(text: "X")
-        closeInventoryLabel.name = "ui-closeInventoryLabel"
+
         closeInventoryLabel.fontSize = 20
         closeInventoryLabel.fontName = "Baskerville-bold"
         closeInventoryLabel.fontColor = .white
         closeInventoryLabel.horizontalAlignmentMode = .center
         closeInventoryLabel.verticalAlignmentMode = .center
-        
+        closeInventoryLabel.userData = NSMutableDictionary()
+        closeInventoryLabel.userData?.setValue(GameButtons.CloseInventoryButton, forKey: "btn-type")
         closeInventoryBtn.addChild(closeInventoryLabel)
         
         inventoryScreen?.addChild(closeInventoryBtn)

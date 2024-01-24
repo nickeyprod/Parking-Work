@@ -53,7 +53,7 @@ extension ParkingWorkGame {
                 self.enterToCarBtn = nil
             } else {
                 hideActionMessage()
-                hideChoosingItemWindow()
+                fastAccessPanel?.hide()
             }
             
         }

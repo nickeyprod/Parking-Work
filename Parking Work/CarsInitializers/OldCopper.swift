@@ -52,7 +52,7 @@ extension ParkingWorkGame {
         oldCopperNode.anchorPoint = CGPoint(x: 0.49, y: 0.5)
 
         // old copper engine smoke
-        var refNode = oldCopperNode.childNode(withName: "smoke-emitter")
+        let refNode = oldCopperNode.childNode(withName: "smoke-emitter")
         oldCopper.smokeEmitter = refNode?.children[0] as? SKEmitterNode
         
         if startEngine {

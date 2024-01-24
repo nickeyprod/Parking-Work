@@ -63,7 +63,8 @@ extension ParkingWorkGame {
         triangleUp.fillColor = .brown
         triangleUp.setScale(0.14)
         triangleUp.position = CGPoint(x: (CHAT_WIDTH / 2) - 8, y: (CHAT_HEIGHT / 2) - 8 )
-        triangleUp.name = "ui-scroll-up-chat-btn"
+        triangleUp.userData = NSMutableDictionary()
+        triangleUp.userData?.setValue(GameButtons.ScrollChatUp, forKey: "btn-type")
         self.windowChat?.addChild(triangleUp)
         
         let path2 = UIBezierPath()
@@ -76,7 +77,8 @@ extension ParkingWorkGame {
         triangleDown.fillColor = .brown
         triangleDown.setScale(0.14)
         triangleDown.position = CGPoint(x: (CHAT_WIDTH / 2) - 8, y: -(CHAT_HEIGHT / 2) + 8 )
-        triangleDown.name = "ui-scroll-down-chat-btn"
+        triangleDown.userData = NSMutableDictionary()
+        triangleDown.userData?.setValue(GameButtons.ScrollChatDown, forKey: "btn-type")
         self.windowChat?.addChild(triangleDown)
         
         self.updateChatSliderTopAndBottomEnds {
@@ -86,6 +88,8 @@ extension ParkingWorkGame {
             slider.position = self.chatSliderBottomPos!
             
             slider.name = "ui-scroll-chat-slider"
+            slider.userData = NSMutableDictionary()
+            slider.userData?.setValue(GameButtons.ScrollChatSlider, forKey: "btn-type")
             self.chatSlider = slider
             self.windowChat?.addChild(slider)
         }

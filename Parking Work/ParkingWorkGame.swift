@@ -121,7 +121,7 @@ class ParkingWorkGame: SKScene {
     
     // Action Message window
     var actionMessageWindow: SKNode?
-    var itemChoosingWindow: SKNode?
+    var fastAccessPanel: FastAccessPanel?
     
     // Target Window
     var targetWindow: SKSpriteNode?
@@ -187,6 +187,8 @@ class ParkingWorkGame: SKScene {
     let gameItemCategory: UInt32 = 1 << 12
     let crosswalkCategory: UInt32 = 1 << 13
     let actionCategory: UInt32 = 1 << 14
+    let speakingCategory: UInt32 = 1 << 15
+    let secondaryUnitCategory: UInt32 = 1 << 16
     
     var messagesInChat: [SKLabelNode?] = []
     
@@ -344,6 +346,25 @@ class ParkingWorkGame: SKScene {
             gesture.isEnabled = false
             gesture.removeTarget(self, action: #selector(pinchHandler))
         }
+    }
+    
+    func runMissionCompletedScreen(money: Float, reputation: Int) {
+        missionCompleted = true
+        pushMessageToChat(text: "Отличная работа!")
+
+        let missionCompletionScene = SKScene(fileNamed: "MissionCompletionScene") as? MissionCompletion
+        missionCompletionScene?.moneyForMission = money
+        missionCompletionScene?.reputationForMisson = reputation
+        missionCompletionScene?.tutorialEnded = tutorialEnded
+        missionCompletionScene?.player = player
+        missionCompletionScene?.gameLoaded = gameLoaded
+        
+        let transition = SKTransition.fade(with: .black, duration: 1.0)
+        let displaySize: CGRect = UIScreen.main.bounds
+        // Set the scale mode to scale to fit the window
+        missionCompletionScene?.scaleMode = .aspectFill
+        missionCompletionScene?.size = displaySize.size
+        self.view?.presentScene(missionCompletionScene!, transition: transition)
     }
     
 }

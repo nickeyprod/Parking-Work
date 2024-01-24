@@ -9,6 +9,7 @@ import SpriteKit
 
 // Pop Up Creation Game Functions
 extension ParkingWorkGame {
+    
     // Creating action message pop-up
     func createActionMessage() {
 
@@ -47,72 +48,26 @@ extension ParkingWorkGame {
         yesBtn.position = CGPoint(x: (window.frame.width / 2) - (yesBtn.frame.width / 2) - 5, y: 0)
         yesBtn.fillColor = UIColor(named: COLORS.ActionMsgYesBtnColor.rawValue)!
         yesBtn.strokeColor = UIColor(named: COLORS.ActionMsgYesBtnColor.rawValue)!
-        yesBtn.name = "ui-actionYesBtn"
+        yesBtn.userData = NSMutableDictionary()
+        yesBtn.userData?.setValue(GameButtons.ActionYesButton, forKey: "btn-type")
+        
         window.addChild(yesBtn)
         
         let yesBtnLabel = SKLabelNode(text: "Да")
-        yesBtnLabel.name = "ui-actionYesBtnLabel"
         yesBtnLabel.fontName = "Copperplate"
         yesBtnLabel.fontSize = 20
         yesBtnLabel.verticalAlignmentMode = .center
         yesBtnLabel.horizontalAlignmentMode = .center
         yesBtnLabel.position = CGPoint(x: 0, y: 0)
         
+        yesBtnLabel.userData = NSMutableDictionary()
+        yesBtnLabel.userData?.setValue(GameButtons.ActionYesButton, forKey: "btn-type")
         yesBtn.addChild(yesBtnLabel)
         
         actionMessageWindow = window
         
       
     }
-    
-    func createItemChoosingPanel(numSquares: Int, with items: [GameItem]) {
-        
-        let chooseWindowRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 260, height: 50))
-        let chooseWindowPath = CGPath(roundedRect: chooseWindowRect, cornerWidth: 6.0, cornerHeight: 6.0, transform: .none)
-        let choosingWindow = SKShapeNode(path: chooseWindowPath, centered: true)
-        
-        choosingWindow.fillColor = .clear
-        choosingWindow.strokeColor = .clear
-        choosingWindow.position = self.actionMessageWindow!.position
-
-        itemChoosingWindow = choosingWindow
-        let stroke = 1
-        let squareWidth = 49 + stroke
-        let squareHeight = 49 + stroke
-        let squareSize = CGSize(width: squareWidth, height: squareHeight)
-        
-        let marginBetweenSquares = 5
-        
-        let halfOfSquare = squareWidth / 2
-        let fullWidth = ((squareWidth + marginBetweenSquares) * numSquares)
-        
-        var xPos = -(fullWidth / 2) + (halfOfSquare + marginBetweenSquares / 2)
-        
-        for i in 0...numSquares - 1 {
-            
-            let itemSquare = SKSpriteNode(color: .black, size: squareSize)
-            itemSquare.position = CGPoint(x: xPos, y: 0)
-            choosingWindow.addChild(itemSquare)
-            if i < (items.count) {
-                let itemPic = SKSpriteNode(imageNamed: items[i].assetName)
-                itemPic.name = "inventory-chooseitem-" + items[i].type
-                itemPic.zPosition = 15
-                itemPic.size = CGSize(width: squareWidth, height: squareHeight)
-                itemPic.position = CGPoint(x: 0, y: 0)
-                itemSquare.addChild(itemPic)
-
-                itemPic.userData = NSMutableDictionary()
-                itemPic.userData?.setValue(items[i].self, forKeyPath: "self")
-            }
-
-            xPos += squareWidth + marginBetweenSquares
-            
-            
-        }
-        choosingWindow.setScale(0)
-        self.cameraNode?.addChild(choosingWindow)
-    }
-    
     
     // Open car was successful message pop-up
     func createOpenCarSuccessMessage() {
@@ -148,9 +103,11 @@ extension ParkingWorkGame {
         
         // good button window
         let goodBtn = SKShapeNode(rect: CGRect(x: -75, y: -100, width: 150, height: 40), cornerRadius: 6)
-        goodBtn.name = "goodButton"
         goodBtn.fillColor = .gray
         goodBtn.strokeColor = .gray
+        
+        goodBtn.userData = NSMutableDictionary()
+        goodBtn.userData?.setValue(GameButtons.GoodButton, forKey: "btn-type")
         
         window.addChild(goodBtn)
         
@@ -162,8 +119,8 @@ extension ParkingWorkGame {
         
         goodBtnLabel.fontName = "American Typewriter Bold"
         goodBtnLabel.fontSize = 24
-        goodBtnLabel.name = "goodLabel"
-        
+        goodBtnLabel.userData = NSMutableDictionary()
+        goodBtnLabel.userData?.setValue(GameButtons.GoodButton, forKey: "btn-type")
         goodBtn.addChild(goodBtnLabel)
     }
     
